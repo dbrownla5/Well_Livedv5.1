@@ -30,7 +30,7 @@ export default function Nav() {
       <nav>
         <div className="nav-inner">
           <Link href="/" className="nav-logo">
-            <div className="nav-logo-text">The Well Lived Citizen Co</div>
+            <img src={`${import.meta.env.BASE_URL}images/logo-black.png`} alt="The Well Lived Citizen" />
           </Link>
           <div className="nav-links">
             <div className="nav-dropdown">
@@ -51,10 +51,30 @@ export default function Nav() {
                   <Link href="/services" className="dropdown-header">
                     All Services & Pricing
                   </Link>
-                  <Link href="/services/home-organization">Home Organization & Modern Move</Link>
-                  <Link href="/services/legacy">Legacy Planning & Inventory Catalog</Link>
-                  <Link href="/services/house-calls">House Calls</Link>
-                  <Link href="/services/resale">Curated Resale & Consignment</Link>
+                  <Link
+                    href="/services/home-organization"
+                    style={location === "/services/home-organization" ? { color: "var(--rust)" } : undefined}
+                  >
+                    Home Organization & Modern Move
+                  </Link>
+                  <Link
+                    href="/services/legacy"
+                    style={location === "/services/legacy" ? { color: "var(--rust)" } : undefined}
+                  >
+                    Legacy Planning & Inventory Catalog
+                  </Link>
+                  <Link
+                    href="/services/house-calls"
+                    style={location === "/services/house-calls" ? { color: "var(--rust)" } : undefined}
+                  >
+                    House Calls
+                  </Link>
+                  <Link
+                    href="/services/resale"
+                    style={location === "/services/resale" ? { color: "var(--rust)" } : undefined}
+                  >
+                    Curated Resale & Consignment
+                  </Link>
                   <Link href="/pricing" className="dropdown-footer">
                     View Pricing &rarr;
                   </Link>

@@ -26,6 +26,6 @@ pnpm workspace monorepo using TypeScript. Each package manages its own dependenc
 
 ## Artifacts
 
-- `well-lived-citizen` (react-vite, /) — Marketing site for The Well Lived Citizen Co (Dayna Brown, LA concierge home services). Faithful port of the locked static HTML/CSS provided by the user. Cream/rust/charcoal palette, Plus Jakarta Sans, no backend, contact form simulated client-side.
+- `well-lived-citizen` (react-vite, /) — Marketing site for The Well Lived Citizen (Dayna Brown, LA concierge home services). Faithful port of the user's FINAL static HTML/CSS bundle, with two explicit overrides: each service has its own dedicated detail page, and every phone CTA was replaced with a Wouter Link to /contact (form-first contact). Cream/rust/charcoal palette, Plus Jakarta Sans, no backend; contact form posts to Formspree (xreojkvo). Routes: /, /about, /services, /services/{home-organization,legacy,house-calls,resale}, /pricing, /contact.
 
 See the `pnpm-workspace` skill for workspace structure, TypeScript setup, and package details.

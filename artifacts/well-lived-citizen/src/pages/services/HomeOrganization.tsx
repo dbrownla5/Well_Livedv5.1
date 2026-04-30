@@ -1,50 +1,68 @@
-import { useEffect } from "react";
 import { Link } from "wouter";
 
 export default function HomeOrganization() {
-  useEffect(() => {
-    document.title = "Home Organization & Modern Move — The Well Lived Citizen Co";
-  }, []);
-
   return (
     <div className="page">
       <section style={{ padding: "80px 0 56px", borderBottom: "1px solid var(--linen)" }}>
         <div className="container" style={{ maxWidth: "760px" }}>
           <div className="label">01 — Home Organization & Modern Move</div>
-          <h1 style={{ fontSize: "clamp(28px,4vw,48px)", fontWeight: 700, color: "var(--char)", lineHeight: 1.15, letterSpacing: "-0.02em", marginBottom: "16px" }}>
-            Your home, made to work for how you actually live.
-          </h1>
-          <p style={{ fontSize: "16px", color: "var(--stone)", fontStyle: "italic", maxWidth: "520px" }}>
-            The relief of the room.
-          </p>
+          <h1 style={{ fontSize: "clamp(28px,4vw,48px)", fontWeight: 700, color: "var(--char)", lineHeight: 1.15, letterSpacing: "-0.02em", marginBottom: "16px" }}>The relief of the room.</h1>
+          <p style={{ fontSize: "17px", color: "var(--stone)", lineHeight: 1.75, maxWidth: "600px" }}>Your home, made to work for how you actually live. For the room that keeps collecting piles, the move that technically happened but never settled, the closet that no longer fits your life, or the spaces where everyday friction quietly steals time.</p>
         </div>
       </section>
 
       <section style={{ padding: "64px 0" }}>
         <div className="container" style={{ maxWidth: "760px" }}>
-          <div className="service-body">
-            <p>We cover the rooms and spaces. For the room that keeps collecting piles. The storage unit that keeps increasing rent and you only go every six months to ensure you weren't broken into or to take out that one outfit, or bike. The move where the boxes made it through the door, but nothing feels settled. The move where you had to leave before everything was fully packed, and someone still needs to close out what's left behind.</p>
-            <p>The professional landing in Los Angeles the same day as their boxes and the first day on the job — knowing you'll come home to a boxed mattress, no phone charger, and a suit that needs steaming. No energy, takeout food, or forks. It's the 'oh my gosh, someone save me' situation. But you're happy — life is starting a new chapter — you just have to move through the hurdles of that part.</p>
-            <p>The closet that no longer fits your life, body, season, or the way you actually get dressed (morning or afternoon — no judgment). I come in, find the friction, and make the space work around how you naturally move through your day. The goal is a home that lands well and WORKS and keeps working after I leave.</p>
+          <div style={{ fontSize: "15px", lineHeight: 1.9, color: "var(--ink)" }}>
+            <p style={{ marginBottom: "20px" }}>The issue here is the space itself. The room, layout, volume, or systems are no longer supporting the way you naturally move through your day. I come in, find the friction, and make the space work around your real habits.</p>
           </div>
 
-          <div className="service-pricing" style={{ marginTop: "40px" }}>$150/hr &middot; 3 hr minimum</div>
-          <div className="service-flex-note">
-            Flex pricing and project quotes covered on our <Link href="/pricing" style={{ color: "var(--rust)" }}>Pricing page</Link>.
-          </div>
-          <Link href="/contact" className="btn btn-dark" style={{ marginTop: "16px" }}>Book your session</Link>
-        </div>
-      </section>
+          <h2 style={{ fontSize: "18px", fontWeight: 700, color: "var(--char)", margin: "40px 0 16px" }}>How we can work together</h2>
+          <p style={{ fontSize: "14px", color: "var(--stone)", marginBottom: "12px" }}>Projects can be:</p>
+          <ul style={{ listStyle: "none", marginBottom: "24px" }}>
+            <li style={{ fontSize: "14px", color: "var(--ink)", padding: "8px 0", borderBottom: "1px solid var(--linen)" }}>Side-by-side guided sessions</li>
+            <li style={{ fontSize: "14px", color: "var(--ink)", padding: "8px 0", borderBottom: "1px solid var(--linen)" }}>Hybrid decision blocks</li>
+            <li style={{ fontSize: "14px", color: "var(--ink)", padding: "8px 0", borderBottom: "1px solid var(--linen)" }}>Full key handoff</li>
+            <li style={{ fontSize: "14px", color: "var(--ink)", padding: "8px 0", borderBottom: "1px solid var(--linen)" }}>Solo resets while you're away</li>
+            <li style={{ fontSize: "14px", color: "var(--ink)", padding: "8px 0", borderBottom: "1px solid var(--linen)" }}>Packing and move prep with or without you</li>
+            <li style={{ fontSize: "14px", color: "var(--ink)", padding: "8px 0" }}>Closet and system continuity after landing</li>
+          </ul>
+          <p style={{ fontSize: "14px", color: "var(--stone)", fontStyle: "italic", marginBottom: "40px" }}>The right style is the one that creates the easiest lasting outcome.</p>
 
-      <section style={{ padding: "48px 0 72px", borderTop: "1px solid var(--linen)", background: "var(--warm)" }}>
-        <div className="container" style={{ maxWidth: "760px", textAlign: "center" }}>
-          <div style={{ fontSize: "11px", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--rust)", marginBottom: "24px" }}>
-            Other Services
+          <h2 style={{ fontSize: "18px", fontWeight: 700, color: "var(--char)", margin: "0 0 16px" }}>What's included</h2>
+          <ul style={{ listStyle: "none", marginBottom: "24px" }}>
+            <li style={{ fontSize: "14px", color: "var(--ink)", padding: "8px 0", borderBottom: "1px solid var(--linen)" }}>Intake call, prior coordination, and any pre-planning on my end</li>
+            <li style={{ fontSize: "14px", color: "var(--ink)", padding: "8px 0", borderBottom: "1px solid var(--linen)" }}>Layout logic</li>
+            <li style={{ fontSize: "14px", color: "var(--ink)", padding: "8px 0", borderBottom: "1px solid var(--linen)" }}>Sourcing recommendations</li>
+            <li style={{ fontSize: "14px", color: "var(--ink)", padding: "8px 0", borderBottom: "1px solid var(--linen)" }}>Setup and install</li>
+            <li style={{ fontSize: "14px", color: "var(--ink)", padding: "8px 0", borderBottom: "1px solid var(--linen)" }}>Label systems</li>
+            <li style={{ fontSize: "14px", color: "var(--ink)", padding: "8px 0", borderBottom: "1px solid var(--linen)" }}>Pre-order coordination</li>
+            <li style={{ fontSize: "14px", color: "var(--ink)", padding: "8px 0", borderBottom: "1px solid var(--linen)" }}>Workflow tools and install basics</li>
+            <li style={{ fontSize: "14px", color: "var(--ink)", padding: "8px 0", borderBottom: "1px solid var(--linen)" }}>Measuring tools, reusable sort bins</li>
+            <li style={{ fontSize: "14px", color: "var(--ink)", padding: "8px 0" }}>Cord wraps, Velcro, adapters, and utility hardware</li>
+          </ul>
+          <p style={{ fontSize: "13px", color: "var(--stone)", marginBottom: "40px" }}>For deeper spaces like closets, offices, storage rooms, and linen systems, product support is quoted after walkthrough based on hidden volume and actual dimensions.</p>
+
+          <h2 style={{ fontSize: "18px", fontWeight: 700, color: "var(--char)", margin: "0 0 20px" }}>Pricing</h2>
+          <table className="pricing-table">
+            <tbody>
+              <tr><td>Hourly</td><td>$150/hr · 3 hr minimum</td></tr>
+              <tr><td>10-hour Flex Block</td><td>$1,250</td></tr>
+              <tr><td>25-hour Flex Block</td><td>$3,150</td></tr>
+              <tr><td>Studio / 1BR Move Reset</td><td>$1,200/day flat rate — up to 8 hours straight</td></tr>
+              <tr><td>Larger homes & multi-room projects</td><td>Quoted after call</td></tr>
+            </tbody>
+          </table>
+          <p style={{ fontSize: "12px", color: "var(--sand)", marginTop: "8px", marginBottom: "40px" }}>Flex blocks never expire. $1,200 flat rate is reserved for studio and 1-bedroom moves only. Larger homes scope as projects.</p>
+
+          <div style={{ background: "var(--warm)", border: "1px solid var(--linen)", padding: "32px", marginBottom: "40px" }}>
+            <div style={{ fontSize: "12px", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--rust)", marginBottom: "12px" }}>A Note on Labels</div>
+            <p style={{ fontSize: "14px", color: "var(--ink)", lineHeight: 1.8 }}>Labels are always included — handwritten on-site by default, and printed sets provided for larger project scopes. For efficiency, printed labels are usually handled as office work rather than billed hourly. I notate during the session, build the label set in my own app on my own time, print them, and bring them back to apply. This saves real money on hourly time that would otherwise be spent typing and cutting labels mid-session.</p>
           </div>
-          <div style={{ display: "flex", flexDirection: "column", gap: "16px", alignItems: "center" }}>
-            <Link href="/services/legacy" style={{ fontSize: "14px", fontWeight: 600, color: "var(--char)", textDecoration: "underline", textDecorationColor: "var(--linen)", textUnderlineOffset: "4px" }}>Legacy Planning & Inventory Catalog</Link>
-            <Link href="/services/house-calls" style={{ fontSize: "14px", fontWeight: 600, color: "var(--char)", textDecoration: "underline", textDecorationColor: "var(--linen)", textUnderlineOffset: "4px" }}>House Calls</Link>
-            <Link href="/services/resale" style={{ fontSize: "14px", fontWeight: 600, color: "var(--char)", textDecoration: "underline", textDecorationColor: "var(--linen)", textUnderlineOffset: "4px" }}>Curated Resale & Consignment</Link>
+
+          <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
+            <Link href="/contact" className="btn btn-dark">Book your session</Link>
+            <Link href="/services" style={{ fontSize: "12px", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--stone)", display: "flex", alignItems: "center", textDecoration: "none" }}>← All Services</Link>
           </div>
         </div>
       </section>
