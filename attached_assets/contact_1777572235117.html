@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5"/>
+  <title>Get in Touch — The Well Lived Citizen Co</title>
+  <meta name="description" content="Tell Dayna what you need. The first conversation is always free. Los Angeles concierge home and life services."/>
+  <meta name="robots" content="index, follow"/>
+  <link rel="canonical" href="https://thewelllivedcitizenco.com/contact"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-HN9C986JLW"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-HN9C986JLW');</script>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><img src="images/logo-black.png" alt="The Well Lived Citizen Co"/></a>
+    <div class="nav-links">
+      <div class="nav-dropdown">
+        <button class="nav-dropdown-trigger">Services<svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="dropdown-menu"><div class="dropdown-menu-inner">
+          <a href="services.html" class="dropdown-header">All Services & Pricing</a>
+          <a href="services/home-organization.html">Home Organization & Modern Move</a>
+          <a href="services/legacy.html">Legacy Planning & Inventory Catalog</a>
+          <a href="services/house-calls.html">House Calls</a>
+          <a href="services/resale.html">Curated Resale & Consignment</a>
+          <a href="pricing.html" class="dropdown-footer">View Pricing →</a>
+        </div></div>
+      </div>
+      <a href="about.html">About</a>
+      <a href="contact.html" class="nav-cta active">Get in Touch</a>
+    </div>
+    <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="services.html">Services & Pricing</a>
+  <a href="services/home-organization.html">Home Organization & Modern Move</a>
+  <a href="services/legacy.html">Legacy Planning & Inventory Catalog</a>
+  <a href="services/house-calls.html">House Calls</a>
+  <a href="services/resale.html">Curated Resale & Consignment</a>
+  <a href="about.html">About</a>
+  <a href="contact.html">Get in Touch</a>
+</div>
+
+<div class="page">
+
+  <section style="padding:80px 0 56px; border-bottom:1px solid var(--linen);">
+    <div class="container" style="max-width:760px;">
+      <div class="label">The Well Lived Citizen Co.</div>
+      <h1 style="font-size:clamp(28px,4vw,48px); font-weight:700; color:var(--char); line-height:1.15; letter-spacing:-0.02em; margin-bottom:16px;">Get in Touch</h1>
+      <p style="font-size:16px; color:var(--stone); line-height:1.75; max-width:520px;">Tell me what you need. You do not need to have it figured out. Start with what is true right now and I will take it from there.</p>
+      <p style="font-size:13px; color:var(--clay); margin-top:8px; font-style:italic;">The first conversation is always just that — a conversation.</p>
+    </div>
+  </section>
+
+  <section style="padding:64px 0;">
+    <div class="container" style="max-width:760px;">
+      <div style="display:grid; grid-template-columns:1fr 280px; gap:64px; align-items:start;">
+
+        <!-- FORM -->
+        <div>
+
+          <!-- Entry paths -->
+          <div style="margin-bottom:40px;">
+            <div class="form-label">What brings you here?</div>
+            <div class="form-radio-group">
+              <label class="form-radio"><input type="radio" name="need" value="call"/> <span><strong>Schedule a call</strong> — I want to talk through what I need first.</span></label>
+              <label class="form-radio"><input type="radio" name="need" value="book"/> <span><strong>Book a session</strong> — I know what I need and I'm ready to lock it in.</span></label>
+              <label class="form-radio"><input type="radio" name="need" value="pickup"/> <span><strong>Schedule a pickup or drop-off</strong> — Clothing, items, resale — I just need to hand something off.</span></label>
+              <label class="form-radio"><input type="radio" name="need" value="notsure"/> <span><strong>Not sure yet</strong> — Send me a message and Dayna will figure it out.</span></label>
+            </div>
+          </div>
+
+          <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" id="contactForm">
+            <input type="hidden" name="_subject" value="New Inquiry — The Well Lived Citizen Co"/>
+            <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off"/>
+
+            <div class="form-field">
+              <label class="form-label" for="fullName">Your name</label>
+              <input class="form-input" type="text" id="fullName" name="fullName" required placeholder="First and last name"/>
+            </div>
+
+            <div class="form-field">
+              <label class="form-label" for="email">Email</label>
+              <input class="form-input" type="email" id="email" name="email" required placeholder="your@email.com"/>
+            </div>
+
+            <div class="form-field">
+              <label class="form-label" for="phone">Phone</label>
+              <input class="form-input" type="tel" id="phone" name="phone" placeholder="(000) 000-0000"/>
+            </div>
+
+            <div class="form-field">
+              <label class="form-label" for="service">Which service?</label>
+              <select class="form-select" id="service" name="service">
+                <option value="">— Select —</option>
+                <option value="home-org">Home Organization & Modern Move</option>
+                <option value="legacy">Legacy Planning & Inventory Catalog</option>
+                <option value="house-calls">House Calls</option>
+                <option value="resale">Curated Resale & Consignment</option>
+                <option value="notsure">Not sure yet</option>
+              </select>
+            </div>
+
+            <div class="form-field">
+              <label class="form-label" for="realLife">What's the real-life version?</label>
+              <textarea class="form-textarea" id="realLife" name="realLife" placeholder="Two sentences is enough. What changed, what's actually happening?"></textarea>
+            </div>
+
+            <div class="form-field">
+              <label class="form-label" for="bestTime">Best time to reach you</label>
+              <input class="form-input" type="text" id="bestTime" name="bestTime" placeholder="e.g. weekday mornings, anytime by text"/>
+            </div>
+
+            <button type="submit" class="form-submit" id="submitBtn">Send</button>
+
+            <div id="successMsg" style="display:none; margin-top:16px; padding:20px; background:var(--warm); border:1px solid var(--linen);">
+              <p style="font-size:14px; color:var(--char); font-weight:600;">Got it.</p>
+              <p style="font-size:13px; color:var(--stone); margin-top:4px;">I'll be in touch within 24 hours. Text (323) 433-1350 if you need something sooner.</p>
+            </div>
+            <div id="errorMsg" style="display:none; margin-top:16px; padding:20px; background:var(--warm); border:1px solid var(--linen);">
+              <p style="font-size:13px; color:var(--char);">Something went wrong. Text directly at (323) 433-1350 or email <a href="mailto:dayna@thewelllivedcitizenco.com" style="color:var(--rust);">dayna@thewelllivedcitizenco.com</a>.</p>
+            </div>
+          </form>
+        </div>
+
+        <!-- Direct contact sidebar -->
+        <div style="position:sticky; top:88px;">
+          <div style="padding:32px; background:var(--warm); border:1px solid var(--linen); margin-bottom:16px;">
+            <div style="font-size:11px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--rust); margin-bottom:16px;">Direct Contact</div>
+            <div style="margin-bottom:12px;">
+              <a href="tel:3234331350" style="font-size:15px; font-weight:700; color:var(--char); display:block;">(323) 433-1350</a>
+              <div style="font-size:11px; color:var(--stone); margin-top:2px;">Text or call</div>
+            </div>
+            <div>
+              <a href="mailto:dayna@thewelllivedcitizenco.com" style="font-size:13px; color:var(--rust);">dayna@thewelllivedcitizenco.com</a>
+            </div>
+          </div>
+          <div style="padding:24px; background:var(--warm); border:1px solid var(--linen);">
+            <div style="font-size:11px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--rust); margin-bottom:12px;">Service Area</div>
+            <p style="font-size:13px; color:var(--stone); line-height:1.7;">Los Angeles and surrounding areas. Travel by project logic — not radius-limited.</p>
+            <div style="margin-top:16px; font-size:11px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--rust); margin-bottom:8px;">Response Time</div>
+            <p style="font-size:13px; color:var(--stone);">Within 24 hours. Text for urgent requests.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div><img src="images/logo-black.png" alt="The Well Lived Citizen Co" style="height:48px; width:auto; margin-bottom:12px;"><div class="footer-brand">The Well Lived Citizen Co</div><div class="footer-loc">Los Angeles, CA</div><div class="footer-legal">The Well Lived Citizen Co., a DBA of Well Dressed Citizen LLC</div></div>
+    <div class="footer-links"><a href="services.html">Services</a><a href="pricing.html">Pricing</a><a href="about.html">About</a><a href="contact.html">Get in Touch</a></div>
+    <div class="footer-copy">© 2026 The Well Lived Citizen Co · Los Angeles, CA</div>
+  </div>
+</footer>
+<a href="tel:3234331350" class="float-call"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.68A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>Call or Text</a>
+
+<script>
+function toggleMenu(){const m=document.getElementById('mobileMenu');m.classList.toggle('open');}
+document.addEventListener('click',function(e){const menu=document.getElementById('mobileMenu');const btn=document.querySelector('.nav-hamburger');if(menu.classList.contains('open')&&!menu.contains(e.target)&&!btn.contains(e.target)){menu.classList.remove('open');}});
+
+document.getElementById('contactForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const btn = document.getElementById('submitBtn');
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
+  try {
+    const res = await fetch(this.action, {
+      method: 'POST',
+      body: new FormData(this),
+      headers: { 'Accept': 'application/json' }
+    });
+    if (res.ok) {
+      document.getElementById('successMsg').style.display = 'block';
+      this.style.display = 'none';
+    } else {
+      document.getElementById('errorMsg').style.display = 'block';
+      btn.textContent = 'Send'; btn.disabled = false;
+    }
+  } catch(err) {
+    document.getElementById('errorMsg').style.display = 'block';
+    btn.textContent = 'Send'; btn.disabled = false;
+  }
+});
+</script>
+</body>
+</html>

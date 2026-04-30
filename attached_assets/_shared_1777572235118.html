@@ -1,0 +1,98 @@
+<!-- 
+  SHARED NAV + FOOTER SNIPPETS
+  Copy nav into every page <body> top
+  Copy footer into every page before </body>
+  Logo src: images/logo-black.png (on cream bg) or images/logo-white.png (on dark bg)
+-->
+
+<!-- ═══ NAV ═══ -->
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="images/logo-black.png" alt="The Well Lived Citizen Co" />
+    </a>
+    <div class="nav-links">
+      <div class="nav-dropdown">
+        <button class="nav-dropdown-trigger">
+          Services
+          <svg width="10" height="6" viewBox="0 0 10 6" fill="none">
+            <path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <div class="dropdown-menu">
+          <a href="services.html" class="dropdown-header">All Services & Pricing</a>
+          <a href="services/home-organization.html">Home Organization & Modern Move</a>
+          <a href="services/legacy.html">Legacy Planning & Inventory Catalog</a>
+          <a href="services/house-calls.html">House Calls</a>
+          <a href="services/resale.html">Curated Resale & Consignment</a>
+          <a href="pricing.html" class="dropdown-footer">View Pricing →</a>
+        </div>
+      </div>
+      <a href="about.html">About</a>
+      <a href="contact.html" class="nav-cta">Get in Touch</a>
+    </div>
+    <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="services.html">Services & Pricing</a>
+  <a href="services/home-organization.html">Home Organization & Modern Move</a>
+  <a href="services/legacy.html">Legacy Planning & Inventory Catalog</a>
+  <a href="services/house-calls.html">House Calls</a>
+  <a href="services/resale.html">Curated Resale & Consignment</a>
+  <a href="about.html">About</a>
+  <a href="contact.html">Get in Touch</a>
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">The Well Lived Citizen Co</div>
+      <div class="footer-loc">Los Angeles, CA</div>
+      <div class="footer-legal">The Well Lived Citizen Co., a DBA of Well Dressed Citizen LLC</div>
+    </div>
+    <div class="footer-links">
+      <a href="services.html">Services</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="footer-copy">© 2026 The Well Lived Citizen Co · Los Angeles, CA</div>
+  </div>
+</footer>
+
+<!-- ═══ FLOATING CALL BUTTON (mobile only) ═══ -->
+<a href="tel:3234331350" class="float-call">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.68A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+  </svg>
+  Call or Text
+</a>
+
+<!-- ═══ SHARED JS ═══ -->
+<script>
+function toggleMenu() {
+  const m = document.getElementById('mobileMenu');
+  m.classList.toggle('open');
+}
+// Close on outside click
+document.addEventListener('click', function(e) {
+  const menu = document.getElementById('mobileMenu');
+  const btn = document.querySelector('.nav-hamburger');
+  if (menu.classList.contains('open') && !menu.contains(e.target) && !btn.contains(e.target)) {
+    menu.classList.remove('open');
+  }
+});
+// FAQ accordion
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.faq-trigger').forEach(function(trigger) {
+    trigger.addEventListener('click', function() {
+      const item = this.closest('.faq-item');
+      item.classList.toggle('open');
+    });
+  });
+});
+</script>

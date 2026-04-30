@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://thewelllivedcitizenco.com/sitemap.xml
