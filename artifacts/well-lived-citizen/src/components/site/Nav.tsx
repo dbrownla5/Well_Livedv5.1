@@ -3,9 +3,11 @@ import { Link, useLocation } from "wouter";
 
 export default function Nav() {
   const [isOpen, setIsOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
   const [location] = useLocation();
   const menuRef = useRef<HTMLDivElement>(null);
   const btnRef = useRef<HTMLButtonElement>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
@@ -18,12 +20,19 @@ export default function Nav() {
       ) {
         setIsOpen(false);
       }
+      if (
+        servicesOpen &&
+        dropdownRef.current &&
+        !dropdownRef.current.contains(e.target as Node)
+      ) {
+        setServicesOpen(false);
+      }
     }
     document.addEventListener("click", handleClickOutside);
     return () => document.removeEventListener("click", handleClickOutside);
-  }, [isOpen]);
+  }, [isOpen, servicesOpen]);
 
-  const handleLinkClick = () => setIsOpen(false);
+  const handleLinkClick = () => { setIsOpen(false); setServicesOpen(false); };
 
   return (
     <>
@@ -33,8 +42,12 @@ export default function Nav() {
             <img src={`${import.meta.env.BASE_URL}images/logo-black.png`} alt="The Well Lived Citizen" />
           </Link>
           <div className="nav-links">
-            <div className="nav-dropdown">
-              <button className="nav-dropdown-trigger">
+            <div ref={dropdownRef} className={`nav-dropdown${servicesOpen ? " open" : ""}`}>
+              <button
+                className="nav-dropdown-trigger"
+                onClick={() => setServicesOpen(!servicesOpen)}
+                aria-expanded={servicesOpen}
+              >
                 Services
                 <svg width="10" height="6" viewBox="0 0 10 6" fill="none">
                   <path
@@ -48,34 +61,27 @@ export default function Nav() {
               </button>
               <div className="dropdown-menu">
                 <div className="dropdown-menu-inner">
-                  <Link href="/services" className="dropdown-header">
-                    All Services & Pricing
-                  </Link>
-                  <Link
-                    href="/services/home-organization"
+                  <Link href="/services/home-organization" onClick={handleLinkClick}
                     style={location === "/services/home-organization" ? { color: "var(--rust)" } : undefined}
                   >
-                    Home Organization & Modern Move
+                    01 — Home Organization & Modern Move
                   </Link>
-                  <Link
-                    href="/services/legacy"
+                  <Link href="/services/legacy" onClick={handleLinkClick}
                     style={location === "/services/legacy" ? { color: "var(--rust)" } : undefined}
                   >
-                    Legacy Planning & Inventory Catalog
+                    02 — Legacy Planning & Inventory Catalog
                   </Link>
-                  <Link
-                    href="/services/house-calls"
+                  <Link href="/services/house-calls" onClick={handleLinkClick}
                     style={location === "/services/house-calls" ? { color: "var(--rust)" } : undefined}
                   >
-                    House Calls
+                    03 — House Calls
                   </Link>
-                  <Link
-                    href="/services/resale"
+                  <Link href="/services/resale" onClick={handleLinkClick}
                     style={location === "/services/resale" ? { color: "var(--rust)" } : undefined}
                   >
-                    Curated Resale & Consignment
+                    04 — Curated Resale & Consignment
                   </Link>
-                  <Link href="/pricing" className="dropdown-footer">
+                  <Link href="/pricing" onClick={handleLinkClick} className="dropdown-footer">
                     View Pricing &rarr;
                   </Link>
                 </div>
