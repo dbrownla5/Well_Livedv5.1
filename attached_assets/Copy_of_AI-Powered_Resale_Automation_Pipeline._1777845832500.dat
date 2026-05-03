@@ -1,0 +1,301 @@
+{
+  "runSettings": {
+    "temperature": 1.0,
+    "model": "models/gemini-3-flash-preview",
+    "topP": 0.95,
+    "topK": 64,
+    "maxOutputTokens": 65536,
+    "safetySettings": [{
+      "category": "HARM_CATEGORY_HARASSMENT",
+      "threshold": "OFF"
+    }, {
+      "category": "HARM_CATEGORY_HATE_SPEECH",
+      "threshold": "OFF"
+    }, {
+      "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+      "threshold": "OFF"
+    }, {
+      "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
+      "threshold": "OFF"
+    }],
+    "enableCodeExecution": true,
+    "enableSearchAsATool": false,
+    "enableBrowseAsATool": false,
+    "enableAutoFunctionResponse": false,
+    "thinkingBudget": -1,
+    "outputResolution": "1K",
+    "thinkingLevel": "THINKING_HIGH"
+  },
+  "systemInstruction": {
+  },
+  "chunkedPrompt": {
+    "chunks": [{
+      "text": "Since you want a system that works without the friction of manual data entry, we’ll move away from \"interesting\" experiments and toward a high-utility pipeline.\nTo handle luxury items and vintage furniture in bulk, you need a system that acts as an expert appraiser and a logistics coordinator. We will use Google AI Studio to power the \"brain\" and a simple Master Sheet as your database.\nThe \"App\" Configuration: Copy \u0026 Paste\nIn Google AI Studio, create a new Chat Prompt or Structured Prompt. Paste the following into the System Instructions box. This is the logic that ensures the AI doesn\u0027t \"reset\" and follows your direct tone.\n\u003e System Instruction:\n\u003e You are the \"DB Strategic Resale Engine.\"\n\u003e Goal: Identify luxury and vintage items from photos to generate optimized listings for Poshmark, eBay, Etsy, Chairish, and FB Marketplace.\n\u003e Operational Logic:\n\u003e  * Visual Scan: Identify Brand, Model, Material, and Condition markers (e.g., date codes for purses, joinery for furniture).\n\u003e  * Platform Routing: \u003e    * Small/Luxury (Purses/Small Decor) -\u003e Route to eBay/Poshmark.\n\u003e    * Vintage/Handmade -\u003e Route to Etsy.\n\u003e    * Large/Heavy (Tables/Sofas) -\u003e Route to Chairish (High-end) or Facebook Marketplace (Local).\n\u003e  * Pricing: Suggest a \"Market Price\" and a \"Floor Price\" (Lowest to Sell).\n\u003e  * Output: Provide a structured table for the Master Sheet and formatted descriptions for each platform. Zero fluff.\n\u003e \nYour 2025 Platform Strategy\nSince you handle everything from purses to tables, your system will auto-sort items based on shipping complexity.\n| Item Type | Size | Primary Apps | Shipping Logic |\n|---|---|---|---|\n| Luxury Purses | Small | Poshmark / eBay | You ship; use authenticated labels. |\n| Vintage Decor | Small/Med | Etsy / eBay | You ship; calculated shipping costs. |\n| Vintage Furniture | Large | Chairish | They handle white-glove shipping. |\n| Tables / Bulky | Heavy | Facebook / OfferUp | Local Pickup only to save energy. |\nThe \"Bulk\" Automation: PowerShell Script\nSince you prefer PowerShell for automation, here is a \"drop-and-go\" script logic. This script scans a folder on your computer, sends the images to the AI, and saves the data to a CSV file (which you can open in Excel or Google Sheets).\n# Quick Bulk Processor for DB\n$photoFolder \u003d \"C:\\Resale\\Uploads\"\n$resultsFile \u003d \"C:\\Resale\\MasterInventory.csv\"\n$apiKey \u003d \"YOUR_AI_STUDIO_API_KEY\"\n\n# Loop through every photo in your upload folder\nGet-ChildItem $photoFolder -Filter *.jpg | ForEach-Object {\n    $imagePath \u003d $_.FullName\n    Write-Host \"Processing: $($_.Name)...\" -ForegroundColor Cyan\n\n    # API Call to Gemini to scan the photo and return the Table Data\n    # [Insert API call logic here - I can provide the full code if you have your key ready]\n    \n    # Append the AI\u0027s identification \u0026 pricing to your Master Sheet\n    $dataRow \u003d \"$($_.Name), Brand, Model, Price, Floor, Platform\"\n    $dataRow | Out-File $resultsFile -Append\n}\nWrite-Host \"Bulk Upload Complete. Master Sheet Updated.\" -ForegroundColor Green\n\nWhy this works for you:\n * Persistence: The System Instruction keeps the AI focused on your specific apps (Poshmark, Etsy, etc.) every single time.\n * No Manual Entry: You upload 20 photos; it gives you 20 rows of data and 20 listing drafts.\n * Strategic Growth: It calculates your \"Lowest to Sell\" automatically so you don\u0027t have to think about it when a buyer sends an offer.\nWould you like me to finish the PowerShell script with the full API integration so you can run it on your Windows machine today?\n",
+      "role": "user",
+      "tokenCount": 878
+    }, {
+      "text": "**Constructing a Pipeline**\n\nI\u0027m currently focused on building a high-utility pipeline. My aim is to identify and list luxury and vintage items. I\u0027m leveraging Google AI Studio (Gemini) and a PowerShell script to automate the process. Thinking about item categories, I\u0027m considering luxury purses, vintage furniture, small decor, and bulky items for inclusion.\n\n\n**Developing API Integration**\n\nI\u0027ve been working on the API integration for Gemini. The PowerShell script is nearing completion. I\u0027ve successfully set up variables, encoded images using `[Convert]::ToBase64String`, and am now constructing the JSON body. The current focus is on the `gemini-1.5-flash` model, ensuring the prompt effectively extracts data from the image. The POST method and endpoint are now set.\n\n\n**Refining Script Functionality**\n\nI\u0027m now focusing on the final steps of the PowerShell script. Specifically, I\u0027m integrating `Invoke-RestMethod` to interface with Google\u0027s API, followed by parsing the JSON response. My goal is to extract the relevant text returned by the AI. To streamline the \"Master Sheet\" output, I\u0027m refining the prompt to elicit a single CSV line per item. I\u0027m also adding error handling and implementing the requested file naming conventions, while keeping the user\u0027s \"Zero fluff\" request in mind.\n\n\n",
+      "role": "model",
+      "tokenCount": 285,
+      "isThought": true,
+      "thinkingBudget": -1,
+      "parts": [{
+        "text": "**Constructing a Pipeline**\n\nI\u0027m currently focused on building a high-utility pipeline. My aim is to identify and list luxury and vintage items. I\u0027m leveraging Google AI Studio (Gemini) and a PowerShell script to automate the process. Thinking about item categories, I\u0027m considering luxury purses, vintage furniture, small decor, and bulky items for inclusion.\n\n\n",
+        "thought": true
+      }, {
+        "text": "**Developing API Integration**\n\nI\u0027ve been working on the API integration for Gemini. The PowerShell script is nearing completion. I\u0027ve successfully set up variables, encoded images using `[Convert]::ToBase64String`, and am now constructing the JSON body. The current focus is on the `gemini-1.5-flash` model, ensuring the prompt effectively extracts data from the image. The POST method and endpoint are now set.\n\n\n",
+        "thought": true
+      }, {
+        "text": "**Refining Script Functionality**\n\nI\u0027m now focusing on the final steps of the PowerShell script. Specifically, I\u0027m integrating `Invoke-RestMethod` to interface with Google\u0027s API, followed by parsing the JSON response. My goal is to extract the relevant text returned by the AI. To streamline the \"Master Sheet\" output, I\u0027m refining the prompt to elicit a single CSV line per item. I\u0027m also adding error handling and implementing the requested file naming conventions, while keeping the user\u0027s \"Zero fluff\" request in mind.\n\n\n",
+        "thought": true
+      }]
+    }, {
+      "text": "This is a sophisticated approach to high-volume resale. By using **Gemini 1.5 Flash** (via the API), we can process these images rapidly and cheaply. The \"Flash\" model is specifically optimized for high-speed vision tasks like this.\n\nBelow is the complete PowerShell script. It includes the logic to **Base64 encode your images**, send them to the Google AI Studio API, and parse the response directly into your CSV.\n\n### Prerequisites\n1.  **API Key:** Get it from [Google AI Studio](https://aistudio.google.com/app/apikey).\n2.  **Folder Setup:** Create `C:\\Resale\\Uploads` and put a few test `.jpg` files there.\n\n### The Full PowerShell Script\n\n```powershell\n# --- CONFIGURATION ---\n$apiKey \u003d \"YOUR_YOUR_API_KEY_HERE\"\n$photoFolder \u003d \"C:\\Resale\\Uploads\"\n$resultsFile \u003d \"C:\\Resale\\MasterInventory.csv\"\n\n# Create the CSV header if the file doesn\u0027t exist\nif (-not (Test-Path $resultsFile)) {\n    \"FileName,Brand,Model,MarketPrice,FloorPrice,PrimaryPlatform,ShippingLogic\" | Out-File $resultsFile -Encoding utf8\n}\n\n# --- SYSTEM PROMPT ---\n$systemPrompt \u003d @\"\nYou are the DB Strategic Resale Engine. Identify luxury/vintage items from photos.\nReturn ONLY a single line of comma-separated values (CSV format) for the item.\nOrder: Brand, Model, Market Price, Floor Price, Platform, Shipping Logic.\nPlatform Logic: \n- Small/Luxury -\u003e eBay/Poshmark\n- Vintage/Handmade -\u003e Etsy\n- Large/High-end -\u003e Chairish\n- Heavy/Bulky -\u003e FB Marketplace\nZero fluff. No markdown. No conversational text.\n\"@\n\n# --- PROCESSOR ---\nGet-ChildItem $photoFolder -Filter *.jpg | ForEach-Object {\n    $imagePath \u003d $_.FullName\n    Write-Host \"Analyzing: $($_.Name)...\" -ForegroundColor Cyan\n\n    try {\n        # 1. Convert Image to Base64\n        $fileBytes \u003d [System.IO.File]::ReadAllBytes($imagePath)\n        $base64Image \u003d [Convert]::ToBase64String($fileBytes)\n\n        # 2. Construct API Payload\n        $payload \u003d @{\n            contents \u003d @(\n                @{\n                    parts \u003d @(\n                        @{ text \u003d $systemPrompt },\n                        @{\n                            inline_data \u003d @{\n                                mime_type \u003d \"image/jpeg\"\n                                data \u003d $base64Image\n                            }\n                        }\n                    )\n                }\n            )\n        } | ConvertTo-Json -Depth 10\n\n        # 3. Call Google Gemini API\n        $apiUrl \u003d \"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key\u003d$apiKey\"\n        $response \u003d Invoke-RestMethod -Method Post -Uri $apiUrl -ContentType \"application/json\" -Body $payload\n\n        # 4. Extract Text and Append to CSV\n        $aiResult \u003d $response.candidates[0].content.parts[0].text.Trim()\n        \n        # Add the filename to the start of the row\n        $csvRow \u003d \"$($_.Name),$aiResult\"\n        $csvRow | Out-File $resultsFile -Append -Encoding utf8\n\n        Write-Host \"Success: $aiResult\" -ForegroundColor Green\n    }\n    catch {\n        Write-Host \"Error processing $($_.Name): $($_.Exception.Message)\" -ForegroundColor Red\n    }\n}\n\nWrite-Host \"`nFinished! Check $resultsFile for your listings.\" -ForegroundColor Yellow\n```\n\n### How to use this script:\n\n1.  **Open Notepad** (or VS Code).\n2.  **Paste the code** above.\n3.  **Replace** `YOUR_YOUR_API_KEY_HERE` with your actual key from AI Studio.\n4.  **Save the file** as `ResaleProcessor.ps1` on your desktop.\n5.  **Run it:** Right-click the file and select **\"Run with PowerShell.\"**\n\n### Why this specific setup is powerful for you:\n\n*   **Gemini 1.5 Flash Vision:** Unlike older OCR tools, this understands *context*. If it sees a \"Herman Miller\" logo on the underside of a chair, it knows that\u0027s a Chairish item, not a Facebook Marketplace item.\n*   **The \"CSV Only\" Constraint:** By forcing the AI to return *only* a comma-separated line, we skip the need for complex data cleaning. It goes straight from the photo to your spreadsheet.\n*   **Cost Efficiency:** Gemini 1.5 Flash has a massive free tier (up to 15 requests per minute and 1,500 requests per day for free at the time of writing), making this pipeline essentially free for a mid-sized resale operation.\n\n### Pro-Tip for your Master Sheet:\nIf you want the script to also generate the **Full Description** for the listing (not just the CSV row), let me know. I can modify it to save a `.txt` file for every photo that contains a pre-written, SEO-optimized description for the specific platform it chose.",
+      "role": "model",
+      "finishReason": "STOP",
+      "tokenCount": 1170,
+      "parts": [{
+        "text": "This is a sophisticated approach to high-volume resale. By using **Gemini 1.5 Flash** (via the API), we can process these images rapidly and cheaply. The \"Flash\" model is specifically"
+      }, {
+        "text": " optimized for high-speed vision tasks like this.\n\nBelow is the complete PowerShell script. It includes the logic to **Base6"
+      }, {
+        "text": "4 encode your images**, send them to the Google AI Studio API, and parse the response directly into your CSV.\n\n###"
+      }, {
+        "text": " Prerequisites\n1.  **API Key:** Get it from [Google AI Studio](https://aistudio.google.com"
+      }, {
+        "text": "/app/apikey).\n2.  **Folder Setup:** Create `C:\\Resale\\Uploads` and put"
+      }, {
+        "text": " a few test `.jpg` files there.\n\n### The Full PowerShell Script\n\n```powershell\n# --- CONFIGURATION ---"
+      }, {
+        "text": "\n$apiKey \u003d \"YOUR_YOUR_API_KEY_HERE\"\n$photoFolder \u003d \"C:\\Res"
+      }, {
+        "text": "ale\\Uploads\"\n$resultsFile \u003d \"C:\\Resale\\MasterInventory.csv\"\n\n# Create"
+      }, {
+        "text": " the CSV header if the file doesn\u0027t exist\nif (-not (Test-Path $resultsFile)) {\n    "
+      }, {
+        "text": "\"FileName,Brand,Model,MarketPrice,FloorPrice,PrimaryPlatform,ShippingLogic\" | Out-File $results"
+      }, {
+        "text": "File -Encoding utf8\n}\n\n# --- SYSTEM PROMPT ---\n$systemPrompt \u003d @\"\nYou are the"
+      }, {
+        "text": " DB Strategic Resale Engine. Identify luxury/vintage items from photos.\nReturn ONLY a single line of comma-separated values ("
+      }, {
+        "text": "CSV format) for the item.\nOrder: Brand, Model, Market Price, Floor Price, Platform, Shipping Logic.\nPlatform"
+      }, {
+        "text": " Logic: \n- Small/Luxury -\u003e eBay/Poshmark\n- Vintage/Handmade -\u003e Etsy\n- Large"
+      }, {
+        "text": "/High-end -\u003e Chairish\n- Heavy/Bulky -\u003e FB Marketplace\nZero fluff. No markdown. No conversational"
+      }, {
+        "text": " text.\n\"@\n\n# --- PROCESSOR ---\nGet-ChildItem $photoFolder -Filter *.jpg | ForEach-"
+      }, {
+        "text": "Object {\n    $imagePath \u003d $_.FullName\n    Write-Host \"Analyzing: $($_.Name)...\" -ForegroundColor"
+      }, {
+        "text": " Cyan\n\n    try {\n        # 1. Convert Image to Base64\n        $fileBytes \u003d [System"
+      }, {
+        "text": ".IO.File]::ReadAllBytes($imagePath)\n        $base64Image \u003d [Convert]::ToBase6"
+      }, {
+        "text": "4String($fileBytes)\n\n        # 2. Construct API Payload\n        $payload \u003d @{\n            contents \u003d @"
+      }, {
+        "text": "(\n                @{\n                    parts \u003d @(\n                        @{ text \u003d $systemPrompt },\n                        @{\n                            inline_"
+      }, {
+        "text": "data \u003d @{\n                                mime_type \u003d \"image/jpeg\"\n                                data \u003d $base64Image"
+      }, {
+        "text": "\n                            }\n                        }\n                    )\n                }\n            )\n        } | ConvertTo-Json -"
+      }, {
+        "text": "Depth 10\n\n        # 3. Call Google Gemini API\n        $apiUrl \u003d \"https://generativel"
+      }, {
+        "text": "anguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?"
+      }, {
+        "text": "key\u003d$apiKey\"\n        $response \u003d Invoke-RestMethod -Method Post -Uri $apiUrl -ContentType \"application/json"
+      }, {
+        "text": "\" -Body $payload\n\n        # 4. Extract Text and Append to CSV\n        $aiResult \u003d $response."
+      }, {
+        "text": "candidates[0].content.parts[0].text.Trim()\n        \n        # Add the filename to the"
+      }, {
+        "text": " start of the row\n        $csvRow \u003d \"$($_.Name),$aiResult\"\n        $csvRow | Out"
+      }, {
+        "text": "-File $resultsFile -Append -Encoding utf8\n\n        Write-Host \"Success: $aiResult\" -ForegroundColor"
+      }, {
+        "text": " Green\n    }\n    catch {\n        Write-Host \"Error processing $($_.Name): $($_.Exception.Message"
+      }, {
+        "text": ")\" -ForegroundColor Red\n    }\n}\n\nWrite-Host \"`nFinished! Check $resultsFile for your listings"
+      }, {
+        "text": ".\" -ForegroundColor Yellow\n```\n\n### How to use this script:\n\n1.  **Open Notepad** (or VS"
+      }, {
+        "text": " Code).\n2.  **Paste the code** above.\n3.  **Replace** `YOUR_YOUR"
+      }, {
+        "text": "_API_KEY_HERE` with your actual key from AI Studio.\n4.  **Save the file** as"
+      }, {
+        "text": " `ResaleProcessor.ps1` on your desktop.\n5.  **Run it:** Right-click the file"
+      }, {
+        "text": " and select **\"Run with PowerShell.\"**\n\n### Why this specific setup is powerful for you:\n\n*   **Gemini"
+      }, {
+        "text": " 1.5 Flash Vision:** Unlike older OCR tools, this understands *context*. If it sees a \"Herman"
+      }, {
+        "text": " Miller\" logo on the underside of a chair, it knows that\u0027s a Chairish item, not a Facebook Marketplace"
+      }, {
+        "text": " item.\n*   **The \"CSV Only\" Constraint:** By forcing the AI to return *only* a comma-separated line"
+      }, {
+        "text": ", we skip the need for complex data cleaning. It goes straight from the photo to your spreadsheet.\n*   **Cost Efficiency:**"
+      }, {
+        "text": " Gemini 1.5 Flash has a massive free tier (up to 15 requests per minute and 1,"
+      }, {
+        "text": "500 requests per day for free at the time of writing), making this pipeline essentially free for a mid-sized resale"
+      }, {
+        "text": " operation.\n\n### Pro-Tip for your Master Sheet:\nIf you want the script to also generate the **Full"
+      }, {
+        "text": " Description** for the listing (not just the CSV row), let me know. I can modify it to save a `.txt` file"
+      }, {
+        "text": " for every photo that contains a pre-written, SEO-optimized description for the specific platform it chose."
+      }, {
+        "text": "",
+        "thoughtSignature": "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"
+      }]
+    }, {
+      "text": "THE PROBLEM IS ITS STILL NOT IDENTIFYING DUPLICATE LISTINGS OR MAKING THIS MNORE EFFICENT\n",
+      "role": "user",
+      "tokenCount": 24
+    }, {
+      "text": "**Refining the Identification**\n\nI\u0027m focused on the \"DB Strategic Resale Engine.\" The PowerShell script continues to ingest images, identify items, and then recommend prices, and platforms, adding them to a CSV. While the core process is there, there is still the major pain point: identification isn\u0027t where I want it to be.\n\n\n**Addressing Duplicates and Efficiency**\n\nI\u0027m now zeroing in on duplicate listings and improving efficiency. I\u0027ve broken it down into two core challenges. First, to address duplicates, I\u0027m considering hash-based identification (which won\u0027t solve the core problem), an AI-based memory system, or checking the CSV for similar brand/model strings. For efficiency, I\u0027m exploring batch processing with the Gemini API, asking the AI to group photos of the same item into one listing. This should streamline things significantly.\n\n\n",
+      "role": "model",
+      "tokenCount": 675,
+      "isThought": true,
+      "thinkingBudget": -1,
+      "parts": [{
+        "text": "**Refining the Identification**\n\nI\u0027m focused on the \"DB Strategic Resale Engine.\" The PowerShell script continues to ingest images, identify items, and then recommend prices, and platforms, adding them to a CSV. While the core process is there, there is still the major pain point: identification isn\u0027t where I want it to be.\n\n\n",
+        "thought": true
+      }, {
+        "text": "**Addressing Duplicates and Efficiency**\n\nI\u0027m now zeroing in on duplicate listings and improving efficiency. I\u0027ve broken it down into two core challenges. First, to address duplicates, I\u0027m considering hash-based identification (which won\u0027t solve the core problem), an AI-based memory system, or checking the CSV for similar brand/model strings. For efficiency, I\u0027m exploring batch processing with the Gemini API, asking the AI to group photos of the same item into one listing. This should streamline things significantly.\n\n\n",
+        "thought": true
+      }]
+    }, {
+      "text": "To solve the efficiency and duplicate problem, we need to stop treating every **photo** as a unique **item**.\n\nIn high-volume resale, you usually take 3–5 photos of one item. If you run the previous script, you get 5 duplicate rows. To fix this, we are going to upgrade the \"Brain\" to use **Batch Vision Processing**. \n\nInstead of sending 1 photo at a time, we will send **all** photos in the folder at once. We will tell Gemini: *\"Look at these 20 photos. Group the ones that belong to the same item, and check my Master Sheet to make sure I haven\u0027t listed them before.\"*\n\n### The New \"Efficiency\" Logic\n1.  **Image Grouping:** The AI identifies that Photo A, B, and C are all the same \"Louis Vuitton Speedy 30\" and merges them into one entry.\n2.  **Duplicate Detection:** The script reads your `MasterInventory.csv` first and sends the \"Already Owned\" list to the AI so it doesn\u0027t create doubles.\n3.  **JSON Output:** We move from CSV to JSON for the API response because it\u0027s much harder for the AI to \"break\" the formatting when handling multiple items.\n\n### Step 1: Updated System Instructions (Copy/Paste to AI Studio)\nReplace your previous instructions with these to enable \"Deduplication Mode\":\n\n\u003e You are the \"DB Strategic Resale Engine.\"\n\u003e **Task:** Analyze a batch of images and generate a consolidated inventory list.\n\u003e **Logic:** \n\u003e 1. **Grouping:** Multiple images may show the same item from different angles. Group them into a single unique ID.\n\u003e 2. **Deduplication:** I will provide a list of \"Existing Inventory.\" If a new photo matches an item already in the list, label it \"DUPLICATE\" and do not create a new entry.\n\u003e 3. **Platform Routing:** Use previous logic (Large -\u003e Chairish, Small -\u003e eBay, etc.).\n\u003e **Output Format:** Return ONLY a JSON array of objects with these keys: Brand, Model, MarketPrice, FloorPrice, Platform, Status (New/Duplicate).\n\n---\n\n### Step 2: The \"Batch\" PowerShell Script\nThis script is much more efficient. It bundles your images and talks to the AI once per batch.\n\n```powershell\n# --- CONFIG ---\n$apiKey \u003d \"YOUR_API_KEY\"\n$photoFolder \u003d \"C:\\Resale\\Uploads\"\n$resultsFile \u003d \"C:\\Resale\\MasterInventory.csv\"\n\n# 1. Load Existing Inventory to prevent duplicates\n$existingInventory \u003d \"\"\nif (Test-Path $resultsFile) {\n    $existingInventory \u003d Import-Csv $resultsFile | Select-Object -Property Brand, Model | ConvertTo-Json\n}\n\n# 2. Prepare all images in the folder\n$imageParts \u003d @()\n$files \u003d Get-ChildItem $photoFolder -Filter *.jpg\nforeach ($file in $files) {\n    $bytes \u003d [System.IO.File]::ReadAllBytes($file.FullName)\n    $b64 \u003d [Convert]::ToBase64String($bytes)\n    $imageParts +\u003d @{\n        inline_data \u003d @{\n            mime_type \u003d \"image/jpeg\"\n            data \u003d $b64\n        }\n    }\n}\n\n# 3. Add the instructions and the \"Memory\" of existing items\n$promptText \u003d \"Group these images into unique items. Do not repeat items. Cross-reference with this existing inventory to avoid duplicates: $existingInventory\"\n$payloadContents \u003d @(\n    @{\n        parts \u003d $imageParts + @{ text \u003d $promptText }\n    }\n)\n\n$payload \u003d @{ contents \u003d $payloadContents } | ConvertTo-Json -Depth 10\n\n# 4. Call Gemini 1.5 Flash (Optimized for Batch Vision)\nWrite-Host \"Analyzing batch of $($files.Count) photos...\" -ForegroundColor Cyan\n$apiUrl \u003d \"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key\u003d$apiKey\"\n\ntry {\n    $response \u003d Invoke-RestMethod -Method Post -Uri $apiUrl -ContentType \"application/json\" -Body $payload\n    \n    # Clean the AI output (removing markdown code blocks if present)\n    $rawJson \u003d $response.candidates[0].content.parts[0].text -replace \"```json\", \"\" -replace \"```\", \"\"\n    $items \u003d $rawJson | ConvertFrom-Json\n\n    # 5. Append only NEW, Non-Duplicate items to the CSV\n    foreach ($item in $items) {\n        if ($item.Status -ne \"Duplicate\") {\n            $newRow \u003d [PSCustomObject]@{\n                Date \u003d (Get-Date -Format \"yyyy-MM-dd\")\n                Brand \u003d $item.Brand\n                Model \u003d $item.Model\n                Price \u003d $item.MarketPrice\n                Floor \u003d $item.FloorPrice\n                Platform \u003d $item.Platform\n            }\n            $newRow | Export-Csv $resultsFile -Append -NoTypeInformation\n            Write-Host \"Added: $($item.Brand) $($item.Model)\" -ForegroundColor Green\n        } else {\n            Write-Host \"Skipped Duplicate: $($item.Brand)\" -ForegroundColor Yellow\n        }\n    }\n}\ncatch {\n    Write-Host \"Error: $($_.Exception.Message)\" -ForegroundColor Red\n}\n```\n\n### Why this is a major upgrade:\n\n1.  **Image Grouping:** If you take 4 photos of a West Elm Dining Table, the AI now sees all 4 at once. It realizes it\u0027s **one** item and gives you **one** row in your sheet.\n2.  **Memory:** By passing `$existingInventory` into the prompt, the AI \"remembers\" what you\u0027ve already processed in previous runs.\n3.  **Speed:** Calling the API once for 10 images is significantly faster (and uses less of your rate limit) than calling it 10 times for 1 image each.\n4.  **Cleaner Data:** The JSON-to-CSV conversion ensures that commas in descriptions don\u0027t break your Excel columns.\n\n### Recommendation for \"Ultimate\" Efficiency:\nIf you are doing this in **bulk** (e.g., 50+ items at a time), move your photos into \"Batch Folders\" (Batch1, Batch2). Run the script on one folder, verify the results, and move to the next. This prevents the API from timing out on massive image sets.",
+      "role": "model",
+      "finishReason": "STOP",
+      "tokenCount": 1446,
+      "parts": [{
+        "text": "To solve the efficiency and duplicate problem, we need to stop treating every **photo** as a unique **"
+      }, {
+        "text": "item**.\n\nIn high-volume resale, you usually take 3–5 photos of one item. If you run"
+      }, {
+        "text": " the previous script, you get 5 duplicate rows. To fix this, we are going to upgrade the \"Brain\" to use **"
+      }, {
+        "text": "Batch Vision Processing**. \n\nInstead of sending 1 photo at a time, we will send **all** photos in the folder"
+      }, {
+        "text": " at once. We will tell Gemini: *\"Look at these 20 photos. Group the ones that belong to the same item,"
+      }, {
+        "text": " and check my Master Sheet to make sure I haven\u0027t listed them before.\"*\n\n### The New \"Efficiency\""
+      }, {
+        "text": " Logic\n1.  **Image Grouping:** The AI identifies that Photo A, B, and C are all the same \"Louis"
+      }, {
+        "text": " Vuitton Speedy 30\" and merges them into one entry.\n2.  **Duplicate Detection:** The script reads your"
+      }, {
+        "text": " `MasterInventory.csv` first and sends the \"Already Owned\" list to the AI so it doesn\u0027t create"
+      }, {
+        "text": " doubles.\n3.  **JSON Output:** We move from CSV to JSON for the API response because it\u0027s"
+      }, {
+        "text": " much harder for the AI to \"break\" the formatting when handling multiple items.\n\n### Step 1: Updated System Instructions ("
+      }, {
+        "text": "Copy/Paste to AI Studio)\nReplace your previous instructions with these to enable \"Deduplication Mode\":\n\n\u003e You"
+      }, {
+        "text": " are the \"DB Strategic Resale Engine.\"\n\u003e **Task:** Analyze a batch of images and generate a consolidated inventory list.\n"
+      }, {
+        "text": "\u003e **Logic:** \n\u003e 1. **Grouping:** Multiple images may show the same item from different angles. Group them into"
+      }, {
+        "text": " a single unique ID.\n\u003e 2. **Deduplication:** I will provide a list of \"Existing Inventory"
+      }, {
+        "text": ".\" If a new photo matches an item already in the list, label it \"DUPLICATE\" and do not create"
+      }, {
+        "text": " a new entry.\n\u003e 3. **Platform Routing:** Use previous logic (Large -\u003e Chairish, Small -\u003e eBay"
+      }, {
+        "text": ", etc.).\n\u003e **Output Format:** Return ONLY a JSON array of objects with these keys: Brand, Model, Market"
+      }, {
+        "text": "Price, FloorPrice, Platform, Status (New/Duplicate).\n\n---\n\n### Step 2: The \"Batch"
+      }, {
+        "text": "\" PowerShell Script\nThis script is much more efficient. It bundles your images and talks to the AI once per batch.\n\n```powers"
+      }, {
+        "text": "hell\n# --- CONFIG ---\n$apiKey \u003d \"YOUR_API_KEY\"\n$photoFolder \u003d \"C:\\Res"
+      }, {
+        "text": "ale\\Uploads\"\n$resultsFile \u003d \"C:\\Resale\\MasterInventory.csv\"\n\n# "
+      }, {
+        "text": "1. Load Existing Inventory to prevent duplicates\n$existingInventory \u003d \"\"\nif (Test-Path $resultsFile) {\n"
+      }, {
+        "text": "    $existingInventory \u003d Import-Csv $resultsFile | Select-Object -Property Brand, Model | ConvertTo-Json"
+      }, {
+        "text": "\n}\n\n# 2. Prepare all images in the folder\n$imageParts \u003d @()\n$files \u003d Get-"
+      }, {
+        "text": "ChildItem $photoFolder -Filter *.jpg\nforeach ($file in $files) {\n    $bytes \u003d ["
+      }, {
+        "text": "System.IO.File]::ReadAllBytes($file.FullName)\n    $b64 \u003d [Convert]::ToBase"
+      }, {
+        "text": "64String($bytes)\n    $imageParts +\u003d @{\n        inline_data \u003d @{\n            mime_type"
+      }, {
+        "text": " \u003d \"image/jpeg\"\n            data \u003d $b64\n        }\n    }\n}\n\n#"
+      }, {
+        "text": " 3. Add the instructions and the \"Memory\" of existing items\n$promptText \u003d \"Group these images into unique"
+      }, {
+        "text": " items. Do not repeat items. Cross-reference with this existing inventory to avoid duplicates: $existingInventory\"\n$payload"
+      }, {
+        "text": "Contents \u003d @(\n    @{\n        parts \u003d $imageParts + @{ text \u003d $promptText }\n"
+      }, {
+        "text": "    }\n)\n\n$payload \u003d @{ contents \u003d $payloadContents } | ConvertTo-Json -Depth 1"
+      }, {
+        "text": "0\n\n# 4. Call Gemini 1.5 Flash (Optimized for Batch Vision)\nWrite-Host \"Analyzing"
+      }, {
+        "text": " batch of $($files.Count) photos...\" -ForegroundColor Cyan\n$apiUrl \u003d \"https://generativelanguage."
+      }, {
+        "text": "googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key\u003d$"
+      }, {
+        "text": "apiKey\"\n\ntry {\n    $response \u003d Invoke-RestMethod -Method Post -Uri $apiUrl -ContentType \""
+      }, {
+        "text": "application/json\" -Body $payload\n    \n    # Clean the AI output (removing markdown code blocks if present"
+      }, {
+        "text": ")\n    $rawJson \u003d $response.candidates[0].content.parts[0].text -replace \""
+      }, {
+        "text": "```json\", \"\" -replace \"```\", \"\"\n    $items \u003d $rawJson | ConvertFrom-Json\n\n"
+      }, {
+        "text": "    # 5. Append only NEW, Non-Duplicate items to the CSV\n    foreach ($item in $items) {"
+      }, {
+        "text": "\n        if ($item.Status -ne \"Duplicate\") {\n            $newRow \u003d [PSCustomObject]"
+      }, {
+        "text": "@{\n                Date \u003d (Get-Date -Format \"yyyy-MM-dd\")\n                Brand \u003d $item"
+      }, {
+        "text": ".Brand\n                Model \u003d $item.Model\n                Price \u003d $item.MarketPrice\n                Floor \u003d $"
+      }, {
+        "text": "item.FloorPrice\n                Platform \u003d $item.Platform\n            }\n            $newRow | Export-Csv $"
+      }, {
+        "text": "resultsFile -Append -NoTypeInformation\n            Write-Host \"Added: $($item.Brand) $($item.Model)\""
+      }, {
+        "text": " -ForegroundColor Green\n        } else {\n            Write-Host \"Skipped Duplicate: $($item.Brand)\" -ForegroundColor Yellow\n"
+      }, {
+        "text": "        }\n    }\n}\ncatch {\n    Write-Host \"Error: $($_.Exception.Message)\" -"
+      }, {
+        "text": "ForegroundColor Red\n}\n```\n\n### Why this is a major upgrade:\n\n1.  **Image Grouping:**"
+      }, {
+        "text": " If you take 4 photos of a West Elm Dining Table, the AI now sees all 4 at once. It realizes it"
+      }, {
+        "text": "\u0027s **one** item and gives you **one** row in your sheet.\n2.  **Memory:** By"
+      }, {
+        "text": " passing `$existingInventory` into the prompt, the AI \"remembers\" what you\u0027ve already processed in previous runs"
+      }, {
+        "text": ".\n3.  **Speed:** Calling the API once for 10 images is significantly faster (and uses less of"
+      }, {
+        "text": " your rate limit) than calling it 10 times for 1 image each.\n4.  **Cleaner Data:** The JSON"
+      }, {
+        "text": "-to-CSV conversion ensures that commas in descriptions don\u0027t break your Excel columns.\n\n### Recommendation for \"Ultimate"
+      }, {
+        "text": "\" Efficiency:\nIf you are doing this in **bulk** (e.g., 50+ items at a time),"
+      }, {
+        "text": " move your photos into \"Batch Folders\" (Batch1, Batch2). Run the script on one folder, verify"
+      }, {
+        "text": " the results, and move to the next. This prevents the API from timing out on massive image sets."
+      }, {
+        "text": "",
+        "thoughtSignature": "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"
+      }]
+    }],
+    "pendingInputs": [{
+      "text": "",
+      "role": "user"
+    }]
+  }
+}
