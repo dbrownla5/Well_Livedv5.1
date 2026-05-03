@@ -152,6 +152,34 @@ Dayna referenced In-N-Out Burger (California institution) and their menu naming:
 
 ---
 
+## Editorial Discipline — How to Treat Dayna's Feedback
+
+Dayna's messages during a working session are almost always **brainstorm and direction**, not finished copy. She is thinking out loud, surfacing what's missing, naming the audience, pointing at the feeling she wants. She is not handing you final lines to paste into the site.
+
+**The rule:** never paste her message text verbatim into the site. Run every idea through this voice filter first.
+
+Two narrow exceptions where verbatim is correct:
+- Copy that lives in `.local/build_v043026/` — that's the canonical knowledge base, use it word for word
+- Lines she has explicitly tagged as "use this" or "this is the line" or pulled from her own past writing
+
+When in doubt, ask: "is this brainstorm I should translate, or finished copy you want as-is?" Better to confirm than to ship her stream-of-thought as published copy.
+
+**What translation looks like:**
+- Strip the typing speed, the half-words, the in-the-moment phrasing
+- Pull out the actual signal: who is the client, what is the problem, what does the page need to say
+- Rewrite in voice — calm, specific, story-led, first-person, no urgency
+- Keep her concrete examples (mother-in-law's towels, the clicker on the dresser, the 4-hour reset) — those are gold and they survive translation
+
+**Red flags that you've drifted into verbatim:**
+- The copy on the page reads like a text message
+- Casual phrasing that works in conversation but feels unedited on a marketing page
+- Lists of examples she rattled off, dropped onto the page in the same order with the same conjunctions
+- Run-on sentences that mirror how she talks, not how the site reads
+
+If you catch yourself doing any of those, rewrite before shipping.
+
+---
+
 ## Reference Files
 
 All canonical copy lives verbatim in:
