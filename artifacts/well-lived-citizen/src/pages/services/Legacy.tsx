@@ -25,12 +25,16 @@ export default function Legacy() {
           <p style={{ fontSize: "14px", color: "var(--stone)", marginBottom: "16px", lineHeight: 1.75 }}>The operational side of a home shows up for almost everyone, eventually. Sometimes it's a life change. Sometimes it's a move. Sometimes it's a quiet morning where the drawers, closets, and storage spaces stop matching the person living there.</p>
 
           <ul style={{ listStyle: "none", marginBottom: "24px" }}>
-            <li style={{ fontSize: "14px", color: "var(--ink)", padding: "10px 0", borderBottom: "1px solid var(--linen)" }}>The divorced mom who moved into a condo and suddenly had to see, for the first time, how much had actually been accumulated over a marriage — and had to agree to how it all gets split</li>
-            <li style={{ fontSize: "14px", color: "var(--ink)", padding: "10px 0", borderBottom: "1px solid var(--linen)" }}>The person who lived in the same apartment for ten years and had no idea how much had quietly gathered in the back of every closet</li>
-            <li style={{ fontSize: "14px", color: "var(--ink)", padding: "10px 0", borderBottom: "1px solid var(--linen)" }}>The career change that revealed a hundred film industry cords, gear, and references in the garage — from a life that isn't the current one anymore</li>
-            <li style={{ fontSize: "14px", color: "var(--ink)", padding: "10px 0", borderBottom: "1px solid var(--linen)" }}>The household where someone is ready to take control of their own story before it falls into someone else's hands</li>
-            <li style={{ fontSize: "14px", color: "var(--ink)", padding: "10px 0", borderBottom: "1px solid var(--linen)" }}>The family carrying years of meaningful, valuable, or hard-to-sort volume that deserves clarity without pressure</li>
-            <li style={{ fontSize: "14px", color: "var(--ink)", padding: "10px 0" }}>The person who wants to decide what stays, what moves on, and what gets remembered — while they are the one making the decisions</li>
+            {[
+              "The divorced mom who moved into a condo and suddenly had to see, for the first time, how much had actually been accumulated over a marriage — and had to agree to how it all gets split",
+              "The person who lived in the same apartment for ten years and had no idea how much had quietly gathered in the back of every closet",
+              "The career change that revealed a hundred film industry cords, gear, and references in the garage — from a life that isn't the current one anymore",
+              "The household where someone is ready to take control of their own story before it falls into someone else's hands",
+              "The family carrying years of meaningful, valuable, or hard-to-sort volume that deserves clarity without pressure",
+              "The person who wants to decide what stays, what moves on, and what gets remembered — while they are the one making the decisions",
+            ].map((item, i, arr) => (
+              <li key={i} style={{ fontSize: "14px", color: "var(--ink)", padding: "10px 0", borderBottom: i < arr.length - 1 ? "1px solid var(--linen)" : "none" }}>{item}</li>
+            ))}
           </ul>
 
           {/* China passage */}
@@ -44,18 +48,25 @@ export default function Legacy() {
           <h2 style={{ fontSize: "18px", fontWeight: 700, color: "var(--char)", margin: "40px 0 16px" }}>What this work actually is</h2>
           <p style={{ fontSize: "14px", color: "var(--stone)", marginBottom: "16px" }}>The operational side of a home is the layer that quietly adds up over time:</p>
           <ul style={{ listStyle: "none", marginBottom: "24px" }}>
-            <li style={{ fontSize: "14px", color: "var(--ink)", padding: "8px 0", borderBottom: "1px solid var(--linen)" }}>The drawers</li>
-            <li style={{ fontSize: "14px", color: "var(--ink)", padding: "8px 0", borderBottom: "1px solid var(--linen)" }}>The backup bedding</li>
-            <li style={{ fontSize: "14px", color: "var(--ink)", padding: "8px 0", borderBottom: "1px solid var(--linen)" }}>The linen closets stacked with care</li>
-            <li style={{ fontSize: "14px", color: "var(--ink)", padding: "8px 0", borderBottom: "1px solid var(--linen)" }}>The vintage pieces with story</li>
-            <li style={{ fontSize: "14px", color: "var(--ink)", padding: "8px 0", borderBottom: "1px solid var(--linen)" }}>The everyday things with future value</li>
-            <li style={{ fontSize: "14px", color: "var(--ink)", padding: "8px 0", borderBottom: "1px solid var(--linen)" }}>The candles tucked away because the house was always tidy enough</li>
-            <li style={{ fontSize: "14px", color: "var(--ink)", padding: "8px 0", borderBottom: "1px solid var(--linen)" }}>The designer pieces in sizes the family doesn't share</li>
-            <li style={{ fontSize: "14px", color: "var(--ink)", padding: "8px 0" }}>The objects that deserve clarity before family stress builds</li>
+            {[
+              "The drawers",
+              "The backup bedding",
+              "The linen closets stacked with care",
+              "The vintage pieces with story",
+              "The everyday things with future value",
+              "The candles tucked away because the house was always tidy enough",
+              "The designer pieces in sizes the family doesn't share",
+              "The collection no one else in the house ever learned to see",
+              "The objects that deserve clarity before family stress builds",
+            ].map((item, i, arr) => (
+              <li key={i} style={{ fontSize: "14px", color: "var(--ink)", padding: "8px 0", borderBottom: i < arr.length - 1 ? "1px solid var(--linen)" : "none" }}>{item}</li>
+            ))}
           </ul>
           <p style={{ fontSize: "14px", color: "var(--ink)", lineHeight: 1.8, marginBottom: "40px" }}>Sometimes the people who love you don't share your eye, your size, or the history behind what you chose. That is not a failure of family. It is just the reality of inherited space — people can only hold what they recognize.</p>
 
-          <h2 style={{ fontSize: "18px", fontWeight: 700, color: "var(--char)", margin: "0 0 16px" }}>Possible outputs include</h2>
+          <h2 style={{ fontSize: "18px", fontWeight: 700, color: "var(--char)", margin: "0 0 16px" }}>What Legacy Planning holds</h2>
+          <p style={{ fontSize: "14px", color: "var(--ink)", lineHeight: 1.8, marginBottom: "24px" }}>The walls and the things inside them tell a story just as much as the person in the photographs. This work is built to honor both — the operational layer that keeps a home running, and the meaning underneath the objects that deserve to carry forward with the right memory attached.</p>
+
           <div className="outputs-grid">
             <span className="outputs-header">Possible outputs include</span>
             <span>Digital inventory</span><span>Photo documentation</span>
@@ -67,7 +78,9 @@ export default function Legacy() {
             <span style={{ borderRight: "none" }}>Digital or web-based workflows</span><span></span>
           </div>
 
-          <p style={{ fontSize: "14px", color: "var(--ink)", lineHeight: 1.8, margin: "32px 0" }}>When a piece has a story worth keeping with it, that history is documented too. That is the quiet bridge between Legacy Planning and Curated Resale. Items identified for sale during catalog work can route directly into Curated Resale & Consignment without restarting the process — and when story matters, the story travels with them.</p>
+          <p style={{ fontSize: "14px", color: "var(--ink)", lineHeight: 1.8, margin: "32px 0" }}>When a piece has a story worth keeping with it, that history is documented too — not for paperwork, but so the next person who wears the fur coat, sets the table with the china, or lights the candle in the drawer has just enough of the mystery underneath to feel like they are living inside a second life, not just holding an object.</p>
+
+          <p style={{ fontSize: "14px", color: "var(--ink)", lineHeight: 1.8, marginBottom: "40px" }}>That is the quiet bridge between Legacy Planning and Curated Resale. Items identified for sale during catalog work can route directly into Curated Resale & Consignment without restarting the process — and when story matters, the story travels with them.</p>
 
           <h2 style={{ fontSize: "18px", fontWeight: 700, color: "var(--char)", margin: "40px 0 16px" }}>How project timelines work</h2>
           <p style={{ fontSize: "14px", color: "var(--ink)", lineHeight: 1.8, marginBottom: "40px" }}>Larger projects are completed across focused work sessions over a shared timeline, rather than continuous daily presence. A two-week catalog may look like three focused 11–4 sessions, with off-site documentation, resale routing, and continuity work completed between visits.</p>
@@ -75,15 +88,11 @@ export default function Legacy() {
           <h2 style={{ fontSize: "18px", fontWeight: 700, color: "var(--char)", margin: "0 0 20px" }}>Pricing</h2>
           <table className="pricing-table">
             <tbody>
-              <tr><td>Hourly</td><td>$175/hr · 2 hr minimum</td></tr>
-              <tr><td>10-hour Flex Block</td><td>$1,500 ($150/hr)</td></tr>
-              <tr><td>25-hour Flex Block</td><td>$3,650</td></tr>
-              <tr><td>Legacy Project</td><td>From $3,500 / 20–30 hrs</td></tr>
-              <tr><td>Whole home</td><td>Quoted after walkthrough</td></tr>
-              <tr><td>Ongoing Continuity</td><td>$500/mo</td></tr>
+              <tr><td>Single room or storage unit</td><td>$175/hr · 2 hr minimum</td></tr>
+              <tr><td>Whole home</td><td>Project quote after walkthrough</td></tr>
             </tbody>
           </table>
-          <p style={{ fontSize: "12px", color: "var(--sand)", marginTop: "8px", marginBottom: "40px" }}>Larger estates quoted after walkthrough only — no fixed tier. Flex blocks never expire.</p>
+          <p style={{ fontSize: "12px", color: "var(--sand)", marginTop: "8px", marginBottom: "40px" }}>No fixed tier for larger estates — scope and complexity vary too much to quote in advance.</p>
 
           <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
             <Link href="/contact" className="btn btn-dark">Book your time</Link>
