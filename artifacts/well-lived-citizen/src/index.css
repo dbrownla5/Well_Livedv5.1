@@ -2,3 +2,24 @@
 
 @media(max-width:760px){.contact-grid{grid-template-columns:1fr!important;gap:40px!important}.contact-grid > div:last-child{position:static!important}}
 .nav-dropdown.open .dropdown-menu{display:block}.nav-dropdown.open .nav-dropdown-trigger{color:var(--rust)}.nav-dropdown.open .nav-dropdown-trigger svg{transform:rotate(180deg)}
+
+/* ── Quick Entry Band ─────────────────────────────────────────────────── */
+.conversion-band-header{font-size:clamp(13px,1.4vw,15px);font-weight:500;color:var(--stone);letter-spacing:.02em;line-height:1.6;margin-bottom:32px;padding-bottom:20px;border-bottom:1px solid var(--linen)}
+.conversion-grid-4{display:grid;grid-template-columns:1fr 1fr;gap:2px}
+.conversion-block-primary{background:var(--char)}
+.conversion-block-rust{background:var(--rust)}
+.conversion-block-dark{background:var(--ink)}
+.conversion-block-light{background:var(--warm);border:1px solid var(--linen)}
+.conversion-price{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(245,240,232,.6);margin-bottom:12px}
+.conversion-price-dark{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--clay);margin-bottom:12px}
+.conversion-title{font-size:clamp(18px,2vw,22px);font-weight:700;color:var(--cream);line-height:1.2;letter-spacing:-.01em;margin-bottom:20px}
+.conversion-title-dark{font-size:clamp(18px,2vw,22px);font-weight:700;color:var(--char);line-height:1.2;letter-spacing:-.01em;margin-bottom:20px}
+.conversion-block-primary .conversion-body,.conversion-block-rust .conversion-body,.conversion-block-dark .conversion-body{color:rgba(245,240,232,.78)}
+.conversion-body-dark{color:var(--stone)}
+.conversion-block-primary .conversion-body p,.conversion-block-rust .conversion-body p,.conversion-block-dark .conversion-body p,.conversion-body-dark p{margin-bottom:10px}
+.conversion-block-primary .conversion-body p:last-child,.conversion-block-rust .conversion-body p:last-child,.conversion-block-dark .conversion-body p:last-child,.conversion-body-dark p:last-child{margin-bottom:0}
+.btn-cream{background:var(--cream);color:var(--char);align-self:flex-start}
+.btn-cream:hover{background:var(--rust);color:var(--cream)}
+.conversion-block-primary .btn-cream,.conversion-block-rust .btn-cream,.conversion-block-dark .btn-cream{margin-top:auto;padding-top:24px}
+.conversion-block-light .btn-dark{align-self:flex-start;margin-top:auto;padding-top:24px}
+@media(max-width:640px){.conversion-grid-4{grid-template-columns:1fr}}

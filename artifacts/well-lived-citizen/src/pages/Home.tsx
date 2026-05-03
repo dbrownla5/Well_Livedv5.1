@@ -27,35 +27,62 @@ export default function Home() {
 
       <hr className="divider" />
 
-      {/* CONVERSION BLOCKS */}
+      {/* QUICK ENTRY BAND */}
       <section style={{ padding: "72px 0" }}>
         <div className="container">
-          <div className="conversion-grid">
-            <div className="conversion-block">
-              <div className="conversion-label">The 4-Hour Reset</div>
-              <div className="conversion-body">
-                Book it for the room, the task list, the move landing, or the household overflow that won't stop building up. In and out. Home works again.
-                <br /><br />
-                <strong style={{ color: "var(--cream)" }}>$500 &middot; Easy to get on the calendar.</strong>
-              </div>
-              <Link href="/contact?offer=4hour" className="btn">Book Now</Link>
-            </div>
-
-            <div className="conversion-block">
-              <div className="conversion-label">Resale Bag Pickup</div>
-              <div className="conversion-body">
-                Moving, closet cleanout, post-breakup, wardrobe reset. Fill the bag and send me the intake form.
-                <br /><br />
-                Urgent handoffs can happen same-day. Everything else is picked up within 7 days and routed from there.
-              </div>
-              <Link href="/contact?offer=pickup" className="btn">Schedule Pickup</Link>
-            </div>
+          <div className="conversion-band-header">
+            Start here. Quick ways to get me in and get momentum.
           </div>
+          <div className="conversion-grid-4">
 
-          <div className="conversion-fullwidth">
-            <div className="conversion-label">You go. I'll close out the space.</div>
-            <div className="conversion-body">Pack what travels. Store what shouldn't. Route what sells. Ship what you still need. No urgency following you from the other end — just a clean handoff from a place that's been properly closed out.</div>
-            <Link href="/contact?offer=closeout" className="btn btn-dark">Book the Closeout</Link>
+            {/* Card 1 — Primary */}
+            <div className="conversion-block conversion-block-primary">
+              <div className="conversion-price">$650 · 4 hours</div>
+              <div className="conversion-title">4-Hour Practical Reset</div>
+              <div className="conversion-body">
+                <p>The fastest way to get unstuck.</p>
+                <p>One block for the room, the move landing, the task list, or whatever has been quietly building up.</p>
+                <p>We work through it together or I take it on directly — whatever gets the most done.</p>
+              </div>
+              <Link href="/contact?offer=4hour" className="btn btn-cream">Book a 4-Hour Reset</Link>
+            </div>
+
+            {/* Card 2 */}
+            <div className="conversion-block conversion-block-rust">
+              <div className="conversion-price">Commission-based · pickup available</div>
+              <div className="conversion-title">Resale Pickup Bag</div>
+              <div className="conversion-body">
+                <p>Closet cleanout, move-out, post-breakup, or just — this needs to go.</p>
+                <p>Fill 2–4 bags. I handle the sorting, selling, donating, and getting anything with value where it belongs.</p>
+                <p>Same-day pickup, route stop, or drop — whichever is easiest for your week.</p>
+              </div>
+              <Link href="/contact?offer=pickup" className="btn btn-cream">Schedule a Pickup</Link>
+            </div>
+
+            {/* Card 3 */}
+            <div className="conversion-block conversion-block-dark">
+              <div className="conversion-price">Starts as a 4-hour block</div>
+              <div className="conversion-title">The Move Closeout</div>
+              <div className="conversion-body">
+                <p>Moving and not sure what's worth selling, storing, or letting go?</p>
+                <p>I sort and route what stays, what sells, and what moves on — storage, shipping, and resale follow-through included.</p>
+                <p>You keep going. I handle what's behind you.</p>
+              </div>
+              <Link href="/contact?offer=closeout" className="btn btn-cream">Start Move Support</Link>
+            </div>
+
+            {/* Card 4 — Light Entry */}
+            <div className="conversion-block conversion-block-light">
+              <div className="conversion-price conversion-price-dark">$250 · 2 hours</div>
+              <div className="conversion-title conversion-title-dark">House Call · First Visit</div>
+              <div className="conversion-body conversion-body-dark">
+                <p>A low-key way to get me in the door.</p>
+                <p>Small resets, returns, errands, setup — the things that need hands, not a full project plan.</p>
+                <p>If it turns into more, we take it from there.</p>
+              </div>
+              <Link href="/contact?offer=housecall" className="btn btn-dark">Book a House Call</Link>
+            </div>
+
           </div>
         </div>
       </section>
