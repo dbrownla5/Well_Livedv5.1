@@ -19,7 +19,7 @@ export default function Home() {
           </p>
           <p className="hero-kicker fade-up fade-up-3">I'm built for your chaos.</p>
           <div className="hero-cta fade-up fade-up-3">
-            <Link href="/services/home-organization" className="btn btn-dark">See the work</Link>
+            <Link href="/services" className="btn btn-dark">See the services</Link>
             <Link href="/contact" className="btn btn-outline">Get in Touch</Link>
           </div>
         </div>
@@ -40,9 +40,9 @@ export default function Home() {
               <div className="conversion-price">4 hours · $500 flat</div>
               <div className="conversion-title">The 4x5</div>
               <div className="conversion-body">
-                <p>Four hours to clear the block.</p>
-                <p>The guest room that became a storage unit. The move landing that never settled. The overhead that needs to stop catching immediately.</p>
-                <p>You point to the friction. I bring the momentum to unstick it.</p>
+                <p>This is my operational shorthand for four hours of focused, intentional work in your space.</p>
+                <p>The closet that needs to finally be done. The guest room your mother-in-law is arriving for in three days. The move landing that technically happened. The event prep where everything needs to be in order before people arrive.</p>
+                <p>Personal shopping, staging, sourcing — if it fits in four hours, it's on the table. You point to the friction. I bring the rest.</p>
               </div>
               <Link href="/contact?offer=4hour" className="btn btn-cream">Book the 4x5</Link>
             </div>
@@ -77,7 +77,7 @@ export default function Home() {
               <div className="conversion-title conversion-title-dark">The 2x3</div>
               <div className="conversion-body conversion-body-dark">
                 <p>Two hours for the things life leaves unfinished.</p>
-                <p>The donation bags by the door. The vendor who needs letting in. The practical loose ends that are stealing your weekend.</p>
+                <p>The donation bags by the door. The vendor who needs letting in. The practical loose ends that have been on the list for two weeks.</p>
                 <p>You used to have to call a friend for this. Now you just book a 2x3.</p>
               </div>
               <Link href="/contact?offer=housecall" className="btn btn-dark">Book the 2x3</Link>
@@ -110,7 +110,7 @@ export default function Home() {
             <div className="service-num">02 — Legacy Planning & Inventory Catalog</div>
             <div className="service-title">Clarity without fear.</div>
             <div className="service-body">
-              <p>The operational layer of what quietly adds up inside a home. You may already have the estate planner, the will, and the paperwork. My work lives in the operational middle — the things inside the walls that deserve a plan while you're the one making decisions.</p>
+              <p>The operational layer of what quietly adds up inside a home. You may already have the estate planner, the will, and the paperwork. My work lives in the operational middle — the things inside the walls that deserve a plan while you're still the one making decisions.</p>
             </div>
             <div className="service-pricing">$175/hr · 2 hr minimum</div>
             <div className="service-flex-note">Project quotes on the <Link href="/pricing" style={{ color: "var(--rust)" }}>Pricing page</Link>.</div>
@@ -122,9 +122,10 @@ export default function Home() {
             <div className="service-num">03 — House Calls</div>
             <div className="service-title">For the things life leaves unfinished.</div>
             <div className="service-body">
-              <p>That's the thing friends used to do. The thing neighbors don't always have time for anymore. The thing adult children need when they're in another city. Once I know how your home works, it becomes easy for me to help keep it working.</p>
+              <p>These are services that obviously should exist — but didn't come with a number to call. Not a company. Not a system. Just one person who shows up and handles it, one on one, in your space.</p>
+              <p>For anyone in a gap: slammed professional, new-to-LA person, someone mid-transition, an adult navigating what used to just get handled.</p>
             </div>
-            <div className="service-pricing">$175/hr · 2 hr minimum</div>
+            <div className="service-pricing">The 2x3 · $300 flat &nbsp;|&nbsp; The 4x5 · $500 flat &nbsp;|&nbsp; $175/hr</div>
             <div className="service-flex-note">Continuity retainer available. Details on the <Link href="/pricing" style={{ color: "var(--rust)" }}>Pricing page</Link>.</div>
             <Link href="/services/house-calls" className="btn btn-outline">Book me</Link>
           </div>
@@ -153,7 +154,7 @@ export default function Home() {
             <div className="testimonial-quote">
               "I wake up and my clicker for all my lamps is on my bedside table. I get up and move it to the dresser by the door so every time I come back in I can turn any lamp from the doorway. My clothes are arranged by item and color, my purses on two long shelves and two short ones — I can see what I have and choose accordingly. My shoes are on four shelves where I can easily see them. The heat is set perfectly. The TV is set up with only one clicker to get to all the channels I want. Thank you for making life easier for me."
             </div>
-            <div className="testimonial-attr">— Gayle, Seattle Client</div>
+            <div className="testimonial-attr">— Gayle, Seattle &nbsp;·&nbsp; <Link href="/services/house-calls" style={{ color: "var(--rust)", fontWeight: 600 }}>House Calls</Link></div>
           </div>
         </div>
       </section>
