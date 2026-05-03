@@ -1,6 +1,11 @@
 import { Link } from "wouter";
+import { usePageMeta } from "../../hooks/usePageMeta";
 
 export default function Legacy() {
+  usePageMeta({
+    title: "Legacy Planning & Inventory Catalog",
+    description: "Clarity without fear. The operational side of a home, made visible — inventory, documentation, and decisions while you're the one making them.",
+  });
   return (
     <div className="page">
       <section style={{ padding: "80px 0 56px", borderBottom: "1px solid var(--linen)" }}>
@@ -94,11 +99,15 @@ export default function Legacy() {
           <h2 style={{ fontSize: "18px", fontWeight: 700, color: "var(--char)", margin: "0 0 20px" }}>Pricing</h2>
           <table className="pricing-table">
             <tbody>
-              <tr><td>Single room or storage unit</td><td>$175/hr · 2 hr minimum</td></tr>
-              <tr><td>Whole home</td><td>Project quote after walkthrough</td></tr>
+              <tr><td>Hourly</td><td>$175/hr · 2 hr minimum</td></tr>
+              <tr><td>10-hour Flex Block</td><td>$1,500 ($150/hr)</td></tr>
+              <tr><td>25-hour Flex Block</td><td>$3,650</td></tr>
+              <tr><td>Legacy Project</td><td>From $3,500 / 20–30 hrs</td></tr>
+              <tr><td>Whole home</td><td>Quoted after walkthrough</td></tr>
+              <tr><td>Ongoing Continuity</td><td>$500/mo</td></tr>
             </tbody>
           </table>
-          <p style={{ fontSize: "12px", color: "var(--sand)", marginTop: "8px", marginBottom: "40px" }}>No fixed tier for larger estates — scope and complexity vary too much to quote in advance.</p>
+          <p style={{ fontSize: "12px", color: "var(--sand)", marginTop: "8px", marginBottom: "40px" }}>Larger estates and whole-home projects are quoted after walkthrough only. No fixed tier. Flex blocks never expire.</p>
 
           <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
             <Link href="/contact" className="btn btn-dark">Book your time</Link>

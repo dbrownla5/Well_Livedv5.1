@@ -1,6 +1,11 @@
 import { Link } from "wouter";
+import { usePageMeta } from "../../hooks/usePageMeta";
 
 export default function HomeOrganization() {
+  usePageMeta({
+    title: "Home Organization & Modern Move",
+    description: "Your home, made to work for how you actually live. Concierge home organization and move support in Los Angeles.",
+  });
   return (
     <div className="page">
       <section style={{ padding: "80px 0 56px", borderBottom: "1px solid var(--linen)" }}>
@@ -62,11 +67,13 @@ export default function HomeOrganization() {
           <table className="pricing-table">
             <tbody>
               <tr><td>Hourly</td><td>$150/hr · 3 hr minimum</td></tr>
+              <tr><td>10-hour Flex Block</td><td>$1,250 ($125/hr)</td></tr>
+              <tr><td>25-hour Flex Block</td><td>$3,125 ($125/hr)</td></tr>
               <tr><td>Studio / 1BR Move Reset</td><td>$1,200 flat — up to 8 hours straight</td></tr>
               <tr><td>Larger homes & multi-room projects</td><td>Quoted after call</td></tr>
             </tbody>
           </table>
-          <p style={{ fontSize: "12px", color: "var(--sand)", marginTop: "8px", marginBottom: "40px" }}>The $1,200 flat rate is reserved for studio and 1-bedroom moves only — footprints that can realistically be packed, landed, or reset in a single uninterrupted day. Larger homes scope as projects.</p>
+          <p style={{ fontSize: "12px", color: "var(--sand)", marginTop: "8px", marginBottom: "40px" }}>Flex blocks never expire. The $1,200 flat rate is reserved for studio and 1-bedroom moves only — footprints that can realistically be packed, landed, or reset in a single uninterrupted day. Larger homes scope as projects.</p>
 
           <div style={{ background: "var(--warm)", border: "1px solid var(--linen)", padding: "32px", marginBottom: "56px" }}>
             <div style={{ fontSize: "12px", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--rust)", marginBottom: "12px" }}>A Note on Labels</div>

@@ -26,6 +26,11 @@ pnpm workspace monorepo using TypeScript. Each package manages its own dependenc
 
 ## Artifacts
 
-- `well-lived-citizen` (react-vite, /) — Marketing site for The Well Lived Citizen (Dayna Brown, LA concierge home services). Faithful port of the user's FINAL static HTML/CSS bundle, with two explicit overrides: each service has its own dedicated detail page, and every phone CTA was replaced with a Wouter Link to /contact (form-first contact). Cream/rust/charcoal palette, Plus Jakarta Sans, no backend; contact form posts to Formspree (xreojkvo). Routes: /, /about, /services, /services/{home-organization,legacy,house-calls,resale}, /pricing, /contact.
+- `well-lived-citizen` (react-vite, /) — Marketing site for The Well Lived Citizen (Dayna Brown, LA concierge home services). Cream/rust/charcoal palette, Plus Jakarta Sans. Form-first contact: every phone CTA routes to /contact except the FloatCall button and Schema.org. Routes: /, /about, /services, /services/{home-organization,legacy,house-calls,resale}, /pricing, /contact.
+  - **Voice / copy authority**: `.agents/skills/wlc-voice/SKILL.md` is the single source of truth. Canonical reference copy in `.local/build_v043026/*.md` — elevation only, no rewrites, no drift.
+  - **Quick books (flat rate)**: The 4x5 ($500 / 4hr), The 2x3 ($300 / 2hr). CTAs route to `/contact?offer={4hour|2x3|housecall|pickup|closeout}` and the multi-step intake auto-jumps to the right intent.
+  - **Contact intake**: Formspree `xreojkvo` is the system of record (success determinant). `/api/intake` POST is a best-effort mirror only; never blocks success. Do not change the Formspree endpoint.
+  - **SEO**: per-page titles via `src/hooks/usePageMeta.ts`. `index.html` carries OG/Twitter tags, JSON-LD LocalBusiness, GA4 (`G-HN9C986JLW`). `public/robots.txt` and `public/sitemap.xml` shipped.
+  - **Brand rules** (from voice skill): never "estate sale", "Special Delivery", "elder care", or "The Well Lived Citizen Co". Phone (323) 433-1350 lives only in FloatCall + Schema.org. Email: dayna@thewelllivedcitizen.com.
 
 See the `pnpm-workspace` skill for workspace structure, TypeScript setup, and package details.

@@ -1,6 +1,11 @@
 import { Link } from "wouter";
+import { usePageMeta } from "../hooks/usePageMeta";
 
 export default function Home() {
+  usePageMeta({
+    title: "The Well Lived Citizen — Concierge Home Services in Los Angeles",
+    description: "Concierge home and life services in Los Angeles — home organization, legacy planning, house calls, and curated resale. Run by Dayna Brown.",
+  });
   return (
     <div className="page">
       {/* HERO */}
@@ -18,69 +23,56 @@ export default function Home() {
             I move fast where things are solvable, and when life gets stuck, I know how to move it through.
           </p>
           <p className="hero-kicker fade-up fade-up-3">I'm built for your chaos.</p>
-          <div className="hero-cta fade-up fade-up-3">
-            <Link href="/services" className="btn btn-dark">See the services</Link>
-            <Link href="/contact" className="btn btn-outline">Get in Touch</Link>
-          </div>
         </div>
       </section>
 
-      <hr className="divider" />
-
-      {/* QUICK ENTRY BAND */}
-      <section style={{ padding: "72px 0" }}>
+      {/* QUICK ENTRY BAND — rolls directly out of the hero, no divider */}
+      <section style={{ padding: "56px 0 72px" }}>
         <div className="container">
-          <div className="conversion-band-header">
-            Start here. Quick ways to get me in and get momentum.
-          </div>
           <div className="conversion-grid-4">
 
             {/* Card 1 — The 4x5 */}
             <div className="conversion-block conversion-block-primary">
-              <div className="conversion-price">4 hours · $500 flat</div>
+              <div className="conversion-price">Four hours. Five hundred flat.</div>
               <div className="conversion-title">The 4x5</div>
               <div className="conversion-body">
-                <p>This is my operational shorthand for four hours of focused, intentional work in your space.</p>
-                <p>The closet that needs to finally be done. The guest room your mother-in-law is arriving for in three days. The move landing that technically happened. The event prep where everything needs to be in order before people arrive.</p>
-                <p>Personal shopping, staging, sourcing — if it fits in four hours, it's on the table. You point to the friction. I bring the rest.</p>
+                <p>This is my operational shorthand for making the heavy thing move. The room that keeps collecting piles. The boxes from a move that technically happened but never settled. The closet that no longer fits your life.</p>
+                <p>No project scopes, no hourly counting. You point to the friction. I bring the momentum.</p>
               </div>
-              <Link href="/contact?offer=4hour" className="btn btn-cream">Book the 4x5</Link>
+              <Link href="/contact?offer=4hour" className="btn btn-cream">Book a 4x5</Link>
             </div>
 
-            {/* Card 2 — Resale Pickup */}
+            {/* Card 2 — The 2x3 */}
+            <div className="conversion-block conversion-block-light">
+              <div className="conversion-price conversion-price-dark">Two hours. Three hundred flat.</div>
+              <div className="conversion-title conversion-title-dark">The 2x3</div>
+              <div className="conversion-body conversion-body-dark">
+                <p>The inside request for the things life leaves unfinished. The donation bags sitting by the front door. The vendor who needs letting in. The baby gear still stacked in the corner after the shower.</p>
+                <p>You used to have to call a friend for this. Now, you just book a 2x3.</p>
+              </div>
+              <Link href="/contact?offer=housecall" className="btn btn-dark">Book a 2x3</Link>
+            </div>
+
+            {/* Card 3 — Resale Pickup */}
             <div className="conversion-block conversion-block-rust">
               <div className="conversion-price">Commission-based · pickup available</div>
               <div className="conversion-title">Resale Pickup Bag</div>
               <div className="conversion-body">
-                <p>Closet cleanout, move-out, post-breakup, or just — this needs to go.</p>
-                <p>Fill 2–4 bags. I handle the sorting, selling, donating, and getting anything with value where it belongs.</p>
-                <p>Same-day pickup, route stop, or drop — whichever is easiest for your week.</p>
+                <p>Moving, closet cleanout, post-breakup, wardrobe reset. Fill 2 to 4 bags and get them to me same day.</p>
+                <p>Same-day pickup or courier handoff available.</p>
               </div>
               <Link href="/contact?offer=pickup" className="btn btn-cream">Schedule a Pickup</Link>
             </div>
 
-            {/* Card 3 — The Move Closeout */}
+            {/* Card 4 — Move Closeout */}
             <div className="conversion-block conversion-block-dark">
-              <div className="conversion-price">Starts as a 4-hour block</div>
+              <div className="conversion-price">Scoped after a quick call</div>
               <div className="conversion-title">The Move Closeout</div>
               <div className="conversion-body">
-                <p>Moving and not sure what's worth selling, storing, or letting go?</p>
-                <p>I sort and route what stays, what sells, and what moves on — storage, shipping, and resale follow-through included.</p>
-                <p>You keep going. I handle what's behind you.</p>
+                <p>You go to the new city. I stay behind to pack and close out the space — move what should store, route what should sell, ship what you still need in labeled boxes.</p>
+                <p>The move continues in flexible chunks without you carrying the urgency from the other end.</p>
               </div>
               <Link href="/contact?offer=closeout" className="btn btn-cream">Start Move Support</Link>
-            </div>
-
-            {/* Card 4 — The 2x3 */}
-            <div className="conversion-block conversion-block-light">
-              <div className="conversion-price conversion-price-dark">2 hours · $300 flat</div>
-              <div className="conversion-title conversion-title-dark">The 2x3</div>
-              <div className="conversion-body conversion-body-dark">
-                <p>Two hours for the things life leaves unfinished.</p>
-                <p>The donation bags by the door. The vendor who needs letting in. The practical loose ends that have been on the list for two weeks.</p>
-                <p>You used to have to call a friend for this. Now you just book a 2x3.</p>
-              </div>
-              <Link href="/contact?offer=housecall" className="btn btn-dark">Book the 2x3</Link>
             </div>
 
           </div>
@@ -122,8 +114,7 @@ export default function Home() {
             <div className="service-num">03 — House Calls</div>
             <div className="service-title">For the things life leaves unfinished.</div>
             <div className="service-body">
-              <p>These are services that obviously should exist — but didn't come with a number to call. Not a company. Not a system. Just one person who shows up and handles it, one on one, in your space.</p>
-              <p>For anyone in a gap: slammed professional, new-to-LA person, someone mid-transition, an adult navigating what used to just get handled.</p>
+              <p>That's the thing friends used to do. The thing neighbors don't always have time for anymore. The thing adult children need when they're in another city. Once I know how your home works, it becomes easy for me to help keep it working — home check-ins, tech setup, donation drop-offs, and the practical loose ends that make everyday life easier when someone trusted is paying attention.</p>
             </div>
             <div className="service-pricing">The 2x3 · $300 flat &nbsp;|&nbsp; The 4x5 · $500 flat &nbsp;|&nbsp; $175/hr</div>
             <div className="service-flex-note">Continuity retainer available. Details on the <Link href="/pricing" style={{ color: "var(--rust)" }}>Pricing page</Link>.</div>

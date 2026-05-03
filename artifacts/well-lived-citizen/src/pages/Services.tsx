@@ -1,6 +1,11 @@
 import { Link } from "wouter";
+import { usePageMeta } from "../hooks/usePageMeta";
 
 export default function Services() {
+  usePageMeta({
+    title: "Services",
+    description: "Home Organization & Modern Move, Legacy Planning, House Calls, and Curated Resale — concierge services in Los Angeles.",
+  });
   return (
     <div className="page">
       <section style={{ padding: "80px 0 48px", borderBottom: "1px solid var(--linen)" }}>

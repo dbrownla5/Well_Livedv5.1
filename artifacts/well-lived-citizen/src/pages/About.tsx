@@ -1,6 +1,12 @@
 import { Link } from "wouter";
 
+import { usePageMeta } from "../hooks/usePageMeta";
+
 export default function About() {
+  usePageMeta({
+    title: "About Dayna Brown",
+    description: "Fifteen years of large-scale operations leadership, now applied to your home and the practical layer of life. Los Angeles, CA.",
+  });
   return (
     <div className="page">
       {/* HERO */}

@@ -1,6 +1,11 @@
 import { Link } from "wouter";
+import { usePageMeta } from "../hooks/usePageMeta";
 
 export default function Pricing() {
+  usePageMeta({
+    title: "Pricing",
+    description: "Flat-rate quick books (4x5, 2x3), hourly, flex blocks, projects, and continuity. Clear pricing for concierge home services in Los Angeles.",
+  });
   return (
     <div className="page">
       <section style={{ padding: "80px 0 48px", borderBottom: "1px solid var(--linen)" }}>
@@ -81,6 +86,7 @@ export default function Pricing() {
               </tbody>
             </table>
             <p style={{ fontSize: "12px", color: "var(--sand)", marginTop: "8px" }}>No membership. No subscription. Ease comes from relationship, not a forced plan. Retainer includes priority scheduling and dedicated continuity across sessions.</p>
+            <p style={{ fontSize: "12px", color: "var(--sand)", marginTop: "8px" }}>Tech setup, troubleshooting, and bulk donation routing all fit inside a House Call — usually a 2x3 if it's contained, or a 4x5 if it's stacked with other practical loose ends.</p>
           </div>
 
           <hr className="divider" style={{ marginBottom: "56px" }} />

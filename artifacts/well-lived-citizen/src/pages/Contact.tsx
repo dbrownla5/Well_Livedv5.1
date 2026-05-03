@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useSearch } from "wouter";
+import { usePageMeta } from "../hooks/usePageMeta";
 
 type IntentType =
   | "homeorg"
@@ -251,6 +252,10 @@ function QuestionCard({
 }
 
 export default function Contact() {
+  usePageMeta({
+    title: "Get in Touch",
+    description: "Tell me what you need. The first conversation is always just that — a conversation. Concierge home services in Los Angeles.",
+  });
   const search = useSearch();
   const preIntent = getInitialIntent(search);
 
@@ -339,31 +344,34 @@ export default function Contact() {
     };
 
     try {
-      const [serverRes] = await Promise.allSettled([
+      // Formspree is the system of record. The /api/intake POST is a best-effort
+      // mirror only — its result never blocks success.
+      const fd = new FormData();
+      fd.append("_subject", `New Intake — ${intent ?? "general"} — ${name}`);
+      fd.append("name", name);
+      fd.append("email", email);
+      if (phone) fd.append("phone", phone);
+      fd.append("service", intent ?? "general");
+      fd.append("answers", JSON.stringify(answers));
+      if (realLife) fd.append("realLife", realLife);
+      if (bestTime) fd.append("bestTime", bestTime);
+
+      const [formspreeRes] = await Promise.allSettled([
+        fetch("https://formspree.io/f/xreojkvo", {
+          method: "POST",
+          body: fd,
+          headers: { Accept: "application/json" },
+        }),
         fetch("/api/intake", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload),
-        }),
-        (async () => {
-          const fd = new FormData();
-          fd.append("_subject", `New Intake — ${intent ?? "general"} — ${name}`);
-          fd.append("name", name);
-          fd.append("email", email);
-          if (phone) fd.append("phone", phone);
-          fd.append("service", intent ?? "general");
-          fd.append("answers", JSON.stringify(answers));
-          if (realLife) fd.append("realLife", realLife);
-          if (bestTime) fd.append("bestTime", bestTime);
-          await fetch("https://formspree.io/f/xreojkvo", {
-            method: "POST",
-            body: fd,
-            headers: { Accept: "application/json" },
-          });
-        })(),
+        }).catch(() => null),
       ]);
 
-      const ok = serverRes.status === "fulfilled" && (serverRes.value as Response).ok;
+      const ok =
+        formspreeRes.status === "fulfilled" &&
+        (formspreeRes.value as Response).ok;
       setStatus(ok ? "success" : "error");
     } catch {
       setStatus("error");

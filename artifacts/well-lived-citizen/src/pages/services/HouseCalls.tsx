@@ -1,6 +1,11 @@
 import { Link } from "wouter";
+import { usePageMeta } from "../../hooks/usePageMeta";
 
 export default function HouseCalls() {
+  usePageMeta({
+    title: "House Calls",
+    description: "For the things life leaves unfinished. The 2x3, the 4x5, hourly, and continuity retainer — concierge house calls in Los Angeles.",
+  });
   return (
     <div className="page">
       <section style={{ padding: "80px 0 56px", borderBottom: "1px solid var(--linen)" }}>

@@ -1,6 +1,11 @@
 import { Link } from "wouter";
+import { usePageMeta } from "../../hooks/usePageMeta";
 
 export default function CuratedResale() {
+  usePageMeta({
+    title: "Curated Resale & Consignment",
+    description: "Trust-forward thoughtful curation. Pickup, evaluation, photography, platform matching, and payout — without making you a part-time reseller.",
+  });
   return (
     <div className="page">
       <section style={{ padding: "80px 0 56px", borderBottom: "1px solid var(--linen)" }}>
