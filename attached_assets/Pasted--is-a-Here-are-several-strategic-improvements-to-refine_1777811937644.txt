@@ -1,0 +1,73 @@
+ is a Here are several strategic improvements to refine your site, ensure your unique voice remains consistent, and tighten your service offerings and pricing models.
+
+**1. Enhancing and Keeping Your Voice**
+Your brand rules dictate a voice that is "first-person, story-led, specific objects, specific people" with a "calm, dry, warm" tone that embraces "mid-process imperfection" [1]. 
+*   **The "About" page is perfect:** Your stories about Stevie Nicks' capes, museum glass, and the 13 temporary homes perfectly capture this voice [1-3]. 
+*   **Improvement for Service Pages:** The descriptions for your actual services slightly drift into corporate terminology (e.g., "Layout logic, Sourcing recommendations, Setup and install" [4]). To keep your voice, inject specific objects and sentence fragments here too. Instead of just saying "Layout logic," you might add: *"The drawer that jams every Tuesday. The coat closet that became a dumping ground. We fix the friction."*
+*   **The "Closeout" Copy:** Your description of the move closeout is incredibly strong and empathetic—*"The move continues in flexible chunks without you carrying the urgency from the other end"* [5]. Lean into this empathetic tone in the Home Organization page as well. 
+
+**2. Services Missed or Undefined**
+*   **The "Tech Fixes" Gap:** In your hero section, you mention that your daily life runs on "tech fixes" [6]. However, none of your four core pillars explicitly mention digital organization, router troubleshooting, or password management [7]. You should clarify if this falls under House Calls [8].
+*   **The Continuity Retainer:** On your pricing page, you list an "Ongoing Continuity: $500/mo" for Legacy Planning and a "Continuity Retainer: $500/mo" for House Calls [9, 10]. However, you never explain what this actually includes. Is this a guaranteed 3 hours of on-site work per month? Is it unlimited text support? Defining this will make it much easier to sell.
+*   **Dedicated Donation Rerouting:** You mention "Donation reroute" as part of Resale [11] and "Donation pathways" in Legacy Planning [12]. However, a major pain point for clients is simply getting rid of bags of non-valuable items. Explicitly stating whether you handle pure bulk donation runs (and under which service/rate) would capture clients who are paralyzed by bags of clutter.
+
+**3. Clarity and Navigation Improvements**
+*   **Mapping Page 1 CTAs to Pricing:** On your homepage Conversion Grid, you tell people to "Book the 4-Hour Practical Reset" and "Book the closeout" [5]. However, when they get to the pricing page, "4-Hour Practical Reset" just says "Available" with no price listed, and there is no specific "Closeout" tier [9, 10]. You should link these directly to a specific dollar amount or flat rate so the user doesn't hit a friction point.
+*   **Product Support Clarity:** Under Home Organization, you state that tools, reusable sort bins, and utility hardware are included, but for deeper spaces, "product support is quoted after walkthrough" [4, 13]. It should be explicitly clear if this quote means the *cost of the physical bins themselves* or the *labor* to source them. 
+
+**4. Pricing Factors and Strategy**
+*   **Check the Math on Flex Blocks:** Your volume discount math slightly misaligns on the Home Organization flex blocks [9]. 
+    *   Hourly: $150/hr
+    *   10-hour block: $1,250 (This is an excellent discount at **$125/hr**).
+    *   25-hour block: $3,150 (This breaks down to **$126/hr**). 
+    *   *Fix:* Volume pricing should decrease or stay flat as the commitment goes up. Consider adjusting the 25-hour block to $3,000 ($120/hr) or $3,125 ($125/hr) to properly incentivize the larger purchase.
+*   **Travel and Expense Costs:** Your service area covers Los Angeles and surrounding areas [14]. LA traffic is a major logistical factor. Your pricing should explicitly state if your hourly rate includes travel time, or if a travel fee applies for areas beyond a certain radius.
+*   **Price the 4-Hour Reset:** Since you are actively pushing the "4-Hour Practical Reset" on the homepage [5], put a hard number on it in the pricing section [10]. If a 2-hour House Call is $350 [10], a 4-hour reset should clearly state a price (e.g., $700) to match your fixed-price, "no estimate call" philosophy [15, 16]., organized handoff summary you can copy and paste directly to your deploy agent. It explains the strategy behind the updates and provides the exact text they need to swap into the site build.
+
+***
+
+### **DEPLOYMENT HANDOFF: The Well Lived Citizen Site Updates**
+
+**To the Developer / Deploy Agent:** 
+Please use the original site architecture and copy provided in the primary build document [1, 2], but apply the following strategic updates to the Homepage and Services pages. 
+
+#### **Part 1: The Perspective to Consider (The Strategy)**
+We are designing the site to convert two very different types of clients:
+1. **The "Action Buyer":** This person is overwhelmed (post-move, new baby, flooding) and needs immediate relief without thinking. For them, we are creating a "Secret Menu" on the Homepage (**The 4x5** and **The 2x3**). These are flat-rate, quick-book options that skip the estimation phase [3, 4].
+2. **The "Trust Buyer":** This person has a complex project (Legacy Planning, large moves) and needs to justify the $150–$175/hr premium rate [5, 6]. For them, we are moving Dayna’s 15+ years of corporate operational expertise from the bottom of the "About" page [7] directly onto the detailed Service pages [4, 8, 9] to prove her value.
+
+---
+
+#### **Part 2: What to Say (Exact Copy to Implement)**
+
+**1. HOMEPAGE UPDATES (The "Fast Menu")**
+*Replace the first two bullets in the Homepage "Conversion Grid" [3] with the following:*
+
+*   **The 4x5**
+    **Four hours. Five hundred flat.**
+    This is my operational shorthand for making the heavy thing move. The room that keeps collecting piles. The boxes from a move that technically happened but never settled. The closet that no longer fits your life. No project scopes, no hourly counting. You point to the friction. I bring the momentum.
+    *(Button: Book a 4x5)*
+*   **The 2x3**
+    **Two hours. Three hundred flat.**
+    The inside request for the things life leaves unfinished. The donation bags sitting by the front door. The vendor who needs letting in. The baby gear still stacked in the corner after the shower. You used to have to call a friend for this. Now, you just book a 2x3.
+    *(Button: Book a 2x3)*
+
+**2. SERVICE PAGE UPDATES (The "Trust/Expertise" Additions)**
+*Inject these paragraphs into their respective Service pages to justify the pricing and establish authority:*
+
+*   **Add to '01 — Home Organization' Page [8]:**
+    **Why this works.**
+    I don't just organize. I spent over 15 years leading large-scale operations and transformation initiatives for national retail brands. I know how systems flow, how inventory moves, and where bottlenecks happen. I take the operational logic of a corporate environment and apply it to the room that keeps collecting piles. The result isn't just a space that looks good for a day. It is a living system shaped around your real habits.
+*   **Add to '02 — Legacy Planning' Page [9]:**
+    **The value of the operational middle.**
+    You already have the estate planner and the will. But the lawyer doesn't know about the backup bedding, the designer pieces in sizes the family doesn't share, or the vintage pieces with a story. My worth is in preventing family stress before it builds. I map the operational side of the home so that when the time comes, your family has clarity, not chaos.
+*   **Add to '03 — House Calls' Page [4]:**
+    **The return on your time.**
+    You could spend your entire Saturday managing the vendor, routing the donation bags, and trying to figure out what to do with the duplicate baby gear. Or, you could hand it to me. House Calls is about buying back your time. I step into the moments you cannot hold alone, making the decisions you are too depleted to make.
+
+**3. PRICING & LOGIC CLEANUP [5, 6]**
+*Please ensure the following minor fixes are applied to the pricing page:*
+*   **Fix Volume Math:** Change the "25-hour Flex Block" under Home Organization from $3,150 to $3,125 (to properly reflect a $125/hr discount).
+*   **Match New Naming:** Ensure the Pricing Page reflects the new flat rates: **The 4x5 Reset ($500)** and **The 2x3 House Call ($300)**.
+*   **Define Retainers:** Add a quick half-sentence defining the $500/mo Continuity Retainer (e.g., "Includes X hours of on-site continuity or dedicated text support"). 
+*   **Clarify Tech/Donations:** Explicitly state if "tech fixes" [2] or bulk "donation routing" [4, 10] require booking a standard 2x3 House Call.

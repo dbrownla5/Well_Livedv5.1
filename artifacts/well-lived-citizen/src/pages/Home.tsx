@@ -35,19 +35,19 @@ export default function Home() {
           </div>
           <div className="conversion-grid-4">
 
-            {/* Card 1 — Primary */}
+            {/* Card 1 — The 4x5 */}
             <div className="conversion-block conversion-block-primary">
-              <div className="conversion-price">$650 · 4 hours</div>
-              <div className="conversion-title">4-Hour Practical Reset</div>
+              <div className="conversion-price">4 hours · $500 flat</div>
+              <div className="conversion-title">The 4x5</div>
               <div className="conversion-body">
-                <p>The fastest way to get unstuck.</p>
-                <p>One block for the room, the move landing, the task list, or whatever has been quietly building up.</p>
-                <p>We work through it together or I take it on directly — whatever gets the most done.</p>
+                <p>Four hours to clear the block.</p>
+                <p>The guest room that became a storage unit. The move landing that never settled. The overhead that needs to stop catching immediately.</p>
+                <p>You point to the friction. I bring the momentum to unstick it.</p>
               </div>
-              <Link href="/contact?offer=4hour" className="btn btn-cream">Book a 4-Hour Reset</Link>
+              <Link href="/contact?offer=4hour" className="btn btn-cream">Book the 4x5</Link>
             </div>
 
-            {/* Card 2 */}
+            {/* Card 2 — Resale Pickup */}
             <div className="conversion-block conversion-block-rust">
               <div className="conversion-price">Commission-based · pickup available</div>
               <div className="conversion-title">Resale Pickup Bag</div>
@@ -59,7 +59,7 @@ export default function Home() {
               <Link href="/contact?offer=pickup" className="btn btn-cream">Schedule a Pickup</Link>
             </div>
 
-            {/* Card 3 */}
+            {/* Card 3 — The Move Closeout */}
             <div className="conversion-block conversion-block-dark">
               <div className="conversion-price">Starts as a 4-hour block</div>
               <div className="conversion-title">The Move Closeout</div>
@@ -71,16 +71,16 @@ export default function Home() {
               <Link href="/contact?offer=closeout" className="btn btn-cream">Start Move Support</Link>
             </div>
 
-            {/* Card 4 — Light Entry */}
+            {/* Card 4 — The 2x3 */}
             <div className="conversion-block conversion-block-light">
-              <div className="conversion-price conversion-price-dark">$250 · 2 hours</div>
-              <div className="conversion-title conversion-title-dark">House Call · First Visit</div>
+              <div className="conversion-price conversion-price-dark">2 hours · $300 flat</div>
+              <div className="conversion-title conversion-title-dark">The 2x3</div>
               <div className="conversion-body conversion-body-dark">
-                <p>A low-key way to get me in the door.</p>
-                <p>Small resets, returns, errands, setup — the things that need hands, not a full project plan.</p>
-                <p>If it turns into more, we take it from there.</p>
+                <p>Two hours for the things life leaves unfinished.</p>
+                <p>The donation bags by the door. The vendor who needs letting in. The practical loose ends that are stealing your weekend.</p>
+                <p>You used to have to call a friend for this. Now you just book a 2x3.</p>
               </div>
-              <Link href="/contact?offer=housecall" className="btn btn-dark">Book a House Call</Link>
+              <Link href="/contact?offer=housecall" className="btn btn-dark">Book the 2x3</Link>
             </div>
 
           </div>
@@ -98,12 +98,10 @@ export default function Home() {
             <div className="service-num">01 — Home Organization & Modern Move</div>
             <div className="service-title">Your home, made to work for how you actually live.</div>
             <div className="service-body">
-              <p>We cover the rooms and spaces. For the room that keeps collecting piles. The storage unit that keeps increasing rent and you only go every six months to ensure you weren't broken into or to take out that one outfit, or bike. The move where the boxes made it through the door, but nothing feels settled. The move where you had to leave before everything was fully packed, and someone still needs to close out what's left behind.</p>
-              <p>The professional landing in Los Angeles the same day as their boxes and the first day on the job — knowing you'll come home to a boxed mattress, no phone charger, and a suit that needs steaming. No energy, takeout food, or forks. It's the "oh my gosh, someone save me" situation. But you're happy — life is starting a new chapter — you just have to move through the hurdles of that part.</p>
-              <p>The closet that no longer fits your life, body, season, or the way you actually get dressed (morning or afternoon — no judgment). I come in, find the friction, and make the space work around how you naturally move through your day. The goal is a home that lands well and WORKS and keeps working after I leave.</p>
+              <p>For the room that keeps collecting piles. The move that technically happened but never settled. The closet that no longer fits your life. I come in, find the friction, and make the space work around how you naturally move through your day.</p>
             </div>
             <div className="service-pricing">$150/hr · 3 hr minimum</div>
-            <div className="service-flex-note">Flex pricing and project quotes covered on the <Link href="/pricing" style={{ color: "var(--rust)" }}>Pricing page</Link>.</div>
+            <div className="service-flex-note">Flex pricing and project quotes on the <Link href="/pricing" style={{ color: "var(--rust)" }}>Pricing page</Link>.</div>
             <Link href="/services/home-organization" className="btn btn-outline">Book your session</Link>
           </div>
 
@@ -112,12 +110,10 @@ export default function Home() {
             <div className="service-num">02 — Legacy Planning & Inventory Catalog</div>
             <div className="service-title">Clarity without fear.</div>
             <div className="service-body">
-              <p>The lived-in layer of your home — the walls you spend your life within — needs clarity before it becomes a burden to you, your future self, your family, or the people you rely on. Most people are prepared for the things we're pressured to check off the list — good job, us. You may already have the estate planner, the will, and the paperwork.</p>
-              <p>My work is the home itself — identifying what's still in use, what still has value (often hidden in cabinets), and what needs a clear plan while you can still decide what matters. When story matters, I document that too — so meaning isn't lost when objects change hands.</p>
-              <p>I am not a legal estate planner or estate sale service. I focus on the meaning behind the life in your objects and how to preserve that, giving everything more value to you now, your family later, and the people who want your things. You have meaningful things attached to you — let's share them.</p>
+              <p>The operational layer of what quietly adds up inside a home. You may already have the estate planner, the will, and the paperwork. My work lives in the operational middle — the things inside the walls that deserve a plan while you're the one making decisions.</p>
             </div>
             <div className="service-pricing">$175/hr · 2 hr minimum</div>
-            <div className="service-flex-note">Flex pricing and project quotes covered on the <Link href="/pricing" style={{ color: "var(--rust)" }}>Pricing page</Link>.</div>
+            <div className="service-flex-note">Project quotes on the <Link href="/pricing" style={{ color: "var(--rust)" }}>Pricing page</Link>.</div>
             <Link href="/services/legacy" className="btn btn-outline">Book your time</Link>
           </div>
 
@@ -126,12 +122,10 @@ export default function Home() {
             <div className="service-num">03 — House Calls</div>
             <div className="service-title">For the things life leaves unfinished.</div>
             <div className="service-body">
-              <p>Possibly my favorite service, and the spirit of this company.</p>
-              <p>That's the thing friends used to do. The thing neighbors don't always have time for anymore. The thing adult children need when they're in another city.</p>
-              <p>Once I know how your home works, it becomes easy for me to help keep it working — home check-ins, tech setup, hands-on home improvements, donation drop-offs, and the practical loose ends that make everyday life easier when someone trusted is paying attention.</p>
+              <p>That's the thing friends used to do. The thing neighbors don't always have time for anymore. The thing adult children need when they're in another city. Once I know how your home works, it becomes easy for me to help keep it working.</p>
             </div>
             <div className="service-pricing">$175/hr · 2 hr minimum</div>
-            <div className="service-flex-note">Flex pricing and project quotes covered on the <Link href="/pricing" style={{ color: "var(--rust)" }}>Pricing page</Link>.</div>
+            <div className="service-flex-note">Continuity retainer available. Details on the <Link href="/pricing" style={{ color: "var(--rust)" }}>Pricing page</Link>.</div>
             <Link href="/services/house-calls" className="btn btn-outline">Book me</Link>
           </div>
 
@@ -140,11 +134,10 @@ export default function Home() {
             <div className="service-num">04 — Curated Resale & Consignment</div>
             <div className="service-title">Is it cool? Is it sellable? Will they even take it?</div>
             <div className="service-body">
-              <p>This is for clothing, designer bags, jewelry, and the pieces you know might still have value but do not want to spend hours platform-matching, measuring, negotiating, and managing yourself. With an established luxury and resale background, I go through it piece by piece, decide what is worth the effort, and match each item to the platform where it makes the most sense. Clean, non-sellable items can be responsibly donated as part of the process.</p>
-              <p>You fill the waterproof bag, sign the agreement, and I handle the rest — pickup, styling, measurements, listing, buyer questions, returns, monthly check-ins, and payout on the agreed split.</p>
+              <p>For the things that still have value, story, or second-market potential — without asking you to become a part-time reseller. I go through it piece by piece, match each item to the right platform, and handle everything from pickup through payout.</p>
             </div>
             <div className="service-pricing">Commission-based · agreement required</div>
-            <div className="service-flex-note">Commission structure and full terms covered on the <Link href="/pricing" style={{ color: "var(--rust)" }}>Pricing page</Link>.</div>
+            <div className="service-flex-note">Commission structure and full terms on the <Link href="/pricing" style={{ color: "var(--rust)" }}>Pricing page</Link>.</div>
             <Link href="/services/resale" className="btn btn-outline">Schedule it</Link>
           </div>
 

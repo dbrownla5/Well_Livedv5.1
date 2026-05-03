@@ -17,6 +17,12 @@ export default function HomeOrganization() {
             <p style={{ marginBottom: "20px" }}>The issue here is the space itself. The room, layout, volume, or systems are no longer supporting the way you naturally move through your day. I come in, find the friction, and make the space work around your real habits.</p>
           </div>
 
+          <div style={{ background: "var(--char)", padding: "36px", margin: "40px 0" }}>
+            <div style={{ fontSize: "11px", fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--sand)", marginBottom: "14px" }}>Why this works.</div>
+            <p style={{ fontSize: "15px", color: "var(--cream)", lineHeight: 1.8, marginBottom: "12px" }}>I don't just organize. I spent over 15 years leading large-scale operations and transformation initiatives for national retail brands. I know how systems flow, how inventory moves, and where bottlenecks happen.</p>
+            <p style={{ fontSize: "15px", color: "rgba(245,240,232,.78)", lineHeight: 1.8 }}>I take the operational logic of a corporate environment and apply it to the room that keeps collecting piles. The result isn't just a space that looks good for a day. It's a living system shaped around your real habits.</p>
+          </div>
+
           <h2 style={{ fontSize: "18px", fontWeight: 700, color: "var(--char)", margin: "40px 0 16px" }}>How we can work together</h2>
           <p style={{ fontSize: "14px", color: "var(--stone)", marginBottom: "12px" }}>Projects can be:</p>
           <ul style={{ listStyle: "none", marginBottom: "16px" }}>

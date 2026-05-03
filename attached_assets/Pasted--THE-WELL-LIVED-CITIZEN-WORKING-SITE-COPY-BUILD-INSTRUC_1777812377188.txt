@@ -1,0 +1,287 @@
+# THE WELL LIVED CITIZEN: WORKING SITE COPY
+**BUILD INSTRUCTION FOR AI:** Build a static website using the verbatim text and architecture provided below. 
+
+### **GLOBAL BRAND & DESIGN RULES**
+*   **Business Name:** The Well Lived Citizen
+*   **Phone Number:** (323) 433-1350
+*   **Email:** dayna@thewelllivedcitizen.com
+*   **Color Palette:** Cream (`#F5F0E8`), Warm (`#FAF7F2`), Linen (`#EDE7DB`), Charcoal (`#1C1917`), Rust (`#9A5B3C`), Stone (`#57534E`), Clay (`#78716C`), Sand (`#A8A29E`).
+*   **Typography:** Plus Jakarta Sans.
+*   **Voice:** First person. Story-led. Specific objects, specific people. Calm, dry, warm. Real spaces, real light, mid-process imperfection. Em-dashes and sentence fragments are used for pacing.
+*   **Anchor Stories:** Gayle (Seattle), The flood (13 temporary homes), The china (incomplete sets), Stevie's capes / Steven Tyler's scarves (museum glass), The baby shower mountain.
+
+---
+
+### **PAGE 1: `index_V,04302026.html`**
+
+**[Hero Section]**
+**Headline:** When *"there has to be an easier way"* becomes a business.
+**Subhead:** Welcome to the concierge for the things you don't want to handle.
+**Body:** My daily life already runs on shipping, logistics, tech fixes, resale, and the kind of real-world problem solving that doesn't slow down. I move fast where things are solvable, and when life gets stuck, I know how to move it through.
+**Kicker:** I'm built for your chaos.
+**CTAs:** See the work / Get in Touch
+
+**[Conversion Grid]**
+*   **Ready to move on it?** Book the 4-Hour Practical Reset for the room, task list, move landing, or household overflow that needs to stop catching immediately. *(Button: Book 4-Hour Reset)*
+*   **Resale bag pickup.** Moving, closet cleanout, post-breakup, wardrobe reset — fill 2 to 4 totes and get them to me same day. Same-day pickup or courier handoff available. *(Button: Schedule Pickup)*
+*   **Need to leave before everything is packed?** You go to the new city, the family home, the furnished rental, or the next place first. I stay behind to pack and close out the space — moving what should be stored, routing what should be sold, and shipping what you still need in labeled boxes. Start with a scoped project fee built from hourly work blocks. The move continues in flexible chunks without you carrying the urgency from the other end. *(Button: Book the closeout)*
+
+**[Pillar Overview Cards]**
+*   **01 — Home Organization & Modern Move** | Your home, made to work for how you actually live. | The room that keeps collecting piles. The move where the boxes are technically inside but nothing feels settled... I come in, find the friction, and make the space work around how you naturally move through your day. | $150/hr · 3 hr min
+*   **02 — Legacy Planning & Inventory Catalog** | Clarity without fear. | The operational layer of what quietly adds up inside a home. You may already have the estate planner, the will, and the paperwork. My work lives in the operational middle... 
+*   **03 — House Calls** | For the things life leaves unfinished. | That's the thing friends used to do. The thing neighbors don't always exist for anymore. The thing adult children need when they're in another city... Once I know how your home works, it becomes easy for me to help keep it working. | $175/hr · 2 hr min
+*   **04 — Curated Resale & Consignment** | Is it cool? Is it sellable? Will they even take it? | This is for clothing, designer bags, jewelry, and the pieces you know might still have value but do not want to spend hours platform-matching, measuring, negotiating, and managing yourself. 
+
+**[Testimonial]**
+"I wake up and my clicker for all my lamps is on my bedside table. I get up and move it to the dresser by the door so every time I come back in I can turn any lamp from the doorway. My clothes are arranged by item and color... Thank you for making life easier for me."
+— Gayle, Seattle Client
+
+**[Bottom CTA]**
+**Not sure where to start? Start anywhere.**
+No pressure. The whole point is to make your life easier to navigate from here.
+*(Button: Get in Touch)*
+
+---
+
+### **PAGE 2: `services_V,04302026.html`**
+
+**Headline:** Services & Pricing
+
+**01 — Home Organization & Modern Move**
+**Tagline:** The relief of the room.
+**Body:** Your home, made to work for how you actually live. For the room that keeps collecting piles, the move that technically happened but never settled, the closet that no longer fits your life, or the spaces where everyday friction quietly steals time.
+**Pricing:** $150/hr · 3 hr min | $1,200/day Move Reset
+
+**02 — Legacy Planning & Inventory Catalog**
+**Tagline:** Clarity without fear.
+**Body:** The operational side of a home, made visible again. This is for the part of life most people don't realize has been quietly building for years — the things inside a home that became part of how life worked, long before anyone stopped to look at them. Not the will. Not the paperwork. Not the part a lawyer handles. The part that lives inside the walls.
+**Pricing:** $175/hr · 2 hr min | Project pricing after walkthrough
+
+**03 — House Calls**
+**Tagline:** For the things life leaves unfinished.
+**Body:** For when the issue isn't the room — it's the person you used to have to call. Possibly my favorite service, and the spirit of this company.
+**Pricing:** 2-Hour House Call: $350 | Hourly: $175/hr · 2 hr min
+
+**04 — Curated Resale & Consignment**
+**Tagline:** Piece-by-piece curation from someone who knows the platforms.
+**Body:** For the things that still have value, story, or second-market potential — without asking you to become a part-time reseller. No item count minimum. Fill what you have and send it when it's ready.
+**Pricing:** 55/45 or 50/50 splits depending on item category
+
+---
+
+### **PAGE 3: `home_organization_V,04302026.html`**
+
+**Headline:** 01 — Home Organization & Modern Move
+**Tagline:** The relief of the room.
+**Body:** Your home, made to work for how you actually live. For the room that keeps collecting piles, the move that technically happened but never settled, the closet that no longer fits your life, or the spaces where everyday friction quietly steals time.
+
+The issue here is the space itself. The room, layout, volume, or systems are no longer supporting the way you naturally move through your day. I come in, find the friction, and make the space work around your real habits.
+
+**How we can work together**
+Projects can be:
+*   Side-by-side guided sessions
+*   Hybrid decision blocks
+*   Full key handoff
+*   Solo resets while you're away
+*   Packing and move prep with or without you
+*   Closet and system continuity after landing
+
+*The right style is the one that creates the easiest lasting outcome.*
+
+**What's included**
+Intake call, prior coordination, and any pre-planning on my end, Layout logic, Sourcing recommendations, Setup and install, Label systems, Pre-order coordination, Workflow tools and install basics, Measuring tools, reusable sort bins, Cord wraps, Velcro, adapters, and utility hardware.
+
+For deeper spaces like closets, offices, storage rooms, and linen systems, product support is quoted after walkthrough based on hidden volume and actual dimensions.
+
+---
+
+### **PAGE 4: `legacy_V,04302026.html`**
+
+**Headline:** 02 — Legacy Planning & Inventory Catalog
+**Tagline:** Clarity without fear.
+**Body:** The operational side of a home, made visible again. 
+
+**What this work actually is**
+The operational side of a home is the layer that quietly adds up over time:
+*   The drawers
+*   The backup bedding
+*   The linen closets stacked with care
+*   The vintage pieces with story
+*   The everyday things with future value
+*   The candles tucked away because the house was always tidy enough
+*   The designer pieces in sizes the family doesn't share
+*   The objects that deserve clarity before family stress builds
+
+Sometimes the people who love you don't share your eye, your size, or the history behind what you chose. That is not a failure of family. It is just the reality of inherited space — people can only hold what they recognize.
+
+**Possible outputs include**
+Digital inventory, Photo documentation, Room-by-room item notes, Family distribution references, Sentiment and story preservation, Resale-ready routing notes, Donation pathways, Second-home and storage references, Transition roadmap, Printable copies, Bound family binders, Duplicate family copies, Digital or web-based workflows.
+
+When a piece has a story worth keeping with it, that history is documented too. That is the quiet bridge between Legacy Planning and Curated Resale. Items identified for sale during catalog work can route directly into Curated Resale & Consignment without restarting the process — and when story matters, the story travels with them.
+
+**How project timelines work**
+Larger projects are completed across focused work sessions over a shared timeline, rather than continuous daily presence. A two-week catalog may look like three focused 11–4 sessions, with off-site documentation, resale routing, and continuity work completed between visits.
+
+---
+
+### **PAGE 5: `house_calls_V,04302026.html`**
+
+**Headline:** 03 — House Calls
+**Tagline:** 2-hour House Call — $350. Book this week.
+**Subhead:** Fixed price. No quote, no estimate call. The fastest way to get me on your calendar this week.
+
+**Body:**
+For when the issue isn't the room — it's the person you used to have to call.
+
+The world changed, the process got heavier, and no one can be expected to keep up with every new layer alone. House Calls fills the missing person role in real life: the partner who handled it, the nearby parent, the neighbor, the adult child in another city, the friend who always knew how to make the day still work.
+
+**Ways to use House Calls**
+*   One-time practical resets
+*   Weekly support
+*   Monthly continuity
+*   Seasonal resets
+*   Remote family check-ins
+*   Post-project upkeep
+*   Vendor days
+*   Donation and return routing
+*   Home re-entry after travel
+*   Guest and event resets
+
+**Real-Life Example**
+The 8-month pregnant woman with a beautiful baby shower, hundreds of gifts, duplicate baby gear, no time, and no energy to turn a mountain of love into something functional.
+
+The point is simple: everyone helps celebrate the moment — I help make it livable afterward. That's House Calls.
+
+**Vendor & project oversight**
+When needed, House Calls also covers: Movers, haulers, cleaners, installers, contractors, Storage teams and donation pickups, Resale buyer coordination, Building and concierge protocol, service appointment access.
+
+---
+
+### **PAGE 6: `resale_V,04302026.html`**
+
+**Headline:** 04 — Curated Resale & Consignment
+**Tagline:** Is it cool? Is it sellable? Will they even take it?
+**Body:** Piece-by-piece curation from someone who knows the platforms. For the things that still have value, story, or second-market potential — without asking you to become a part-time reseller.
+
+This service is best for items that have been well cared for, still hold real market interest, or deserve thoughtful placement through story-led resale. It is not a donation pickup substitute, bulk textile recycling service, or a shortcut for things that are no longer in resellable condition.
+
+**Shop the closet**
+The Well Lived Closet
+Curated pieces with a life left in them — designer, vintage, and the occasional treasure. Photographed clean. Shipped in two days.
+*(Links: Shop Poshmark → | Shop eBay → | Follow the Closet on Instagram →)*
+
+**The work is not just listing. It includes:**
+Pickup, intake, evaluation, Photography, Platform matching, Buyer communication, Routing and return logic, Donation reroute when appropriate, Monthly reporting and payout rhythm.
+*The goal is to move the item into the right next life, not just the fastest sale.*
+
+**Easy handoff and pickup**
+The handoff is intentionally easy. Depending on what makes the most sense for your week, items can move through: City pickup, Route-based stop-ins, Uber Business courier, Building desk drop, UPS Access Point, Direct bag shipment or handoff during another project block.
+
+**Realistic resale timeline**
+This is a long game, not a fast-cash service. Most strong items sell within the first 90 days. Nearly everything with real demand finds its buyer within 6 to 9 months. The right expectation is: resale rewards patience, not urgency. If immediate cash is the priority, resale may not be the best route.
+
+---
+
+### **PAGE 7: `pricing_V,04302026.html`**
+
+**Headline:** Pricing
+**Subhead:** How I charge
+
+**01 — Home Organization & Modern Move**
+*   Hourly: $150/hr · 3 hr minimum
+*   10-hour Flex Block: $1,250 ($125/hr)
+*   25-hour Flex Block: $3,150
+*   Studio / 1BR Move Reset: $1,200/day flat rate — up to 8 hours straight
+*   Larger homes & multi-room projects: Quoted after call
+
+**02 — Legacy Planning & Inventory Catalog**
+*   Hourly: $175/hr · 2 hr minimum
+*   10-hour Flex Block: $1,500 ($150/hr)
+*   25-hour Flex Block: $3,650
+*   Legacy Project: From $3,500 / 20–30 hrs
+*   Whole home: Quoted after walkthrough
+*   Ongoing Continuity: $500/mo
+
+**03 — House Calls**
+*   2-Hour House Call: $350
+*   Hourly: $175/hr · 2 hr minimum
+*   4-Hour Practical Reset: Available
+*   Continuity Retainer: $500/mo
+
+**04 — Curated Resale & Consignment**
+*   Clothing & Accessories: 55% Dayna / 45% client
+*   Designer: 50 / 50
+*   Furniture & Significant Home Pieces: 50 / 50
+*   Full Closet Liquidation: 55 / 45
+
+**Payment details**
+All bookings are paid via Zelle using the email below. In the Zelle memo line, please include your name and the service being paid for (e.g., "Smith — Home Org 3 hr block").
+
+**Resale**
+All resale sales are final. Items are sold as-described with photos, measurements, and condition notes. No returns, no refunds, no exchanges, no chargebacks. Disputes are handled by text or email first — that's almost always faster than a bank.
+
+---
+
+### **PAGE 8: `about_V,04302026.html`**
+
+**Headline:** Meet Dayna
+**Subhead:** competence does not eliminate the need to be cared for.
+
+**Body:**
+I have always been drawn to the life that lives inside people's most treasured possessions — the objects around which identity is formed, whether subtly or boldly.
+
+A jacket is never just clothing when it carries the memory of the woman who wore it and the nights she spent wrapped in it beside the love of her life. A record is never just vinyl when it still holds the rebellion, risk, and moment that brought it into the world — an era in which music helped bring authority to its knees. A closed closet door is never simply storage when it still tells the story of a marriage, a career, a season of confidence, or the person someone once was.
+
+That instinct has followed me my entire life.
+
+Creating the time, space, and experience for people to discover the belongings that will become part of their own story has always felt deeply important to me. Some of my earliest memories are of sitting on the floor with records spread around me, replaying Lionel Richie, Billy Joel, and Aerosmith until the stories behind the music felt as important as the songs themselves. I always felt the lyrics were telling stories so personal that I wanted to know the people behind them. The mystery of the music — and the lives we could not hear through the turntable — always felt like part of the journey.
+
+Years later, standing in Seattle and looking through museum glass at Steven Tyler's scarves, I felt that same truth again: the profound human residue objects can hold.
+
+I best understand my own attachment through moments of live music. I remember recently feeling the same reverence I felt at that museum glass while watching Stevie Nicks pull her iconic capes from decades-old performances back onto the stage. She said she had not seen some of them since the original songs were recorded, and that wearing them changed her for those few minutes. I watched memory alter the way she moved, turned, and became the person from those moments again in real time.
+
+That is the heart of this work.
+
+Each of us has those items. Those memories. Those stories that are not on tape, in a notebook, or, worse, scattered across digital spaces where they can disappear into the constant shuffle of noise.
+
+I came to understand the full weight of that truth in an entirely different way over the last year. After an unforeseen flood, I found myself moving through 13 temporary homes and Airbnbs, carrying only fragments of the life I thought I would always recognize. What surprised me most was not only the grief of the loss itself, but the disorientation of living without the things that quietly reflect you back to yourself each day.
+
+During that season, I was introduced to someone who, on paper, might have simply been called a home organizer. But what she offered was something far deeper. She stepped into the moments I could not hold alone. The decisions I was too depleted to make. She was not organizing. She was relief.
+
+I do not see homes as projects. I see them as living systems shaped by identity, family, safety, and transition. 
+
+My role is to step into complexity with calm, create clarity around belongings, preserve what matters, recover hidden value, and build elegant systems that help people move forward without losing the story of how they got here.
+
+At the core, I believe the most meaningful work is helping people feel truly taken care of. That is what this business was built to do.
+
+*(Button: Get in Touch)*
+
+**Background (Sidebar)**
+*   **Corporate:** 15+ years creating environments, leading large-scale operations and transformation initiatives for national brands. (SVP Worldwide, evo, The Collected Group, BCBG, Bonobos, Nordstrom)
+*   **Patent:** Invented and patented an outdoor retail solution prototype.
+*   **Speaker:** Keynote Speaker at MAGIC Las Vegas. Featured Guest on Retail in America with Ron Thurston.
+
+---
+
+### **PAGE 9: `contact_V,04302026.html`**
+
+**Headline:** Get in Touch
+**Subhead:** Tell me what you need. You do not need to have it figured out. Start with what is true right now and I will take it from there.
+*The first conversation is always just that — a conversation.*
+
+**Contact Flow / Form Fields (Formspree POST)**
+1. What brings you here? (Schedule a call / Book a session / Schedule a pickup or drop-off / Not sure yet)
+2. Name
+3. Email
+4. Phone
+5. Which service?
+6. What's the real-life version? (Two sentences is enough. What changed, what's actually happening?)
+7. Best time to reach you
+
+**Contact Details**
+*   **Call or Text:** (323) 433-1350
+*   **Email:** dayna@thewelllivedcitizen.com
+*   **Service Area:** Los Angeles and surrounding areas.
+*   **Response Time:** Within 24 hours. Text for urgent requests.
+*   **Payment:** Zelle using the email below.
+*   *(Include native HTML form posting directly to Formspree: `https://formspree.io/f/xreojkvo`)*

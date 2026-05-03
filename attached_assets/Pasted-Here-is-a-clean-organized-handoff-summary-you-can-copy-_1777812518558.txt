@@ -1,0 +1,49 @@
+Here is a clean, organized handoff summary you can copy and paste directly to your deploy agent. It explains the strategy behind the updates and provides the exact text they need to swap into the site build.
+
+***
+
+### **DEPLOYMENT HANDOFF: The Well Lived Citizen Site Updates**
+
+**To the Developer / Deploy Agent:** 
+Please use the original site architecture and copy provided in the primary build document [1, 2], but apply the following strategic updates to the Homepage and Services pages. 
+
+#### **Part 1: The Perspective to Consider (The Strategy)**
+We are designing the site to convert two very different types of clients:
+1. **The "Action Buyer":** This person is overwhelmed (post-move, new baby, flooding) and needs immediate relief without thinking. For them, we are creating a "Secret Menu" on the Homepage (**The 4x5** and **The 2x3**). These are flat-rate, quick-book options that skip the estimation phase [3, 4].
+2. **The "Trust Buyer":** This person has a complex project (Legacy Planning, large moves) and needs to justify the $150–$175/hr premium rate [5, 6]. For them, we are moving Dayna’s 15+ years of corporate operational expertise from the bottom of the "About" page [7] directly onto the detailed Service pages [4, 8, 9] to prove her value.
+
+---
+
+#### **Part 2: What to Say (Exact Copy to Implement)**
+
+**1. HOMEPAGE UPDATES (The "Fast Menu")**
+*Replace the first two bullets in the Homepage "Conversion Grid" [3] with the following:*
+
+*   **The 4x5**
+    **Four hours. Five hundred flat.**
+    This is my operational shorthand for making the heavy thing move. The room that keeps collecting piles. The boxes from a move that technically happened but never settled. The closet that no longer fits your life. No project scopes, no hourly counting. You point to the friction. I bring the momentum.
+    *(Button: Book a 4x5)*
+*   **The 2x3**
+    **Two hours. Three hundred flat.**
+    The inside request for the things life leaves unfinished. The donation bags sitting by the front door. The vendor who needs letting in. The baby gear still stacked in the corner after the shower. You used to have to call a friend for this. Now, you just book a 2x3.
+    *(Button: Book a 2x3)*
+
+**2. SERVICE PAGE UPDATES (The "Trust/Expertise" Additions)**
+*Inject these paragraphs into their respective Service pages to justify the pricing and establish authority:*
+
+*   **Add to '01 — Home Organization' Page [8]:**
+    **Why this works.**
+    I don't just organize. I spent over 15 years leading large-scale operations and transformation initiatives for national retail brands. I know how systems flow, how inventory moves, and where bottlenecks happen. I take the operational logic of a corporate environment and apply it to the room that keeps collecting piles. The result isn't just a space that looks good for a day. It is a living system shaped around your real habits.
+*   **Add to '02 — Legacy Planning' Page [9]:**
+    **The value of the operational middle.**
+    You already have the estate planner and the will. But the lawyer doesn't know about the backup bedding, the designer pieces in sizes the family doesn't share, or the vintage pieces with a story. My worth is in preventing family stress before it builds. I map the operational side of the home so that when the time comes, your family has clarity, not chaos.
+*   **Add to '03 — House Calls' Page [4]:**
+    **The return on your time.**
+    You could spend your entire Saturday managing the vendor, routing the donation bags, and trying to figure out what to do with the duplicate baby gear. Or, you could hand it to me. House Calls is about buying back your time. I step into the moments you cannot hold alone, making the decisions you are too depleted to make.
+
+**3. PRICING & LOGIC CLEANUP [5, 6]**
+*Please ensure the following minor fixes are applied to the pricing page:*
+*   **Fix Volume Math:** Change the "25-hour Flex Block" under Home Organization from $3,150 to $3,125 (to properly reflect a $125/hr discount).
+*   **Match New Naming:** Ensure the Pricing Page reflects the new flat rates: **The 4x5 Reset ($500)** and **The 2x3 House Call ($300)**.
+*   **Define Retainers:** Add a quick half-sentence defining the $500/mo Continuity Retainer (e.g., "Includes X hours of on-site continuity or dedicated text support"). 
+*   **Clarify Tech/Donations:** Explicitly state if "tech fixes" [2] or bulk "donation routing" [4, 10] require booking a standard 2x3 House Call.

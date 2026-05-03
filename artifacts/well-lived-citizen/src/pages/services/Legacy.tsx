@@ -64,6 +64,12 @@ export default function Legacy() {
           </ul>
           <p style={{ fontSize: "14px", color: "var(--ink)", lineHeight: 1.8, marginBottom: "40px" }}>Sometimes the people who love you don't share your eye, your size, or the history behind what you chose. That is not a failure of family. It is just the reality of inherited space — people can only hold what they recognize.</p>
 
+          <div style={{ background: "var(--char)", padding: "36px", margin: "40px 0" }}>
+            <div style={{ fontSize: "11px", fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--sand)", marginBottom: "14px" }}>The value of the operational middle.</div>
+            <p style={{ fontSize: "15px", color: "var(--cream)", lineHeight: 1.8, marginBottom: "12px" }}>You already have the estate planner and the will. But the lawyer doesn't know about the backup bedding, the designer pieces in sizes the family doesn't share, or the vintage pieces with a story no one thought to write down.</p>
+            <p style={{ fontSize: "15px", color: "rgba(245,240,232,.78)", lineHeight: 1.8 }}>My work is preventing family stress before it builds — mapping the operational side of the home so that when the time comes, your family has clarity and not chaos. The things that took a lifetime to accumulate deserve more than a rushed weekend of sorting.</p>
+          </div>
+
           <h2 style={{ fontSize: "18px", fontWeight: 700, color: "var(--char)", margin: "0 0 16px" }}>What Legacy Planning holds</h2>
           <p style={{ fontSize: "14px", color: "var(--ink)", lineHeight: 1.8, marginBottom: "24px" }}>The walls and the things inside them tell a story just as much as the person in the photographs. This work is built to honor both — the operational layer that keeps a home running, and the meaning underneath the objects that deserve to carry forward with the right memory attached.</p>
 

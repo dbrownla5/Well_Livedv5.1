@@ -67,6 +67,12 @@ export default function HouseCalls() {
 
           <p style={{ fontSize: "14px", color: "var(--stone)", fontStyle: "italic", marginBottom: "32px" }}>Sometimes there isn't a perfect way around the problem. There's just the person who knows how to make the day work anyway. That's where House Calls is most useful.</p>
 
+          <div style={{ background: "var(--char)", padding: "36px", margin: "40px 0" }}>
+            <div style={{ fontSize: "11px", fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--sand)", marginBottom: "14px" }}>The return on your time.</div>
+            <p style={{ fontSize: "15px", color: "var(--cream)", lineHeight: 1.8, marginBottom: "12px" }}>You could spend your entire Saturday managing the vendor, routing the donation bags, and trying to figure out what to do with the duplicate baby gear. Or you could hand it to me.</p>
+            <p style={{ fontSize: "15px", color: "rgba(245,240,232,.78)", lineHeight: 1.8 }}>House Calls is about buying back your time. I step into the moments you cannot hold alone — making the decisions you're too depleted to make, handling the tasks that don't need your energy to get done.</p>
+          </div>
+
           <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
             <Link href="/contact" className="btn btn-dark">Get in Touch</Link>
             <Link href="/services" style={{ fontSize: "12px", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--stone)", display: "flex", alignItems: "center", textDecoration: "none" }}>← All Services</Link>
