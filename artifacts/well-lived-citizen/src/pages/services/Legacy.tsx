@@ -110,7 +110,7 @@ export default function Legacy() {
           <p style={{ fontSize: "12px", color: "var(--sand)", marginTop: "8px", marginBottom: "40px" }}>Larger estates and whole-home projects are quoted after walkthrough only. No fixed tier. Flex blocks never expire.</p>
 
           <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
-            <Link href="/contact" className="btn btn-dark">Book your time</Link>
+            <Link href="/contact?service=legacy" className="btn btn-dark">Book your time</Link>
             <Link href="/services" style={{ fontSize: "12px", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--stone)", display: "flex", alignItems: "center", textDecoration: "none" }}>← All Services</Link>
           </div>
         </div>

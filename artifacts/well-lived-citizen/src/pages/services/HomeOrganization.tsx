@@ -146,7 +146,7 @@ export default function HomeOrganization() {
           </div>
 
           <div style={{ display: "flex", gap: "12px", flexWrap: "wrap", marginTop: "56px" }}>
-            <Link href="/contact" className="btn btn-dark">Book your session</Link>
+            <Link href="/contact?service=home-org" className="btn btn-dark">Book your session</Link>
             <Link href="/services" style={{ fontSize: "12px", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--stone)", display: "flex", alignItems: "center", textDecoration: "none" }}>← All Services</Link>
           </div>
         </div>

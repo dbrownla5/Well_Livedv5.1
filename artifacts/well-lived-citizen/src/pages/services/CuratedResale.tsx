@@ -132,7 +132,7 @@ export default function CuratedResale() {
           <p style={{ fontSize: "12px", color: "var(--sand)", marginTop: "8px", marginBottom: "40px" }}>Agreement required. No upfront cost. Commission calculated on net proceeds after platform fees.</p>
 
           <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
-            <Link href="/contact" className="btn btn-dark">Schedule a Pickup</Link>
+            <Link href="/contact?service=resale" className="btn btn-dark">Schedule a Pickup</Link>
             <Link href="/services" style={{ fontSize: "12px", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--stone)", display: "flex", alignItems: "center", textDecoration: "none" }}>← All Services</Link>
           </div>
         </div>

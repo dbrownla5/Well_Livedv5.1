@@ -34,7 +34,7 @@ export default function Pricing() {
               </tbody>
             </table>
             <p style={{ fontSize: "12px", color: "var(--clay)", marginTop: "14px" }}>Flat-rate blocks are paid at booking. No estimate call required. You point to what needs handling — I bring the momentum.</p>
-            <Link href="/contact" className="btn btn-rust" style={{ marginTop: "20px", display: "inline-block" }}>Book a flat-rate block</Link>
+            <Link href="/contact?offer=4hour" className="btn btn-rust" style={{ marginTop: "20px", display: "inline-block" }}>Book a flat-rate block</Link>
           </div>
 
           <hr className="divider" style={{ marginBottom: "56px" }} />
