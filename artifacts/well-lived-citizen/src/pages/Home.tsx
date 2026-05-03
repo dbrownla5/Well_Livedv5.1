@@ -32,26 +32,30 @@ export default function Home() {
         <div className="container">
           <div className="conversion-grid">
             <div className="conversion-block">
-              <div className="conversion-label">Ready to move on it?</div>
-              <div className="conversion-body">Book the 4-Hour Practical Reset for the room, task list, move landing, or household overflow that needs to stop catching immediately.</div>
-              <Link href="/contact" className="btn">Book 4-Hour Reset</Link>
+              <div className="conversion-label">The 4-Hour Reset</div>
+              <div className="conversion-body">
+                Book it for the room, the task list, the move landing, or the household overflow that won't stop building up. In and out. Home works again.
+                <br /><br />
+                <strong style={{ color: "var(--cream)" }}>$500 &middot; Easy to get on the calendar.</strong>
+              </div>
+              <Link href="/contact?offer=4hour" className="btn">Book Now</Link>
             </div>
 
             <div className="conversion-block">
-              <div className="conversion-label">Resale bag pickup.</div>
+              <div className="conversion-label">Resale Bag Pickup</div>
               <div className="conversion-body">
-                Moving, closet cleanout, post-breakup, wardrobe reset — fill 2 to 4 totes and get them to me same day.
+                Moving, closet cleanout, post-breakup, wardrobe reset. Fill the bag and send me the intake form.
                 <br /><br />
-                Same-day pickup or courier handoff available.
+                Urgent handoffs can happen same-day. Everything else is picked up within 7 days and routed from there.
               </div>
-              <Link href="/contact" className="btn">Schedule Pickup</Link>
+              <Link href="/contact?offer=pickup" className="btn">Schedule Pickup</Link>
             </div>
           </div>
 
           <div className="conversion-fullwidth">
-            <div className="conversion-label">Need to leave before everything is packed?</div>
-            <div className="conversion-body">You go to the new city, the family home, the furnished rental, or the next place first. I stay behind to pack and close out the space, move what should store, route what should sell, ship what you still need in labeled boxes. Start with a scoped project fee built from hourly work blocks. The move continues in flexible chunks without you carrying the urgency from the other end.</div>
-            <Link href="/contact" className="btn btn-dark">Book the closeout</Link>
+            <div className="conversion-label">You go. I'll close out the space.</div>
+            <div className="conversion-body">Pack what travels. Store what shouldn't. Route what sells. Ship what you still need. No urgency following you from the other end — just a clean handoff from a place that's been properly closed out.</div>
+            <Link href="/contact?offer=closeout" className="btn btn-dark">Book the Closeout</Link>
           </div>
         </div>
       </section>
