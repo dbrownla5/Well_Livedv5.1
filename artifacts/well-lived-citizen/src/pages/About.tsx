@@ -35,9 +35,15 @@ export default function About() {
 
                 <p style={{ marginBottom: "20px" }}>That instinct has followed me my entire life.</p>
 
-                <p style={{ marginBottom: "20px" }}>Creating the time, space, and experience for people to discover the belongings that will become part of their own story has always felt deeply important to me.</p>
+                <p style={{ marginBottom: "20px" }}>Creating the time, space, and experience for people to discover the belongings that will become part of their own story has always felt deeply important to me. Some of my earliest memories are of sitting on the floor with records spread around me, replaying Lionel Richie, Billy Joel, and Aerosmith until the stories behind the music felt as important as the songs themselves. I always felt the lyrics were telling stories so personal that I wanted to know the people behind them. The mystery of the music — and the lives we could not hear through the turntable — always felt like part of the journey.</p>
+
+                <p style={{ marginBottom: "20px" }}>Years later, standing in Seattle and looking through museum glass at Steven Tyler's scarves, I felt that same truth again: the profound human residue objects can hold.</p>
+
+                <p style={{ marginBottom: "20px" }}>I best understand my own attachment through moments of live music. I remember recently feeling the same reverence I felt at that museum glass while watching Stevie Nicks pull her iconic capes from decades-old performances back onto the stage. She said she had not seen some of them since the original songs were recorded, and that wearing them changed her for those few minutes. I watched memory alter the way she moved, turned, and became the person from those moments again in real time.</p>
 
                 <p style={{ marginBottom: "32px", fontSize: "17px", fontWeight: 600, color: "var(--char)", fontStyle: "italic" }}>That is the heart of this work.</p>
+
+                <p style={{ marginBottom: "20px" }}>Each of us has those items. Those memories. Those stories that are not on tape, in a notebook, or, worse, scattered across digital spaces where they can disappear into the constant shuffle of noise.</p>
 
                 <p style={{ marginBottom: "20px" }}>I do not believe people simply need help getting rid of things. I believe they need help understanding what those things mean, what they are worth, what they still have left to do, and where the next chapter of those belongings belongs.</p>
 
