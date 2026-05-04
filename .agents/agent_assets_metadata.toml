@@ -4,10 +4,10 @@ uploads = []
 id = "EgLOpqvQsF05yys8fo2s_"
 uri = "file://artifacts/well-lived-citizen/public/images/hero-bg.png"
 type = "image"
-title = "wlc hero bg v6 plain leather jacket"
+title = "wlc hero bg v7 unified scene"
 
 [[outputs]]
 id = "ldsDVTpJDuSS7WYpfS4y4"
 uri = "file://artifacts/well-lived-citizen/public/images/hero-bg.png"
 type = "image"
-title = "Hero v6 — plain leather, no bedazzle"
+title = "Hero v7 — unified"
