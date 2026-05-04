@@ -15,9 +15,7 @@ export default function Home() {
     const handleScroll = () => {
       if (!heroRef.current || !overlayRef.current) return;
       const heroH = heroRef.current.offsetHeight;
-      const base = 0.72;
-      const scrolled = Math.min(window.scrollY / (heroH * 0.6), 1 - base);
-      const progress = base + scrolled;
+      const progress = Math.min(window.scrollY / (heroH * 0.65), 1);
       overlayRef.current.style.opacity = String(progress);
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
