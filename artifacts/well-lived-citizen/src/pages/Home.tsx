@@ -33,7 +33,7 @@ export default function Home() {
             {/* Card 1 — The 4x5 */}
             <div className="conversion-block conversion-block-primary">
               <div className="conversion-price">THE FOUR HOUR </div>
-              <div className="conversion-title">The 4x5</div>
+              <div className="conversion-title">Call it a reset, an assist, a good start. It's a block that creates movement you can see - wherever you feel it.</div>
               <div className="conversion-body">
                 <p>This is my operational shorthand for making the heavy thing move. The room that keeps collecting piles. The boxes from a move that technically happened but never settled. The closet that no longer fits your life.</p>
                 <p>No project scopes, no hourly counting. You point to the friction. I bring the momentum.</p>
