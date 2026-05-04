@@ -21,52 +21,29 @@ export default function HouseCalls() {
 
           <div style={{ fontSize: "15px", lineHeight: 1.9, color: "var(--ink)", marginBottom: "40px" }}>
             <p style={{ marginBottom: "16px", fontStyle: "italic", fontSize: "16px" }}>Possibly my favorite service, and the spirit of this company.</p>
-            <p style={{ marginBottom: "16px" }}>These are services that obviously should exist — but until now, didn't come with a number to call. The world shifted. People got busier, more dispersed, more self-reliant out of necessity. The practical layer of daily life kept accumulating, and the circle of people who used to absorb it quietly got smaller.</p>
-            <p>House Calls fills that gap — not as a company, not as a system, but as one person who shows up and handles it. One on one. Real conversation. No onboarding process. No intake team. Just me, in your space, making the day actually work.</p>
+            <p style={{ marginBottom: "16px" }}>For when the issue isn't the room — it's the person you used to have to call.</p>
+            <p>The world changed, the process got heavier, and no one can be expected to keep up with every new layer alone. House Calls fills the missing person role in real life: the partner who handled it, the nearby parent, the neighbor, the adult child in another city, the friend who always knew how to make the day still work.</p>
           </div>
-
-          <div style={{ background: "var(--char)", padding: "36px", margin: "0 0 48px" }}>
-            <div style={{ fontSize: "11px", fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--sand)", marginBottom: "14px" }}>The return on your time.</div>
-            <p style={{ fontSize: "15px", color: "var(--cream)", lineHeight: 1.8, marginBottom: "12px" }}>You could spend your entire Saturday managing the vendor, routing the donation bags, figuring out what to do with the gear still in the corner. Or you could hand it to me.</p>
-            <p style={{ fontSize: "15px", color: "rgba(245,240,232,.78)", lineHeight: 1.8 }}>House Calls is about buying back your time. I step into the moments you cannot hold alone — making the decisions you're too depleted to make, handling what doesn't need your energy to get done.</p>
-          </div>
-
-          <h2 style={{ fontSize: "18px", fontWeight: 700, color: "var(--char)", margin: "0 0 16px" }}>Who this is for</h2>
-          <p style={{ fontSize: "14px", color: "var(--stone)", lineHeight: 1.75, marginBottom: "16px" }}>This is for anyone in a gap — a season of life where the usual support has changed and the practical layer hasn't caught up.</p>
-          <ul style={{ listStyle: "none", marginBottom: "40px" }}>
-            {[
-              "The professional who is slammed and needs someone to handle the building, the vendor, the donation run — without explaining everything twice",
-              "The person who just moved to LA and doesn't have the network yet to know who to call",
-              "The person coming out of a relationship where certain things were just handled by someone else — and now aren't",
-              "The adult child who wants someone to help their parent set up the new iPhone, the new TV, the new routines — without making it a big event",
-              "The parent whose kid just moved home and the house needs to be rethought to actually work for two people again",
-              "The creative, the entrepreneur, the constantly traveling person who needs a trusted point of contact for the home when they're not there",
-              "Anyone who keeps saying 'I need to deal with that' and just hasn't — because there was no one easy to call",
-            ].map((item, i, arr) => (
-              <li key={i} style={{ fontSize: "14px", color: "var(--ink)", padding: "10px 0", borderBottom: i < arr.length - 1 ? "1px solid var(--linen)" : "none", lineHeight: 1.7 }}>{item}</li>
-            ))}
-          </ul>
 
           <h2 style={{ fontSize: "18px", fontWeight: 700, color: "var(--char)", margin: "0 0 16px" }}>Ways to use House Calls</h2>
           <ul style={{ listStyle: "none", marginBottom: "40px" }}>
             {[
               "One-time practical resets",
-              "Weekly or monthly continuity",
-              "Seasonal home prep",
-              "Vendor and contractor access",
-              "Donation and return routing",
-              "Tech setup, troubleshooting, or walkthroughs",
-              "Personal shopping and sourcing",
-              "Home re-entry after travel",
-              "Guest and event prep",
+              "Weekly support",
+              "Monthly continuity",
+              "Seasonal resets",
               "Remote family check-ins",
-              "4-Hour Practical Reset",
+              "Post-project upkeep",
+              "Vendor days",
+              "Donation and return routing",
+              "Home re-entry after travel",
+              "Guest and event resets",
             ].map((item, i, arr) => (
               <li key={i} style={{ fontSize: "14px", color: "var(--ink)", padding: "8px 0", borderBottom: i < arr.length - 1 ? "1px solid var(--linen)" : "none" }}>{item}</li>
             ))}
           </ul>
 
-          {/* Gayle story — this is why House Calls exists */}
+          {/* Gayle story */}
           <div style={{ background: "var(--warm)", border: "1px solid var(--linen)", borderLeft: "3px solid var(--rust)", padding: "32px 36px", margin: "48px 0" }}>
             <div style={{ fontSize: "11px", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--rust)", marginBottom: "20px" }}>This is why House Calls exists.</div>
             <blockquote style={{ margin: 0 }}>
@@ -81,20 +58,16 @@ export default function HouseCalls() {
           <div style={{ background: "var(--warm)", border: "1px solid var(--linen)", padding: "32px", margin: "40px 0" }}>
             <div style={{ fontSize: "11px", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--rust)", marginBottom: "16px" }}>Real-Life Example</div>
             <p style={{ fontSize: "14px", color: "var(--ink)", lineHeight: 1.8, marginBottom: "12px" }}>The 8-month pregnant woman with a beautiful baby shower, hundreds of gifts, duplicate baby gear, no time, and no energy to turn a mountain of love into something functional.</p>
-            <p style={{ fontSize: "14px", color: "var(--ink)", lineHeight: 1.8, marginBottom: "12px" }}>I step in for the 4-hour practical reset: unwrap and sort everything, organize by month and size and first-use timeline, separate immediate essentials, identify duplicates, create return and resale routes, donate what will never realistically be used, clear packaging and gift-wrap chaos, order thank-you cards, export addresses to print, reset the room so it actually works for day one.</p>
-            <p style={{ fontSize: "14px", color: "var(--stone)", lineHeight: 1.8, fontStyle: "italic" }}>Everyone helps celebrate the moment — I help make it livable afterward.</p>
+            <p style={{ fontSize: "14px", color: "var(--stone)", lineHeight: 1.8, fontStyle: "italic" }}>Everyone helps celebrate the moment — I help make it livable afterward. That's House Calls.</p>
           </div>
 
           <h2 style={{ fontSize: "18px", fontWeight: 700, color: "var(--char)", margin: "40px 0 16px" }}>Vendor & project oversight</h2>
           <p style={{ fontSize: "14px", color: "var(--stone)", marginBottom: "16px" }}>When needed, House Calls also covers:</p>
           <ul style={{ listStyle: "none", marginBottom: "40px" }}>
-            {["Movers, haulers, cleaners, installers, contractors", "Storage teams and donation pickups", "Resale buyer coordination", "Shipping and courier", "Building and concierge protocol, service appointment access"].map((item, i, arr) => (
+            {["Movers, haulers, cleaners, installers, contractors", "Storage teams and donation pickups", "Resale buyer coordination", "Building and concierge protocol, service appointment access"].map((item, i, arr) => (
               <li key={i} style={{ fontSize: "14px", color: "var(--ink)", padding: "8px 0", borderBottom: i < arr.length - 1 ? "1px solid var(--linen)" : "none" }}>{item}</li>
             ))}
           </ul>
-
-          <h2 style={{ fontSize: "18px", fontWeight: 700, color: "var(--char)", margin: "0 0 16px" }}>Service area</h2>
-          <p style={{ fontSize: "14px", color: "var(--ink)", lineHeight: 1.8, marginBottom: "40px" }}>LA base, but not radius-limited. Quick asks can often be absorbed into an existing route. Urgent timing and transition-sensitive requests are prioritized whenever possible.</p>
 
           <h2 style={{ fontSize: "18px", fontWeight: 700, color: "var(--char)", margin: "0 0 20px" }}>Pricing</h2>
           <table className="pricing-table">
@@ -105,8 +78,7 @@ export default function HouseCalls() {
               <tr><td>Continuity Retainer</td><td>$500/mo</td></tr>
             </tbody>
           </table>
-          <p style={{ fontSize: "12px", color: "var(--sand)", marginTop: "8px" }}>No membership. No subscription. Ease comes from relationship, not a forced plan. Retainer includes priority scheduling and dedicated continuity across sessions.</p>
-          <p style={{ fontSize: "12px", color: "var(--sand)", marginTop: "8px", marginBottom: "48px" }}>Tech setup, troubleshooting, and bulk donation routing all fit inside a House Call — a 2-hour block if it's contained, or the 4-hour reset if it's stacked with other practical loose ends.</p>
+          <p style={{ fontSize: "12px", color: "var(--sand)", marginTop: "8px", marginBottom: "48px" }}>No membership. No subscription. Ease comes from relationship, not a forced plan. Retainer includes priority scheduling and dedicated continuity across sessions.</p>
 
           <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
             <Link href="/contact?offer=housecall" className="btn btn-dark">Book a House Call</Link>

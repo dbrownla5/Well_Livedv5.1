@@ -26,22 +26,6 @@ export default function Legacy() {
             <p>Not the will, not the paperwork, not the part a lawyer handles. The part that lives inside the walls.</p>
           </div>
 
-          <h2 style={{ fontSize: "18px", fontWeight: 700, color: "var(--char)", margin: "40px 0 16px" }}>Who this is for</h2>
-          <p style={{ fontSize: "14px", color: "var(--stone)", marginBottom: "16px", lineHeight: 1.75 }}>The operational side of a home shows up for almost everyone, eventually. Sometimes it's a life change. Sometimes it's a move. Sometimes it's a quiet morning where the drawers, closets, and storage spaces stop matching the person living there.</p>
-
-          <ul style={{ listStyle: "none", marginBottom: "24px" }}>
-            {[
-              "The divorced mom who moved into a condo and suddenly had to see, for the first time, how much had actually been accumulated over a marriage — and had to agree to how it all gets split",
-              "The person who lived in the same apartment for ten years and had no idea how much had quietly gathered in the back of every closet",
-              "The career change that revealed a hundred film industry cords, gear, and references in the garage — from a life that isn't the current one anymore",
-              "The household where someone is ready to take control of their own story before it falls into someone else's hands",
-              "The family carrying years of meaningful, valuable, or hard-to-sort volume that deserves clarity without pressure",
-              "The person who wants to decide what stays, what moves on, and what gets remembered — while they are the one making the decisions",
-            ].map((item, i, arr) => (
-              <li key={i} style={{ fontSize: "14px", color: "var(--ink)", padding: "10px 0", borderBottom: i < arr.length - 1 ? "1px solid var(--linen)" : "none" }}>{item}</li>
-            ))}
-          </ul>
-
           {/* China passage */}
           <div style={{ background: "var(--warm)", borderLeft: "3px solid var(--rust)", padding: "24px 28px", margin: "40px 0" }}>
             <p style={{ fontSize: "14px", color: "var(--ink)", lineHeight: 1.9, marginBottom: "16px" }}>It's a holiday dinner, looking at china that hasn't been used in years. You wonder if it ever will, knowing three plates are missing, broken in memorable moments over lifetimes. What happens to a set of china passed down two generations, incomplete but once made a new couple feel whole? It can't be worthless, but can't be sold incomplete. Your kids live in small apartments and said, "That's sweet, but we can't take it." So, what happens to something you thought would be with your family forever?</p>
@@ -68,15 +52,6 @@ export default function Legacy() {
             ))}
           </ul>
           <p style={{ fontSize: "14px", color: "var(--ink)", lineHeight: 1.8, marginBottom: "40px" }}>Sometimes the people who love you don't share your eye, your size, or the history behind what you chose. That is not a failure of family. It is just the reality of inherited space — people can only hold what they recognize.</p>
-
-          <div style={{ background: "var(--char)", padding: "36px", margin: "40px 0" }}>
-            <div style={{ fontSize: "11px", fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--sand)", marginBottom: "14px" }}>The value of the operational middle.</div>
-            <p style={{ fontSize: "15px", color: "var(--cream)", lineHeight: 1.8, marginBottom: "12px" }}>You already have the estate planner and the will. But the lawyer doesn't know about the backup bedding, the designer pieces in sizes the family doesn't share, or the vintage pieces with a story no one thought to write down.</p>
-            <p style={{ fontSize: "15px", color: "rgba(245,240,232,.78)", lineHeight: 1.8 }}>My work is preventing family stress before it builds — mapping the operational side of the home so that when the time comes, your family has clarity and not chaos. The things that took a lifetime to accumulate deserve more than a rushed weekend of sorting.</p>
-          </div>
-
-          <h2 style={{ fontSize: "18px", fontWeight: 700, color: "var(--char)", margin: "0 0 16px" }}>What Legacy Planning holds</h2>
-          <p style={{ fontSize: "14px", color: "var(--ink)", lineHeight: 1.8, marginBottom: "24px" }}>The walls and the things inside them tell a story just as much as the person in the photographs. This work is built to honor both — the operational layer that keeps a home running, and the meaning underneath the objects that deserve to carry forward with the right memory attached.</p>
 
           <div className="outputs-grid">
             <span className="outputs-header">Possible outputs include</span>

@@ -18,17 +18,11 @@ export default function HomeOrganization() {
 
       <section style={{ padding: "64px 0" }}>
         <div className="container" style={{ maxWidth: "760px" }}>
-          <div style={{ fontSize: "15px", lineHeight: 1.9, color: "var(--ink)" }}>
-            <p style={{ marginBottom: "20px" }}>The issue here is the space itself. The room, layout, volume, or systems are no longer supporting the way you naturally move through your day. I come in, find the friction, and make the space work around your real habits.</p>
+          <div style={{ fontSize: "15px", lineHeight: 1.9, color: "var(--ink)", marginBottom: "40px" }}>
+            <p>The issue here is the space itself. The room, layout, volume, or systems are no longer supporting the way you naturally move through your day. I come in, find the friction, and make the space work around your real habits.</p>
           </div>
 
-          <div style={{ background: "var(--char)", padding: "36px", margin: "40px 0" }}>
-            <div style={{ fontSize: "11px", fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--sand)", marginBottom: "14px" }}>Why this works.</div>
-            <p style={{ fontSize: "15px", color: "var(--cream)", lineHeight: 1.8, marginBottom: "12px" }}>The same discipline that reorganized 150 retail stores across 14 states, that led a Seattle flagship to its highest sales year in company history, that rebuilt organizations from startup to scale — applied to the places where people actually live.</p>
-            <p style={{ fontSize: "15px", color: "rgba(245,240,232,.78)", lineHeight: 1.8 }}>I know where systems break, where bottlenecks hide, and how to build something that holds. The result isn't a space that looks good for a day. It's a living system shaped around your real habits.</p>
-          </div>
-
-          <h2 style={{ fontSize: "18px", fontWeight: 700, color: "var(--char)", margin: "40px 0 16px" }}>How we can work together</h2>
+          <h2 style={{ fontSize: "18px", fontWeight: 700, color: "var(--char)", margin: "0 0 16px" }}>How we can work together</h2>
           <p style={{ fontSize: "14px", color: "var(--stone)", marginBottom: "12px" }}>Projects can be:</p>
           <ul style={{ listStyle: "none", marginBottom: "16px" }}>
             {[
@@ -73,67 +67,10 @@ export default function HomeOrganization() {
               <tr><td>Larger homes & multi-room projects</td><td>Quoted after call</td></tr>
             </tbody>
           </table>
-          <p style={{ fontSize: "12px", color: "var(--sand)", marginTop: "8px", marginBottom: "40px" }}>Flex blocks never expire. The $1,200 flat rate is reserved for studio and 1-bedroom moves only — footprints that can realistically be packed, landed, or reset in a single uninterrupted day. Larger homes scope as projects.</p>
-
-          <div style={{ background: "var(--warm)", border: "1px solid var(--linen)", padding: "32px", marginBottom: "56px" }}>
-            <div style={{ fontSize: "12px", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--rust)", marginBottom: "12px" }}>A Note on Labels</div>
-            <p style={{ fontSize: "14px", color: "var(--ink)", lineHeight: 1.8, marginBottom: "12px" }}>Labels are always included — handwritten on-site by default, and printed sets provided for larger project scopes.</p>
-            <p style={{ fontSize: "14px", color: "var(--ink)", lineHeight: 1.8, marginBottom: "12px" }}>For efficiency, printed labels are usually handled as office work rather than billed hourly. I notate during the session, build the label set in my own app on my own time, print them, and bring them back to apply on the next visit or at the end of a multi-session project. This saves real money on hourly time that would otherwise be spent typing and cutting labels in the middle of active work.</p>
-            <p style={{ fontSize: "14px", color: "var(--ink)", lineHeight: 1.8 }}>If you want fully printed labels applied the same day, I'm happy to bring the label maker on-site — just mention it during intake so it's built into the time estimate.</p>
-          </div>
-
-          {/* Add-Ons */}
-          <h2 style={{ fontSize: "18px", fontWeight: 700, color: "var(--char)", margin: "0 0 8px" }}>Add-Ons & Landing Support</h2>
-          <p style={{ fontSize: "14px", color: "var(--stone)", lineHeight: 1.75, marginBottom: "32px" }}>Optional product budgets that can be added to any session or day rate. Priced to cover real items, not estimated loosely.</p>
-
-          <div style={{ fontSize: "13px", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--char)", marginBottom: "16px" }}>First-Night & First-Week Supply Bundles</div>
-          <p style={{ fontSize: "13px", color: "var(--stone)", lineHeight: 1.7, marginBottom: "20px" }}>So the home works before the first Target run.</p>
-
-          {[
-            {
-              price: "$150 — Essentials Landing",
-              body: "Toilet paper, paper towels, basic utensils, water glasses, a wine or whiskey tumbler, laundry and dish detergent, trash bags, trash bins, two bath towels, and two kitchen towels. The first-night basics so nothing has to be bought in a panic.",
-            },
-            {
-              price: "$250 — Start-Up Landing",
-              body: "Everything in Essentials, plus a starter dish set, dish soap, hamper, hangers, and entry-point setup — keys, mail, shoes, bag drop. Enough to make the kitchen functional and the front door feel like a real landing zone.",
-            },
-            {
-              price: "$500 — Full Landing Bundle",
-              body: "Everything in Start-Up, plus sheets, pillows, a steamer, and a duvet. The sleep, shower, eat, charge, and get dressed tonight bundle. Ideal for new-city arrivals, life transitions, furnished rentals, post-breakup moves, and temporary homes that still need to feel fully functional.",
-            },
-          ].map(({ price, body }, i) => (
-            <div key={i} style={{ borderTop: "1px solid var(--linen)", padding: "20px 0" }}>
-              <div style={{ fontSize: "14px", fontWeight: 700, color: "var(--char)", marginBottom: "8px" }}>{price}</div>
-              <p style={{ fontSize: "14px", color: "var(--ink)", lineHeight: 1.8 }}>{body}</p>
-            </div>
-          ))}
-
-          <div style={{ fontSize: "13px", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--char)", margin: "40px 0 16px" }}>Pre-Buy Org Bundles</div>
-          <p style={{ fontSize: "13px", color: "var(--stone)", lineHeight: 1.7, marginBottom: "20px" }}>For clients who want to front-load organizing supplies into the session. Item mix is adjusted during intake to fit the specific room — any item can be swapped for another of equal value.</p>
-
-          {[
-            {
-              price: "$150 — Starter Org Bundle",
-              body: "5 bins, 3 bin latches, and a rolling cart. Good for a single closet, pantry shelf, or one focused zone.",
-            },
-            {
-              price: "$250 — Mid Org Bundle",
-              body: "10 bins in mixed sizes, 6 bin latches, a rolling cart, 2 drawer divider sets, and a shelf riser or two. Covers a full closet, a small pantry, or a bathroom and linen combo.",
-            },
-            {
-              price: "$500 — Full Org Bundle",
-              body: "20 bins across multiple sizes, full latch set, rolling cart, 4 drawer divider sets, shelf risers, under-shelf baskets, hanger refresh, and a starter set of clear canisters or lazy susans for pantry or bath. Covers a full pantry, a primary closet and dresser, or a multi-zone reset in one session.",
-            },
-          ].map(({ price, body }, i) => (
-            <div key={i} style={{ borderTop: "1px solid var(--linen)", padding: "20px 0" }}>
-              <div style={{ fontSize: "14px", fontWeight: 700, color: "var(--char)", marginBottom: "8px" }}>{price}</div>
-              <p style={{ fontSize: "14px", color: "var(--ink)", lineHeight: 1.8 }}>{body}</p>
-            </div>
-          ))}
+          <p style={{ fontSize: "12px", color: "var(--sand)", marginTop: "8px", marginBottom: "56px" }}>Flex blocks never expire. The $1,200 flat rate is reserved for studio and 1-bedroom moves only — footprints that can realistically be packed, landed, or reset in a single uninterrupted day. Larger homes scope as projects.</p>
 
           {/* Gayle testimonial */}
-          <div style={{ borderTop: "1px solid var(--linen)", margin: "56px 0 0", paddingTop: "48px" }}>
+          <div style={{ borderTop: "1px solid var(--linen)", paddingTop: "48px" }}>
             <blockquote style={{ borderLeft: "3px solid var(--rust)", paddingLeft: "28px", margin: 0 }}>
               <p style={{ fontSize: "15px", color: "var(--ink)", lineHeight: 1.9, marginBottom: "16px" }}>I was thinking about the ease of my life here since you streamlined my environment.</p>
               <p style={{ fontSize: "15px", color: "var(--ink)", lineHeight: 1.9, marginBottom: "16px" }}>I wake up and my clicker for all my lamps is on my bedside table. I get up and move it to the dresser by the door so every time I come back in I can turn any lamp from the doorway. Then I go in to shower and my wonderful shower head makes it so easy — it beats down on me but doesn't get to the very back of the tub, which makes clean up easier.</p>
