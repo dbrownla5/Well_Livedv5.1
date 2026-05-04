@@ -47,7 +47,7 @@ export default function Nav() {
       <nav className={scrolled ? "nav-scrolled" : "nav-top"}>
         <div className="nav-inner">
           <Link href="/" className="nav-logo">
-            <img src={`${import.meta.env.BASE_URL}images/logo-black.png`} alt="The Well Lived Citizen" />
+            <img src={`${import.meta.env.BASE_URL}images/logo-transparent.png`} alt="The Well Lived Citizen" />
           </Link>
           <div className="nav-links">
             <div ref={dropdownRef} className={`nav-dropdown${servicesOpen ? " open" : ""}`}>
