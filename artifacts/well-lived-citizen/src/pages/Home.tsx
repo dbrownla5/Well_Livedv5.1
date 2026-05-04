@@ -1,4 +1,5 @@
 import { Link } from "wouter";
+import { useEffect, useRef } from "react";
 import { usePageMeta } from "../hooks/usePageMeta";
 
 export default function Home() {
@@ -6,11 +7,28 @@ export default function Home() {
     title: "The Well Lived Citizen — Concierge Home Services in Los Angeles",
     description: "Concierge home and life services in Los Angeles — home organization, legacy planning, house calls, and curated resale. Run by Dayna Brown.",
   });
+
+  const heroRef = useRef<HTMLElement>(null);
+  const overlayRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!heroRef.current || !overlayRef.current) return;
+      const heroH = heroRef.current.offsetHeight;
+      const progress = Math.min(window.scrollY / (heroH * 0.65), 1);
+      overlayRef.current.style.opacity = String(progress);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <div className="page">
       {/* HERO */}
-      <section className="hero hero-with-image">
-        <div className="container" style={{ maxWidth: "820px" }}>
+      <section ref={heroRef} className="hero hero-with-image">
+        <div ref={overlayRef} className="hero-overlay" aria-hidden="true" />
+        <div className="container hero-content" style={{ maxWidth: "820px" }}>
           <div className="label fade-up fade-up-1">Los Angeles</div>
           <h1 className="hero-h1 fade-up fade-up-2">
             When <em>"there has to be an easier way"</em> becomes a business.
@@ -32,7 +50,7 @@ export default function Home() {
 
             {/* Card 1 — The Four x Five */}
             <div className="conversion-block conversion-block-primary">
-              <div className="conversion-price">$500 · Four Hours · Flat Rate</div>
+              <div className="conversion-price">Four Hours · $500 Flat</div>
               <div className="conversion-title">The Four&nbsp;x&nbsp;Five</div>
               <div className="conversion-body">
                 <p>The room that keeps collecting piles. The move that technically happened but never settled. The closet that no longer fits your life. The guest room that needs to look like you always keep it that way — because your mother-in-law just texted.</p>
