@@ -25,7 +25,6 @@ export default function Home() {
           <p className="hero-kicker fade-up fade-up-3">I'm built for your chaos.</p>
         </div>
       </section>
-
       {/* QUICK ENTRY BAND — rolls directly out of the hero, no divider */}
       <section style={{ padding: "56px 0 72px" }}>
         <div className="container">
@@ -33,7 +32,7 @@ export default function Home() {
 
             {/* Card 1 — The 4x5 */}
             <div className="conversion-block conversion-block-primary">
-              <div className="conversion-price">Four hours. Five hundred flat.</div>
+              <div className="conversion-price">THE FOUR HOUR </div>
               <div className="conversion-title">The 4x5</div>
               <div className="conversion-body">
                 <p>This is my operational shorthand for making the heavy thing move. The room that keeps collecting piles. The boxes from a move that technically happened but never settled. The closet that no longer fits your life.</p>
@@ -78,9 +77,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       <hr className="divider" />
-
       {/* SERVICES OVERVIEW */}
       <section style={{ padding: "72px 0" }}>
         <div className="container">
@@ -135,9 +132,7 @@ export default function Home() {
 
         </div>
       </section>
-
       <hr className="divider" />
-
       {/* TESTIMONIAL */}
       <section style={{ padding: "72px 0" }}>
         <div className="container" style={{ maxWidth: "760px" }}>
@@ -149,9 +144,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       <hr className="divider" />
-
       {/* CLOSING CTA */}
       <section style={{ padding: "72px 0", background: "var(--char)" }}>
         <div className="container" style={{ maxWidth: "760px", textAlign: "center" }}>

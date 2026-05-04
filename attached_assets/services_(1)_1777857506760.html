@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services &amp; Pricing — The Well Lived Citizen Co</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--cream:#F5F0E8;--warm-white:#FAF8F4;--ink:#1C1A17;--ink-soft:#3D3A34;--stone:#8C8880;--terracotta:#B85C38;--terracotta-light:#D4795A;--gold:#C4A265;--border:#E0D8CC}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--warm-white);color:var(--ink);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:20px 48px;background:rgba(250,248,244,0.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:400;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);text-decoration:none}
+.nav-links{display:flex;gap:36px;list-style:none}
+.nav-links a{font-size:12px;font-weight:400;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);text-decoration:none;transition:color .2s}
+.nav-links a:hover,.nav-links a.active{color:var(--terracotta)}
+.page-header{padding:140px 80px 72px;border-bottom:1px solid var(--border);display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:end}
+.page-eyebrow{font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--terracotta);margin-bottom:18px}
+.page-title{font-family:'Cormorant Garamond',serif;font-size:clamp(34px,3.8vw,52px);font-weight:300;line-height:1.15;color:var(--ink)}
+.page-intro{font-size:15px;font-weight:300;line-height:1.9;color:var(--ink-soft)}
+.door-nav{display:flex;background:var(--warm-white);border-bottom:1px solid var(--border);position:sticky;top:61px;z-index:50;overflow-x:auto}
+.door-nav-item{flex:1;min-width:120px;padding:18px 16px;text-align:center;text-decoration:none;font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--stone);border-right:1px solid var(--border);transition:all .2s;display:flex;flex-direction:column;align-items:center;gap:4px}
+.door-nav-item:last-child{border-right:none}
+.door-nav-item:hover,.door-nav-item.active{color:var(--terracotta);background:var(--cream)}
+.door-nav-num{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;display:block}
+.door-section{padding:96px 80px;border-bottom:1px solid var(--border)}
+.door-section:nth-child(even){background:var(--cream)}
+.door-header{display:grid;grid-template-columns:96px 1fr auto;gap:36px;align-items:start;margin-bottom:56px}
+.door-big-num{font-family:'Cormorant Garamond',serif;font-size:88px;font-weight:300;line-height:.9;color:var(--border)}
+.door-label{font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--terracotta);margin-bottom:10px}
+.door-title{font-family:'Cormorant Garamond',serif;font-size:clamp(26px,2.8vw,40px);font-weight:300;line-height:1.2;color:var(--ink);margin-bottom:10px}
+.door-tagline{font-size:15px;font-weight:300;font-style:italic;color:var(--ink-soft)}
+.price-block{display:flex;flex-direction:column;gap:6px;flex-shrink:0}
+.price-row{display:flex;flex-direction:column;align-items:flex-end;padding:14px 20px;border:1px solid var(--border);background:white;white-space:nowrap;gap:2px}
+.price-row+.price-row{border-top:none}
+.price-main{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;color:var(--ink)}
+.price-note{font-size:11px;color:var(--stone);font-weight:300}
+.door-body{font-size:15px;font-weight:300;line-height:1.9;color:var(--ink-soft);max-width:700px;margin-bottom:48px}
+.door-body p+p{margin-top:18px}
+.sub-section{margin-bottom:48px}
+.sub-label{font-size:11px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--stone);margin-bottom:20px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+.item-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
+.item-entry{padding:13px 0;font-size:14px;font-weight:300;color:var(--ink-soft);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px}
+.item-entry::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--terracotta);flex-shrink:0}
+.callout{padding:28px 32px;border-left:2px solid var(--terracotta);background:white;margin-bottom:48px;font-size:14px;font-weight:300;line-height:1.8;color:var(--ink-soft)}
+.callout strong{display:block;font-size:10px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--terracotta);margin-bottom:8px}
+.callout em{font-style:italic;color:var(--ink)}
+.move-box{border:1px solid var(--border);background:white;margin-bottom:48px;overflow:hidden}
+.move-box-header{padding:20px 28px;background:var(--ink);display:flex;align-items:center;justify-content:space-between;gap:16px}
+.move-box-title{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:300;color:white}
+.move-box-price{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;color:var(--gold);white-space:nowrap}
+.move-box-body{padding:28px}
+.move-box-body p{font-size:14px;font-weight:300;line-height:1.8;color:var(--ink-soft);margin-bottom:16px}
+.move-box-body p:last-child{margin-bottom:0}
+.move-note{font-size:12px;font-weight:300;color:var(--stone);font-style:italic;border-top:1px solid var(--border);padding-top:16px;margin-top:4px}
+.flex-block{border:1px solid var(--border);background:white;overflow:hidden;margin-bottom:48px}
+.flex-block-header{padding:16px 24px;background:var(--cream);border-bottom:1px solid var(--border)}
+.flex-block-label{font-size:10px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--stone)}
+.flex-block-title{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:300;color:var(--ink);margin-top:4px}
+.flex-tiers{display:grid;grid-template-columns:1fr 1fr}
+.flex-tier{padding:24px 28px;border-right:1px solid var(--border)}
+.flex-tier:last-child{border-right:none}
+.flex-tier-hours{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:300;color:var(--terracotta);line-height:1}
+.flex-tier-label{font-size:11px;color:var(--stone);font-weight:300;margin-bottom:12px}
+.flex-tier-price{font-size:20px;font-weight:500;color:var(--ink)}
+.flex-tier-rate{font-size:12px;color:var(--stone);font-weight:300;margin-top:2px}
+.flex-note{padding:16px 24px;font-size:12px;font-weight:300;color:var(--stone);border-top:1px solid var(--border);font-style:italic}
+.how-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:2px;background:var(--border);border:1px solid var(--border);margin-bottom:40px}
+.how-item{background:white;padding:24px 20px;font-size:13px;font-weight:300;color:var(--ink-soft);line-height:1.6}
+.how-item strong{display:block;font-size:10px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--terracotta);margin-bottom:6px}
+.commission-block{background:var(--ink);padding:36px 40px;margin-bottom:2px}
+.commission-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:rgba(255,255,255,.08)}
+.commission-row{background:var(--ink);padding:24px 28px;display:flex;flex-direction:column;gap:6px}
+.commission-row-label{font-size:10px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--gold)}
+.commission-row-split{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:300;color:white}
+.commission-row-desc{font-size:12px;font-weight:300;color:rgba(255,255,255,.5);line-height:1.6}
+.commission-footnote{font-size:13px;font-weight:300;color:var(--ink-soft);line-height:1.8;padding:20px 24px;background:var(--cream);border:1px solid var(--border);border-top:none;margin-bottom:32px}
+.intake-block{padding:24px 28px;background:white;border:1px solid var(--border);margin-bottom:48px}
+.intake-label{font-size:10px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--terracotta);margin-bottom:16px}
+.intake-grid{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.intake-item{padding:10px 0;font-size:13px;font-weight:300;color:var(--ink-soft);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
+.intake-item::before{content:'';width:3px;height:3px;border-radius:50%;background:var(--stone);flex-shrink:0}
+.intake-note{font-size:12px;font-weight:300;color:var(--stone);font-style:italic;margin-top:14px}
+.bottom-cta{background:var(--ink);padding:96px 80px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.bottom-cta-headline{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,3vw,44px);font-weight:300;line-height:1.3;color:white}
+.bottom-cta-headline em{font-style:italic;color:var(--gold)}
+.bottom-cta-body{font-size:15px;font-weight:300;line-height:1.8;color:rgba(255,255,255,.6);margin-bottom:28px}
+.btn-primary{display:inline-block;padding:14px 32px;background:var(--terracotta);color:white;font-size:12px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;transition:background .2s}
+.btn-primary:hover{background:var(--terracotta-light)}
+footer{background:var(--ink);border-top:1px solid rgba(255,255,255,.07);padding:36px 80px;display:flex;align-items:center;justify-content:space-between}
+.footer-logo{font-family:'Cormorant Garamond',serif;font-size:15px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.45)}
+.footer-links{display:flex;gap:28px;list-style:none}
+.footer-links a{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.3);text-decoration:none;transition:color .2s}
+.footer-links a:hover{color:rgba(255,255,255,.65)}
+.footer-copy{font-size:11px;color:rgba(255,255,255,.18)}
+@media(max-width:900px){
+  nav{padding:16px 24px}.nav-links{display:none}
+  .page-header{grid-template-columns:1fr;padding:110px 24px 56px;gap:28px}
+  .door-section{padding:64px 24px}
+  .door-header{grid-template-columns:1fr;gap:16px}.door-big-num{font-size:56px}
+  .price-block{flex-direction:row;flex-wrap:wrap}.price-row{align-items:flex-start}
+  .item-grid{grid-template-columns:1fr 1fr}
+  .flex-tiers{grid-template-columns:1fr}
+  .flex-tier{border-right:none;border-bottom:1px solid var(--border)}
+  .flex-tier:last-child{border-bottom:none}
+  .how-grid{grid-template-columns:1fr 1fr}
+  .commission-grid{grid-template-columns:1fr}
+  .intake-grid{grid-template-columns:1fr}
+  .move-box-header{flex-direction:column;align-items:flex-start;gap:8px}
+  .bottom-cta{grid-template-columns:1fr;padding:64px 24px;gap:36px}
+  footer{flex-direction:column;gap:20px;padding:36px 24px;text-align:center}.footer-links{justify-content:center;flex-wrap:wrap}
+}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">The Well Lived Citizen Co</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="services.html" class="active">Services &amp; Pricing</a></li>
+    <li><a href="#contact">Get in Touch</a></li>
+  </ul>
+</nav>
+
+<div class="page-header">
+  <div>
+    <p class="page-eyebrow">Services &amp; Pricing</p>
+    <h1 class="page-title">Pick the door you're in right now.</h1>
+  </div>
+  <p class="page-intro">The first conversation is always free.</p>
+</div>
+
+<div class="door-nav">
+  <a href="#door1" class="door-nav-item"><span class="door-nav-num">01</span>Home Flow</a>
+  <a href="#door2" class="door-nav-item"><span class="door-nav-num">02</span>Inventory &amp; Value</a>
+  <a href="#door3" class="door-nav-item"><span class="door-nav-num">03</span>House Calls</a>
+  <a href="#door4" class="door-nav-item"><span class="door-nav-num">04</span>Resale</a>
+</div>
+
+<!-- DOOR 1 -->
+<section class="door-section" id="door1">
+  <div class="door-header">
+    <div class="door-big-num">01</div>
+    <div>
+      <h2 class="door-title">Home Flow &amp; The Modern Move</h2>
+      <p class="door-tagline">Your space, made to work for you.</p>
+    </div>
+    <div class="price-block">
+      <div class="price-row">
+        <span class="price-main">$150/hr</span>
+        <span class="price-note">3-hour minimum</span>
+      </div>
+      <div class="price-row">
+        <span class="price-main">$1,200/day</span>
+        <span class="price-note">Modern Move Reset</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="door-body">
+    <p>This is where we start with what's actually frustrating you.</p>
+    <p>The room that keeps collecting piles. The kitchen that somehow slows every morning down. The move where the boxes are technically inside but nothing feels settled. The closet that no longer matches your life.</p>
+    <p>I come in, figure out where the friction is, and make the space work around how you naturally move through your day.</p>
+  </div>
+
+  <div class="sub-section">
+    <p class="sub-label">That can mean</p>
+    <div class="item-grid">
+      <div class="item-entry">Unpacking and setting up after a move</div>
+      <div class="item-entry">Getting one room fully functional</div>
+      <div class="item-entry">Reworking closets and storage</div>
+      <div class="item-entry">Making small spaces actually livable</div>
+    </div>
+  </div>
+
+  <div class="move-box">
+    <div class="move-box-header">
+      <span class="move-box-title">Modern Move Reset</span>
+      <span class="move-box-price">$1,200 flat rate · up to 8 hours</span>
+    </div>
+    <div class="move-box-body">
+      <p>For professionals arriving the same day who want the apartment functioning before life starts moving again.</p>
+      <p>Designed especially for studios and one-bedrooms — depending on delivery timing and volume, some homes may require up to 2 days.</p>
+      <p>The first priorities are always function: the bed gets built, the phone charger gets found, the workspace gets set, clothing for the coming week gets unpacked, and kitchen and bathroom basics are immediately accessible.</p>
+      <p>Ready-to-assemble furniture is included where practical. Custom furniture building or specialty woodworking is not included.</p>
+      <p class="move-note">This service assumes boxes contain reasonably identifiable contents and that essential deliveries — bed-in-a-box, household basics — are already arriving or coordinated during intake. If essentials still need to be ordered, I can handle that ahead of time; noted on intake.</p>
+    </div>
+  </div>
+
+  <div class="flex-block">
+    <div class="flex-block-header">
+      <div class="flex-block-label">For ongoing work</div>
+      <div class="flex-block-title">Flex Blocks — use the hours when you need them</div>
+    </div>
+    <div class="flex-tiers">
+      <div class="flex-tier">
+        <div class="flex-tier-hours">10</div>
+        <div class="flex-tier-label">hours</div>
+        <div class="flex-tier-price">$1,250</div>
+        <div class="flex-tier-rate">$125/hr</div>
+      </div>
+      <div class="flex-tier">
+        <div class="flex-tier-hours">25</div>
+        <div class="flex-tier-label">hours</div>
+        <div class="flex-tier-price">$3,150</div>
+        <div class="flex-tier-rate">$126/hr</div>
+      </div>
+    </div>
+    <div class="flex-note">Flex blocks apply to home org and space work. They do not apply to Modern Move Reset or project-priced inventory work. Hours never expire.</div>
+  </div>
+</section>
+
+<!-- DOOR 2 -->
+<section class="door-section" id="door2">
+  <div class="door-header">
+    <div class="door-big-num">02</div>
+    <div>
+      <h2 class="door-title">Inventory, Value &amp; The Things That Add Up</h2>
+      <p class="door-tagline">A plan for what's valuable, what's useful, and what quietly runs the home.</p>
+    </div>
+    <div class="price-block">
+      <div class="price-row">
+        <span class="price-main">Project pricing</span>
+        <span class="price-note">After walkthrough</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="door-body">
+    <p>This starts with being in the space with you.</p>
+    <p>I walk the home, the closets, the drawers, the storage bins, the shelves people stop seeing after a while.</p>
+  </div>
+
+  <div class="sub-section">
+    <p class="sub-label">We figure out</p>
+    <div class="item-grid">
+      <div class="item-entry">What has actual resale value</div>
+      <div class="item-entry">What needs to be cataloged</div>
+      <div class="item-entry">What deserves better storage</div>
+      <div class="item-entry">What is worth preserving</div>
+      <div class="item-entry">What's just taking up energy</div>
+      <div class="item-entry">What everyday systems are failing</div>
+    </div>
+  </div>
+
+  <div class="door-body">
+    <p>This is where the stories matter. Because the story behind an item often changes how it gets priced, whether it gets sold, where it gets listed, whether it should stay in your daily life, and what deserves documentation before it moves.</p>
+    <p>Those are the things that quietly create friction every single day. I catalog what matters, route what can generate income, and build a practical plan for the rest so the home works better now — not just someday.</p>
+  </div>
+
+  <div class="sub-section">
+    <p class="sub-label">The rest of the work — the real-life stuff</p>
+    <div class="item-grid">
+      <div class="item-entry">The drawer of candles</div>
+      <div class="item-entry">Gift wrap and batteries</div>
+      <div class="item-entry">Extra linens</div>
+      <div class="item-entry">Paperwork piles</div>
+      <div class="item-entry">Seasonal décor</div>
+      <div class="item-entry">Backup tech cords</div>
+      <div class="item-entry">The overflow closet</div>
+      <div class="item-entry">The "I know I have it somewhere" cabinet</div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong>The Catalog — so the next chapter feels lighter</strong>
+    Part of this work is building a living catalog of what matters in your home. We map what stays in daily use, what can be sold now, what deserves better storage, what you're ready to release slowly, and what you want documented because the story matters.<br><br>
+    A lot of what people own is either under-documented, under-valued, or not insured at all.<br><br>
+    <em>And yes, sometimes that means helping you keep the crap.</em>
+  </div>
+</section>
+
+<!-- DOOR 3 -->
+<section class="door-section" id="door3">
+  <div class="door-header">
+    <div class="door-big-num">03</div>
+    <div>
+      <h2 class="door-title">House Calls &amp; The In Between</h2>
+      <p class="door-tagline">Did we forget to pack the parents?</p>
+    </div>
+    <div class="price-block">
+      <div class="price-row">
+        <span class="price-main">$175/hr</span>
+        <span class="price-note">2-hour minimum</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="door-body">
+    <p>For the things life doesn't explain on paper.</p>
+    <p>This is what happens after the first project, because once I know how your home works, it's easy for me to help keep it working.</p>
+  </div>
+
+  <div class="sub-section">
+    <p class="sub-label">A House Call might look like</p>
+    <div class="item-grid">
+      <div class="item-entry">Picking up donations</div>
+      <div class="item-entry">Taking the next load of resale</div>
+      <div class="item-entry">Looking at the weird lamp your friend thinks is valuable</div>
+      <div class="item-entry">Sorting old cords and fire hazards</div>
+      <div class="item-entry">Cleaning vents before winter</div>
+      <div class="item-entry">Setting up the smart TV</div>
+      <div class="item-entry">Phone and iCloud security settings</div>
+      <div class="item-entry">Sorting the paperwork pile on the desk</div>
+      <div class="item-entry">Replacing bulbs so the house feels better</div>
+      <div class="item-entry">Checking appliances and practical safety items</div>
+      <div class="item-entry">Resetting spaces that quietly stopped working</div>
+    </div>
+  </div>
+
+  <div class="sub-section">
+    <p class="sub-label">The practical things that never need their own appointment</p>
+    <div class="item-grid">
+      <div class="item-entry">Hanging shelves</div>
+      <div class="item-entry">Furniture assembly</div>
+      <div class="item-entry">Tightening hardware</div>
+      <div class="item-entry">Mounting a TV safely into studs</div>
+      <div class="item-entry">Patching old holes left behind</div>
+      <div class="item-entry">Resetting closet rods</div>
+      <div class="item-entry">Replacing better lighting</div>
+      <div class="item-entry">Organizing utility zones</div>
+      <div class="item-entry">Swapping smoke detector batteries</div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong>When you need a pro — without being left alone to figure it out</strong>
+    I help clients figure out who to call, what kind of vendor the job actually needs, when it makes sense to book it, and how to avoid paying for the wrong appointment twice.
+  </div>
+</section>
+
+<!-- DOOR 4 -->
+<section class="door-section" id="door4">
+  <div class="door-header">
+    <div class="door-big-num">04</div>
+    <div>
+      <h2 class="door-title">Curated Resale &amp; Doorstep Consignment</h2>
+      <p class="door-tagline">Is it wearable? Is it cool? Is it even sellable? Let me figure that out.</p>
+    </div>
+    <div class="price-block">
+      <div class="price-row">
+        <span class="price-main">Commission-based</span>
+        <span class="price-note">Agreement included</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="door-body">
+    <p>Because yes — the brand lists are too long, the drop-off rules are annoying, and fun fact: most places only take about half anyway.</p>
+    <p>You fill the included 24-gallon zip storage bag with what you're ready to move out of your closet or home.</p>
+    <p>For best results, resale intake begins at a 10-item minimum, with an ideal value of $25+ per item. Most bags comfortably hold 30–40 pounds depending on item type and material weight.</p>
+  </div>
+
+  <div class="sub-section">
+    <p class="sub-label">I figure out</p>
+    <div class="item-grid">
+      <div class="item-entry">What's actually wearable</div>
+      <div class="item-entry">What's trending again</div>
+      <div class="item-entry">What vintage buyers want</div>
+      <div class="item-entry">What designer still moves</div>
+      <div class="item-entry">What should be sold locally</div>
+      <div class="item-entry">What belongs on a niche platform</div>
+      <div class="item-entry">What's better bundled</div>
+      <div class="item-entry">What should skip resale completely</div>
+    </div>
+  </div>
+
+  <div class="sub-section">
+    <p class="sub-label">How it works</p>
+    <div class="how-grid">
+      <div class="how-item"><strong>Step 1</strong>I send the bags</div>
+      <div class="how-item"><strong>Step 2</strong>You fill them</div>
+      <div class="how-item"><strong>Pickup</strong>Local within 10 miles in 10 days</div>
+      <div class="how-item"><strong>Repeat &amp; retainer</strong>Secure inside-door or mailroom pickup</div>
+      <div class="how-item"><strong>Rush</strong>Uber courier at your cost</div>
+      <div class="how-item"><strong>Ship</strong>Prepaid label up to $10</div>
+      <div class="how-item"><strong>Reporting</strong>Monthly by the 1st</div>
+      <div class="how-item"><strong>Payout</strong>By the 5th</div>
+    </div>
+  </div>
+
+  <div class="sub-section">
+    <p class="sub-label">Commission structure</p>
+    <div class="commission-block">
+      <div class="commission-grid">
+        <div class="commission-row">
+          <span class="commission-row-label">Clothing &amp; Accessories</span>
+          <span class="commission-row-split">55 / 45</span>
+          <span class="commission-row-desc">Your share / my share · net after platform fees</span>
+        </div>
+        <div class="commission-row">
+          <span class="commission-row-label">Designer Items</span>
+          <span class="commission-row-split">50 / 50</span>
+          <span class="commission-row-desc">Your share / my share · net after platform fees</span>
+        </div>
+        <div class="commission-row">
+          <span class="commission-row-label">Furniture &amp; Significant Home Goods</span>
+          <span class="commission-row-split">50 / 50</span>
+          <span class="commission-row-desc">Your share / my share · net after platform fees</span>
+        </div>
+      </div>
+    </div>
+    <div class="commission-footnote">Platform fees are deducted first, then the remaining proceeds are split. My share covers the operating tools, software, photography, listing management, routing, buyer communication, and shipping labor required to make the system work cleanly.</div>
+  </div>
+
+  <div class="intake-block">
+    <div class="intake-label">Intake confirmation</div>
+    <div class="intake-grid">
+      <div class="intake-item">Items are clean and dry</div>
+      <div class="intake-item">Pockets and compartments have been checked</div>
+      <div class="intake-item">All items being released are appropriate for resale evaluation</div>
+    </div>
+    <div class="intake-note">Listing review generally begins within 7–10 business days. Payout timing varies based on platform performance, seasonality, and buyer demand.</div>
+  </div>
+</section>
+
+<section class="bottom-cta" id="contact">
+  <div class="bottom-cta-headline">Start with the door that feels most like your <em>life right now.</em></div>
+  <div>
+    <p class="bottom-cta-body">The first conversation is always free. No pressure to figure out which door before we talk — that's what the first call is for.</p>
+    <a href="mailto:hello@welllivedcitizen.com" class="btn-primary">Get in Touch</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">The Well Lived Citizen Co</div>
+  <ul class="footer-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="footer-copy">&copy; 2026 The Well Lived Citizen Co &middot; Los Angeles, CA</div>
+</footer>
+
+<script>
+const sections=document.querySelectorAll('.door-section');
+const navItems=document.querySelectorAll('.door-nav-item');
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){navItems.forEach(i=>i.classList.remove('active'));const m=document.querySelector(`.door-nav-item[href="#${e.target.id}"]`);if(m)m.classList.add('active')}})},{threshold:.3});
+sections.forEach(s=>obs.observe(s));
+</script>
+</body>
+</html>

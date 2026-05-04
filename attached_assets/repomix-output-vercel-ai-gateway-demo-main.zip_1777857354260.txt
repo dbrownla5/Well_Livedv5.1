@@ -1,0 +1,1576 @@
+This file is a merged representation of the entire codebase, combined into a single document by Repomix.
+The content has been processed where comments have been removed, empty lines have been removed, line numbers have been added, content has been formatted for parsing in plain style.
+
+================================================================
+File Summary
+================================================================
+
+Purpose:
+--------
+This file contains a packed representation of the entire repository's contents.
+It is designed to be easily consumable by AI systems for analysis, code review,
+or other automated processes.
+
+File Format:
+------------
+The content is organized as follows:
+1. This summary section
+2. Repository information
+3. Directory structure
+4. Repository files (if enabled)
+5. Multiple file entries, each consisting of:
+  a. A separator line (================)
+  b. The file path (File: path/to/file)
+  c. Another separator line
+  d. The full contents of the file
+  e. A blank line
+
+Usage Guidelines:
+-----------------
+- This file should be treated as read-only. Any changes should be made to the
+  original repository files, not this packed version.
+- When processing this file, use the file path to distinguish
+  between different files in the repository.
+- Be aware that this file may contain sensitive information. Handle it with
+  the same level of security as you would the original repository.
+
+Notes:
+------
+- Some files may have been excluded based on .gitignore rules and Repomix's configuration
+- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Files matching patterns in .gitignore are excluded
+- Files matching default ignore patterns are excluded
+- Code comments have been removed from supported file types
+- Empty lines have been removed from all files
+- Line numbers have been added to the beginning of each line
+- Content has been formatted for parsing in plain style
+- Files are sorted by Git change count (files with more changes are at the bottom)
+
+
+================================================================
+Directory Structure
+================================================================
+vercel-ai-gateway-demo-main/
+  app/
+    api/
+      chat/
+        route.ts
+      models/
+        route.ts
+    favicon.ico
+    globals.css
+    layout.tsx
+    page.tsx
+  components/
+    ui/
+      alert.tsx
+      button.tsx
+      card.tsx
+      input.tsx
+      select.tsx
+    chat.tsx
+    model-selector.tsx
+    theme-toggle.tsx
+  lib/
+    hooks/
+      use-available-models.ts
+    constants.ts
+    display-model.ts
+    gateway.ts
+    utils.ts
+  public/
+    file.svg
+    globe.svg
+    next.svg
+    vercel.svg
+    window.svg
+  .gitignore
+  components.json
+  eslint.config.mjs
+  LICENSE
+  next.config.ts
+  package.json
+  postcss.config.mjs
+  README.md
+  tsconfig.json
+
+================================================================
+Files
+================================================================
+
+================
+File: vercel-ai-gateway-demo-main/app/api/chat/route.ts
+================
+ 1: import { convertToModelMessages, streamText, type UIMessage } from "ai";
+ 2: import { DEFAULT_MODEL, SUPPORTED_MODELS } from "@/lib/constants";
+ 3: import { gateway } from "@/lib/gateway";
+ 4: export const maxDuration = 60;
+ 5: export async function POST(req: Request) {
+ 6:   const {
+ 7:     messages,
+ 8:     modelId = DEFAULT_MODEL,
+ 9:   }: { messages: UIMessage[]; modelId: string } = await req.json();
+10:   if (!SUPPORTED_MODELS.includes(modelId)) {
+11:     return new Response(
+12:       JSON.stringify({ error: `Model ${modelId} is not supported` }),
+13:       { status: 400, headers: { "Content-Type": "application/json" } }
+14:     );
+15:   }
+16:   const result = streamText({
+17:     model: gateway(modelId),
+18:     system: "You are a software engineer exploring Generative AI.",
+19:     messages: convertToModelMessages(messages),
+20:     onError: (e) => {
+21:       console.error("Error while streaming.", e);
+22:     },
+23:   });
+24:   return result.toUIMessageStreamResponse();
+25: }
+
+================
+File: vercel-ai-gateway-demo-main/app/api/models/route.ts
+================
+ 1: import { gateway } from "@/lib/gateway";
+ 2: import { NextResponse } from "next/server";
+ 3: import { SUPPORTED_MODELS } from "@/lib/constants";
+ 4: export async function GET() {
+ 5:   const allModels = await gateway.getAvailableModels();
+ 6:   return NextResponse.json({
+ 7:     models: allModels.models.filter((model) =>
+ 8:       SUPPORTED_MODELS.includes(model.id)
+ 9:     ),
+10:   });
+11: }
+
+================
+File: vercel-ai-gateway-demo-main/app/globals.css
+================
+  1: @import "tailwindcss";
+  2: @import "tw-animate-css";
+  3: @source "../node_modules/streamdown/dist/*.js";
+  4: @custom-variant dark (&:is(.dark *));
+  5: @theme inline {
+  6:   --color-background: var(--background);
+  7:   --color-foreground: var(--foreground);
+  8:   --font-sans: var(--font-geist-sans);
+  9:   --font-mono: var(--font-geist-mono);
+ 10:   --color-sidebar-ring: var(--sidebar-ring);
+ 11:   --color-sidebar-border: var(--sidebar-border);
+ 12:   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+ 13:   --color-sidebar-accent: var(--sidebar-accent);
+ 14:   --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+ 15:   --color-sidebar-primary: var(--sidebar-primary);
+ 16:   --color-sidebar-foreground: var(--sidebar-foreground);
+ 17:   --color-sidebar: var(--sidebar);
+ 18:   --color-chart-5: var(--chart-5);
+ 19:   --color-chart-4: var(--chart-4);
+ 20:   --color-chart-3: var(--chart-3);
+ 21:   --color-chart-2: var(--chart-2);
+ 22:   --color-chart-1: var(--chart-1);
+ 23:   --color-ring: var(--ring);
+ 24:   --color-input: var(--input);
+ 25:   --color-border: var(--border);
+ 26:   --color-destructive: var(--destructive);
+ 27:   --color-accent-foreground: var(--accent-foreground);
+ 28:   --color-accent: var(--accent);
+ 29:   --color-muted-foreground: var(--muted-foreground);
+ 30:   --color-muted: var(--muted);
+ 31:   --color-secondary-foreground: var(--secondary-foreground);
+ 32:   --color-secondary: var(--secondary);
+ 33:   --color-primary-foreground: var(--primary-foreground);
+ 34:   --color-primary: var(--primary);
+ 35:   --color-popover-foreground: var(--popover-foreground);
+ 36:   --color-popover: var(--popover);
+ 37:   --color-card-foreground: var(--card-foreground);
+ 38:   --color-card: var(--card);
+ 39:   --radius-sm: calc(var(--radius) - 4px);
+ 40:   --radius-md: calc(var(--radius) - 2px);
+ 41:   --radius-lg: var(--radius);
+ 42:   --radius-xl: calc(var(--radius) + 4px);
+ 43: }
+ 44: :root {
+ 45:   --radius: 0.75rem;
+ 46:   --background: oklch(0.99 0 0);
+ 47:   --foreground: oklch(0.12 0 0);
+ 48:   --card: oklch(1 0 0);
+ 49:   --card-foreground: oklch(0.12 0 0);
+ 50:   --popover: oklch(1 0 0);
+ 51:   --popover-foreground: oklch(0.12 0 0);
+ 52:   --primary: oklch(0.15 0 0);
+ 53:   --primary-foreground: oklch(0.98 0 0);
+ 54:   --secondary: oklch(0.96 0 0);
+ 55:   --secondary-foreground: oklch(0.15 0 0);
+ 56:   --muted: oklch(0.96 0 0);
+ 57:   --muted-foreground: oklch(0.45 0 0);
+ 58:   --accent: oklch(0.94 0 0);
+ 59:   --accent-foreground: oklch(0.15 0 0);
+ 60:   --destructive: oklch(0.577 0.245 27.325);
+ 61:   --border: oklch(0.89 0 0);
+ 62:   --input: oklch(0.94 0 0);
+ 63:   --ring: oklch(0.15 0 0);
+ 64:   --chart-1: oklch(0.646 0.222 41.116);
+ 65:   --chart-2: oklch(0.6 0.118 184.704);
+ 66:   --chart-3: oklch(0.398 0.07 227.392);
+ 67:   --chart-4: oklch(0.828 0.189 84.429);
+ 68:   --chart-5: oklch(0.769 0.188 70.08);
+ 69:   --sidebar: oklch(0.98 0 0);
+ 70:   --sidebar-foreground: oklch(0.12 0 0);
+ 71:   --sidebar-primary: oklch(0.15 0 0);
+ 72:   --sidebar-primary-foreground: oklch(0.98 0 0);
+ 73:   --sidebar-accent: oklch(0.96 0 0);
+ 74:   --sidebar-accent-foreground: oklch(0.15 0 0);
+ 75:   --sidebar-border: oklch(0.89 0 0);
+ 76:   --sidebar-ring: oklch(0.15 0 0);
+ 77: }
+ 78: .dark {
+ 79:   --background: oklch(0.08 0 0);
+ 80:   --foreground: oklch(0.95 0 0);
+ 81:   --card: oklch(0.12 0 0);
+ 82:   --card-foreground: oklch(0.95 0 0);
+ 83:   --popover: oklch(0.12 0 0);
+ 84:   --popover-foreground: oklch(0.95 0 0);
+ 85:   --primary: oklch(0.88 0 0);
+ 86:   --primary-foreground: oklch(0.08 0 0);
+ 87:   --secondary: oklch(0.18 0 0);
+ 88:   --secondary-foreground: oklch(0.95 0 0);
+ 89:   --muted: oklch(0.18 0 0);
+ 90:   --muted-foreground: oklch(0.65 0 0);
+ 91:   --accent: oklch(0.18 0 0);
+ 92:   --accent-foreground: oklch(0.95 0 0);
+ 93:   --destructive: oklch(0.704 0.191 22.216);
+ 94:   --border: oklch(0.95 0 0 / 12%);
+ 95:   --input: oklch(0.95 0 0 / 8%);
+ 96:   --ring: oklch(0.88 0 0);
+ 97:   --chart-1: oklch(0.488 0.243 264.376);
+ 98:   --chart-2: oklch(0.696 0.17 162.48);
+ 99:   --chart-3: oklch(0.769 0.188 70.08);
+100:   --chart-4: oklch(0.627 0.265 303.9);
+101:   --chart-5: oklch(0.645 0.246 16.439);
+102:   --sidebar: oklch(0.12 0 0);
+103:   --sidebar-foreground: oklch(0.95 0 0);
+104:   --sidebar-primary: oklch(0.88 0 0);
+105:   --sidebar-primary-foreground: oklch(0.08 0 0);
+106:   --sidebar-accent: oklch(0.18 0 0);
+107:   --sidebar-accent-foreground: oklch(0.95 0 0);
+108:   --sidebar-border: oklch(0.95 0 0 / 12%);
+109:   --sidebar-ring: oklch(0.88 0 0);
+110: }
+111: @layer base {
+112:   * {
+113:     @apply border-border outline-ring/50;
+114:   }
+115:   body {
+116:     @apply bg-background text-foreground;
+117:   }
+118:   .hide-scrollbar {
+119:     scrollbar-width: none;
+120:     -ms-overflow-style: none;
+121:   }
+122:   .hide-scrollbar::-webkit-scrollbar {
+123:     display: none;
+124:   }
+125: }
+126: @layer utilities {
+127:   .animate-fade-in {
+128:     animation: fade-in 200ms ease-out;
+129:   }
+130:   .animate-slide-up {
+131:     animation: slide-up 200ms ease-out;
+132:   }
+133:   .animate-slide-down {
+134:     animation: slide-down 150ms ease-out;
+135:   }
+136:   .animate-scale-in {
+137:     animation: scale-in 200ms ease-out;
+138:   }
+139:   .animate-message-in {
+140:     animation: message-in 300ms ease-out;
+141:   }
+142:   .shadow-border-small {
+143:     box-shadow:
+144:       0 0 0 1px rgba(0, 0, 0, 0.08),
+145:       0 1px 2px rgba(0, 0, 0, 0.12);
+146:   }
+147:   .shadow-border-medium {
+148:     box-shadow:
+149:       0 0 0 1px rgba(0, 0, 0, 0.08),
+150:       0 2px 4px rgba(0, 0, 0, 0.12),
+151:       0 1px 6px rgba(0, 0, 0, 0.05);
+152:   }
+153:   .dark .shadow-border-small {
+154:     box-shadow:
+155:       0 0 0 1px rgba(255, 255, 255, 0.1),
+156:       0 1px 2px rgba(0, 0, 0, 0.4);
+157:   }
+158:   .dark .shadow-border-medium {
+159:     box-shadow:
+160:       0 0 0 1px rgba(255, 255, 255, 0.1),
+161:       0 2px 4px rgba(0, 0, 0, 0.4),
+162:       0 1px 6px rgba(0, 0, 0, 0.2);
+163:   }
+164:   .glass-effect {
+165:     backdrop-filter: blur(12px);
+166:     background: rgba(255, 255, 255, 0.8);
+167:     border: 1px solid rgba(255, 255, 255, 0.2);
+168:   }
+169:   .dark .glass-effect {
+170:     background: rgba(0, 0, 0, 0.4);
+171:     border: 1px solid rgba(255, 255, 255, 0.1);
+172:   }
+173:   @keyframes fade-in {
+174:     from {
+175:       opacity: 0;
+176:     }
+177:     to {
+178:       opacity: 1;
+179:     }
+180:   }
+181:   @keyframes slide-up {
+182:     from {
+183:       opacity: 0;
+184:       transform: translateY(20px);
+185:     }
+186:     to {
+187:       opacity: 1;
+188:       transform: translateY(0);
+189:     }
+190:   }
+191:   @keyframes slide-down {
+192:     from {
+193:       opacity: 0;
+194:       transform: translateY(-10px);
+195:     }
+196:     to {
+197:       opacity: 1;
+198:       transform: translateY(0);
+199:     }
+200:   }
+201:   @keyframes scale-in {
+202:     from {
+203:       opacity: 0;
+204:       transform: scale(0.95);
+205:     }
+206:     to {
+207:       opacity: 1;
+208:       transform: scale(1);
+209:     }
+210:   }
+211:   @keyframes message-in {
+212:     from {
+213:       opacity: 0;
+214:       transform: translateY(20px);
+215:       filter: blur(4px);
+216:     }
+217:     to {
+218:       opacity: 1;
+219:       transform: translateY(0);
+220:       filter: blur(0);
+221:     }
+222:   }
+223:   @media (prefers-reduced-motion: reduce) {
+224:     .animate-fade-in,
+225:     .animate-slide-up,
+226:     .animate-slide-down,
+227:     .animate-scale-in,
+228:     .animate-message-in {
+229:       animation: fade-in 200ms ease-out;
+230:     }
+231:   }
+232: }
+
+================
+File: vercel-ai-gateway-demo-main/app/layout.tsx
+================
+ 1: import type { Metadata } from "next";
+ 2: import { Geist, Geist_Mono } from "next/font/google";
+ 3: import { ThemeProvider } from "next-themes";
+ 4: import "./globals.css";
+ 5: const geistSans = Geist({
+ 6:   variable: "--font-geist-sans",
+ 7:   subsets: ["latin"],
+ 8: });
+ 9: const geistMono = Geist_Mono({
+10:   variable: "--font-geist-mono",
+11:   subsets: ["latin"],
+12: });
+13: export const metadata: Metadata = {
+14:   title: "AI Gateway Demo",
+15:   description: "A demo of the Vercel AI Gateway with the AI SDK by Vercel",
+16: };
+17: export default function RootLayout({
+18:   children,
+19: }: Readonly<{
+20:   children: React.ReactNode;
+21: }>) {
+22:   return (
+23:     <html lang="en" suppressHydrationWarning>
+24:       <body
+25:         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+26:       >
+27:         <ThemeProvider
+28:           attribute="class"
+29:           defaultTheme="system"
+30:           enableSystem
+31:           disableTransitionOnChange
+32:         >
+33:           {children}
+34:         </ThemeProvider>
+35:       </body>
+36:     </html>
+37:   );
+38: }
+
+================
+File: vercel-ai-gateway-demo-main/app/page.tsx
+================
+1: import { Chat } from "@/components/chat";
+2: export default async function Page({
+3:   searchParams,
+4: }: {
+5:   searchParams: Promise<{ modelId: string }>;
+6: }) {
+7:   const { modelId } = await searchParams;
+8:   return <Chat modelId={modelId} />;
+9: }
+
+================
+File: vercel-ai-gateway-demo-main/components/ui/alert.tsx
+================
+ 1: import * as React from "react"
+ 2: import { cva, type VariantProps } from "class-variance-authority"
+ 3: import { cn } from "@/lib/utils"
+ 4: const alertVariants = cva(
+ 5:   "relative w-full rounded-lg border px-4 py-3 text-sm grid has-[>svg]:grid-cols-[calc(var(--spacing)*4)_1fr] grid-cols-[0_1fr] has-[>svg]:gap-x-3 gap-y-0.5 items-start [&>svg]:size-4 [&>svg]:translate-y-0.5 [&>svg]:text-current",
+ 6:   {
+ 7:     variants: {
+ 8:       variant: {
+ 9:         default: "bg-card text-card-foreground",
+10:         destructive:
+11:           "text-destructive bg-card [&>svg]:text-current *:data-[slot=alert-description]:text-destructive/90",
+12:       },
+13:     },
+14:     defaultVariants: {
+15:       variant: "default",
+16:     },
+17:   }
+18: )
+19: function Alert({
+20:   className,
+21:   variant,
+22:   ...props
+23: }: React.ComponentProps<"div"> & VariantProps<typeof alertVariants>) {
+24:   return (
+25:     <div
+26:       data-slot="alert"
+27:       role="alert"
+28:       className={cn(alertVariants({ variant }), className)}
+29:       {...props}
+30:     />
+31:   )
+32: }
+33: function AlertTitle({ className, ...props }: React.ComponentProps<"div">) {
+34:   return (
+35:     <div
+36:       data-slot="alert-title"
+37:       className={cn(
+38:         "col-start-2 line-clamp-1 min-h-4 font-medium tracking-tight",
+39:         className
+40:       )}
+41:       {...props}
+42:     />
+43:   )
+44: }
+45: function AlertDescription({
+46:   className,
+47:   ...props
+48: }: React.ComponentProps<"div">) {
+49:   return (
+50:     <div
+51:       data-slot="alert-description"
+52:       className={cn(
+53:         "text-muted-foreground col-start-2 grid justify-items-start gap-1 text-sm [&_p]:leading-relaxed",
+54:         className
+55:       )}
+56:       {...props}
+57:     />
+58:   )
+59: }
+60: export { Alert, AlertTitle, AlertDescription }
+
+================
+File: vercel-ai-gateway-demo-main/components/ui/button.tsx
+================
+ 1: import * as React from "react"
+ 2: import { Slot } from "@radix-ui/react-slot"
+ 3: import { cva, type VariantProps } from "class-variance-authority"
+ 4: import { cn } from "@/lib/utils"
+ 5: const buttonVariants = cva(
+ 6:   "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
+ 7:   {
+ 8:     variants: {
+ 9:       variant: {
+10:         default:
+11:           "bg-primary text-primary-foreground shadow-xs hover:bg-primary/90",
+12:         destructive:
+13:           "bg-destructive text-white shadow-xs hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
+14:         outline:
+15:           "border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50",
+16:         secondary:
+17:           "bg-secondary text-secondary-foreground shadow-xs hover:bg-secondary/80",
+18:         ghost:
+19:           "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
+20:         link: "text-primary underline-offset-4 hover:underline",
+21:       },
+22:       size: {
+23:         default: "h-9 px-4 py-2 has-[>svg]:px-3",
+24:         sm: "h-8 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5",
+25:         lg: "h-10 rounded-md px-6 has-[>svg]:px-4",
+26:         icon: "size-9",
+27:       },
+28:     },
+29:     defaultVariants: {
+30:       variant: "default",
+31:       size: "default",
+32:     },
+33:   }
+34: )
+35: function Button({
+36:   className,
+37:   variant,
+38:   size,
+39:   asChild = false,
+40:   ...props
+41: }: React.ComponentProps<"button"> &
+42:   VariantProps<typeof buttonVariants> & {
+43:     asChild?: boolean
+44:   }) {
+45:   const Comp = asChild ? Slot : "button"
+46:   return (
+47:     <Comp
+48:       data-slot="button"
+49:       className={cn(buttonVariants({ variant, size, className }))}
+50:       {...props}
+51:     />
+52:   )
+53: }
+54: export { Button, buttonVariants }
+
+================
+File: vercel-ai-gateway-demo-main/components/ui/card.tsx
+================
+ 1: import * as React from "react"
+ 2: import { cn } from "@/lib/utils"
+ 3: function Card({ className, ...props }: React.ComponentProps<"div">) {
+ 4:   return (
+ 5:     <div
+ 6:       data-slot="card"
+ 7:       className={cn(
+ 8:         "bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm",
+ 9:         className
+10:       )}
+11:       {...props}
+12:     />
+13:   )
+14: }
+15: function CardHeader({ className, ...props }: React.ComponentProps<"div">) {
+16:   return (
+17:     <div
+18:       data-slot="card-header"
+19:       className={cn(
+20:         "@container/card-header grid auto-rows-min grid-rows-[auto_auto] items-start gap-1.5 px-6 has-data-[slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-6",
+21:         className
+22:       )}
+23:       {...props}
+24:     />
+25:   )
+26: }
+27: function CardTitle({ className, ...props }: React.ComponentProps<"div">) {
+28:   return (
+29:     <div
+30:       data-slot="card-title"
+31:       className={cn("leading-none font-semibold", className)}
+32:       {...props}
+33:     />
+34:   )
+35: }
+36: function CardDescription({ className, ...props }: React.ComponentProps<"div">) {
+37:   return (
+38:     <div
+39:       data-slot="card-description"
+40:       className={cn("text-muted-foreground text-sm", className)}
+41:       {...props}
+42:     />
+43:   )
+44: }
+45: function CardAction({ className, ...props }: React.ComponentProps<"div">) {
+46:   return (
+47:     <div
+48:       data-slot="card-action"
+49:       className={cn(
+50:         "col-start-2 row-span-2 row-start-1 self-start justify-self-end",
+51:         className
+52:       )}
+53:       {...props}
+54:     />
+55:   )
+56: }
+57: function CardContent({ className, ...props }: React.ComponentProps<"div">) {
+58:   return (
+59:     <div
+60:       data-slot="card-content"
+61:       className={cn("px-6", className)}
+62:       {...props}
+63:     />
+64:   )
+65: }
+66: function CardFooter({ className, ...props }: React.ComponentProps<"div">) {
+67:   return (
+68:     <div
+69:       data-slot="card-footer"
+70:       className={cn("flex items-center px-6 [.border-t]:pt-6", className)}
+71:       {...props}
+72:     />
+73:   )
+74: }
+75: export {
+76:   Card,
+77:   CardHeader,
+78:   CardFooter,
+79:   CardTitle,
+80:   CardAction,
+81:   CardDescription,
+82:   CardContent,
+83: }
+
+================
+File: vercel-ai-gateway-demo-main/components/ui/input.tsx
+================
+ 1: import * as React from "react"
+ 2: import { cn } from "@/lib/utils"
+ 3: function Input({ className, type, ...props }: React.ComponentProps<"input">) {
+ 4:   return (
+ 5:     <input
+ 6:       type={type}
+ 7:       data-slot="input"
+ 8:       className={cn(
+ 9:         "file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input flex h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
+10:         "focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]",
+11:         "aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
+12:         className
+13:       )}
+14:       {...props}
+15:     />
+16:   )
+17: }
+18: export { Input }
+
+================
+File: vercel-ai-gateway-demo-main/components/ui/select.tsx
+================
+  1: "use client"
+  2: import * as React from "react"
+  3: import * as SelectPrimitive from "@radix-ui/react-select"
+  4: import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from "lucide-react"
+  5: import { cn } from "@/lib/utils"
+  6: function Select({
+  7:   ...props
+  8: }: React.ComponentProps<typeof SelectPrimitive.Root>) {
+  9:   return <SelectPrimitive.Root data-slot="select" {...props} />
+ 10: }
+ 11: function SelectGroup({
+ 12:   ...props
+ 13: }: React.ComponentProps<typeof SelectPrimitive.Group>) {
+ 14:   return <SelectPrimitive.Group data-slot="select-group" {...props} />
+ 15: }
+ 16: function SelectValue({
+ 17:   ...props
+ 18: }: React.ComponentProps<typeof SelectPrimitive.Value>) {
+ 19:   return <SelectPrimitive.Value data-slot="select-value" {...props} />
+ 20: }
+ 21: function SelectTrigger({
+ 22:   className,
+ 23:   size = "default",
+ 24:   children,
+ 25:   ...props
+ 26: }: React.ComponentProps<typeof SelectPrimitive.Trigger> & {
+ 27:   size?: "sm" | "default"
+ 28: }) {
+ 29:   return (
+ 30:     <SelectPrimitive.Trigger
+ 31:       data-slot="select-trigger"
+ 32:       data-size={size}
+ 33:       className={cn(
+ 34:         "border-input data-[placeholder]:text-muted-foreground [&_svg:not([class*='text-'])]:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 dark:hover:bg-input/50 flex w-fit items-center justify-between gap-2 rounded-md border bg-transparent px-3 py-2 text-sm whitespace-nowrap shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 data-[size=default]:h-9 data-[size=sm]:h-8 *:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-2 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+ 35:         className
+ 36:       )}
+ 37:       {...props}
+ 38:     >
+ 39:       {children}
+ 40:       <SelectPrimitive.Icon asChild>
+ 41:         <ChevronDownIcon className="size-4 opacity-50" />
+ 42:       </SelectPrimitive.Icon>
+ 43:     </SelectPrimitive.Trigger>
+ 44:   )
+ 45: }
+ 46: function SelectContent({
+ 47:   className,
+ 48:   children,
+ 49:   position = "popper",
+ 50:   ...props
+ 51: }: React.ComponentProps<typeof SelectPrimitive.Content>) {
+ 52:   return (
+ 53:     <SelectPrimitive.Portal>
+ 54:       <SelectPrimitive.Content
+ 55:         data-slot="select-content"
+ 56:         className={cn(
+ 57:           "bg-popover text-popover-foreground data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 relative z-50 max-h-(--radix-select-content-available-height) min-w-[8rem] origin-(--radix-select-content-transform-origin) overflow-x-hidden overflow-y-auto rounded-md border shadow-md",
+ 58:           position === "popper" &&
+ 59:             "data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1",
+ 60:           className
+ 61:         )}
+ 62:         position={position}
+ 63:         {...props}
+ 64:       >
+ 65:         <SelectScrollUpButton />
+ 66:         <SelectPrimitive.Viewport
+ 67:           className={cn(
+ 68:             "p-1",
+ 69:             position === "popper" &&
+ 70:               "h-[var(--radix-select-trigger-height)] w-full min-w-[var(--radix-select-trigger-width)] scroll-my-1"
+ 71:           )}
+ 72:         >
+ 73:           {children}
+ 74:         </SelectPrimitive.Viewport>
+ 75:         <SelectScrollDownButton />
+ 76:       </SelectPrimitive.Content>
+ 77:     </SelectPrimitive.Portal>
+ 78:   )
+ 79: }
+ 80: function SelectLabel({
+ 81:   className,
+ 82:   ...props
+ 83: }: React.ComponentProps<typeof SelectPrimitive.Label>) {
+ 84:   return (
+ 85:     <SelectPrimitive.Label
+ 86:       data-slot="select-label"
+ 87:       className={cn("text-muted-foreground px-2 py-1.5 text-xs", className)}
+ 88:       {...props}
+ 89:     />
+ 90:   )
+ 91: }
+ 92: function SelectItem({
+ 93:   className,
+ 94:   children,
+ 95:   ...props
+ 96: }: React.ComponentProps<typeof SelectPrimitive.Item>) {
+ 97:   return (
+ 98:     <SelectPrimitive.Item
+ 99:       data-slot="select-item"
+100:       className={cn(
+101:         "focus:bg-accent focus:text-accent-foreground [&_svg:not([class*='text-'])]:text-muted-foreground relative flex w-full cursor-default items-center gap-2 rounded-sm py-1.5 pr-8 pl-2 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 *:[span]:last:flex *:[span]:last:items-center *:[span]:last:gap-2",
+102:         className
+103:       )}
+104:       {...props}
+105:     >
+106:       <span className="absolute right-2 flex size-3.5 items-center justify-center">
+107:         <SelectPrimitive.ItemIndicator>
+108:           <CheckIcon className="size-4" />
+109:         </SelectPrimitive.ItemIndicator>
+110:       </span>
+111:       <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
+112:     </SelectPrimitive.Item>
+113:   )
+114: }
+115: function SelectSeparator({
+116:   className,
+117:   ...props
+118: }: React.ComponentProps<typeof SelectPrimitive.Separator>) {
+119:   return (
+120:     <SelectPrimitive.Separator
+121:       data-slot="select-separator"
+122:       className={cn("bg-border pointer-events-none -mx-1 my-1 h-px", className)}
+123:       {...props}
+124:     />
+125:   )
+126: }
+127: function SelectScrollUpButton({
+128:   className,
+129:   ...props
+130: }: React.ComponentProps<typeof SelectPrimitive.ScrollUpButton>) {
+131:   return (
+132:     <SelectPrimitive.ScrollUpButton
+133:       data-slot="select-scroll-up-button"
+134:       className={cn(
+135:         "flex cursor-default items-center justify-center py-1",
+136:         className
+137:       )}
+138:       {...props}
+139:     >
+140:       <ChevronUpIcon className="size-4" />
+141:     </SelectPrimitive.ScrollUpButton>
+142:   )
+143: }
+144: function SelectScrollDownButton({
+145:   className,
+146:   ...props
+147: }: React.ComponentProps<typeof SelectPrimitive.ScrollDownButton>) {
+148:   return (
+149:     <SelectPrimitive.ScrollDownButton
+150:       data-slot="select-scroll-down-button"
+151:       className={cn(
+152:         "flex cursor-default items-center justify-center py-1",
+153:         className
+154:       )}
+155:       {...props}
+156:     >
+157:       <ChevronDownIcon className="size-4" />
+158:     </SelectPrimitive.ScrollDownButton>
+159:   )
+160: }
+161: export {
+162:   Select,
+163:   SelectContent,
+164:   SelectGroup,
+165:   SelectItem,
+166:   SelectLabel,
+167:   SelectScrollDownButton,
+168:   SelectScrollUpButton,
+169:   SelectSeparator,
+170:   SelectTrigger,
+171:   SelectValue,
+172: }
+
+================
+File: vercel-ai-gateway-demo-main/components/chat.tsx
+================
+  1: "use client";
+  2: import { useChat } from "@ai-sdk/react";
+  3: import { useRouter } from "next/navigation";
+  4: import { ModelSelector } from "@/components/model-selector";
+  5: import { Button } from "@/components/ui/button";
+  6: import { Input } from "@/components/ui/input";
+  7: import { ThemeToggle } from "@/components/theme-toggle";
+  8: import { SendIcon, PlusIcon } from "lucide-react";
+  9: import { useState, useEffect, useRef } from "react";
+ 10: import { DEFAULT_MODEL } from "@/lib/constants";
+ 11: import { Alert, AlertDescription } from "@/components/ui/alert";
+ 12: import { AlertCircle } from "lucide-react";
+ 13: import { cn } from "@/lib/utils";
+ 14: import Link from "next/link";
+ 15: import { Streamdown } from "streamdown";
+ 16: function ModelSelectorHandler({
+ 17:   modelId,
+ 18:   onModelIdChange,
+ 19: }: {
+ 20:   modelId: string;
+ 21:   onModelIdChange: (newModelId: string) => void;
+ 22: }) {
+ 23:   const router = useRouter();
+ 24:   const handleSelectChange = (newModelId: string) => {
+ 25:     onModelIdChange(newModelId);
+ 26:     const params = new URLSearchParams();
+ 27:     params.set("modelId", newModelId);
+ 28:     router.push(`?${params.toString()}`);
+ 29:   };
+ 30:   return <ModelSelector modelId={modelId} onModelChange={handleSelectChange} />;
+ 31: }
+ 32: export function Chat({ modelId = DEFAULT_MODEL }: { modelId: string }) {
+ 33:   const [input, setInput] = useState("");
+ 34:   const [currentModelId, setCurrentModelId] = useState(modelId);
+ 35:   const messagesEndRef = useRef<HTMLDivElement>(null);
+ 36:   const handleModelIdChange = (newModelId: string) => {
+ 37:     setCurrentModelId(newModelId);
+ 38:   };
+ 39:   const { messages, error, sendMessage, regenerate, setMessages, stop, status } = useChat();
+ 40:   const hasMessages = messages.length > 0;
+ 41:   const scrollToBottom = () => {
+ 42:     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+ 43:   };
+ 44:   useEffect(() => {
+ 45:     scrollToBottom();
+ 46:   }, [messages]);
+ 47:   const handleNewChat = () => {
+ 48:     stop();
+ 49:     setMessages([]);
+ 50:     setInput("");
+ 51:   };
+ 52:   return (
+ 53:     <div className="flex flex-col h-screen overflow-hidden">
+ 54:       <div className="absolute top-3 left-3 md:top-4 md:left-4 z-10 flex gap-2 animate-fade-in">
+ 55:         <Button
+ 56:           onClick={handleNewChat}
+ 57:           variant="outline"
+ 58:           size="icon"
+ 59:           className="h-9 w-9 shadow-border-small hover:shadow-border-medium bg-background/80 backdrop-blur-sm border-0 hover:bg-background hover:scale-[1.02] transition-all duration-150 ease"
+ 60:         >
+ 61:           <PlusIcon className="h-4 w-4" />
+ 62:         </Button>
+ 63:         <ThemeToggle />
+ 64:       </div>
+ 65:       {!hasMessages && (
+ 66:         <div className="flex-1 flex flex-col items-center justify-center px-4 md:px-8 animate-fade-in">
+ 67:           <div className="w-full max-w-2xl text-center space-y-8 md:space-y-12">
+ 68:             <h1 className="text-3xl md:text-6xl font-light tracking-tight text-foreground animate-slide-up">
+ 69:               <span className="font-mono font-semibold tracking-tight bg-foreground text-background px-4 py-3 rounded-2xl shadow-border-medium">
+ 70:                 AI GATEWAY
+ 71:               </span>
+ 72:             </h1>
+ 73:             <div className="w-full animate-slide-up" style={{ animationDelay: '100ms' }}>
+ 74:               <form
+ 75:                 onSubmit={(e) => {
+ 76:                   e.preventDefault();
+ 77:                   sendMessage({ text: input }, { body: { modelId: currentModelId } });
+ 78:                   setInput("");
+ 79:                 }}
+ 80:               >
+ 81:                 <div className="flex items-center gap-2 md:gap-3 p-3 md:p-4 rounded-2xl glass-effect shadow-border-medium transition-all duration-200 ease-out">
+ 82:                   <ModelSelectorHandler
+ 83:                     modelId={modelId}
+ 84:                     onModelIdChange={handleModelIdChange}
+ 85:                   />
+ 86:                   <div className="flex flex-1 items-center">
+ 87:                     <Input
+ 88:                       name="prompt"
+ 89:                       placeholder="Ask a question..."
+ 90:                       onChange={(e) => setInput(e.target.value)}
+ 91:                       value={input}
+ 92:                       autoFocus
+ 93:                       className="flex-1 border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 text-base placeholder:text-muted-foreground/60"
+ 94:                       onKeyDown={(e) => {
+ 95:                         if (e.metaKey && e.key === "Enter") {
+ 96:                           sendMessage(
+ 97:                             { text: input },
+ 98:                             { body: { modelId: currentModelId } },
+ 99:                           );
+100:                           setInput("");
+101:                         }
+102:                       }}
+103:                     />
+104:                     <Button
+105:                       type="submit"
+106:                       size="icon"
+107:                       variant="ghost"
+108:                       className="h-9 w-9 rounded-xl hover:bg-muted/50"
+109:                       disabled={!input.trim()}
+110:                     >
+111:                       <SendIcon className="h-4 w-4" />
+112:                     </Button>
+113:                   </div>
+114:                 </div>
+115:               </form>
+116:             </div>
+117:           </div>
+118:         </div>
+119:       )}
+120:       {hasMessages && (
+121:         <div className="flex-1 flex flex-col max-w-4xl mx-auto w-full animate-fade-in overflow-hidden">
+122:           <div className="flex-1 overflow-y-auto px-4 md:px-8 py-4 hide-scrollbar">
+123:             <div className="flex flex-col gap-4 md:gap-6 pb-4">
+124:               {messages.map((m) => (
+125:                 <div
+126:                   key={m.id}
+127:                   className={cn(
+128:                     m.role === "user" &&
+129:                       "bg-foreground text-background rounded-2xl p-3 md:p-4 ml-auto max-w-[90%] md:max-w-[75%] shadow-border-small font-medium text-sm md:text-base",
+130:                     m.role === "assistant" && "max-w-[95%] md:max-w-[85%] text-foreground/90 leading-relaxed text-sm md:text-base"
+131:                   )}
+132:                 >
+133:                   {m.parts.map((part, i) => {
+134:                     switch (part.type) {
+135:                       case "text":
+136:                         return m.role === "assistant" ? (
+137:                           <Streamdown key={`${m.id}-${i}`} isAnimating={status === "streaming" && m.id === messages[messages.length - 1]?.id}>
+138:                             {part.text}
+139:                           </Streamdown>
+140:                         ) : (
+141:                           <div key={`${m.id}-${i}`}>{part.text}</div>
+142:                         );
+143:                     }
+144:                   })}
+145:                 </div>
+146:               ))}
+147:               <div ref={messagesEndRef} />
+148:             </div>
+149:           </div>
+150:         </div>
+151:       )}
+152:       {error && (
+153:         <div className="max-w-4xl mx-auto w-full px-4 md:px-8 pb-4 animate-slide-down">
+154:           <Alert variant="destructive" className="flex flex-col items-end">
+155:             <div className="flex flex-row gap-2">
+156:               <AlertCircle className="h-4 w-4 shrink-0 mt-0.5" />
+157:               <AlertDescription className="dark:text-red-400 text-red-600">
+158:                 {error.message.startsWith("AI Gateway requires a valid credit card") ? <div>AI Gateway requires a valid credit card on file to service requests. Please visit your <Link className="underline underline-offset-4" href="https://vercel.com/d?to=%2F%5Bteam%5D%2F%7E%2Fai%3Fmodal%3Dadd-credit-card" target="_noblank">dashboard</Link> to add a card and unlock your free credits.</div> : "An error occurred while generating the response."}
+159:               </AlertDescription>
+160:             </div>
+161:             <Button
+162:               variant="outline"
+163:               size="sm"
+164:               className="ml-auto transition-all duration-150 ease-out hover:scale-105"
+165:               onClick={() => regenerate()}
+166:             >
+167:               Retry
+168:             </Button>
+169:           </Alert>
+170:         </div>
+171:       )}
+172:       {hasMessages && (
+173:         <div className="w-full max-w-4xl mx-auto">
+174:           <form
+175:             onSubmit={(e) => {
+176:               e.preventDefault();
+177:               sendMessage({ text: input }, { body: { modelId: currentModelId } });
+178:               setInput("");
+179:             }}
+180:             className="px-4 md:px-8 pb-6 md:pb-8"
+181:           >
+182:             <div className="flex items-center gap-3 p-4 rounded-2xl glass-effect shadow-border-medium transition-all duration-200 ease-out">
+183:               <ModelSelectorHandler
+184:                 modelId={modelId}
+185:                 onModelIdChange={handleModelIdChange}
+186:               />
+187:               <div className="flex flex-1 items-center">
+188:                 <Input
+189:                   name="prompt"
+190:                   placeholder="Ask a question..."
+191:                   onChange={(e) => setInput(e.target.value)}
+192:                   value={input}
+193:                   className="flex-1 border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 text-base placeholder:text-muted-foreground/60 font-medium"
+194:                   onKeyDown={(e) => {
+195:                     if (e.metaKey && e.key === "Enter") {
+196:                       sendMessage(
+197:                         { text: input },
+198:                         { body: { modelId: currentModelId } },
+199:                       );
+200:                       setInput("");
+201:                     }
+202:                   }}
+203:                 />
+204:                 <Button
+205:                   type="submit"
+206:                   size="icon"
+207:                   variant="ghost"
+208:                   className="h-9 w-9 rounded-xl hover:bg-accent hover:text-accent-foreground hover:scale-110 transition-all duration-150 ease disabled:opacity-50 disabled:hover:scale-100"
+209:                   disabled={!input.trim()}
+210:                 >
+211:                   <SendIcon className="h-4 w-4" />
+212:                 </Button>
+213:               </div>
+214:             </div>
+215:           </form>
+216:         </div>
+217:       )}
+218:       <footer className="pb-8 text-center animate-fade-in" style={{ animationDelay: '200ms' }}>
+219:         <p className="text-xs md:text-sm text-muted-foreground">
+220:           The models in the list are a small subset of those available in the
+221:           Vercel AI Gateway.
+222:           <br />
+223:           See the{" "}
+224:           <Button
+225:             variant="link"
+226:             asChild
+227:             className="p-0 h-auto text-xs md:text-sm font-normal"
+228:           >
+229:             <a
+230:               href="https://vercel.com/d?to=%2F%5Bteam%5D%2F%7E%2Fai%2Fmodel-list&title="
+231:               target="_blank"
+232:               rel="noopener noreferrer"
+233:             >
+234:               model library
+235:             </a>
+236:           </Button>{" "}
+237:           for the full set.
+238:         </p>
+239:       </footer>
+240:     </div>
+241:   );
+242: }
+
+================
+File: vercel-ai-gateway-demo-main/components/model-selector.tsx
+================
+ 1: "use client";
+ 2: import { useAvailableModels } from "@/lib/hooks/use-available-models";
+ 3: import { Loader2, ChevronDown } from "lucide-react";
+ 4: import { DEFAULT_MODEL } from "@/lib/constants";
+ 5: import {
+ 6:   Select,
+ 7:   SelectContent,
+ 8:   SelectItem,
+ 9:   SelectTrigger,
+10:   SelectValue,
+11:   SelectGroup,
+12:   SelectLabel,
+13: } from "@/components/ui/select";
+14: import { memo } from "react";
+15: type ModelSelectorProps = {
+16:   modelId: string;
+17:   onModelChange: (modelId: string) => void;
+18: };
+19: export const ModelSelector = memo(function ModelSelector({
+20:   modelId = DEFAULT_MODEL,
+21:   onModelChange,
+22: }: ModelSelectorProps) {
+23:   const { models, isLoading, error } = useAvailableModels();
+24:   return (
+25:     <Select
+26:       value={modelId}
+27:       onValueChange={onModelChange}
+28:       disabled={isLoading || !!error || !models?.length}
+29:     >
+30:       <SelectTrigger className="w-9 h-9 md:w-[140px] border-0 bg-transparent focus:ring-0 focus:ring-offset-0 focus:outline-none focus-visible:outline-none focus:border-0 focus-visible:border-0 focus-visible:ring-0 focus-visible:ring-offset-0 rounded-xl font-medium text-sm p-0 md:px-3 [&_[data-placeholder]]:hidden md:[&_[data-placeholder]]:block [&>svg]:hidden md:[&>svg]:block">
+31:         <div className="flex items-center justify-center w-full h-full md:hidden">
+32:           {isLoading ? (
+33:             <Loader2 className="h-4 w-4 animate-spin" />
+34:           ) : (
+35:             <ChevronDown className="h-4 w-4" />
+36:           )}
+37:         </div>
+38:         <div className="hidden md:flex items-center gap-2 w-full">
+39:           {isLoading ? (
+40:             <>
+41:               <Loader2 className="h-3 w-3 animate-spin" />
+42:               <span className="text-sm">Loading</span>
+43:             </>
+44:           ) : error ? (
+45:             <span className="text-red-500 text-sm">Error</span>
+46:           ) : !models?.length ? (
+47:             <span className="text-sm">No models</span>
+48:           ) : (
+49:             <SelectValue placeholder="Select model" />
+50:           )}
+51:         </div>
+52:       </SelectTrigger>
+53:       <SelectContent className="rounded-2xl border-0 shadow-border-medium bg-popover/95 backdrop-blur-sm animate-scale-in" align="start" sideOffset={4}>
+54:         <SelectGroup>
+55:           <SelectLabel className="text-xs text-muted-foreground px-2 py-1">Models</SelectLabel>
+56:           {models?.map((model) => (
+57:             <SelectItem key={model.id} value={model.id} className="rounded-lg transition-colors duration-150 ease-out">
+58:               {model.label}
+59:             </SelectItem>
+60:           )) || []}
+61:         </SelectGroup>
+62:       </SelectContent>
+63:     </Select>
+64:   );
+65: });
+
+================
+File: vercel-ai-gateway-demo-main/components/theme-toggle.tsx
+================
+ 1: "use client";
+ 2: import { useTheme } from "next-themes";
+ 3: import { Button } from "@/components/ui/button";
+ 4: import { Moon, Sun } from "lucide-react";
+ 5: import { useEffect, useState } from "react";
+ 6: export function ThemeToggle() {
+ 7:   const { theme, setTheme } = useTheme();
+ 8:   const [mounted, setMounted] = useState(false);
+ 9:   useEffect(() => {
+10:     setMounted(true);
+11:   }, []);
+12:   if (!mounted) {
+13:     return (
+14:       <Button
+15:         variant="outline"
+16:         size="icon"
+17:         className="h-9 w-9 shadow-border-small bg-background/80 backdrop-blur-sm border-0"
+18:       >
+19:         <Sun className="h-4 w-4" />
+20:       </Button>
+21:     );
+22:   }
+23:   return (
+24:     <Button
+25:       variant="outline"
+26:       size="icon"
+27:       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+28:       className="h-9 w-9 shadow-border-small hover:shadow-border-medium bg-background/80 backdrop-blur-sm border-0 hover:bg-background hover:scale-[1.02] transition-all duration-150 ease"
+29:     >
+30:       {theme === "dark" ? (
+31:         <Sun className="h-4 w-4" />
+32:       ) : (
+33:         <Moon className="h-4 w-4" />
+34:       )}
+35:     </Button>
+36:   );
+37: }
+
+================
+File: vercel-ai-gateway-demo-main/lib/hooks/use-available-models.ts
+================
+ 1: import { useState, useEffect, useCallback } from "react";
+ 2: import type { DisplayModel } from "@/lib/display-model";
+ 3: import type { GatewayLanguageModelEntry } from "@ai-sdk/gateway";
+ 4: import { SUPPORTED_MODELS } from "@/lib/constants";
+ 5: const MAX_RETRIES = 3;
+ 6: const RETRY_DELAY_MILLIS = 5000;
+ 7: function buildModelList(models: GatewayLanguageModelEntry[]): DisplayModel[] {
+ 8:   return models
+ 9:     .filter((model) => SUPPORTED_MODELS.includes(model.id))
+10:     .map((model) => ({
+11:       id: model.id,
+12:       label: model.name,
+13:     }));
+14: }
+15: export function useAvailableModels() {
+16:   const [models, setModels] = useState<DisplayModel[]>([]);
+17:   const [isLoading, setIsLoading] = useState(true);
+18:   const [error, setError] = useState<Error | null>(null);
+19:   const [retryCount, setRetryCount] = useState(0);
+20:   const fetchModels = useCallback(
+21:     async (isRetry: boolean = false) => {
+22:       if (!isRetry) {
+23:         setIsLoading(true);
+24:         setError(null);
+25:       }
+26:       try {
+27:         const response = await fetch("/api/models");
+28:         if (!response.ok) {
+29:           throw new Error("Failed to fetch models");
+30:         }
+31:         const data = await response.json();
+32:         const newModels = buildModelList(data.models);
+33:         setModels(newModels);
+34:         setError(null);
+35:         setRetryCount(0);
+36:         setIsLoading(false);
+37:       } catch (err) {
+38:         setError(
+39:           err instanceof Error ? err : new Error("Failed to fetch models")
+40:         );
+41:         if (retryCount < MAX_RETRIES) {
+42:           setRetryCount((prev) => prev + 1);
+43:           setIsLoading(true);
+44:         } else {
+45:           setIsLoading(false);
+46:         }
+47:       } finally {
+48:         setIsLoading(false);
+49:       }
+50:     },
+51:     [retryCount]
+52:   );
+53:   useEffect(() => {
+54:     if (retryCount === 0) {
+55:       fetchModels(false);
+56:     } else if (retryCount > 0 && retryCount <= MAX_RETRIES) {
+57:       const timerId = setTimeout(() => {
+58:         fetchModels(true);
+59:       }, RETRY_DELAY_MILLIS);
+60:       return () => clearTimeout(timerId);
+61:     }
+62:   }, [retryCount, fetchModels]);
+63:   return { models, isLoading, error };
+64: }
+
+================
+File: vercel-ai-gateway-demo-main/lib/constants.ts
+================
+ 1: export const DEFAULT_MODEL = "openai/gpt-5-nano";
+ 2: export const SUPPORTED_MODELS = [
+ 3:   "amazon/nova-lite",
+ 4:   "amazon/nova-micro",
+ 5:   "anthropic/claude-haiku-4.5",
+ 6:   "google/gemini-3-flash",
+ 7:   "google/gemma2-9b-it",
+ 8:   "meta/llama-3.1-8b",
+ 9:   "openai/gpt-5-mini",
+10:   "openai/gpt-5-nano"
+11: ];
+
+================
+File: vercel-ai-gateway-demo-main/lib/display-model.ts
+================
+1: export interface DisplayModel {
+2:   id: string;
+3:   label: string;
+4: }
+
+================
+File: vercel-ai-gateway-demo-main/lib/gateway.ts
+================
+1: import { createGatewayProvider } from "@ai-sdk/gateway";
+2: export const gateway = createGatewayProvider({
+3:   baseURL: process.env.AI_GATEWAY_BASE_URL,
+4: });
+
+================
+File: vercel-ai-gateway-demo-main/lib/utils.ts
+================
+1: import { clsx, type ClassValue } from "clsx"
+2: import { twMerge } from "tailwind-merge"
+3: export function cn(...inputs: ClassValue[]) {
+4:   return twMerge(clsx(inputs))
+5: }
+
+================
+File: vercel-ai-gateway-demo-main/public/file.svg
+================
+1: <svg fill="none" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M14.5 13.5V5.41a1 1 0 0 0-.3-.7L9.8.29A1 1 0 0 0 9.08 0H1.5v13.5A2.5 2.5 0 0 0 4 16h8a2.5 2.5 0 0 0 2.5-2.5m-1.5 0v-7H8v-5H3v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1M9.5 5V2.12L12.38 5zM5.13 5h-.62v1.25h2.12V5zm-.62 3h7.12v1.25H4.5zm.62 3h-.62v1.25h7.12V11z" clip-rule="evenodd" fill="#666" fill-rule="evenodd"/></svg>
+
+================
+File: vercel-ai-gateway-demo-main/public/globe.svg
+================
+1: <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><g clip-path="url(#a)"><path fill-rule="evenodd" clip-rule="evenodd" d="M10.27 14.1a6.5 6.5 0 0 0 3.67-3.45q-1.24.21-2.7.34-.31 1.83-.97 3.1M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m.48-1.52a7 7 0 0 1-.96 0H7.5a4 4 0 0 1-.84-1.32q-.38-.89-.63-2.08a40 40 0 0 0 3.92 0q-.25 1.2-.63 2.08a4 4 0 0 1-.84 1.31zm2.94-4.76q1.66-.15 2.95-.43a7 7 0 0 0 0-2.58q-1.3-.27-2.95-.43a18 18 0 0 1 0 3.44m-1.27-3.54a17 17 0 0 1 0 3.64 39 39 0 0 1-4.3 0 17 17 0 0 1 0-3.64 39 39 0 0 1 4.3 0m1.1-1.17q1.45.13 2.69.34a6.5 6.5 0 0 0-3.67-3.44q.65 1.26.98 3.1M8.48 1.5l.01.02q.41.37.84 1.31.38.89.63 2.08a40 40 0 0 0-3.92 0q.25-1.2.63-2.08a4 4 0 0 1 .85-1.32 7 7 0 0 1 .96 0m-2.75.4a6.5 6.5 0 0 0-3.67 3.44 29 29 0 0 1 2.7-.34q.31-1.83.97-3.1M4.58 6.28q-1.66.16-2.95.43a7 7 0 0 0 0 2.58q1.3.27 2.95.43a18 18 0 0 1 0-3.44m.17 4.71q-1.45-.12-2.69-.34a6.5 6.5 0 0 0 3.67 3.44q-.65-1.27-.98-3.1" fill="#666"/></g><defs><clipPath id="a"><path fill="#fff" d="M0 0h16v16H0z"/></clipPath></defs></svg>
+
+================
+File: vercel-ai-gateway-demo-main/public/next.svg
+================
+1: <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 394 80"><path fill="#000" d="M262 0h68.5v12.7h-27.2v66.6h-13.6V12.7H262V0ZM149 0v12.7H94v20.4h44.3v12.6H94v21h55v12.6H80.5V0h68.7zm34.3 0h-17.8l63.8 79.4h17.9l-32-39.7 32-39.6h-17.9l-23 28.6-23-28.6zm18.3 56.7-9-11-27.1 33.7h17.8l18.3-22.7z"/><path fill="#000" d="M81 79.3 17 0H0v79.3h13.6V17l50.2 62.3H81Zm252.6-.4c-1 0-1.8-.4-2.5-1s-1.1-1.6-1.1-2.6.3-1.8 1-2.5 1.6-1 2.6-1 1.8.3 2.5 1a3.4 3.4 0 0 1 .6 4.3 3.7 3.7 0 0 1-3 1.8zm23.2-33.5h6v23.3c0 2.1-.4 4-1.3 5.5a9.1 9.1 0 0 1-3.8 3.5c-1.6.8-3.5 1.3-5.7 1.3-2 0-3.7-.4-5.3-1s-2.8-1.8-3.7-3.2c-.9-1.3-1.4-3-1.4-5h6c.1.8.3 1.6.7 2.2s1 1.2 1.6 1.5c.7.4 1.5.5 2.4.5 1 0 1.8-.2 2.4-.6a4 4 0 0 0 1.6-1.8c.3-.8.5-1.8.5-3V45.5zm30.9 9.1a4.4 4.4 0 0 0-2-3.3 7.5 7.5 0 0 0-4.3-1.1c-1.3 0-2.4.2-3.3.5-.9.4-1.6 1-2 1.6a3.5 3.5 0 0 0-.3 4c.3.5.7.9 1.3 1.2l1.8 1 2 .5 3.2.8c1.3.3 2.5.7 3.7 1.2a13 13 0 0 1 3.2 1.8 8.1 8.1 0 0 1 3 6.5c0 2-.5 3.7-1.5 5.1a10 10 0 0 1-4.4 3.5c-1.8.8-4.1 1.2-6.8 1.2-2.6 0-4.9-.4-6.8-1.2-2-.8-3.4-2-4.5-3.5a10 10 0 0 1-1.7-5.6h6a5 5 0 0 0 3.5 4.6c1 .4 2.2.6 3.4.6 1.3 0 2.5-.2 3.5-.6 1-.4 1.8-1 2.4-1.7a4 4 0 0 0 .8-2.4c0-.9-.2-1.6-.7-2.2a11 11 0 0 0-2.1-1.4l-3.2-1-3.8-1c-2.8-.7-5-1.7-6.6-3.2a7.2 7.2 0 0 1-2.4-5.7 8 8 0 0 1 1.7-5 10 10 0 0 1 4.3-3.5c2-.8 4-1.2 6.4-1.2 2.3 0 4.4.4 6.2 1.2 1.8.8 3.2 2 4.3 3.4 1 1.4 1.5 3 1.5 5h-5.8z"/></svg>
+
+================
+File: vercel-ai-gateway-demo-main/public/vercel.svg
+================
+1: <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1155 1000"><path d="m577.3 0 577.4 1000H0z" fill="#fff"/></svg>
+
+================
+File: vercel-ai-gateway-demo-main/public/window.svg
+================
+1: <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill-rule="evenodd" clip-rule="evenodd" d="M1.5 2.5h13v10a1 1 0 0 1-1 1h-11a1 1 0 0 1-1-1zM0 1h16v11.5a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 0 12.5zm3.75 4.5a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5M7 4.75a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0m1.75.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5" fill="#666"/></svg>
+
+================
+File: vercel-ai-gateway-demo-main/.gitignore
+================
+ 1: # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+ 2: 
+ 3: # dependencies
+ 4: /node_modules
+ 5: /.pnp
+ 6: .pnp.*
+ 7: .yarn/*
+ 8: !.yarn/patches
+ 9: !.yarn/plugins
+10: !.yarn/releases
+11: !.yarn/versions
+12: 
+13: # testing
+14: /coverage
+15: 
+16: # next.js
+17: /.next/
+18: /out/
+19: 
+20: # production
+21: /build
+22: 
+23: # misc
+24: .DS_Store
+25: *.pem
+26: 
+27: # debug
+28: npm-debug.log*
+29: yarn-debug.log*
+30: yarn-error.log*
+31: .pnpm-debug.log*
+32: 
+33: # env files (can opt-in for committing if needed)
+34: .env*
+35: 
+36: # vercel
+37: .vercel
+38: 
+39: # typescript
+40: *.tsbuildinfo
+41: next-env.d.ts
+42: .env*.local
+
+================
+File: vercel-ai-gateway-demo-main/components.json
+================
+ 1: {
+ 2:   "$schema": "https://ui.shadcn.com/schema.json",
+ 3:   "style": "new-york",
+ 4:   "rsc": true,
+ 5:   "tsx": true,
+ 6:   "tailwind": {
+ 7:     "config": "",
+ 8:     "css": "app/globals.css",
+ 9:     "baseColor": "neutral",
+10:     "cssVariables": true,
+11:     "prefix": ""
+12:   },
+13:   "aliases": {
+14:     "components": "@/components",
+15:     "utils": "@/lib/utils",
+16:     "ui": "@/components/ui",
+17:     "lib": "@/lib",
+18:     "hooks": "@/hooks"
+19:   },
+20:   "iconLibrary": "lucide"
+21: }
+
+================
+File: vercel-ai-gateway-demo-main/eslint.config.mjs
+================
+ 1: import { dirname } from "path";
+ 2: import { fileURLToPath } from "url";
+ 3: import { FlatCompat } from "@eslint/eslintrc";
+ 4: 
+ 5: const __filename = fileURLToPath(import.meta.url);
+ 6: const __dirname = dirname(__filename);
+ 7: 
+ 8: const compat = new FlatCompat({
+ 9:   baseDirectory: __dirname,
+10: });
+11: 
+12: const eslintConfig = [
+13:   ...compat.extends("next/core-web-vitals", "next/typescript"),
+14: ];
+15: 
+16: export default eslintConfig;
+
+================
+File: vercel-ai-gateway-demo-main/LICENSE
+================
+ 1: Copyright 2025 Vercel, Inc.
+ 2: 
+ 3: Licensed under the Apache License, Version 2.0 (the "License");
+ 4: you may not use this file except in compliance with the License.
+ 5: You may obtain a copy of the License at
+ 6: 
+ 7:     http://www.apache.org/licenses/LICENSE-2.0
+ 8: 
+ 9: Unless required by applicable law or agreed to in writing, software
+10: distributed under the License is distributed on an "AS IS" BASIS,
+11: WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+12: See the License for the specific language governing permissions and
+13: limitations under the License.
+
+================
+File: vercel-ai-gateway-demo-main/next.config.ts
+================
+1: import type { NextConfig } from "next";
+2: const nextConfig: NextConfig = {
+3: };
+4: export default nextConfig;
+
+================
+File: vercel-ai-gateway-demo-main/package.json
+================
+ 1: {
+ 2:   "name": "ai-sdk-gateway-demo",
+ 3:   "version": "0.1.0",
+ 4:   "private": true,
+ 5:   "scripts": {
+ 6:     "dev": "next dev",
+ 7:     "build": "next build",
+ 8:     "start": "next start",
+ 9:     "lint": "next lint",
+10:     "type-check": "tsc --noEmit"
+11:   },
+12:   "dependencies": {
+13:     "@ai-sdk/gateway": "2.0.27",
+14:     "@ai-sdk/react": "2.0.123",
+15:     "@radix-ui/react-select": "^2.2.2",
+16:     "@radix-ui/react-slot": "^1.2.0",
+17:     "ai": "5.0.121",
+18:     "class-variance-authority": "^0.7.1",
+19:     "clsx": "^2.1.1",
+20:     "lucide-react": "^0.506.0",
+21:     "next": "15.3.8",
+22:     "next-themes": "^0.4.6",
+23:     "react": "^19.1.0",
+24:     "react-dom": "^19.1.0",
+25:     "streamdown": "^1.6.8",
+26:     "tailwind-merge": "^3.2.0",
+27:     "tw-animate-css": "^1.2.8",
+28:     "zod": "^4.3.5"
+29:   },
+30:   "devDependencies": {
+31:     "@eslint/eslintrc": "^3.3.1",
+32:     "@tailwindcss/postcss": "^4.1.5",
+33:     "@types/node": "^22.15.3",
+34:     "@types/react": "^19.1.2",
+35:     "@types/react-dom": "^19.1.3",
+36:     "eslint": "^9.25.1",
+37:     "eslint-config-next": "15.3.6",
+38:     "tailwindcss": "^4.1.5",
+39:     "typescript": "^5.8.3"
+40:   },
+41:   "packageManager": "pnpm@10.6.2+sha512.47870716bea1572b53df34ad8647b42962bc790ce2bf4562ba0f643237d7302a3d6a8ecef9e4bdfc01d23af1969aa90485d4cebb0b9638fa5ef1daef656f6c1b"
+42: }
+
+================
+File: vercel-ai-gateway-demo-main/postcss.config.mjs
+================
+1: const config = {
+2:   plugins: ["@tailwindcss/postcss"],
+3: };
+4: 
+5: export default config;
+
+================
+File: vercel-ai-gateway-demo-main/README.md
+================
+ 1: A simple [Next.js](https://nextjs.org) chatbot app to demonstrate the use of the Vercel AI Gateway with the [AI SDK](https://sdk.vercel.ai).
+ 2: 
+ 3: ## Getting Started
+ 4: 
+ 5: ### One-time setup
+ 6: 
+ 7: [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvercel-labs%2Fai-sdk-gateway-demo)
+ 8: 
+ 9: 1. Clone this repository with the Deploy button above
+10: 1. Install the [Vercel CLI](https://vercel.com/docs/cli) if you don't already have it
+11: 1. Clone the repository you created above: `git clone <repo-url>`
+12: 1. Link it to a Vercel project: `vc link` or `vc deploy`
+13: 
+14: ### Usage
+15: 1. Install packages with `pnpm i` (or `npm i` or `yarn i`) and run the development server with `vc dev`
+16: 1. Open http://localhost:3000 to try the chatbot
+17: 
+18: ### FAQ
+19: 
+20: 1. If you prefer running your local development server directly rather than using `vc dev`, you'll need to run `vc env pull` to fetch the project's OIDC authentication token locally
+21:    1. the token expires every 12h, so you'll need to re-run this command periodically.
+22:    1. if you use `vc dev` it will auto-refresh the token for you, so you don't need to fetch it manually
+23: 1. If you're linking to an existing, older project, you may need to enable the OIDC token feature in your project settings.
+24:    1. visit the project settings page (rightmost tab in your project's dashboard)
+25:    1. search for 'OIDC' in settings
+26:    1. toggle the button under "Secure Backend Access with OIDC Federation" to Enabled and click the "Save" button
+27: 
+28: ## Authors
+29: 
+30: This repository is maintained by the [Vercel](https://vercel.com) team and community contributors. 
+31: 
+32: Contributions are welcome! Feel free to open issues or submit pull requests to enhance functionality or fix bugs.
+
+================
+File: vercel-ai-gateway-demo-main/tsconfig.json
+================
+ 1: {
+ 2:   "compilerOptions": {
+ 3:     "target": "ES2017",
+ 4:     "lib": ["dom", "dom.iterable", "esnext"],
+ 5:     "allowJs": true,
+ 6:     "skipLibCheck": true,
+ 7:     "strict": true,
+ 8:     "noEmit": true,
+ 9:     "esModuleInterop": true,
+10:     "module": "esnext",
+11:     "moduleResolution": "bundler",
+12:     "resolveJsonModule": true,
+13:     "isolatedModules": true,
+14:     "jsx": "preserve",
+15:     "incremental": true,
+16:     "plugins": [
+17:       {
+18:         "name": "next"
+19:       }
+20:     ],
+21:     "paths": {
+22:       "@/*": ["./*"]
+23:     }
+24:   },
+25:   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+26:   "exclude": ["node_modules"]
+27: }
+
+
+
+
+
+================================================================
+End of Codebase
+================================================================

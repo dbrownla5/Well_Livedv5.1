@@ -1,0 +1,41 @@
+# Project TODO
+
+- [x] Review the skill file, site audit, business data, and extracted site snapshot for The Well Lived Citizen migration
+- [x] Preserve the public-facing site copy, layout, styling, and overall appearance exactly as provided
+- [x] Serve the extracted static HTML, CSS, JavaScript, and image files as the public website
+- [x] Implement a database-backed business info model as the single source of truth
+- [x] Provide a public `/api/business-info` endpoint that returns the current business data for `info-loader.js`
+- [x] Fix the contact form to submit directly to `https://formspree.io/f/xreojkvo` with `method="POST"` and no JavaScript interception
+- [x] Verify and fix all footer social links to direct Instagram and Facebook URLs
+- [x] Verify and fix all CTA links across all 9 pages, including direct `tel:3234331350`, `mailto:` email links, and booking/contact links
+- [x] Build an owner-only protected admin dashboard for Dayna
+- [x] Allow Dayna to view and edit phone, email, social links, payment links, hours, and services from the admin dashboard
+- [x] Persist admin edits to the database so the API always returns the latest saved values
+- [x] Display a read-only page status overview for all 9 site pages with titles and key metadata in the admin dashboard
+- [x] Style the admin dashboard in Plus Jakarta Sans with a cream and charcoal palette and no rounded corners, shadows, or bubble-style UI
+- [x] Add or update Vitest coverage for the business info API, admin protection, and page metadata logic
+- [x] Validate the implementation, confirm deployment readiness, and prepare the final delivery
+- [ ] Enforce a clean-start trust boundary and avoid using any prior company files, legacy sources, or historical data unless Dayna explicitly reintroduces them
+- [ ] Treat Dayna messages and approved uploads as the only authoritative source of truth for new business facts and brand direction
+- [ ] Create a master dashboard structure for business facts, brand voice, continuity notes, and cross-agent handoffs
+- [ ] Define a repeatable handoff rhythm so each session ends with an updated dashboard and a clean transfer packet for the separate implementation agent
+- [ ] Build a working model for Dayna’s voice, business language, and brand consistency from new authoritative inputs only
+- [ ] Interpret voice-to-text errors as probable typos and resolve them contextually unless ambiguity is material
+- [ ] Include a clear checklist in the living dashboard for open asks, pending inputs from Dayna, dependencies, and items already structured into the source of truth
+- [ ] Triage the uploaded ZIP as a noisy source, identify embedded errors, and extract only salvageable facts into the clean source-of-truth workflow
+- [ ] Replace open-ended voice-only fact review with a mobile-friendly checkbox and multiple-choice confirmation flow for blocked-mic and laptop cases
+- [ ] Treat the project as a full clean rebuild from Dayna-approved intent rather than an old-site versus new-site reconciliation
+- [ ] Exclude Replit-era rewritten assumptions and contaminated legacy interpretations unless Dayna explicitly re-approves them
+- [ ] Reframe builder guidance so priorities start from a clean rebuild and current business truth rather than migration debates
+- [ ] Rebuild the site cleanly from Dayna-approved intent rather than debating prior site variants
+- [ ] Publish the rebuilt site on the managed host before any domain cutover
+- [ ] Connect the two current domains to the new hosted project after publish
+- [ ] Use the current domains and DNS only as part of the new hosting setup, not as legacy migration artifacts
+- [ ] Treat the restored Thursday live version as the authoritative foundation for the rebuild
+- [ ] Clone the restored live version before making any edits so the controlled copy becomes the working baseline
+- [ ] Pull writing, font, and styling from the live restored source rather than debating prior variants
+- [ ] Publish the rebuilt controlled copy first, then point the current domains to the new host
+- [x] Verify whether earlier runs already captured site files, HTML snapshots, or build artifacts locally before attempting any new pull or reconstruction work
+- [x] Use the confirmed `/home/ubuntu/upload/` recovery set as the authoritative rebuild source and avoid any new live-site pull unless Dayna explicitly asks for it
+- [x] Upload the recovered logo and portrait to managed storage and swap public page asset references to the returned storage URLs
+- [x] Preserve the recovered 9-page static site as the public-serving baseline while wiring dynamic business data through the new backend

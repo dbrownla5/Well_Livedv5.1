@@ -1,0 +1,5 @@
+# Dashboard Model Notes
+
+The internal dashboard should now treat three distinct objects as separate concerns rather than one blended form. First, it needs a **facts layer** for stable business values such as business name, legal entity, main email, social handles, and the currently preferred phone number. Second, it needs a **decision layer** for unresolved routing and operational questions such as redirect behavior or what to do with a failing legacy number. Third, it needs a **review layer** that presents those facts and decisions in mobile-friendly tap controls rather than requiring repeated voice correction.
+
+At the current stage, the working facts set supports beginning the dashboard build with a clean intake surface and a review queue. The most important near-term modeling decision is that **310-993-0204** should be treated as the current working contact number, while **323-433-1350** should remain visible only as an operational issue to resolve. That distinction prevents the interface from publishing a failing number while still preserving the context Dayna supplied.
