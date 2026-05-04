@@ -31,7 +31,8 @@ export default function Home() {
         <div className="container hero-content" style={{ maxWidth: "820px" }}>
           <div className="label fade-up fade-up-1">Los Angeles</div>
           <h1 className="hero-h1 fade-up fade-up-2">
-            When <em>"there has to be an easier way"</em> becomes a business.
+            When <em
+            className="text-[#403737f2] border-t-[#4a4848] border-r-[#4a4848] border-b-[#4a4848] border-l-[#4a4848]">"there has to be an easier way"</em> becomes a business.
           </h1>
           <p className="hero-sub fade-up fade-up-2">
             Welcome to the concierge for the things you don't want to handle.
