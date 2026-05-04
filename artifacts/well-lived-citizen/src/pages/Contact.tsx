@@ -2,25 +2,26 @@ import { useState } from "react";
 import { useSearch } from "wouter";
 import { usePageMeta } from "../hooks/usePageMeta";
 
+type ClientType = "new" | "returning";
+
 type IntentType =
   | "homeorg"
   | "move"
   | "housecalls"
   | "resale"
   | "legacy"
-  | "quick4x5"
-  | "quick2x3"
-  | "general";
+  | "four-x-five"
+  | "house-call"
+  | "call";
 
 const INTENTS: { id: IntentType; label: string; desc: string }[] = [
-  { id: "homeorg",    label: "A room, space, or closet",        desc: "Organization, systems, or a reset — home made to work." },
-  { id: "move",       label: "A move — or what it left behind", desc: "Packing out, landing in, or closing out the old place." },
-  { id: "housecalls", label: "Help around the house",           desc: "Practical things that need hands — errands, vendors, resets." },
-  { id: "resale",     label: "Items to sell or consign",        desc: "Clothing, furniture, vintage — I handle the platforms." },
-  { id: "legacy",     label: "Catalog what's in the home",      desc: "What's accumulated and what should stay, go, or be documented." },
-  { id: "quick4x5",   label: "Book the 4x5 — 4 hrs, $500",     desc: "Pick the heaviest space. I bring the momentum." },
-  { id: "quick2x3",   label: "Book the 2x3 — 2 hrs, $300",     desc: "Two hours for the things life left unfinished." },
-  { id: "general",    label: "Not sure — just reach out",       desc: "Send a message and I'll figure it out with you." },
+  { id: "four-x-five", label: "The Four x Five — 4 hrs, $500",   desc: "Pick the heaviest space. I bring the momentum." },
+  { id: "house-call",  label: "House Call — 2 hrs, at your door", desc: "Tech, errands, vendors, practical overflow." },
+  { id: "homeorg",     label: "A room, space, or closet",         desc: "Organization, systems, or a reset — home made to work." },
+  { id: "move",        label: "A move — or what it left behind",  desc: "Packing out, landing in, or closing out the old place." },
+  { id: "resale",      label: "Items to sell or consign",         desc: "Clothing, furniture, vintage — I handle the platforms." },
+  { id: "legacy",      label: "Catalog what's in the home",       desc: "What's accumulated and what should stay, go, or be documented." },
+  { id: "call",        label: "Not sure — let's schedule a call", desc: "Send your info and I'll reach out to figure it out with you." },
 ];
 
 type QuestionType = {
@@ -32,7 +33,7 @@ type QuestionType = {
   optional?: boolean;
 };
 
-const QUESTIONS: Record<IntentType, QuestionType[]> = {
+const QUESTIONS: Partial<Record<IntentType, QuestionType[]>> = {
   homeorg: [
     {
       key: "space",
@@ -51,12 +52,7 @@ const QUESTIONS: Record<IntentType, QuestionType[]> = {
         "Ongoing friction I can't seem to get ahead of",
       ],
     },
-    {
-      key: "timeline",
-      label: "Timeline?",
-      type: "radio",
-      options: ["This week", "Within the next month", "Flexible"],
-    },
+    { key: "timeline", label: "Timeline?", type: "radio", options: ["This week", "Within the next month", "Flexible"] },
   ],
   move: [
     {
@@ -92,12 +88,7 @@ const QUESTIONS: Record<IntentType, QuestionType[]> = {
         "I'll explain in notes",
       ],
     },
-    {
-      key: "frequency",
-      label: "One-time or ongoing?",
-      type: "radio",
-      options: ["One time", "Looking for regular support"],
-    },
+    { key: "frequency", label: "One-time or ongoing?", type: "radio", options: ["One time", "Looking for regular support"] },
   ],
   resale: [
     {
@@ -106,26 +97,11 @@ const QUESTIONS: Record<IntentType, QuestionType[]> = {
       type: "checkbox",
       options: ["Clothing & accessories", "Designer pieces", "Jewelry", "Furniture", "Home décor or art", "Vintage", "Mixed or not sure"],
     },
-    {
-      key: "volume",
-      label: "Roughly how much?",
-      type: "radio",
-      options: ["1–2 bags or boxes", "3–5 bags or boxes", "More than 5, or large pieces"],
-    },
-    {
-      key: "handoff",
-      label: "How would handoff work?",
-      type: "radio",
-      options: ["City pickup — come to me", "I'll ship it", "I can drop it off"],
-    },
+    { key: "volume", label: "Roughly how much?", type: "radio", options: ["1–2 bags or boxes", "3–5 bags or boxes", "More than 5, or large pieces"] },
+    { key: "handoff", label: "How would handoff work?", type: "radio", options: ["City pickup — come to me", "I'll ship it", "I can drop it off"] },
   ],
   legacy: [
-    {
-      key: "scope",
-      label: "What's the scope?",
-      type: "radio",
-      options: ["A single room or storage unit", "Multiple rooms", "The whole home"],
-    },
+    { key: "scope", label: "What's the scope?", type: "radio", options: ["A single room or storage unit", "Multiple rooms", "The whole home"] },
     {
       key: "situation",
       label: "What's the situation?",
@@ -138,31 +114,11 @@ const QUESTIONS: Record<IntentType, QuestionType[]> = {
       ],
     },
   ],
-  quick4x5: [
-    {
-      key: "focus",
-      label: "What's the focus?",
-      type: "textarea",
-      placeholder: "One room, one task list, one event prep — whatever needs the block.",
-      optional: true,
-    },
+  "four-x-five": [
+    { key: "focus", label: "What's the focus?", type: "textarea", placeholder: "One room, one task list, one event prep — whatever needs the block.", optional: true },
   ],
-  quick2x3: [
-    {
-      key: "focus",
-      label: "What needs to happen?",
-      type: "textarea",
-      placeholder: "Donation bags, tech setup, vendor access, practical overflow — just describe it.",
-      optional: true,
-    },
-  ],
-  general: [
-    {
-      key: "general_note",
-      label: "What's going on?",
-      type: "textarea",
-      placeholder: "A few sentences is enough. What changed, what's actually happening?",
-    },
+  "house-call": [
+    { key: "focus", label: "What needs to happen?", type: "textarea", placeholder: "Donation bags, tech setup, vendor access, practical overflow — just describe it.", optional: true },
   ],
 };
 
@@ -170,10 +126,10 @@ function getInitialIntent(search: string): IntentType | null {
   const p = new URLSearchParams(search);
   const offer = p.get("offer");
   const service = p.get("service");
-  if (offer === "4hour")     return "quick4x5";
+  if (offer === "4hour")     return "four-x-five";
   if (offer === "pickup")    return "resale";
   if (offer === "closeout")  return "move";
-  if (offer === "housecall") return "quick2x3";
+  if (offer === "housecall") return "house-call";
   if (service === "home-org")     return "homeorg";
   if (service === "legacy")       return "legacy";
   if (service === "house-calls")  return "housecalls";
@@ -182,11 +138,7 @@ function getInitialIntent(search: string): IntentType | null {
 }
 
 function QuestionCard({
-  question,
-  answer,
-  onCheck,
-  onRadio,
-  onText,
+  question, answer, onCheck, onRadio, onText,
 }: {
   question: QuestionType;
   answer: string | string[] | undefined;
@@ -196,49 +148,32 @@ function QuestionCard({
 }) {
   const checked = (val: string) => ((answer as string[] | undefined) ?? []).includes(val);
   const radioVal = (answer as string | undefined) ?? "";
-
   return (
     <div>
       <div className="form-label" style={{ marginBottom: "16px", fontSize: "13px" }}>
         {question.label}
-        {question.optional && (
-          <span style={{ fontWeight: 400, color: "var(--clay)", marginLeft: "6px" }}>(optional)</span>
-        )}
+        {question.optional && <span style={{ fontWeight: 400, color: "var(--clay)", marginLeft: "6px" }}>(optional)</span>}
       </div>
-
       {question.type === "checkbox" && question.options && (
         <div className="intake-check-group">
           {question.options.map((opt) => (
             <label key={opt} className="intake-check-item">
-              <input
-                type="checkbox"
-                value={opt}
-                checked={checked(opt)}
-                onChange={(e) => onCheck(opt, e.target.checked)}
-              />
+              <input type="checkbox" value={opt} checked={checked(opt)} onChange={(e) => onCheck(opt, e.target.checked)} />
               <span>{opt}</span>
             </label>
           ))}
         </div>
       )}
-
       {question.type === "radio" && question.options && (
         <div className="intake-check-group">
           {question.options.map((opt) => (
             <label key={opt} className="intake-check-item">
-              <input
-                type="radio"
-                name={question.key}
-                value={opt}
-                checked={radioVal === opt}
-                onChange={() => onRadio(opt)}
-              />
+              <input type="radio" name={question.key} value={opt} checked={radioVal === opt} onChange={() => onRadio(opt)} />
               <span>{opt}</span>
             </label>
           ))}
         </div>
       )}
-
       {question.type === "textarea" && (
         <textarea
           className="form-textarea"
@@ -256,13 +191,20 @@ export default function Contact() {
     title: "Get in Touch",
     description: "Tell me what you need. The first conversation is always just that — a conversation. Concierge home services in Los Angeles.",
   });
+
   const search = useSearch();
   const preIntent = getInitialIntent(search);
 
-  const [step, setStep] = useState<1 | 2 | 3>(preIntent ? 2 : 1);
+  const [clientType, setClientType] = useState<ClientType | null>(null);
+  const [returningEmail, setReturningEmail] = useState("");
+  const [returningLookup, setReturningLookup] = useState<"idle" | "checking" | "found" | "not-found">("idle");
+  const [returningName, setReturningName]   = useState("");
+
+  const [step, setStep]     = useState<0 | 1 | 2 | 3>(preIntent ? 1 : 0);
   const [intent, setIntent] = useState<IntentType | null>(preIntent);
-  const [subStep, setSubStep] = useState(0);
-  const [answers, setAnswers] = useState<Record<string, string | string[]>>({});
+  const [subStep, setSubStep]   = useState(0);
+  const [answers, setAnswers]   = useState<Record<string, string | string[]>>({});
+
   const [name, setName]         = useState("");
   const [email, setEmail]       = useState("");
   const [phone, setPhone]       = useState("");
@@ -270,15 +212,55 @@ export default function Contact() {
   const [bestTime, setBestTime] = useState("");
   const [status, setStatus]     = useState<"idle" | "sending" | "success" | "error">("idle");
 
+  function chooseClientType(type: ClientType) {
+    setClientType(type);
+    if (type === "new") {
+      setStep(1);
+    } else {
+      setStep(1);
+    }
+  }
+
+  async function handleReturningEmail() {
+    if (!returningEmail) return;
+    setReturningLookup("checking");
+    try {
+      const res = await fetch(`/api/clients/lookup?email=${encodeURIComponent(returningEmail)}`);
+      if (res.ok) {
+        const data = await res.json();
+        setReturningName(data.name ?? "");
+        setReturningLookup("found");
+        setEmail(returningEmail);
+        if (data.name) setName(data.name);
+      } else {
+        setReturningLookup("not-found");
+        setEmail(returningEmail);
+      }
+    } catch {
+      setReturningLookup("not-found");
+      setEmail(returningEmail);
+    }
+  }
+
   function selectIntent(id: IntentType) {
     setIntent(id);
     setAnswers({});
     setSubStep(0);
-    setStep(2);
+    if (id === "call") {
+      setStep(3);
+    } else {
+      const qs = QUESTIONS[id];
+      if (qs && qs.length > 0) {
+        setStep(2);
+      } else {
+        setStep(3);
+      }
+    }
   }
 
-  const currentQuestion = intent ? QUESTIONS[intent][subStep] : null;
-  const totalSubSteps    = intent ? QUESTIONS[intent].length : 1;
+  const questions        = intent ? (QUESTIONS[intent] ?? []) : [];
+  const currentQuestion  = questions[subStep] ?? null;
+  const totalSubSteps    = questions.length;
   const isLastSubStep    = subStep === totalSubSteps - 1;
 
   function onCheck(val: string, checked: boolean) {
@@ -289,97 +271,64 @@ export default function Contact() {
       return { ...prev, [key]: checked ? [...arr, val] : arr.filter((v) => v !== val) };
     });
   }
-  function onRadio(val: string) {
-    if (!currentQuestion) return;
-    setAnswers((prev) => ({ ...prev, [currentQuestion.key]: val }));
-  }
-  function onText(val: string) {
-    if (!currentQuestion) return;
-    setAnswers((prev) => ({ ...prev, [currentQuestion.key]: val }));
-  }
+  function onRadio(val: string)  { if (currentQuestion) setAnswers((p) => ({ ...p, [currentQuestion.key]: val })); }
+  function onText(val: string)   { if (currentQuestion) setAnswers((p) => ({ ...p, [currentQuestion.key]: val })); }
 
   function handleContinue() {
-    if (isLastSubStep) {
-      setStep(3);
-    } else {
-      setSubStep((s) => s + 1);
-    }
+    if (isLastSubStep) setStep(3);
+    else setSubStep((s) => s + 1);
   }
 
   function handleBack() {
-    if (step === 2) {
-      if (subStep > 0) {
-        setSubStep((s) => s - 1);
-      } else {
-        setStep(1);
-      }
+    if (step === 1) { setStep(0); setClientType(null); }
+    else if (step === 2) {
+      if (subStep > 0) setSubStep((s) => s - 1);
+      else setStep(1);
     } else if (step === 3) {
-      setStep(2);
+      if (intent === "call" || !QUESTIONS[intent!]?.length) setStep(1);
+      else setStep(2);
     }
   }
 
   const canContinue = () => {
     if (!currentQuestion) return true;
-    const q = currentQuestion;
-    const ans = answers[q.key];
-    if (q.optional) return true;
-    if (q.type === "checkbox") return (ans as string[] | undefined)?.length ?? 0 > 0;
-    if (q.type === "radio")    return typeof ans === "string" && ans.length > 0;
-    if (q.type === "textarea") return typeof ans === "string" && ans.trim().length > 0;
+    const ans = answers[currentQuestion.key];
+    if (currentQuestion.optional) return true;
+    if (currentQuestion.type === "checkbox") return (ans as string[] | undefined)?.length ?? 0 > 0;
+    if (currentQuestion.type === "radio")    return typeof ans === "string" && ans.length > 0;
+    if (currentQuestion.type === "textarea") return typeof ans === "string" && ans.trim().length > 0;
     return true;
   };
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setStatus("sending");
-
-    const payload = {
-      serviceType: intent ?? "general",
-      answers,
-      name,
-      email,
-      phone: phone || undefined,
-      realLife: realLife || undefined,
-      bestTime: bestTime || undefined,
-    };
-
+    const fd = new FormData();
+    fd.append("_subject", `${clientType === "returning" ? "[Returning] " : ""}New Intake — ${intent ?? "general"} — ${name}`);
+    fd.append("name", name);
+    fd.append("email", email);
+    fd.append("clientType", clientType ?? "new");
+    if (phone)    fd.append("phone", phone);
+    fd.append("service", intent ?? "general");
+    fd.append("answers", JSON.stringify(answers));
+    if (realLife) fd.append("realLife", realLife);
+    if (bestTime) fd.append("bestTime", bestTime);
     try {
-      // Formspree is the system of record. The /api/intake POST is a best-effort
-      // mirror only — its result never blocks success.
-      const fd = new FormData();
-      fd.append("_subject", `New Intake — ${intent ?? "general"} — ${name}`);
-      fd.append("name", name);
-      fd.append("email", email);
-      if (phone) fd.append("phone", phone);
-      fd.append("service", intent ?? "general");
-      fd.append("answers", JSON.stringify(answers));
-      if (realLife) fd.append("realLife", realLife);
-      if (bestTime) fd.append("bestTime", bestTime);
-
       const [formspreeRes] = await Promise.allSettled([
-        fetch("https://formspree.io/f/xreojkvo", {
-          method: "POST",
-          body: fd,
-          headers: { Accept: "application/json" },
-        }),
+        fetch("https://formspree.io/f/xreojkvo", { method: "POST", body: fd, headers: { Accept: "application/json" } }),
         fetch("/api/intake", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
+          body: JSON.stringify({ serviceType: intent ?? "general", answers, name, email, clientType, phone: phone || undefined, realLife: realLife || undefined, bestTime: bestTime || undefined }),
         }).catch(() => null),
       ]);
-
-      const ok =
-        formspreeRes.status === "fulfilled" &&
-        (formspreeRes.value as Response).ok;
+      const ok = formspreeRes.status === "fulfilled" && (formspreeRes.value as Response).ok;
       setStatus(ok ? "success" : "error");
-    } catch {
-      setStatus("error");
-    }
+    } catch { setStatus("error"); }
   }
 
   const intentLabel = INTENTS.find((i) => i.id === intent)?.label ?? "";
-  const totalSteps  = 3;
+  const isCallPath  = intent === "call";
 
   return (
     <div className="page">
@@ -390,7 +339,7 @@ export default function Contact() {
             Get in Touch
           </h1>
           <p style={{ fontSize: "16px", color: "var(--stone)", lineHeight: 1.75, maxWidth: "520px" }}>
-            Tell me what you need. You do not need to have it figured out. Start with what is true right now and I will take it from there.
+            Tell me what you need. You do not need to have it figured out. Start with what is true right now and I'll take it from there.
           </p>
           <p style={{ fontSize: "13px", color: "var(--clay)", marginTop: "8px", fontStyle: "italic" }}>
             The first conversation is always just that — a conversation.
@@ -408,34 +357,105 @@ export default function Contact() {
                 <div style={{ padding: "40px", background: "var(--warm)", border: "1px solid var(--linen)" }}>
                   <p style={{ fontSize: "18px", color: "var(--char)", fontWeight: 700, marginBottom: "8px" }}>Got it.</p>
                   <p style={{ fontSize: "14px", color: "var(--stone)", lineHeight: 1.7 }}>
-                    I'll be in touch within 24 hours. Text for anything urgent:{" "}
-                    <a href="tel:3234331350" style={{ color: "var(--rust)" }}>(323) 433-1350</a>.
+                    {isCallPath
+                      ? "I'll reach out to schedule a call — usually within a few hours."
+                      : "I'll be in touch within 24 hours. Text for anything urgent: "}
+                    {!isCallPath && <a href="tel:3234331350" style={{ color: "var(--rust)" }}>(323) 433-1350</a>}
+                    {!isCallPath && "."}
                   </p>
                 </div>
               ) : (
                 <>
-                  {/* Step indicator — only show after intent is chosen */}
-                  {step > 1 && (
-                    <div className="intake-progress" style={{ marginBottom: "32px" }}>
-                      {[1, 2, 3].map((s, i) => (
-                        <>
-                          <span key={s} className={step >= s ? "active" : ""}>{s}</span>
-                          {i < 2 && <span key={`line-${s}`} className="intake-progress-line" />}
-                        </>
-                      ))}
+                  {/* STEP 0 — New or Returning */}
+                  {step === 0 && (
+                    <div>
+                      <div className="form-label" style={{ marginBottom: "24px", fontSize: "15px" }}>
+                        Have we worked together before?
+                      </div>
+                      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
+                        <button
+                          type="button"
+                          className="intake-intent-card"
+                          style={{ textAlign: "left" }}
+                          onClick={() => chooseClientType("new")}
+                        >
+                          <span className="intake-intent-label">New here</span>
+                          <span className="intake-intent-desc">First time reaching out.</span>
+                        </button>
+                        <button
+                          type="button"
+                          className="intake-intent-card"
+                          style={{ textAlign: "left" }}
+                          onClick={() => chooseClientType("returning")}
+                        >
+                          <span className="intake-intent-label">We've worked together</span>
+                          <span className="intake-intent-desc">I'm a returning client.</span>
+                        </button>
+                      </div>
+
+                      {/* Returning email lookup */}
+                      {clientType === "returning" && returningLookup === "idle" && (
+                        <div style={{ marginTop: "28px" }}>
+                          <div className="form-field">
+                            <label className="form-label" htmlFor="ret-email">Your email</label>
+                            <input
+                              className="form-input"
+                              type="email"
+                              id="ret-email"
+                              placeholder="your@email.com"
+                              value={returningEmail}
+                              onChange={(e) => setReturningEmail(e.target.value)}
+                              onKeyDown={(e) => e.key === "Enter" && handleReturningEmail()}
+                            />
+                          </div>
+                          <button
+                            type="button"
+                            className="btn btn-dark"
+                            style={{ marginTop: "12px" }}
+                            onClick={handleReturningEmail}
+                            disabled={!returningEmail}
+                          >
+                            Continue →
+                          </button>
+                        </div>
+                      )}
+
+                      {clientType === "returning" && returningLookup === "checking" && (
+                        <p style={{ marginTop: "20px", fontSize: "13px", color: "var(--clay)" }}>Looking you up…</p>
+                      )}
+
+                      {clientType === "returning" && (returningLookup === "found" || returningLookup === "not-found") && (
+                        <div style={{ marginTop: "20px" }}>
+                          {returningLookup === "found" && returningName ? (
+                            <p style={{ fontSize: "14px", color: "var(--char)", marginBottom: "16px" }}>
+                              Welcome back, {returningName}. What do you need this time?
+                            </p>
+                          ) : (
+                            <p style={{ fontSize: "14px", color: "var(--stone)", marginBottom: "16px" }}>
+                              Good to have you back. What brings you in?
+                            </p>
+                          )}
+                          <button type="button" className="btn btn-dark" onClick={() => setStep(1)}>
+                            Continue →
+                          </button>
+                        </div>
+                      )}
                     </div>
                   )}
 
                   {/* STEP 1 — Intent */}
                   {step === 1 && (
                     <div>
-                      <div className="form-label" style={{ marginBottom: "20px" }}>What brings you here?</div>
+                      <div style={{ marginBottom: "20px", display: "flex", alignItems: "center", gap: "12px" }}>
+                        <button type="button" className="intake-back" onClick={handleBack}>← Back</button>
+                      </div>
+                      <div className="form-label" style={{ marginBottom: "20px" }}>What are you working on?</div>
                       <div className="intake-intent-grid">
                         {INTENTS.map(({ id, label, desc }) => (
                           <button
                             key={id}
                             type="button"
-                            className={`intake-intent-card${intent === id ? " selected" : ""}`}
+                            className={`intake-intent-card${intent === id ? " selected" : ""}${id === "call" ? " intake-intent-card-muted" : ""}`}
                             onClick={() => selectIntent(id)}
                           >
                             <span className="intake-intent-label">{label}</span>
@@ -446,7 +466,7 @@ export default function Contact() {
                     </div>
                   )}
 
-                  {/* STEP 2 — One question at a time */}
+                  {/* STEP 2 — Questions */}
                   {step === 2 && intent && currentQuestion && (
                     <div>
                       <div style={{ marginBottom: "28px", display: "flex", alignItems: "center", gap: "12px" }}>
@@ -455,7 +475,6 @@ export default function Contact() {
                           {intentLabel} · {subStep + 1} of {totalSubSteps}
                         </span>
                       </div>
-
                       <QuestionCard
                         question={currentQuestion}
                         answer={answers[currentQuestion.key]}
@@ -463,7 +482,6 @@ export default function Contact() {
                         onRadio={onRadio}
                         onText={onText}
                       />
-
                       <button
                         type="button"
                         className="btn btn-dark"
@@ -481,71 +499,57 @@ export default function Contact() {
                     <form onSubmit={handleSubmit}>
                       <div style={{ marginBottom: "28px", display: "flex", alignItems: "center", gap: "12px" }}>
                         <button type="button" className="intake-back" onClick={handleBack}>← Back</button>
-                        <span style={{ fontSize: "12px", color: "var(--clay)" }}>{intentLabel}</span>
+                        {intentLabel && <span style={{ fontSize: "12px", color: "var(--clay)" }}>{intentLabel}</span>}
                       </div>
+
+                      {isCallPath && (
+                        <p style={{ fontSize: "14px", color: "var(--stone)", lineHeight: 1.7, marginBottom: "24px", padding: "20px", background: "var(--warm)", border: "1px solid var(--linen)" }}>
+                          Leave your info and I'll reach out to find a time. No prep needed — just a quick call to figure out what makes sense.
+                        </p>
+                      )}
 
                       <div className="form-field">
                         <label className="form-label" htmlFor="fullName">Your name</label>
-                        <input
-                          className="form-input" type="text" id="fullName" required
-                          placeholder="First and last name"
-                          value={name} onChange={(e) => setName(e.target.value)}
-                        />
+                        <input className="form-input" type="text" id="fullName" required placeholder="First and last name" value={name} onChange={(e) => setName(e.target.value)} />
                       </div>
 
                       <div className="form-field">
                         <label className="form-label" htmlFor="email">Email</label>
-                        <input
-                          className="form-input" type="email" id="email" required
-                          placeholder="your@email.com"
-                          value={email} onChange={(e) => setEmail(e.target.value)}
-                        />
+                        <input className="form-input" type="email" id="email" required placeholder="your@email.com" value={email} onChange={(e) => setEmail(e.target.value)} />
                       </div>
 
                       <div className="form-field">
                         <label className="form-label" htmlFor="phone">
                           Phone <span style={{ fontWeight: 400, color: "var(--clay)" }}>(optional)</span>
                         </label>
-                        <input
-                          className="form-input" type="tel" id="phone"
-                          placeholder="(000) 000-0000"
-                          value={phone} onChange={(e) => setPhone(e.target.value)}
-                        />
+                        <input className="form-input" type="tel" id="phone" placeholder="(000) 000-0000" value={phone} onChange={(e) => setPhone(e.target.value)} />
                       </div>
 
-                      <div className="form-field">
-                        <label className="form-label" htmlFor="realLife">
-                          Anything else I should know? <span style={{ fontWeight: 400, color: "var(--clay)" }}>(optional)</span>
-                        </label>
-                        <textarea
-                          className="form-textarea" id="realLife"
-                          placeholder="Two sentences is enough. What changed, what's actually happening?"
-                          value={realLife} onChange={(e) => setRealLife(e.target.value)}
-                        />
-                      </div>
+                      {!isCallPath && (
+                        <div className="form-field">
+                          <label className="form-label" htmlFor="realLife">
+                            Anything else I should know? <span style={{ fontWeight: 400, color: "var(--clay)" }}>(optional)</span>
+                          </label>
+                          <textarea className="form-textarea" id="realLife" placeholder="Two sentences is enough. What changed, what's actually happening?" value={realLife} onChange={(e) => setRealLife(e.target.value)} />
+                        </div>
+                      )}
 
                       <div className="form-field">
                         <label className="form-label" htmlFor="bestTime">
                           Best time to reach you <span style={{ fontWeight: 400, color: "var(--clay)" }}>(optional)</span>
                         </label>
-                        <input
-                          className="form-input" type="text" id="bestTime"
-                          placeholder="e.g. weekday mornings, anytime by email"
-                          value={bestTime} onChange={(e) => setBestTime(e.target.value)}
-                        />
+                        <input className="form-input" type="text" id="bestTime" placeholder="e.g. weekday mornings, anytime by email" value={bestTime} onChange={(e) => setBestTime(e.target.value)} />
                       </div>
 
                       <button type="submit" className="form-submit" disabled={status === "sending"}>
-                        {status === "sending" ? "Sending..." : "Send"}
+                        {status === "sending" ? "Sending…" : isCallPath ? "Request a Call" : "Send"}
                       </button>
 
                       {status === "error" && (
                         <div style={{ marginTop: "16px", padding: "20px", background: "var(--warm)", border: "1px solid var(--linen)" }}>
                           <p style={{ fontSize: "13px", color: "var(--char)" }}>
-                            Something went wrong. Please email{" "}
-                            <a href="mailto:dayna@thewelllivedcitizen.com" style={{ color: "var(--rust)", fontWeight: 600 }}>
-                              dayna@thewelllivedcitizen.com
-                            </a>{" "}
+                            Something went wrong. Email{" "}
+                            <a href="mailto:dayna@thewelllivedcitizen.com" style={{ color: "var(--rust)", fontWeight: 600 }}>dayna@thewelllivedcitizen.com</a>{" "}
                             directly.
                           </p>
                         </div>
@@ -560,7 +564,7 @@ export default function Contact() {
             <div style={{ position: "sticky", top: "calc(var(--nav-h) + 16px)" }}>
               <div style={{ padding: "32px", background: "var(--warm)", border: "1px solid var(--linen)", marginBottom: "16px" }}>
                 <div style={{ fontSize: "11px", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--rust)", marginBottom: "16px" }}>Direct Contact</div>
-                <div style={{ fontSize: "13px", color: "var(--stone)", lineHeight: 1.6, marginBottom: "10px" }}>The fastest way to reach me is the form on this page.</div>
+                <div style={{ fontSize: "13px", color: "var(--stone)", lineHeight: 1.6, marginBottom: "10px" }}>The fastest way is the form on this page.</div>
                 <a href="mailto:dayna@thewelllivedcitizen.com" style={{ fontSize: "13px", color: "var(--rust)", display: "block", marginBottom: "16px" }}>dayna@thewelllivedcitizen.com</a>
                 <div className="contact-social">
                   <a href="https://instagram.com/thewelllivedcitizen" target="_blank" rel="noopener" aria-label="Instagram">
@@ -577,16 +581,12 @@ export default function Contact() {
               </div>
               <div style={{ padding: "24px", background: "var(--warm)", border: "1px solid var(--linen)", marginBottom: "16px" }}>
                 <div style={{ fontSize: "11px", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--rust)", marginBottom: "12px" }}>Payment</div>
-                <p style={{ fontSize: "12px", color: "var(--stone)", lineHeight: 1.6, marginBottom: "6px" }}>Zelle via email below.</p>
-                <a href="mailto:dayna@thewelllivedcitizen.com" style={{ fontSize: "12px", color: "var(--rust)", display: "block" }}>dayna@thewelllivedcitizen.com</a>
-              </div>
-              <div style={{ padding: "24px", background: "var(--warm)", border: "1px solid var(--linen)" }}>
-                <div style={{ fontSize: "11px", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--rust)", marginBottom: "12px" }}>Service Area</div>
-                <p style={{ fontSize: "13px", color: "var(--stone)", lineHeight: 1.7 }}>Los Angeles and surrounding areas.</p>
-                <div style={{ marginTop: "16px", fontSize: "11px", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--rust)", marginBottom: "8px" }}>Response Time</div>
-                <p style={{ fontSize: "13px", color: "var(--stone)" }}>Within 24 hours. Text for urgent requests.</p>
+                <div style={{ fontSize: "13px", color: "var(--stone)", lineHeight: 1.6 }}>
+                  Zelle accepted at dayna@thewelllivedcitizen.com. Payment discussed after scope is confirmed.
+                </div>
               </div>
             </div>
+
           </div>
         </div>
       </section>
