@@ -105,7 +105,8 @@ export default function HouseCalls() {
               <tr><td>Continuity Retainer</td><td>$500/mo</td></tr>
             </tbody>
           </table>
-          <p style={{ fontSize: "12px", color: "var(--sand)", marginTop: "8px", marginBottom: "48px" }}>No membership. No subscription. Ease comes from relationship, not a forced plan.</p>
+          <p style={{ fontSize: "12px", color: "var(--sand)", marginTop: "8px" }}>No membership. No subscription. Ease comes from relationship, not a forced plan. Retainer includes priority scheduling and dedicated continuity across sessions.</p>
+          <p style={{ fontSize: "12px", color: "var(--sand)", marginTop: "8px", marginBottom: "48px" }}>Tech setup, troubleshooting, and bulk donation routing all fit inside a House Call — usually a 2x3 if it's contained, or a 4x5 if it's stacked with other practical loose ends.</p>
 
           <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
             <Link href="/contact?offer=housecall" className="btn btn-dark">Book a 2x3</Link>
