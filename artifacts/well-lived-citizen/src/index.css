@@ -14,7 +14,7 @@
 .conversion-price-dark{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--clay);margin-bottom:12px}
 .conversion-title{font-size:clamp(18px,2vw,22px);font-weight:700;color:var(--cream);line-height:1.2;letter-spacing:-.01em;margin-bottom:20px}
 .conversion-title-dark{font-size:clamp(18px,2vw,22px);font-weight:700;color:var(--char);line-height:1.2;letter-spacing:-.01em;margin-bottom:20px}
-.conversion-block-primary .conversion-body,.conversion-block-rust .conversion-body,.conversion-block-dark .conversion-body{color:rgba(245,240,232,.78)}
+.conversion-block-primary .conversion-body,.conversion-block-dark .conversion-body{color:rgba(245,240,232,.78)}.conversion-block-rust .conversion-body{color:#F5F0E8}.conversion-block-rust .conversion-price{color:rgba(245,240,232,.9)}.conversion-block-rust .conversion-title{color:#fff}
 .conversion-body-dark{color:var(--stone)}
 .conversion-block-primary .conversion-body p,.conversion-block-rust .conversion-body p,.conversion-block-dark .conversion-body p,.conversion-body-dark p{margin-bottom:10px}
 .conversion-block-primary .conversion-body p:last-child,.conversion-block-rust .conversion-body p:last-child,.conversion-block-dark .conversion-body p:last-child,.conversion-body-dark p:last-child{margin-bottom:0}
