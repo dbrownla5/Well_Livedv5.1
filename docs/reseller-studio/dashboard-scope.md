@@ -114,14 +114,13 @@ Where each feature came from in the raw materials:
 
 These need a decision before, or at the start of, the build task. They are deliberately not answered here.
 
-1. **Where does the dashboard live?** Two options:
-   - Add a new artifact (e.g. `artifacts/reseller-studio`) that runs alongside `well-lived-citizen` and `api-server`.
-   - Add a `/dashboard` (or similar) section inside `artifacts/well-lived-citizen`.
-   The decision affects branding (client-facing brand vs. internal tool), auth boundary, and routing.
-2. **Auth model.** Internal ops only, but how — Replit Auth, Clerk, or a single shared login? Tied to question 1.
+Questions 1, 2, and 5 are **resolved** — see `dashboard-placement-decision.md` for the rationale. Summary of the resolutions is inlined below so this doc still reads end-to-end.
+
+1. **Where does the dashboard live?** **Resolved → new artifact `artifacts/reseller-studio`**, sibling of `well-lived-citizen` and `api-server`. Keeps the marketing site static and unauthed; isolates the internal tool's branding, auth, and deploy lifecycle. See `dashboard-placement-decision.md` §1.
+2. **Auth model.** **Resolved → Clerk** (email/password + Google), operator accounts only, no client-facing login in v1. Clerk Organizations covers the multi-operator-per-account requirement. Single shared login is explicitly disallowed (would destroy per-operator audit trail needed for payout reports). See `dashboard-placement-decision.md` §2.
 3. **Photo storage.** Object storage from day one (App Storage / S3-equivalent) vs. a temporary local cache. Affects how the AI call ingests images (URL vs. inline base64).
 4. **Gemini model + key.** The pipeline references `gemini-1.5-flash` and `gemini-3-flash-preview`. Need to pick the current production model and decide whether to use a Replit AI integration proxy (`ai-integrations-gemini`) vs. a user-supplied key.
-5. **Master-inventory persistence.** Postgres in the existing `api-server`, a new lib/schema, or a separate database per client? Tied to question 1.
+5. **Master-inventory persistence.** **Resolved → single Postgres database in the existing `api-server`**, schema in `lib/db` (or a new `@workspace/db-reseller` lib if it grows large), tenancy via `client_id` / `job_id` columns. Not a database-per-client. See `dashboard-placement-decision.md` §3.
 6. **Listing publish-out.** Does the dashboard generate descriptions only (operator copy-pastes into eBay/Poshmark/etc.), or does it integrate directly with each platform's API in v1? Default assumption: generate-only in v1.
 7. **Photo grouping at scale.** v2 relies on Gemini grouping multi-angle photos in a single batch. For 100+ items, do we keep batches small (per source folder) or design a server-side grouping pre-pass?
 8. **Client/household data sensitivity.** Estate clear-outs touch sensitive personal data. Decide retention policy and any encryption-at-rest requirements before storing client records.

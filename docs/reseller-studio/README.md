@@ -14,6 +14,7 @@ No application code, schemas, or UI live here yet — this is reference material
 | `competitors.md` | Human-readable summary of the competitor set, grouped by market segment (franchise, luxury/concierge, methodology specialists, boutique). |
 | `household-roles.md` | Reference on fractional/concierge/estate/lifestyle-manager roles, plus a mapping of each role to the reseller workflow. |
 | `dashboard-scope.md` | Agreed feature set for the future dashboard, end-user definition, source-mapping per feature, and the open question list. |
+| `dashboard-placement-decision.md` | Resolves open questions 1, 2, and 5 in `dashboard-scope.md`: artifact placement (new `artifacts/reseller-studio`), auth model (Clerk), and master-inventory persistence (single Postgres in `api-server`, namespaced by `client_id`). |
 | `prior-art-dashboard.md` | Inspection summary of the `Dashboard--main` zip — what's in it, what's reusable for the reseller build, and where its locked numbers conflict with Dayna's business plan. |
 
 ## Source files extracted
@@ -55,5 +56,9 @@ Updated by Task #4 (May 2026). "Inspected" means the file was opened, scanned fo
 ## What is NOT in this folder
 
 - Any UI, API, database schema, or AI integration code for the reseller dashboard.
-- Any decision about whether the dashboard will live as a new artifact or inside `artifacts/well-lived-citizen` — that is captured as an open question in `dashboard-scope.md`.
+- Any code, schema, or scaffolded artifact directory for the reseller dashboard. (The *decision* to create `artifacts/reseller-studio` as a new artifact is recorded in `dashboard-placement-decision.md`; actually creating the artifact is a future build task.)
 - Any modification to existing artifacts (`well-lived-citizen`, `api-server`, `mockup-sandbox`).
+
+## Decision status
+
+The three architecture decisions that were blocking the dashboard build (artifact placement, auth model, master-inventory persistence) are now **resolved** in `dashboard-placement-decision.md`. Summary: new `artifacts/reseller-studio` artifact, Clerk auth (operator accounts only), single Postgres in the existing `api-server` namespaced by `client_id`. The remaining open questions in `dashboard-scope.md` (Q3, Q4, Q6–Q10) are intentionally still open and will be answered at or before the build task.
