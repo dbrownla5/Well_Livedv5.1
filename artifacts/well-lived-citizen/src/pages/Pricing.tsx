@@ -29,7 +29,7 @@ export default function Pricing() {
                 </tr>
                 <tr>
                   <td style={{ color: "var(--cream)", fontWeight: 600 }}>2-Hour House Call</td>
-                  <td style={{ color: "var(--cream)" }}>$300 flat · fixed price, book directly</td>
+                  <td style={{ color: "var(--cream)" }}>$350 flat · fixed price, book directly</td>
                 </tr>
               </tbody>
             </table>
@@ -79,7 +79,7 @@ export default function Pricing() {
             <div className="label">03 — House Calls</div>
             <table className="pricing-table">
               <tbody>
-                <tr><td>2-Hour House Call</td><td>$300 flat</td></tr>
+                <tr><td>2-Hour House Call</td><td>$350 flat</td></tr>
                 <tr><td>Hourly</td><td>$175/hr · 2 hr minimum</td></tr>
                 <tr><td>4-Hour Practical Reset</td><td>$500 flat</td></tr>
                 <tr><td>Continuity Retainer</td><td>$500/mo — ongoing access for recurring support</td></tr>

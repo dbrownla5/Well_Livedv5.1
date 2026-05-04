@@ -33,8 +33,7 @@ export default function Home() {
         <div className="container hero-content bg-[#f5f5f5b5]" style={{ maxWidth: "820px" }}>
           <div className="label fade-up fade-up-1">Los Angeles</div>
           <h1 className="hero-h1 fade-up fade-up-2">
-            When <em
-            className="text-[#403737f2] border-t-[#4a4848] border-r-[#4a4848] border-b-[#4a4848] border-l-[#4a4848]">"there has to be an easier way"</em> becomes a business.
+            When <em>"there has to be an easier way"</em> becomes a business.
           </h1>
           <p className="hero-sub fade-up fade-up-2">
             Welcome to the concierge for the things you don't want to handle.
@@ -110,7 +109,7 @@ export default function Home() {
             <div className="service-num">03 — House Calls</div>
             <div className="service-title">For the things life leaves unfinished.</div>
             <div className="service-body">
-              <p>That's the thing friends used to do. The thing neighbors don't always have time for anymore. The thing adult children need when they're in another city. Once I know how your home works, it becomes easy for me to help keep it working — home check-ins, tech setup, donation drop-offs, and the practical loose ends that make everyday life easier when someone trusted is paying attention.</p>
+              <p>That's the thing friends used to do. The thing neighbors don't always exist for anymore. The thing adult children need when they're in another city. Once I know how your home works, it becomes easy for me to help keep it working — home check-ins, tech setup, donation drop-offs, and the practical loose ends that make everyday life easier when someone trusted is paying attention.</p>
             </div>
             <div className="service-pricing">$175/hr · 2 hr minimum</div>
             <div className="service-flex-note">Continuity retainer available. Details on the <Link href="/pricing" style={{ color: "var(--rust)" }}>Pricing page</Link>.</div>

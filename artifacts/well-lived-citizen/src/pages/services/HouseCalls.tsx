@@ -99,7 +99,7 @@ export default function HouseCalls() {
           <h2 style={{ fontSize: "18px", fontWeight: 700, color: "var(--char)", margin: "0 0 20px" }}>Pricing</h2>
           <table className="pricing-table">
             <tbody>
-              <tr><td>2-Hour House Call</td><td>$300 flat</td></tr>
+              <tr><td>2-Hour House Call</td><td>$350 flat</td></tr>
               <tr><td>4-Hour Practical Reset</td><td>$500 flat</td></tr>
               <tr><td>Hourly (beyond a flat block)</td><td>$175/hr · 2 hr minimum</td></tr>
               <tr><td>Continuity Retainer</td><td>$500/mo</td></tr>

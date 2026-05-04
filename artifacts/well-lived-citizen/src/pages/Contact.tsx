@@ -16,7 +16,7 @@ type IntentType =
 
 const INTENTS: { id: IntentType; label: string; desc: string }[] = [
   { id: "four-x-five", label: "4-Hour Practical Reset — $500 flat", desc: "The room, the task list, the move landing. Four hours. I find the friction and make it move." },
-  { id: "house-call",  label: "2-Hour House Call — $300 flat",      desc: "Tech, errands, vendors, practical overflow. Book this week." },
+  { id: "house-call",  label: "2-Hour House Call — $350 flat",      desc: "Tech, errands, vendors, practical overflow. Book this week." },
   { id: "homeorg",     label: "A room, space, or closet",         desc: "Organization, systems, or a reset — home made to work." },
   { id: "move",        label: "A move — or what it left behind",  desc: "Packing out, landing in, or closing out the old place." },
   { id: "resale",      label: "Items to sell or consign",         desc: "Clothing, furniture, vintage — I handle the platforms." },
