@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <div className="page">
       {/* HERO */}
-      <section className="hero">
+      <section className="hero hero-with-image">
         <div className="container" style={{ maxWidth: "820px" }}>
           <div className="label fade-up fade-up-1">Los Angeles</div>
           <h1 className="hero-h1 fade-up fade-up-2">

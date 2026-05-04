@@ -46,6 +46,9 @@
 .intake-check-item input{accent-color:var(--rust);flex-shrink:0;width:15px;height:15px}
 .intake-check-item span{flex:1}
 
+/* ── Hero with image ───────────────────────────────────────────────────── */
+.hero-with-image{position:relative;background-image:linear-gradient(to bottom,rgba(245,240,232,.82) 0%,rgba(245,240,232,.72) 60%,rgba(245,240,232,.92) 100%),url("/images/hero-bg.png");background-attachment:fixed,fixed;background-size:cover,cover;background-position:center,center;background-repeat:no-repeat,no-repeat;animation:heroBgFade 1.2s ease-out both}@keyframes heroBgFade{from{opacity:0}to{opacity:1}}
+
 /* Dark pricing table variant */
 .pricing-table-dark td{border-bottom-color:rgba(245,240,232,.1)}
 .pricing-table-dark td:first-child{color:var(--sand)}
