@@ -1,0 +1,55 @@
+This is exactly the right move. These documents are incredibly clarifying. Let me read more of the full copy file because that's where the real comparison lives.
+
+
+Show less
+
+Opened attached_assets/full-copy-final_1777857506760.pdf
+
+Opened artifacts/well-lived-citizen/src/pages/services/HouseCalls.tsx
+
+Planning direct analysis presentation (27 seconds)
+I have enough now to give you a clear, honest read. Let me lay out exactly what I see.
+
+The core problem, plainly:
+
+We were protecting the wrong thing. The "canonical" reference we locked everything to was itself already a filtered version of your writing. Then we built a voice guide on top of that filter with a list of rules — and the rules were aimed at stopping AI drift, but they ended up restricting things that were authentically yours.
+
+Two layers of filtering, compounding. The current site sounds like a careful interpretation of Dayna. It doesn't sound like Dayna.
+
+Specific things your real documents have that the current site doesn't:
+
+About page — the most dramatic loss. Your actual published About had:
+
+The childhood memory: sitting on the floor with records spread around you, Lionel Richie, Billy Joel, Aerosmith, feeling like the lyrics were telling stories so personal you wanted to know the people behind them
+Steven Tyler's scarves — standing in Seattle, looking through museum glass, feeling that same truth: "the profound human residue objects can hold"
+Stevie Nicks pulling her capes from decades-old performances back onto the stage — "She said she had not seen some of them since the original songs were recorded, and that wearing them changed her for those few minutes. I watched memory alter the way she moved"
+Gayle — not just a testimonial, but a full passage: 84 years old, after hip surgery, the woman across the hall who became a close friend. People drawn to make her life easier not because she demanded it, but because of something in her presence. "Everyone deserves to have that person." That passage is the emotional center of why this business exists — and it's gone from the current site
+House Calls — voice stripped of its urgency. Your own published page opened with "2-hour House Call — $350. Book this week." The voice guide we built later called that urgency language and banned it. But it was yours. The PDF also had the full "who this is for" list — newly divorced, recently widowed, first time living alone, partner travels constantly — in your exact language. The current page has a rewritten version of that list.
+
+Hero CTAs — removed based on a misread rule. Your actual published homepage had "SEE THE WORK | GET IN TOUCH" directly under the hero. We removed both because a voice rule said no CTAs under the hero. That rule was aimed at preventing generic "act now" buttons — not at removing your actual navigation choices.
+
+Offer naming. Your original was "4-Hour Practical Reset." The "The 4x5" / "The 2x3" naming came in later as an In-N-Out-inspired shorthand. The In-N-Out reference in the voice guide was meant to describe the tone — California-casual — not to literally rename the service. That may have drifted.
+
+What is actually working and should stay:
+
+The overall structure (hero → offers → service pillars → testimonial → contact) is solid
+The four service names as currently used (Home Organization & Modern Move, Legacy Planning, House Calls, Curated Resale) are fine — they're cleaner than earlier versions
+The Gayle testimonial block on the homepage is well placed
+The contact form multi-step intake is better than the original flat radio group
+SEO foundation, meta tags, sitemap — all good, keep it
+The pricing tables are honest and clear
+What I need from you to move forward:
+
+A few decisions before I touch anything:
+
+About page — Do you want the full original back (Steven Tyler, Stevie Nicks, Gayle full passage, childhood records)? Or a selective restore of just the parts that feel right now?
+
+Hero CTAs — Do you want "See the work" and "Get in Touch" back under the hero, or do you prefer rolling straight into the offer blocks?
+
+Offer naming — "The 4x5 / The 2x3" vs "4-Hour Practical Reset / 2-Hour House Call" — which feels more like you right now?
+
+House Calls page — Do you want to restore the "Book this week" energy, or keep the more measured current tone?
+
+Voice guide — Once we know what you want to restore, I'll rewrite the skill from the inside out — starting with your best writing, not with a list of things to avoid.
+
+You don't have to answer all of these at once. Start wherever it feels most wrong.
