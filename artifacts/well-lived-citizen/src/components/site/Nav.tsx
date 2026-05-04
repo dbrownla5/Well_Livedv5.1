@@ -4,10 +4,18 @@ import { Link, useLocation } from "wouter";
 export default function Nav() {
   const [isOpen, setIsOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const [location] = useLocation();
   const menuRef = useRef<HTMLDivElement>(null);
   const btnRef = useRef<HTMLButtonElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
@@ -36,7 +44,7 @@ export default function Nav() {
 
   return (
     <>
-      <nav>
+      <nav className={scrolled ? "nav-scrolled" : "nav-top"}>
         <div className="nav-inner">
           <Link href="/" className="nav-logo">
             <img src={`${import.meta.env.BASE_URL}images/logo-black.png`} alt="The Well Lived Citizen" />

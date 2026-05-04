@@ -32,11 +32,12 @@ export default function Home() {
 
             {/* Card 1 — The 4x5 */}
             <div className="conversion-block conversion-block-primary">
-              <div className="conversion-price">THE FOUR HOUR </div>
-              <div className="conversion-title">Call it a reset, an assist, a good start. It's a block that creates movement you can see - wherever you feel it.</div>
+              <div className="conversion-price">THE FOUR HOUR</div>
+              <div className="conversion-title">Call it a reset, an assist, a good start. It's a block that creates movement you can see — wherever you feel it.</div>
               <div className="conversion-body">
-                <p>This is my operational shorthand for making the heavy thing move. The room that keeps collecting piles. The boxes from a move that technically happened but never settled. The closet that no longer fits your life.</p>
+                <p>The room that keeps collecting piles. The move that technically happened but never settled. The closet that no longer fits your life.</p>
                 <p>No project scopes, no hourly counting. You point to the friction. I bring the momentum.</p>
+                <p>Four hours. Five hundred flat.</p>
               </div>
               <Link href="/contact?offer=4hour" className="btn btn-cream">Book a 4x5</Link>
             </div>
@@ -46,8 +47,9 @@ export default function Home() {
               <div className="conversion-price conversion-price-dark">Two hours. Three hundred flat.</div>
               <div className="conversion-title conversion-title-dark">The 2x3</div>
               <div className="conversion-body conversion-body-dark">
-                <p>The inside request for the things life leaves unfinished. The donation bags sitting by the front door. The vendor who needs letting in. The baby gear still stacked in the corner after the shower.</p>
-                <p>You used to have to call a friend for this. Now, you just book a 2x3.</p>
+                <p>Same joke. Two hours, three hundred dollars.</p>
+                <p>The donation bags by the front door. The vendor who needs letting in. The baby gear still in the corner three weeks after the shower. The thing you keep saying you'll get to.</p>
+                <p>You used to have someone you could call for this. Now you just book a 2x3.</p>
               </div>
               <Link href="/contact?offer=housecall" className="btn btn-dark">Book a 2x3</Link>
             </div>
