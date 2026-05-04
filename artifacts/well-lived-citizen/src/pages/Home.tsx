@@ -28,7 +28,7 @@ export default function Home() {
       {/* HERO */}
       <section ref={heroRef} className="hero hero-with-image">
         <div ref={overlayRef} className="hero-overlay" aria-hidden="true" />
-        <div className="container hero-content" style={{ maxWidth: "820px" }}>
+        <div className="container hero-content bg-[#f5f5f5b5]" style={{ maxWidth: "820px" }}>
           <div className="label fade-up fade-up-1">Los Angeles</div>
           <h1 className="hero-h1 fade-up fade-up-2">
             When <em
