@@ -1,0 +1,1060 @@
+{
+  "_meta": {
+    "version": "1.0",
+    "source": "full-copy-final.pdf \u2014 CHECKPOINT 5 (Apr 14 2026) + Legacy_Service_Detail.txt",
+    "locked_by": "Dayna Brown",
+    "do_not_modify_without_approval": true,
+    "notes": "This is the single source of truth for TheWellLivedCitizenCo.com. All AI tools must pull from this. No AI may rewrite, reframe, or add to this content without explicit approval from Dayna. Violations flagged in audit log below.",
+    "server_name": "welllivedcitizen-knowledge-base",
+    "abbreviation_note": "Do NOT use AWLC. The business is The Well Lived Citizen Co. Full name only."
+  },
+  "brand": {
+    "business_name": "The Well Lived Citizen Co.",
+    "dba_of": "Well Dressed Citizen LLC",
+    "url": "TheWellLivedCitizenCo.com",
+    "tagline_short": "Well Kept. Well Placed. Well Lived.",
+    "tagline_long": "Life is messy. It looks different for everyone. But it's always well lived. Every item is a story \u2014 and I know just how to unpack it.",
+    "founded": "EST. 2020",
+    "location": "Los Angeles, CA",
+    "phone_business": "(323) 433-1350",
+    "email": "dayna@thewelllivedcitizenco.com",
+    "operator": "Dayna Brown",
+    "footer_legal": "The Well Lived Citizen Co., a DBA of Well Dressed Citizen LLC",
+    "copyright": "\u00a9 2026 The Well Lived Citizen Co \u00b7 Los Angeles, CA",
+    "tagline_status": "RETIRED \u2014 internal reference only. Do NOT use on cards, marketing materials, or any client-facing copy."
+  },
+  "navigation": {
+    "pages": [
+      "Home",
+      "About",
+      "Services & Pricing",
+      "Contact"
+    ],
+    "service_routes": [
+      "/services/home-organization",
+      "/services/legacy",
+      "/services/house-calls",
+      "/services/resale"
+    ]
+  },
+  "pages": {
+    "home": {
+      "hero": {
+        "LOCKED_SOURCE": "Dayna's approved pre-override copy \u2014 confirmed Apr 14 2026",
+        "headline": "When \"there has to be an easier way\" becomes a business.",
+        "subhead": "Welcome to the concierge for the things you don't want to handle.",
+        "supporting_copy": "My daily flow already runs through shipping, logistics, tech fixes, resale, and real-world problem solving at scale. I move fast where things are solvable, and when life gets stuck, I know how to move it through. I'm built for your chaos.",
+        "cta_primary": "See the work",
+        "cta_secondary": "See All Services & Pricing"
+      },
+      "conversion_paths": [
+        {
+          "id": "practical_reset",
+          "label": "Ready to move on it?",
+          "body": "Book the 4-Hour Practical Reset for the room, task list, move landing, or household overflow that needs to stop catching immediately.",
+          "cta": "Book 4-Hour Reset"
+        },
+        {
+          "id": "resale_handoff",
+          "label": "Resale bag pickup.",
+          "body": "Moving, closet cleanout, post-breakup, wardrobe reset \u2014 fill 2 to 4 totes and get them to me same day. Same-day pickup or courier handoff available.",
+          "cta": "Schedule Pickup"
+        },
+        {
+          "id": "closeout",
+          "label": "Need to leave before everything is packed?",
+          "body": "You go to the new city, the family home, the furnished rental, or the next place first. I stay behind to pack and close out the space \u2014 move what should store, route what should sell, ship what you still need in labeled boxes.\n\nStart with a scoped project fee built from hourly work blocks. The move continues in flexible chunks without you carrying the urgency from the other end.",
+          "cta": "Book the closeout",
+          "cta_href": "/contact"
+        }
+      ],
+      "testimonial": {
+        "quote_excerpt": "there has to be an easier way",
+        "attribution": "Seattle Client",
+        "note": "Quote used in testimonial block \u2014 separate from hero headline usage above"
+      },
+      "service_cards": [
+        {
+          "num": "01",
+          "href": "/services/home-organization",
+          "title": "Home Organization & Modern Move",
+          "tagline": "The relief of the room.",
+          "body": "Your home, made to work for how you actually live.",
+          "prices": [
+            "$150/hr \u00b7 3 hr minimum"
+          ],
+          "cta": "Book a home org or move session"
+        },
+        {
+          "num": "02",
+          "href": "/services/legacy",
+          "title": "Legacy Planning & Inventory Catalog",
+          "tagline": "Clarity without fear.",
+          "body": "Not legal estate planning or estate sale services.",
+          "prices": [
+            "Single room or storage unit: $175/hr \u00b7 2hr min",
+            "Whole home: project pricing after walkthrough"
+          ],
+          "cta": "See how inventory and legacy support works \u2192"
+        },
+        {
+          "num": "03",
+          "href": "/services/house-calls",
+          "title": "House Calls",
+          "tagline": "For the things life leaves unfinished.",
+          "body": "That's the thing friends used to do. The thing neighbors don't always exist for anymore. The thing adult children need when they're in another city. Once I know how your home works, it becomes easy for me to help keep it working \u2014 home check-ins, tech setup, hands-on home improvements, donation drop-offs, and the practical loose ends that make everyday life easier when someone trusted is paying attention.",
+          "prices": [
+            "$175/hr \u00b7 2hr min"
+          ],
+          "cta": "Book practical help for your home \u2192"
+        },
+        {
+          "num": "04",
+          "href": "/services/resale",
+          "title": "Curated Resale & Consignment",
+          "tagline": "Is it cool? Is it sellable? Will they even take it?",
+          "body": "This is for clothing, designer bags, jewelry, and the pieces you know might still have value but do not want to spend hours platform-matching, measuring, negotiating, and managing yourself. With an established luxury and resale background, I go through it piece by piece, decide what is worth the effort, and match each item to the platform where it makes the most sense. Clean, non-sellable items can be responsibly donated as part of the process. You fill the waterproof bag, sign the agreement, and I handle the rest \u2014 pickup, styling, measurements, listing, buyer questions, returns, monthly check-ins, and payout on the agreed split.",
+          "prices": [
+            "Commission-based \u00b7 agreement included"
+          ],
+          "cta": "Schedule the handoff for resale \u2192"
+        }
+      ]
+    },
+    "services_overview": {
+      "LOCKED_SOURCE": "Dayna's approved homepage copy \u2014 confirmed Apr 14 2026",
+      "page_note": "Homepage overview only. Detail copy and extended context live on individual service pages.",
+      "block_structure": "blurb \u2192 hourly pricing \u2192 flex note (small print) \u2192 CTA button (subtle, outside block)",
+      "flex_note_standard": "Flex pricing and project quotes covered on our Pricing page.",
+      "closing": {
+        "not_sure": "Not sure where to start? Start anywhere.",
+        "subtext": "No pressure. The whole point is to make your life easier to navigate from here."
+      },
+      "testimonial": {
+        "quote": "I wake up and my clicker for all my lamps is on my bedside table. I get up and move it to the dresser by the door so every time I come back in I can turn any lamp from the doorway. My clothes are arranged by item and color, my purses on two long shelves and two short ones \u2014 I can see what I have and choose accordingly. My shoes are on four shelves where I can easily see them. The heat is set perfectly. The TV is set up with only one clicker to get to all the channels I want. Thank you for making life easier for me.",
+        "attribution": "Gayle Williams, Seattle Client"
+      },
+      "services": [
+        {
+          "num": "01",
+          "title": "Home Organization & Modern Move",
+          "tagline": "Your home, made to work for how you actually live.",
+          "blurb": [
+            "We cover the rooms and spaces. For the room that keeps collecting piles. The storage unit that keeps increasing rent and you only go every six months to ensure you weren't broken into or to take out that one outfit, or bike. The move where the boxes made it through the door, but nothing feels settled. The move where you had to leave before everything was fully packed, and someone still needs to close out what's left behind.",
+            "The professional landing in Los Angeles the same day as their boxes and the first day on the job \u2014 knowing you'll come home to a boxed mattress, no phone charger, and a suit that needs steaming. No energy, takeout food, or forks. It's the 'oh my gosh, someone save me' situation. But you're happy \u2014 life is starting a new chapter \u2014 you just have to move through the hurdles of that part.",
+            "The family move where packing a three-bedroom house with four kids is its own full operation. We are great with kids, but we are better with organizing and navigating the chaos of your things while you enjoy the memories in your home before you move to the next moments.",
+            "The closet that no longer fits your life, body, season, or the way you actually get dressed (morning or afternoon \u2014 no judgment). I come in, find the friction, and make the space work around how you naturally move through your day. I don't preach putting things in perfect spaces for the Instagram shot \u2014 we can do that for one or two, sure \u2014 but I am here for the grit of life and getting you from chaos to relief.",
+            "That can be done with you by my side, being an anxious backseat driver, or you saying, 'I'm going to the beach, here's the key. I have cameras.' Essentially, with or without you. The goal is a home that lands well and WORKS and keeps working after I leave."
+          ],
+          "pricing_display": "$150/hr \u00b7 3 hr minimum",
+          "flex_note": "Flex pricing and project quotes covered on our Pricing page.",
+          "cta": "Book your session",
+          "cta_href": "/services/home-organization"
+        },
+        {
+          "num": "02",
+          "title": "Legacy Planning & Inventory Catalog",
+          "tagline": "Clarity without fear.",
+          "blurb": [
+            "The lived-in layer of your home \u2014 the walls you spend your life within \u2014 needs clarity before it becomes a burden to you, your future self, your family, or the people you rely on. Most people are prepared for the things we're pressured to check off the list \u2014 good job, us. You may already have the estate planner, the will, and the paperwork.",
+            "My work is the home itself \u2014 identifying what's still in use, what still has value (often hidden in cabinets), and what needs a clear plan while you can still decide what matters. I help sort what stays in daily life, what should be documented (even the boring stuff!), what deserves appraisal, and what can move toward resale (now or later). I consider the market value cycle for each item, plan for future sales, identify who would handle it if not me, and distinguish between estate planner moves, donations, and heartfelt family hand-me-downs. When story matters, I document that too \u2014 so meaning isn't lost when objects change hands.",
+            "I am not a legal estate planner or estate sale service. I focus on the meaning behind the life in your objects and how to preserve that, giving everything more value to you now, your family later, and the people who want your things. You have meaningful things attached to you \u2014 let's share them."
+          ],
+          "pricing_display": "$175/hr \u00b7 2 hr minimum",
+          "flex_note": "Flex pricing and project quotes covered on our Pricing page.",
+          "cta": "Book your time",
+          "cta_href": "/services/legacy"
+        },
+        {
+          "num": "03",
+          "title": "House Calls",
+          "tagline": "For the things life leaves unfinished.",
+          "blurb": [
+            "Possibly my favorite service, and the spirit of this company.",
+            "That's the thing friends used to do. The thing neighbors don't always have time for anymore. The thing adult children need when they're in another city.",
+            "Once I know how your home works, it becomes easy for me to help keep it working \u2014 home check-ins, tech setup, hands-on home improvements, donation drop-offs, and the practical loose ends that make everyday life easier when someone trusted is paying attention."
+          ],
+          "detail_page_only": "Extended context, gap/efficiency framing, and service examples live on the House Calls detail page.",
+          "pricing_display": "$175/hr \u00b7 2 hr minimum",
+          "flex_note": "Flex pricing and project quotes covered on our Pricing page.",
+          "cta": "Book me",
+          "cta_href": "/services/house-calls"
+        },
+        {
+          "num": "04",
+          "title": "Curated Resale & Consignment",
+          "tagline": "Is it cool? Is it sellable? Will they even take it?",
+          "blurb": [
+            "This is for clothing, designer bags, jewelry, and the pieces you know might still have value but do not want to spend hours platform-matching, measuring, negotiating, and managing yourself. With an established luxury and resale background, I go through it piece by piece, decide what is worth the effort, and match each item to the platform where it makes the most sense. Clean, non-sellable items can be responsibly donated as part of the process.",
+            "You fill the waterproof bag, sign the agreement, and I handle the rest \u2014 pickup, styling, measurements, listing, buyer questions, returns, monthly check-ins, and payout on the agreed split."
+          ],
+          "pricing_display": "Commission-based \u00b7 agreement required",
+          "flex_note": "Commission structure and full terms covered on our Pricing page.",
+          "cta": "Schedule it",
+          "cta_href": "/services/resale"
+        }
+      ]
+    },
+    "about": {
+      "section_label": "Meet Dayna",
+      "bio_opening": "I have always been drawn to the life that lives inside people's most treasured possessions \u2014 the objects around which identity is formed, whether subtly or boldly.",
+      "bio_paragraphs": [
+        "A jacket is never just clothing when it carries the memory of the woman who wore it and the nights she spent wrapped in it beside the love of her life.",
+        "A record is never just vinyl when it still holds the rebellion, risk, and moment that brought it into the world \u2014 an era in which music helped bring authority to its knees.",
+        "A closed closet door is never simply storage when it still tells the story of a marriage, a career, a season of confidence, or the person someone once was.",
+        "That instinct has followed me my entire life.",
+        "Creating the time, space, and experience for people to discover the belongings that will become part of their own story has always felt deeply important to me.",
+        "Some of my earliest memories are of sitting on the floor with records spread around me, replaying Lionel Richie, Billy Joel, and Aerosmith until the stories behind the music felt as important as the songs themselves.",
+        "I always felt the lyrics were telling stories so personal that I wanted to know the people behind them. The mystery of the music \u2014 and the lives we could not hear through the turntable \u2014 always felt like part of the journey.",
+        "Years later, standing in Seattle and looking through museum glass at Steven Tyler's scarves, I felt that same truth again: the profound human residue objects can hold.",
+        "I best understand my own attachment through moments of live music.",
+        "I remember recently feeling the same reverence I felt at that museum glass while watching Stevie Nicks pull her iconic capes from decades-old performances back onto the stage. She said she had not seen some of them since the original songs were recorded, and that wearing them changed her for those few minutes.",
+        "I watched memory alter the way she moved, turned, and became the person from those moments again in real time.",
+        "That is the heart of this work.",
+        "Each of us has those items. Those memories. Those stories that are not on tape, in a notebook, or, worse, scattered across digital spaces where they can disappear into the constant shuffle of noise.",
+        "I do not believe people simply need help getting rid of things. I believe they need help understanding what those things mean, what they are worth, what they still have left to do, and where the next chapter of those belongings belongs.",
+        "Sometimes that means preserving. Sometimes it means cataloging, resale, or making sure a family story does not disappear into a donation pile.",
+        "The work is never really about the object. It is about protecting the life it represents.",
+        "I came to understand the full weight of that truth in an entirely different way over the last year. After an unforeseen flood, I found myself moving through 13 temporary homes and Airbnbs, carrying only fragments of the life I thought I would always recognize.",
+        "Years of belongings, valuables, and deeply personal objects were damaged or lost \u2014 many of them irreplaceable.",
+        "What surprised me most was not only the grief of the loss itself, but the disorientation of living without the things that quietly reflect you back to yourself each day.",
+        "The art you are used to seeing on your walls. The clothes that belong in your closet. The objects that make a place feel like the life you built.",
+        "When those things are suddenly gone \u2014 or when you watch them become drenched in water before you can do anything to save them \u2014 the experience is profoundly destabilizing. Even for someone as deeply self-sufficient as I have always been.",
+        "I have spent my life moving independently, orchestrating complexity, leading across states, traveling constantly, and building systems that hold under pressure. I have long been the person who can get anything done, anywhere, at any hour. But this was different.",
+        "When it was my life, my loss, my dog beside me in a storage unit, and no clear sense yet of what the next version of home would be, I came face to face with something essential.",
+        "During that season, I was introduced to someone who, on paper, might have simply been called a home organizer. But what she offered was something far deeper. She stepped into the moments I could not hold alone. The decisions I was too depleted to make. The logistics I normally would have solved in seconds. The emotional labor hidden inside every object, every box, every impossible next step.",
+        "She was not organizing. She was relief. She became calm in the middle of disruption, clarity in the middle of grief, and movement in a moment when everything in my life had stopped.",
+        "That experience changed the way I understand this work. Because when it is your own life in pieces, even the most capable person can lose access to their usual clarity. And in those moments, what matters most is not simply having someone who knows where things go. It is having someone who can step into the emotional and operational weight of transition and quietly help carry it with you.",
+        "Over the years, this understanding has been reinforced in quieter ways, too. A woman who once lived across the hall from me began as someone I simply greeted in passing at the call box or mailbox. Over time, she became a close friend. She is one of the most independent, self-sufficient, quietly powerful women I have ever known.",
+        "Even with family nearby, I found myself noticing something remarkable: people were naturally drawn to make life easier for her. Not because she demanded it. Not because she was incapable. Simply because there was something about her presence that made others want to say, I can take care of that for you.",
+        "At 84, after hip surgery and countless chapters of life behind her, she kept moving forward \u2014 not because life had become easy, but because she met it with fullness, curiosity, and grace.",
+        "I found myself doing the same. Setting up new televisions. Making smart-home systems work seamlessly. Adjusting thermostats. Quietly removing friction so her life could remain as comfortable, elegant, and effortless as possible.",
+        "What stayed with me was not that she needed anyone. It was the realization that everyone deserves to have that person. The one who knows what to do. The one who can make life easier. The one who steps in before inconvenience becomes overwhelm, or before crisis turns into isolation.",
+        "Because not everyone has the network. Not everyone knows who to call. And sometimes disruption arrives suddenly, as it did for me.",
+        "What I have spent years doing instinctively \u2014 building systems, solving invisible problems, and creating custom solutions that make life move beautifully \u2014 has always come naturally. What changed is understanding that these are not simply favors, talents, or professional strengths. For the right person, in the right moment, they become essential care.",
+        "For more than 15 years, I have built my career creating environments that help people function beautifully in real life. I have led large-scale operations, teams, and transformation initiatives for national brands, designing systems that solve invisible friction before it becomes visible failure.",
+        "That same philosophy now lives inside The Well Lived Citizen Co.",
+        "I bring together executive-level operational thinking, emotional discernment, resale and recoverable-value expertise, and a deep reverence for story, memory, and belonging.",
+        "I do not see homes as projects. I see them as living systems shaped by identity, family, safety, and transition.",
+        "My role is to step into complexity with calm, create clarity around belongings, preserve what matters, recover hidden value, and build elegant systems that help people move forward without losing the story of how they got here.",
+        "That is what this business was built to do."
+      ],
+      "background_cta": "Get in Touch",
+      "page_headline": "competence does not eliminate the need to be cared for.",
+      "bio_closing": "At the core, I believe the most meaningful work is helping people feel truly taken care of. That is what this business was built to do.",
+      "anchor_lines": {
+        "philosophy": "That is the heart of this work.",
+        "operational_care": "She was relief.",
+        "closing": "At the core, I believe the most meaningful work is helping people feel truly taken care of. That is what this business was built to do."
+      }
+    },
+    "service_home_organization": {
+      "title": "Home Organization & Modern Move",
+      "hero_tagline": "The relief of the room.",
+      "hero_body": "Your home, made to work for how you actually live. For the room that keeps collecting piles, the move that technically happened but never settled, the closet that no longer fits your life, or the spaces where everyday friction quietly steals time.",
+      "problem_statement": "The issue here is the space itself. The room, layout, volume, or systems are no longer supporting the way you naturally move through your day. I come in, find the friction, and make the space work around your real habits.",
+      "how_we_work": {
+        "header": "How we can work together",
+        "subhead": "Projects can be:",
+        "styles": [
+          "side-by-side guided sessions",
+          "hybrid decision blocks",
+          "full key handoff",
+          "solo resets while you're away",
+          "packing and move prep with or without you",
+          "closet and system continuity after landing"
+        ],
+        "note": "The right style is the one that creates the easiest lasting outcome."
+      },
+      "whats_included": {
+        "header": "What's included",
+        "items": [
+          "intake call, prior coordination, and any pre-planning on my end if needed \u2014 depending on what information is required, or whether it's an on-site, task-focused immediate dive in",
+          "layout logic",
+          "sourcing recommendations",
+          "setup and install",
+          "label systems",
+          "pre-order coordination",
+          "workflow tools and install basics",
+          "measuring tools",
+          "reusable sort bins",
+          "cord wraps, Velcro, adapters, and utility hardware",
+          "problem-solving tools that become necessary once the room opens up"
+        ],
+        "deeper_spaces_note": "For deeper spaces like closets, offices, storage rooms, and linen systems, product support is quoted after walkthrough based on hidden volume and actual dimensions."
+      },
+      "pricing": {
+        "hourly": "$150/hr \u00b7 3 hr minimum",
+        "day_rate": "$1,200 flat day rate \u2014 reserved for studio and 1-bedroom get-it-done-fast moves, up to 8 hours straight. The flat rate exists because these smaller footprints can realistically be packed, landed, or reset in a single uninterrupted day. Larger homes scope as projects.",
+        "projects": "Project scopes are quoted separately.",
+        "flex_blocks": {
+          "10hr": "$1,250 / 10 hrs ($125/hr)",
+          "25hr": "$3,150 / 25 hrs"
+        }
+      },
+      "cta": "Book your session",
+      "labels_note": {
+        "header": "A Note on Labels",
+        "body": "Labels are always included \u2014 handwritten on-site by default, and printed sets provided for larger project scopes. For efficiency, printed labels are usually handled as office work rather than billed hourly. I notate during the session, build the label set in my own app on my own time, print them, and bring them back to apply on the next visit or at the end of a multi-session project. This saves real money on hourly time that would otherwise be spent typing, cutting, and feeding a label maker in the middle of active organizing work. If you want fully printed labels applied the same day, I'm happy to bring the label maker on-site \u2014 just let me know during intake so it's built into the time estimate."
+      },
+      "add_ons": {
+        "header": "Add-Ons & Landing Support",
+        "first_night_bundles": {
+          "label": "First-Night & First-Week Supply Bundles",
+          "description": "Optional product budgets added to any move session or day rate so the home works before the first Target run.",
+          "tiers": [
+            {
+              "name": "Essentials Landing",
+              "price": "$150"
+            },
+            {
+              "name": "Start-Up Landing",
+              "price": "$250"
+            },
+            {
+              "name": "Full Landing Bundle",
+              "price": "$500"
+            }
+          ]
+        },
+        "pre_buy_org_bundles": {
+          "label": "Pre-Buy Org Bundles",
+          "description": "Optional product budgets for clients who want to front-load organizing supplies into the session. Bundles below are examples \u2014 actual item mix is adjusted based on intake and dialogue to fit the specific room or project. Any item can be swapped for another of equal value.",
+          "tiers": [
+            {
+              "name": "Starter Org Bundle"
+            },
+            {
+              "name": "Mid Org Bundle"
+            },
+            {
+              "name": "Full Org Bundle"
+            }
+          ]
+        }
+      }
+    },
+    "service_legacy": {
+      "title": "Legacy Planning & Inventory Catalog",
+      "hero_tagline": "Clarity without fear.",
+      "hero_subtagline": "The operational side of a home, made visible again.",
+      "positioning_disclaimer": "It is not estate planning. It is not asset planning. It is planning the actual pieces of a life. Not the will, not the paperwork, not the part a lawyer handles. The part that lives inside the walls.",
+      "intro_body": "This is for the part of life most people don't realize has been quietly building for years \u2014 the things inside a home that became part of how life worked, long before anyone stopped to look at them.",
+      "who_its_for": {
+        "header": "Who this is for",
+        "framing": "The operational side of a home shows up for almost everyone, eventually. Sometimes it's a life change. Sometimes it's a move. Sometimes it's a quiet morning where the drawers, closets, and storage spaces stop matching the person living there.",
+        "audience_list": [
+          "the divorced mom who moved into a condo and suddenly had to see, for the first time, how much had actually been accumulated over a marriage \u2014 and had to agree to how it all gets split",
+          "the person who lived in the same apartment for ten years and had no idea how much had quietly gathered in the back of every closet",
+          "the career change that revealed a hundred film industry cords, gear, and references in the garage \u2014 from a life that isn't the current one anymore",
+          "the household where someone is ready to take control of their own story before it falls into someone else's hands",
+          "the family carrying years of meaningful, valuable, or hard-to-sort volume that deserves clarity without pressure",
+          "the person who wants to decide what stays, what moves on, and what gets remembered \u2014 while they are the one making the decisions"
+        ],
+        "bridge_copy": "Most people will reach a point where the home outgrows who they are as a person. That doesn't mean calling someone to take it all to Goodwill. Goodwill doesn't always take it. You might not have a car. You might not have a friend you're comfortable asking for a favor. And the things inside the home may deserve more than a bin at the curb anyway. This work exists for that exact in-between."
+      },
+      "what_the_work_is": {
+        "header": "What this work actually is",
+        "intro": "The operational side of a home is the layer that quietly adds up over time:",
+        "layer_items": [
+          "the drawers",
+          "the backup bedding",
+          "the linen closets stacked with care",
+          "the vintage pieces with story",
+          "the everyday things with future value",
+          "the candles tucked away because the house was always tidy enough",
+          "the designer pieces in sizes the family doesn't share",
+          "the collection no one else in the house ever learned to see",
+          "the objects that deserve clarity before family stress builds"
+        ],
+        "family_copy": "Sometimes the people who love you don't share your eye, your size, or the history behind what you chose. That is not a failure of family. It is just the reality of inherited space \u2014 people can only hold what they recognize.",
+        "anchor_line": "This service is the person who can see what is actually there."
+      },
+      "what_legacy_holds": {
+        "header": "What Legacy Planning holds",
+        "opening": "The walls and the things inside them tell a story just as much as the person in the photographs.",
+        "mission": "This work is built to honor both \u2014 the operational layer that keeps a home running, and the meaning underneath the objects that deserve to carry forward with the right memory attached.",
+        "outputs_header": "Possible outputs include:",
+        "outputs": [
+          "digital inventory",
+          "photo documentation",
+          "room-by-room item notes",
+          "family distribution references",
+          "sentiment and story preservation",
+          "resale-ready routing notes",
+          "donation pathways",
+          "second-home and storage references",
+          "transition roadmap",
+          "printable copies",
+          "bound family binders",
+          "duplicate family copies",
+          "digital or web-based workflows"
+        ],
+        "story_bridge": "When a piece has a story worth keeping with it, that history is documented too. That is the quiet bridge between Legacy Planning and Curated Resale. Items identified for sale during catalog work can route directly into Curated Resale & Consignment without restarting the process \u2014 and when story matters, the story travels with them."
+      },
+      "timeline_section": {
+        "header": "How project timelines work",
+        "body": "Larger projects are completed across focused work sessions over a shared timeline, rather than continuous daily presence. A two-week catalog may look like three focused 11\u20134 sessions, with off-site documentation, resale routing, and continuity work completed between visits."
+      },
+      "pricing": {
+        "hourly": "$175/hr \u00b7 2 hr minimum",
+        "single_room": "Single room or storage unit: $175/hr \u00b7 2 hr minimum",
+        "whole_home": "Whole home: project quote after walkthrough",
+        "legacy_project": "Legacy Project 20\u201330 hrs \u2014 From $3,500",
+        "ongoing_retainer": "$500/month",
+        "LOCKED_NOTE": "Larger estates are quoted after walkthrough ONLY. No fixed $8,500, $10,000, or $15,000 tier.",
+        "flex_blocks": {
+          "10hr": "$1,500 / 10 hrs ($150/hr)",
+          "25hr": "$3,650 / 25 hrs"
+        }
+      },
+      "cta": "Book your time",
+      "china_passage": {
+        "LOCKED_SOURCE": "Dayna's approved copy \u2014 confirmed Apr 14 2026",
+        "placement": "Between audience framing and anchor line 'This service is the person who can see what is actually there.'",
+        "text": "It's a holiday dinner, looking at china that hasn't been used in years. You wonder if it ever will, knowing three plates are missing, broken in memorable moments over lifetimes. What happens to a set of china passed down two generations, incomplete but once made a new couple feel whole? It can't be worthless, but can't be sold incomplete. Your kids live in small apartments and said, 'That's sweet, but we can't take it.' So, what happens to something you thought would be with your family forever?\n\nI help. I look at everything in your home \u2014 practical, sentimental, and holding memories \u2014 and I listen to them, for as long or as little as you want to tell their stories. If you realize there's a story no one knows and want to get it on paper, recording, or down for your family, with or without me, I'll give you the tools. We'll find a way to ensure the things you felt were special \u2014 incomplete and all \u2014 make it to hands that collect, treasure, and find value in them, sharing in the story a little longer. For the rest, we'll organize, find homes for them, whether in your home or outside of it, creating easy, burden-free plans for you and your support system as you grow, knowing when, where, and how to lift the weight of 'things' without it feeling unplanned."
+      }
+    },
+    "service_house_calls": {
+      "title": "House Calls",
+      "hero_tagline": "For the things life leaves unfinished.",
+      "hero_subtagline": "For when the issue isn't the room \u2014 it's the person you used to have to call.",
+      "positioning": "The world changed, the process got heavier, and no one can be expected to keep up with every new layer alone. House Calls fills the missing person role in real life: the partner who handled it, the nearby parent, the neighbor, the adult child in another city, the friend who always knew how to make the day still work.",
+      "who_its_for": {
+        "header": "Who House Calls Is For",
+        "intro": "For the people who suddenly find themselves handling the parts of home life someone else used to quietly carry.",
+        "examples": "The bill that used to auto-resolve because your partner handled it. The appliance install that feels different when you're home alone. The digital login that somehow became intimidating overnight. The package, pickup, repair, donation, or appointment that shouldn't be a big deal but suddenly feels heavier than it should.",
+        "private_copy": "House Calls exists for the private, practical things people don't always want to say out loud.",
+        "goal": "The goal is not to make life look perfect. The goal is to make everyday life feel safe, manageable, and less isolating when the normal support system changed.",
+        "closing_line": "Sometimes there isn't a perfect way around the problem. There's just the person who knows how to make the day work anyway. That's where House Calls is most useful.",
+        "audience_list": [
+          "newly divorced",
+          "recently widowed",
+          "first time living alone",
+          "partner travels constantly",
+          "adult children supporting from another city",
+          "practical aftermath no one stays to help with",
+          "moments where the original plan stopped working and you still need the day to happen"
+        ]
+      },
+      "ways_to_use": {
+        "header": "Ways to use House Calls",
+        "list": [
+          "one-time practical resets",
+          "weekly support",
+          "monthly continuity",
+          "seasonal resets",
+          "remote family check-ins",
+          "post-project upkeep",
+          "vendor days",
+          "donation and return routing",
+          "home re-entry after travel",
+          "guest and event resets",
+          "the 4-hour practical reset"
+        ]
+      },
+      "real_life_example": {
+        "header": "Real-Life Example",
+        "example": "The 8-month pregnant woman with a beautiful baby shower, hundreds of gifts, duplicate baby gear, no time, and no energy to turn a mountain of love into something functional.",
+        "example_steps": [
+          "unwrap and sort everything",
+          "organize by month / size / first-use timeline",
+          "separate immediate essentials",
+          "identify duplicates",
+          "create return and resale routes",
+          "donate what will never realistically be used",
+          "clear packaging and gift-wrap chaos",
+          "order thank-you cards",
+          "export addresses to print",
+          "reset the room so it actually works for day one"
+        ],
+        "punchline": "The point is simple: everyone helps celebrate the moment \u2014 I help make it livable afterward. That's House Calls."
+      },
+      "vendor_oversight": {
+        "header": "Vendor & project oversight",
+        "intro": "When needed, House Calls also covers:",
+        "list": [
+          "movers",
+          "haulers",
+          "cleaners",
+          "installers",
+          "contractors",
+          "storage teams",
+          "donation pickups",
+          "resale buyer coordination",
+          "shipping and courier",
+          "building and concierge protocol",
+          "service appointment access"
+        ]
+      },
+      "service_area": {
+        "header": "Service area",
+        "body": "LA base but not radius-limited. Travel by project logic, with route-based efficiency and stops built into the flow. Quick asks can often be absorbed into an existing route. Urgent timing and transition-sensitive requests are prioritized whenever possible."
+      },
+      "pricing": {
+        "hourly": "$175/hr \u00b7 2 hr minimum",
+        "four_hour_reset": "4-Hour Practical Reset \u2014 Available",
+        "continuity_retainer": "$500/mo",
+        "retainer_note": "No membership. No subscription. Ease comes from relationship, not a forced plan."
+      },
+      "cta": "Book me"
+    },
+    "service_curated_resale": {
+      "title": "Curated Resale & Consignment",
+      "hero_tagline": "Trust-forward thoughtful curation.",
+      "hero_body": "For the things that still have value, story, or second-market potential \u2014 without asking you to become a part-time reseller.",
+      "what_its_for": {
+        "header": "What this is for",
+        "best_for": "This service is best for items that have been well cared for, still hold real market interest, or deserve thoughtful placement through story-led resale.",
+        "not_for": "It is not a donation pickup substitute, bulk textile recycling service, or a shortcut for things that are no longer in resellable condition.",
+        "built_for_header": "This service is built for:",
+        "item_categories": [
+          "clothing",
+          "designer accessories",
+          "jewelry",
+          "home decor",
+          "furniture",
+          "art",
+          "rare textiles",
+          "story-rich vintage",
+          "one-of-a-kind pieces with real buyer demand"
+        ]
+      },
+      "the_work": {
+        "header": "The work is not just listing. It includes:",
+        "list": [
+          "pickup",
+          "intake",
+          "evaluation",
+          "photography",
+          "platform matching",
+          "buyer communication",
+          "routing",
+          "return logic",
+          "donation reroute when appropriate",
+          "monthly reporting and payout rhythm"
+        ],
+        "goal": "The goal is to move the item into the right next life, not just the fastest sale."
+      },
+      "easy_handoff": {
+        "header": "Easy handoff and pickup",
+        "intro": "The handoff is intentionally easy. Depending on what makes the most sense for your week, items can move through:",
+        "methods": [
+          "city pickup",
+          "route-based stop-ins",
+          "Uber Business courier",
+          "building desk drop",
+          "UPS Access Point",
+          "direct bag shipment",
+          "handoff during another project block"
+        ],
+        "philosophy": "The philosophy is simple: why spend time coordinating a bag when it can simply be in my hands by noon. The longer we have worked together, the easier this process becomes."
+      },
+      "intake_bags": {
+        "header": "Intake bags and safe transport",
+        "body": "All pickup bags used for consignments are new, clean, and selected for safe transport. When it is faster or more convenient, bags may be shipped directly to your home, dropped during an existing route, brought during another session, or couriered directly."
+      },
+      "item_standards": {
+        "header": "Item standards",
+        "what_it_is_not": "This is a resale and curation service. It is not waste removal, donation hauling, contaminated textile removal, a recycling substitute, or a 'please get rid of this for me' service. Those can fall into vendor coordination needs in my other brackets.",
+        "best_fit": "The best fit is: things you would like to think are good, possibly still valuable, interesting, or emotionally meaningful enough to deserve a thoughtful next life and are clean enough \u2014 or could be considered so after a wash or dry cleaning if value warrants. If you have a bag of those items, and intentions are good, the worst that can happen is you sent them to me and I said they are mostly not in good selling condition but I can move a few.",
+        "spirit": "The assumption is: these are things you took care of and know deserve another life. That is the spirit of this service."
+      },
+      "where_items_sell": {
+        "header": "Where items sell",
+        "intro": "Items are routed by category and market fit for maximum return for you and best client match by selling platform.",
+        "channels": [
+          "Poshmark (Poshmark Ambassador \u2014 badge coming to profile soon)",
+          "eBay (new business profile, credible reviews building)",
+          "Etsy",
+          "Facebook Marketplace",
+          "Chairish",
+          "Vinted",
+          "Vestiaire",
+          "Grailed",
+          "vetted local high-end resale",
+          "future hosted client sales through the site"
+        ],
+        "routing_note": "The route depends on item type, buyer demand, story value, platform behavior, furniture logistics, seasonality, and speed versus premium price goals."
+      },
+      "intake_timing": {
+        "header": "Intake review timing",
+        "body": "Once the items arrive, intake review typically takes 7\u201310 business days. Within that window you will receive confirmation of what was received, what is accepted for sale, what may need hold timing, what may be rerouted, and what may not justify resale. If workload, seasonality, or project volume changes that timeline, I will let you know."
+      },
+      "resale_timeline": {
+        "header": "Realistic resale timeline",
+        "body": "This is a long game, not a fast-cash service. Most strong items sell within the first 90 days. Nearly everything with real demand finds its buyer within 6 to 9 months. The right expectation is: resale rewards patience, not urgency. If immediate cash is the priority, resale may not be the best route."
+      },
+      "judgment_section": {
+        "header": "The kind of judgment you are hiring",
+        "intro": "The reason this works is because I am not simply uploading things. I am making decisions around:",
+        "decision_list": [
+          "what deserves effort",
+          "what should wait",
+          "what gains value with story",
+          "what belongs in the collector world",
+          "what should be held for better timing",
+          "what needs to leave fast",
+          "what is better donated",
+          "what has emotional meaning worth preserving in the listing"
+        ],
+        "closing": "The point is not volume. The point is thoughtful curation that creates the best next life for the item and the most realistic return for the client. That is the work.",
+        "donation_note": "Clean non-sellable items can move directly into approved donation channels without requiring separate client sorting."
+      },
+      "commission": {
+        "LOCKED_SOURCE": "Confirmed Apr 14 2026",
+        "clothing_accessories": "55% Dayna / 45% client",
+        "designer": "50 / 50",
+        "furniture_significant_home": "50 / 50",
+        "full_closet_liquidation": "55 / 45",
+        "agreement_required": true
+      },
+      "cta": "Schedule it",
+      "operational_close": "Monthly report by the 1st \u00b7 Payout by the 5th \u00b7 Clean split of net proceeds after platform fees"
+    },
+    "flex_blocks": {
+      "title": "Flex Blocks",
+      "description": "Flex Blocks are 2, 4, or 6-hour reserved work blocks that can be used for focused task support, House Calls, continuity work, or the here-and-there things that build up between bigger projects. They are ideal when you know support will come up, even if it doesn't need to happen all at once.",
+      "best_for": [
+        "task lists that build over time",
+        "practical resets",
+        "vendor access days",
+        "guest and event prep",
+        "move follow-through",
+        "one-zone progress",
+        "post-travel home re-entry",
+        "the 'I need a 4-hour you' kind of month",
+        "the far-and-few-between asks that are easier when time is already held"
+      ],
+      "punchline": "The point is simple: your time is already there when life needs it.",
+      "LOCKED_NOTE": "Flex blocks NEVER expire."
+    },
+    "projects": {
+      "title": "Projects",
+      "description": "Heavier work that needs straight-through momentum, multi-room lift, deeper decision-making, or full move support shifts into project pricing. Project scopes are quoted separately and not structured as blocked days as a starter.",
+      "how_it_works": "Normal client stretches run in 2, 3, 4, 5, or at longest a 6-hour straight block. No single client is my only client in a day \u2014 resale work and client follow-up happen 7 days a week, and the schedule is built to keep all of it moving.",
+      "project_types": [
+        "whole-home resets",
+        "packing and move days",
+        "larger catalogs",
+        "apartment landings",
+        "staged downsizing",
+        "multi-room continuity",
+        "family transition work",
+        "project-managed vendor sequences"
+      ],
+      "pricing_note": "Projects are quoted by scope, timeline, and intensity of lift."
+    },
+    "contact": {
+      "LOCKED_SOURCE": "Dayna's approved copy \u2014 confirmed Apr 14 2026",
+      "headline": "Get in Touch",
+      "intro": "Tell me what you need. You do not need to have it figured out. Start with what is true right now and I will take it from there.",
+      "first_conversation_note": "The first conversation is always just that \u2014 a conversation.",
+      "direct_contact": {
+        "phone": "(323) 433-1350",
+        "email": "dayna@thewelllivedcitizenco.com",
+        "text_note": "Text or call"
+      },
+      "success_message": "Got it.",
+      "error_message": "Something went wrong. Text directly at (323) 433-1350 or email dayna@thewelllivedcitizenco.com.",
+      "form": {
+        "structure": "Progressive disclosure \u2014 each answer reveals the next relevant question only. Not all fields shown at once.",
+        "steps": [
+          {
+            "step": 1,
+            "id": "relationship",
+            "label": "Have we worked together before?",
+            "type": "single_select",
+            "options": [
+              "New client",
+              "Returning client"
+            ]
+          },
+          {
+            "step": 2,
+            "id": "need",
+            "label": "What do you need?",
+            "type": "single_select",
+            "options": [
+              "Book a service",
+              "Schedule a resale pickup",
+              "Ask a question",
+              "Not sure yet"
+            ]
+          },
+          {
+            "step": 3,
+            "id": "urgency",
+            "label": "How urgent is this?",
+            "type": "single_select",
+            "options": [
+              "This week",
+              "Within the month",
+              "Planning ahead",
+              "Not sure"
+            ]
+          },
+          {
+            "step": 4,
+            "id": "contact",
+            "label": "How to reach you",
+            "type": "fields",
+            "fields": [
+              "Full name",
+              "Email",
+              "Phone",
+              "Preferred contact method"
+            ]
+          },
+          {
+            "step": 5,
+            "id": "context",
+            "label": "A little context",
+            "type": "textarea",
+            "placeholder": "Two sentences is enough. What changed, what's the real-life version?"
+          },
+          {
+            "step": 6,
+            "id": "booking_path",
+            "label": "What are we working on?",
+            "type": "conditional",
+            "note": "Shown only when need = 'Book a service'. Branches into service-specific follow-up questions per category: home org, legacy, house calls, or resale.",
+            "service_branches": {
+              "home_org": [
+                "Rooms",
+                "Property type",
+                "Move involved?",
+                "Access style",
+                "Urgent deadline"
+              ],
+              "legacy": [
+                "Legacy scope"
+              ],
+              "house_calls": [
+                "Preferred days",
+                "Best time windows",
+                "Building notes",
+                "Parking notes",
+                "Pets",
+                "Key handoff"
+              ],
+              "resale": [
+                "Item types",
+                "Pickup direction",
+                "Pickup timing"
+              ]
+            }
+          }
+        ]
+      },
+      "entry_paths": [
+        {
+          "id": "schedule_call",
+          "label": "Schedule a call",
+          "sub": "I want to talk through what I need first."
+        },
+        {
+          "id": "book_session",
+          "label": "Book a session",
+          "sub": "I know what I need and I'm ready to lock it in."
+        },
+        {
+          "id": "pickup_dropoff",
+          "label": "Schedule a pickup or drop-off",
+          "sub": "Clothing, items, resale \u2014 I just need to hand something off."
+        },
+        {
+          "id": "not_sure",
+          "label": "Not sure yet",
+          "sub": "Send me a message and Dayna will figure it out."
+        }
+      ],
+      "key_question": "What's the real-life version?",
+      "what_to_expect": {
+        "LOCKED_SOURCE": "Confirmed Apr 14 2026",
+        "note": "Key intake question that translates brand voice into the form."
+      }
+    },
+    "pricing_page": {
+      "LOCKED_SOURCE": "Checkpoint 5 (Apr 14 2026) \u2014 approved pricing structure",
+      "intro": "How I charge",
+      "sections": {
+        "home_org": {
+          "label": "Home Organization & Modern Move",
+          "hourly": "$150/hr \u00b7 3 hr minimum",
+          "flex_10hr": "$1,250 / 10 hrs \u2014 $125/hr",
+          "flex_25hr": "$3,150 / 25 hrs",
+          "move_reset": "$1,200/day \u2014 Studio / 1BR flat day rate",
+          "larger_homes": "Quoted after call"
+        },
+        "legacy": {
+          "label": "Legacy Planning & Inventory Catalog",
+          "hourly": "$175/hr \u00b7 2 hr minimum",
+          "legacy_project": "From $3,500 / 20\u201330 hrs",
+          "whole_home": "Quoted after walkthrough \u2014 NO fixed tier",
+          "ongoing_retainer": "$500/mo",
+          "flex_10hr": "$1,500 / 10 hrs \u2014 $150/hr",
+          "flex_25hr": "$3,650 / 25 hrs"
+        },
+        "house_calls": {
+          "label": "House Calls",
+          "hourly": "$175/hr \u00b7 2 hr minimum",
+          "four_hour_reset": "4-Hour Practical Reset \u2014 Available",
+          "continuity_retainer": "$500/mo"
+        },
+        "resale": {
+          "label": "Curated Resale & Consignment",
+          "clothing_accessories": "55% Dayna / 45% client",
+          "designer": "50 / 50",
+          "furniture_significant": "50 / 50",
+          "full_closet_liquidation": "55 / 45",
+          "operational_close": "Monthly report by the 1st \u00b7 Payout by the 5th \u00b7 Clean split of net proceeds after platform fees"
+        }
+      },
+      "flex_blocks_note": "Flex blocks never expire.",
+      "larger_estates_note": "Larger estates and whole-home legacy projects are quoted after walkthrough only. No fixed tier.",
+      "closing_cta": "Call or text (323) 433-1350. The first conversation is always free."
+    }
+  },
+  "decision_lock": {
+    "_source": "Voice Processor SKILL.md \u2014 March 2026",
+    "brand": {
+      "business_name": "The Well Lived Citizen Co.",
+      "dba": "Well Dressed Citizen LLC",
+      "url": "TheWellLivedCitizenCo.com",
+      "tagline": "Well Kept. Well Placed. Well Lived.",
+      "service_lines": 3,
+      "velvetnomad_status": "RETIRED"
+    },
+    "pricing_locked": {
+      "home_org_hourly": "$150/hr, 3-hr minimum",
+      "home_org_flex_10hr": "$1,250",
+      "home_org_flex_25hr": "$3,150",
+      "legacy_hourly": "$175/hr",
+      "legacy_flex_10hr": "$1,500",
+      "legacy_flex_25hr": "$3,650",
+      "move_in_flat_rate": "$1,200/day (studio/1BR only, 8hr straight)",
+      "legacy_project_from": "From $3,500 / 20-30 hours",
+      "larger_estates": "QUOTED AFTER WALKTHROUGH \u2014 NO FIXED TIER",
+      "ongoing_legacy_retainer": "$500/month",
+      "resale_clothing": "55/45 (Dayna/client)",
+      "resale_designer_furniture": "50/50",
+      "flex_blocks_expire": false
+    },
+    "platforms_active": [
+      "Etsy",
+      "Chairish",
+      "Poshmark"
+    ],
+    "platforms_not_active": [
+      "Depop (banned)",
+      "Grailed (killed)",
+      "Replit (killed)"
+    ],
+    "corrections_do_not_repeat": [
+      "Do NOT say 'elder care' as a service category",
+      "Do NOT say 'estate sales,' 'asset management,' or 'liquidation'",
+      "Do NOT say 'fall prevention'",
+      "Do NOT add attorney referrals, appraiser referrals, interior designer referrals",
+      "Do NOT add grab bars or any items Dayna did not list",
+      "Do NOT use 'luxury organizing' \u2014 it is function, transitions, heavy lifting",
+      "Do NOT defend or justify rates",
+      "Flex blocks NEVER expire",
+      "Larger estates are quoted after walkthrough ONLY \u2014 no fixed $8,500, $10K, or $15K tier",
+      "Do NOT say 'ADHD closet edits' \u2014 say 'child-friendly organization for sensory-friendly practices (ages 4-9), non-clinical'",
+      "Do NOT use 'will' or 'death' in client-facing legacy copy \u2014 use 'loss,' 'major life transition,' or 'next chapter'",
+      "Do NOT take braindump examples literally and put them in client-facing copy",
+      "Do NOT use tagline 'Well Kept. Well Placed. Well Lived.' on cards, marketing materials, or any client-facing copy. It is RETIRED."
+    ]
+  },
+  "audit_log": {
+    "unauthorized_changes_found": [
+      {
+        "checkpoint": "CP1\u2013CP2",
+        "page": "pricing",
+        "issue": "Standard Elder Home Project at $7,000 fixed price appeared \u2014 not in current Decision Lock. Larger estates must be quoted after walkthrough."
+      },
+      {
+        "checkpoint": "CP3",
+        "page": "pricing",
+        "issue": "'Whole Home 40\u201380 hrs From $8,500' tier added \u2014 VIOLATES Decision Lock. No fixed tier for larger estates."
+      },
+      {
+        "checkpoint": "CP3",
+        "page": "pricing",
+        "issue": "'Extended / Complex Legacy From $15,000' tier added \u2014 VIOLATES Decision Lock."
+      },
+      {
+        "checkpoint": "CP1\u2013CP3",
+        "page": "pricing",
+        "issue": "'Special Delivery' listed as a distinct service label in pricing nav \u2014 this is House Calls content, not a separate service."
+      },
+      {
+        "checkpoint": "CP3",
+        "page": "pricing",
+        "issue": "'ADHD & Sensory-Sensitive Spaces' label used \u2014 correction: must say 'child-friendly organization for sensory-friendly practices (ages 4-9), non-clinical.'"
+      }
+    ],
+    "pages_confirmed_clean": [
+      "Home \u2014 body copy stable across all 5 checkpoints",
+      "About \u2014 body copy stable across all 5 checkpoints",
+      "Service: Home Organization \u2014 stable",
+      "Service: Legacy \u2014 stable",
+      "Service: House Calls \u2014 stable",
+      "Service: Curated Resale \u2014 stable",
+      "Services Overview \u2014 stable"
+    ],
+    "status": "CP5 (current, Apr 14 2026) is the approved state. Pricing page violations were introduced in CP3 and appear corrected in CP4/CP5."
+  },
+  "site_architecture": {
+    "LOCKED_SOURCE": "Confirmed Apr 14 2026 \u2014 full git deletion, clean rebuild",
+    "build_instruction": "DELETE entire existing git repo. Rebuild clean from this knowledge base only.",
+    "public_routes": [
+      "/",
+      "/services",
+      "/services/home-organization",
+      "/services/legacy",
+      "/services/house-calls",
+      "/services/resale",
+      "/about",
+      "/pricing",
+      "/contact"
+    ],
+    "routes_removed": [
+      "/qa \u2014 REMOVED. Not part of final architecture. Do not rebuild."
+    ],
+    "nav_structure": {
+      "desktop": [
+        "Services (dropdown)",
+        "About",
+        "Get in Touch"
+      ],
+      "services_dropdown": [
+        "All Services Overview \u2192 /services",
+        "Home Organization & Modern Move \u2192 /services/home-organization",
+        "Legacy Planning & Inventory Catalog \u2192 /services/legacy",
+        "House Calls \u2192 /services/house-calls",
+        "Curated Resale & Consignment \u2192 /services/resale",
+        "View Pricing \u2192 /pricing"
+      ],
+      "mobile": "Hamburger drawer with expandable Services links"
+    },
+    "layout_baseline": {
+      "font": "Plus Jakarta Sans",
+      "palette": {
+        "cream": "#F5F0E8",
+        "warm": "#FAF7F2",
+        "linen": "#EDE7DB",
+        "charcoal": "#1C1917",
+        "rust": "#9A5B3C",
+        "stone": "#57534E"
+      },
+      "shell": "Layout.tsx pattern \u2014 fixed nav, footer, floating mobile call button",
+      "instruction": "Use Manus Layout.tsx as visual baseline. Improve spacing and hierarchy. Do NOT change fonts or palette."
+    }
+  },
+  "seo_fixes": {
+    "LOCKED_SOURCE": "Audit confirmed Apr 14 2026",
+    "ga4_tag": "G-HN9C986JLW \u2014 keep, already correct",
+    "canonical": "https://thewelllivedcitizenco.com \u2014 keep, already correct",
+    "robots_meta": "index, follow \u2014 keep, already correct",
+    "robots_txt": "Allow: / with sitemap declared \u2014 keep, already correct",
+    "fixes_required": [
+      {
+        "file": "index.html",
+        "location": "Twitter card meta description",
+        "current": "Home organization, legacy planning, Special Delivery home visits, and curated resale \u2014 Los Angeles.",
+        "fix": "Home organization, legacy planning, house calls, and curated resale \u2014 Los Angeles.",
+        "reason": "Special Delivery is a dead service name \u2014 VIOLATION"
+      },
+      {
+        "file": "index.html",
+        "location": "Schema.org LocalBusiness description",
+        "current": "...Special Delivery home visits...",
+        "fix": "...House Calls...",
+        "reason": "Special Delivery is a dead service name \u2014 VIOLATION"
+      },
+      {
+        "file": "sitemap.xml",
+        "instruction": "Rebuild to match public_routes exactly. /qa must NOT be included.",
+        "routes_to_include": [
+          "https://thewelllivedcitizenco.com/",
+          "https://thewelllivedcitizenco.com/services",
+          "https://thewelllivedcitizenco.com/services/home-organization",
+          "https://thewelllivedcitizenco.com/services/legacy",
+          "https://thewelllivedcitizenco.com/services/house-calls",
+          "https://thewelllivedcitizenco.com/services/resale",
+          "https://thewelllivedcitizenco.com/about",
+          "https://thewelllivedcitizenco.com/pricing",
+          "https://thewelllivedcitizenco.com/contact"
+        ]
+      },
+      {
+        "file": "index.html",
+        "location": "Search Console verification",
+        "instruction": "Add Google Search Console verification meta tag after GSC verification is completed. This is a post-build step \u2014 Dayna to complete in GSC, then add tag.",
+        "priority": "post-launch"
+      }
+    ],
+    "indexing_root_cause": "Historical canonical mismatch (.com vs .co domain) plus sitemap instability across build iterations. Current canonical is correct. Clean rebuild with correct sitemap should resolve.",
+    "post_launch_checklist": [
+      "Submit clean sitemap in Google Search Console",
+      "Verify Search Console ownership",
+      "Confirm GA4 G-HN9C986JLW receiving data",
+      "Monitor coverage report for indexing confirmation"
+    ]
+  },
+  "file_audit": {
+    "date": "Apr 14 2026",
+    "files_clean": [
+      "Layout.tsx \u2014 nav, footer, mobile button, palette all correct",
+      "index.css \u2014 design system matches locked palette exactly",
+      "robots.txt \u2014 correct",
+      "live_site_reference_notes.md \u2014 reference only"
+    ],
+    "files_with_violations": [
+      "index.html \u2014 Special Delivery in Twitter + Schema descriptions",
+      "QA.tsx \u2014 ENTIRE FILE DEPRECATED. /qa route removed from architecture."
+    ],
+    "files_incomplete": [
+      "App.tsx provided was stripped version (only / and /pricing). Full route set confirmed in Handoff doc. Rebuild from site_architecture.public_routes above."
+    ]
+  },
+  "imagery": {
+    "LOCKED_SOURCE": "Dayna Brown \u2014 confirmed Apr 14 2026",
+    "approved_images": [
+      "Logo \u2014 black/cream version (well_lived_citizen_black_cream.png)",
+      "Logo \u2014 white/transparent version (well_lived_citizen_white_transparent.png)",
+      "Dayna's photo \u2014 provided by Dayna only"
+    ],
+    "NOT_approved": [
+      "AI-generated imagery of any kind",
+      "Stock photography",
+      "Placeholder scene images",
+      "CloudFront living room/legacy hero image \u2014 NOT approved unless Dayna explicitly confirms",
+      "Any image Manus or Claude sourced or generated independently"
+    ],
+    "rule": "If an image slot exists and Dayna has not provided the image, leave the slot empty or use a solid color block from the palette. Do NOT fill with generated or sourced imagery.",
+    "manus_instruction": "Do NOT generate, source, or place any images. Logo and Dayna's photo are the only approved assets. All other image slots stay empty until Dayna provides files."
+  },
+  "session_openers": {
+    "LOCKED_SOURCE": "Confirmed Apr 14 2026",
+    "purpose": "Paste the relevant block at the start of every new session. Both tools start cold. These prompts restore context without re-explaining everything.",
+    "claude": {
+      "label": "Claude \u2014 paste at the start of every session involving The Well Lived Citizen Co.",
+      "prompt": "We are working on The Well Lived Citizen Co. (TheWellLivedCitizenCo.com).\n\nBefore doing anything:\n1. Read the welllivedcitizen-brand skill\n2. Query twlc_get_decision_lock\n3. Query twlc_get_build_rules\n\nSource of truth is the MCP server: welllivedcitizen-knowledge-base\nFull business name only \u2014 never AWLC, never abbreviate.\nNo copy, no CTAs, no pricing without querying the server first."
+    },
+    "manus": {
+      "label": "Manus \u2014 paste at the start of every build session",
+      "prompt": "You are building The Well Lived Citizen Co. website (TheWellLivedCitizenCo.com).\n\nBefore writing a single line of code:\n1. Call twlc_get_build_rules \u2014 read every rule before starting\n2. Call twlc_get_site_architecture \u2014 confirms routes, nav, layout baseline\n3. Call twlc_get_page for every page you are building before writing any copy\n4. Call twlc_check_term before using any service name or phrase\n\nRules that are never negotiable:\n- Full business name only: The Well Lived Citizen Co. Never AWLC.\n- No AI-generated images. No stock images. Logo and Dayna's photo only.\n- No /qa route. It does not exist.\n- No Special Delivery. It does not exist.\n- All copy comes from twlc_get_page. You do not write copy.\n- All pricing comes from twlc_get_pricing. You do not invent pricing.\n- Git: DELETE existing repo. Clean rebuild only.\n\nThe MCP server is your only source of truth. Not previous sessions. Not old files. Not your training data. The server."
+    },
+    "gemini": {
+      "label": "Gemini \u2014 paste when asking for tone or copy polish",
+      "prompt": "You are polishing copy for The Well Lived Citizen Co. (TheWellLivedCitizenCo.com) by Dayna Brown.\n\nYour job is tone and flow only. You do not make content decisions.\n\nRules:\n- Do not change service names. Exact names are locked.\n- Do not change pricing. Do not reference pricing at all.\n- Do not add services, referrals, or capabilities not in the draft.\n- Do not use: Special Delivery, AWLC, elder care, estate sales, luxury organizing.\n- Full business name only: The Well Lived Citizen Co.\n- Polish the draft. Do not rewrite it. Do not reframe it.\n- Return the polished version only. No commentary."
+    },
+    "cowork": {
+      "label": "Cowork \u2014 paste at the start of every Cowork session",
+      "prompt": "You are managing files and tasks for The Well Lived Citizen Co. (TheWellLivedCitizenCo.com) by Dayna Brown.\n\nBefore doing anything:\n1. You are NOT a builder. You do not write copy. You do not make content decisions.\n2. Full business name only: The Well Lived Citizen Co. Never AWLC.\n3. Do not rename files in ways that drift from the locked naming conventions.\n4. Do not touch any live site files without explicit instruction from Dayna.\n5. Do not install, configure, or connect any new tools without explicit instruction.\n\nYour lane:\n- File management and organization\n- Moving assets to correct folders\n- Running defined, specific tasks Dayna gives you\n- Automating repetitive manual steps\n\nIf a task involves copy, pricing, service names, or anything site-related \u2014 stop and flag it. Those decisions live in the MCP server: welllivedcitizen-knowledge-base.\n\nAsk one clarifying question if needed. Then execute exactly what was asked. Nothing more."
+    }
+  }
+}
