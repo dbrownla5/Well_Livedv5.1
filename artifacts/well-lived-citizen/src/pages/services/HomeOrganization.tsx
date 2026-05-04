@@ -24,8 +24,8 @@ export default function HomeOrganization() {
 
           <div style={{ background: "var(--char)", padding: "36px", margin: "40px 0" }}>
             <div style={{ fontSize: "11px", fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--sand)", marginBottom: "14px" }}>Why this works.</div>
-            <p style={{ fontSize: "15px", color: "var(--cream)", lineHeight: 1.8, marginBottom: "12px" }}>I don't just organize. I spent over 15 years leading large-scale operations and transformation initiatives for national retail brands. I know how systems flow, how inventory moves, and where bottlenecks happen.</p>
-            <p style={{ fontSize: "15px", color: "rgba(245,240,232,.78)", lineHeight: 1.8 }}>I take the operational logic of a corporate environment and apply it to the room that keeps collecting piles. The result isn't just a space that looks good for a day. It's a living system shaped around your real habits.</p>
+            <p style={{ fontSize: "15px", color: "var(--cream)", lineHeight: 1.8, marginBottom: "12px" }}>The same discipline that reorganized 150 retail stores across 14 states, that led a Seattle flagship to its highest sales year in company history, that rebuilt organizations from startup to scale — applied to the places where people actually live.</p>
+            <p style={{ fontSize: "15px", color: "rgba(245,240,232,.78)", lineHeight: 1.8 }}>I know where systems break, where bottlenecks hide, and how to build something that holds. The result isn't a space that looks good for a day. It's a living system shaped around your real habits.</p>
           </div>
 
           <h2 style={{ fontSize: "18px", fontWeight: 700, color: "var(--char)", margin: "40px 0 16px" }}>How we can work together</h2>
