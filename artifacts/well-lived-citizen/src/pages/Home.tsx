@@ -30,39 +30,37 @@ export default function Home() {
         <div className="container">
           <div className="conversion-grid-4">
 
-            {/* Card 1 — The 4x5 */}
+            {/* Card 1 — The Four x Five */}
             <div className="conversion-block conversion-block-primary">
-              <div className="conversion-price">THE FOUR HOUR</div>
-              <div className="conversion-title">Call it a reset, an assist, a good start. It's a block that creates movement you can see — wherever you feel it.</div>
+              <div className="conversion-price">$500 · Four Hours · Flat Rate</div>
+              <div className="conversion-title">The Four&nbsp;x&nbsp;Five</div>
               <div className="conversion-body">
-                <p>The room that keeps collecting piles. The move that technically happened but never settled. The closet that no longer fits your life.</p>
-                <p>No project scopes, no hourly counting. You point to the friction. I bring the momentum.</p>
-                <p>Four hours. Five hundred flat.</p>
+                <p>The room that keeps collecting piles. The move that technically happened but never settled. The closet that no longer fits your life. The guest room that needs to look like you always keep it that way — because your mother-in-law just texted.</p>
+                <p>Book it within the week. Use it for whatever's stuck.</p>
               </div>
-              <Link href="/contact?offer=4hour" className="btn btn-cream">Book a 4x5</Link>
+              <Link href="/contact?offer=4hour" className="btn btn-cream">Book the Four x Five</Link>
             </div>
 
-            {/* Card 2 — The 2x3 */}
+            {/* Card 2 — House Call */}
             <div className="conversion-block conversion-block-light">
-              <div className="conversion-price conversion-price-dark">Two hours. Three hundred flat.</div>
-              <div className="conversion-title conversion-title-dark">The 2x3</div>
+              <div className="conversion-price conversion-price-dark">2 Hours · At Your Door</div>
+              <div className="conversion-title conversion-title-dark">House Call</div>
               <div className="conversion-body conversion-body-dark">
-                <p>Same joke. Two hours, three hundred dollars.</p>
-                <p>The donation bags by the front door. The vendor who needs letting in. The baby gear still in the corner three weeks after the shower. The thing you keep saying you'll get to.</p>
-                <p>You used to have someone you could call for this. Now you just book a 2x3.</p>
+                <p>The Alexa your parents don't know how to use. The vendor who needs letting in. The baby gear still in the corner three weeks after the shower. The donation bags that have been by the front door since Tuesday.</p>
+                <p>You used to have someone you could call for this.</p>
               </div>
-              <Link href="/contact?offer=housecall" className="btn btn-dark">Book a 2x3</Link>
+              <Link href="/contact?offer=housecall" className="btn btn-dark">Book a House Call</Link>
             </div>
 
             {/* Card 3 — Resale Pickup */}
             <div className="conversion-block conversion-block-rust">
-              <div className="conversion-price">Commission-based · pickup available</div>
-              <div className="conversion-title">Resale Pickup Bag</div>
+              <div className="conversion-price">Commission-based · No photos, no listings, no hassle</div>
+              <div className="conversion-title">Schedule a Pickup</div>
               <div className="conversion-body">
-                <p>Moving, closet cleanout, post-breakup, wardrobe reset. Fill 2 to 4 bags and get them to me same day.</p>
+                <p>Moving, closet cleanout, post-breakup, wardrobe reset — whatever you think could sell, probably can. Fill the bags I send you, I handle the rest: sorting, routing, selling, receipts. You get a check. I handle the questions.</p>
                 <p>Same-day pickup or courier handoff available.</p>
               </div>
-              <Link href="/contact?offer=pickup" className="btn btn-cream">Schedule a Pickup</Link>
+              <Link href="/contact?offer=pickup" className="btn btn-cream">Order Your Bags</Link>
             </div>
 
             {/* Card 4 — Move Closeout */}
@@ -70,8 +68,7 @@ export default function Home() {
               <div className="conversion-price">Scoped after a quick call</div>
               <div className="conversion-title">The Move Closeout</div>
               <div className="conversion-body">
-                <p>You go to the new city. I stay behind to pack and close out the space — move what should store, route what should sell, ship what you still need in labeled boxes.</p>
-                <p>The move continues in flexible chunks without you carrying the urgency from the other end.</p>
+                <p>You go to the new city. I stay behind — pack what should store, route what should sell, ship what you still need in labeled boxes. The move wraps in flexible chunks without you carrying the urgency from the other end.</p>
               </div>
               <Link href="/contact?offer=closeout" className="btn btn-cream">Start Move Support</Link>
             </div>
@@ -115,7 +112,7 @@ export default function Home() {
             <div className="service-body">
               <p>That's the thing friends used to do. The thing neighbors don't always have time for anymore. The thing adult children need when they're in another city. Once I know how your home works, it becomes easy for me to help keep it working — home check-ins, tech setup, donation drop-offs, and the practical loose ends that make everyday life easier when someone trusted is paying attention.</p>
             </div>
-            <div className="service-pricing">The 2x3 · $300 flat &nbsp;|&nbsp; The 4x5 · $500 flat &nbsp;|&nbsp; $175/hr</div>
+            <div className="service-pricing">House Call · 2 hrs &nbsp;|&nbsp; The Four x Five · $500 flat &nbsp;|&nbsp; $175/hr</div>
             <div className="service-flex-note">Continuity retainer available. Details on the <Link href="/pricing" style={{ color: "var(--rust)" }}>Pricing page</Link>.</div>
             <Link href="/services/house-calls" className="btn btn-outline">Book me</Link>
           </div>
