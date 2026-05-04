@@ -4,14 +4,14 @@ import { usePageMeta } from "../../hooks/usePageMeta";
 export default function CuratedResale() {
   usePageMeta({
     title: "Curated Resale & Consignment",
-    description: "Trust-forward thoughtful curation. Pickup, evaluation, photography, platform matching, and payout — without making you a part-time reseller.",
+    description: "Is it cool? Is it sellable? Will they even take it? Piece-by-piece curation from someone who knows the platforms — pickup through payout.",
   });
   return (
     <div className="page">
       <section style={{ padding: "80px 0 56px", borderBottom: "1px solid var(--linen)" }}>
         <div className="container" style={{ maxWidth: "760px" }}>
           <div className="label">04 — Curated Resale & Consignment</div>
-          <h1 style={{ fontSize: "clamp(28px,4vw,48px)", fontWeight: 700, color: "var(--char)", lineHeight: 1.15, letterSpacing: "-0.02em", marginBottom: "16px" }}>Trust-forward thoughtful curation.</h1>
+          <h1 style={{ fontSize: "clamp(28px,4vw,48px)", fontWeight: 700, color: "var(--char)", lineHeight: 1.15, letterSpacing: "-0.02em", marginBottom: "16px" }}>Is it cool? Is it sellable? Will they even take it?</h1>
           <p style={{ fontSize: "17px", color: "var(--stone)", lineHeight: 1.75, maxWidth: "600px" }}>For the things that still have value, story, or second-market potential — without asking you to become a part-time reseller.</p>
         </div>
       </section>

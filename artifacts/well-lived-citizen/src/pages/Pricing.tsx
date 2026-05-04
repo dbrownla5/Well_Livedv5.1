@@ -4,7 +4,7 @@ import { usePageMeta } from "../hooks/usePageMeta";
 export default function Pricing() {
   usePageMeta({
     title: "Pricing",
-    description: "Flat-rate quick books (4x5, 2x3), hourly, flex blocks, projects, and continuity. Clear pricing for concierge home services in Los Angeles.",
+    description: "Flat-rate quick books, hourly, flex blocks, projects, and continuity. Clear pricing for concierge home services in Los Angeles.",
   });
   return (
     <div className="page">
@@ -24,11 +24,11 @@ export default function Pricing() {
             <table className="pricing-table pricing-table-dark">
               <tbody>
                 <tr>
-                  <td style={{ color: "var(--cream)", fontWeight: 600 }}>The 4x5 — 4-Hour Reset</td>
+                  <td style={{ color: "var(--cream)", fontWeight: 600 }}>4-Hour Practical Reset</td>
                   <td style={{ color: "var(--cream)" }}>$500 flat · no project scope, no hourly count</td>
                 </tr>
                 <tr>
-                  <td style={{ color: "var(--cream)", fontWeight: 600 }}>The 2x3 — 2-Hour House Call</td>
+                  <td style={{ color: "var(--cream)", fontWeight: 600 }}>2-Hour House Call</td>
                   <td style={{ color: "var(--cream)" }}>$300 flat · fixed price, book directly</td>
                 </tr>
               </tbody>
@@ -79,14 +79,14 @@ export default function Pricing() {
             <div className="label">03 — House Calls</div>
             <table className="pricing-table">
               <tbody>
-                <tr><td>The 2x3 — 2-Hour House Call</td><td>$300 flat</td></tr>
-                <tr><td>Hourly (beyond the 2x3)</td><td>$175/hr · 2 hr minimum</td></tr>
-                <tr><td>The 4x5 — 4-Hour Practical Reset</td><td>$500 flat</td></tr>
+                <tr><td>2-Hour House Call</td><td>$300 flat</td></tr>
+                <tr><td>Hourly</td><td>$175/hr · 2 hr minimum</td></tr>
+                <tr><td>4-Hour Practical Reset</td><td>$500 flat</td></tr>
                 <tr><td>Continuity Retainer</td><td>$500/mo — ongoing access for recurring support</td></tr>
               </tbody>
             </table>
             <p style={{ fontSize: "12px", color: "var(--sand)", marginTop: "8px" }}>No membership. No subscription. Ease comes from relationship, not a forced plan. Retainer includes priority scheduling and dedicated continuity across sessions.</p>
-            <p style={{ fontSize: "12px", color: "var(--sand)", marginTop: "8px" }}>Tech setup, troubleshooting, and bulk donation routing all fit inside a House Call — usually a 2x3 if it's contained, or a 4x5 if it's stacked with other practical loose ends.</p>
+            <p style={{ fontSize: "12px", color: "var(--sand)", marginTop: "8px" }}>Tech setup, troubleshooting, and bulk donation routing all fit inside a House Call — a 2-hour block if it's contained, or the 4-hour reset if it's stacked with other practical loose ends.</p>
           </div>
 
           <hr className="divider" style={{ marginBottom: "56px" }} />

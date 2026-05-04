@@ -54,14 +54,14 @@ export default function Home() {
             {/* Card 1 — 4-Hour Practical Reset */}
             <div className="conversion-block">
               <div className="conversion-label">Ready to move on it?</div>
-              <div className="conversion-body">Book the 4-Hour Practical Reset for the room, task list, move landing, or household overflow that needs to stop catching immediately.</div>
+              <div className="conversion-body">The room that keeps collecting piles. The task list that keeps moving to tomorrow. The move landing that technically happened but never settled. Four hours. I come in, find the friction, and make it move.</div>
               <Link href="/contact?offer=4hour" className="btn">Book 4-Hour Reset</Link>
             </div>
 
             {/* Card 2 — Resale Pickup */}
             <div className="conversion-block">
               <div className="conversion-label">Resale bag pickup.</div>
-              <div className="conversion-body">Moving, closet cleanout, post-breakup, wardrobe reset — fill 2 to 4 totes and get them to me same day.<br /><br />Same-day pickup or courier handoff available.</div>
+              <div className="conversion-body">Moving, closet cleanout, post-breakup, wardrobe reset — fill 2 to 4 totes and get them to me same day. The handoff is intentionally easy — pickup, courier, or during another project block.</div>
               <Link href="/contact?offer=pickup" className="btn">Schedule Pickup</Link>
             </div>
 

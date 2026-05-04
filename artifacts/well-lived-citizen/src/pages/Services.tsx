@@ -57,7 +57,7 @@ export default function Services() {
           <div className="service-card" style={{ borderBottom: "none" }}>
             <div className="service-num">04</div>
             <div className="service-title">Curated Resale & Consignment</div>
-            <div className="service-tagline">Trust-forward thoughtful curation.</div>
+            <div className="service-tagline">Is it cool? Is it sellable? Will they even take it?</div>
             <div className="service-body">
               <p>For the things that still have value, story, or second-market potential — without asking you to become a part-time reseller. No item count minimum. Fill what you have and send it when it's ready.</p>
             </div>

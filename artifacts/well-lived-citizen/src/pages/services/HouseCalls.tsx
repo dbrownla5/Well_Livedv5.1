@@ -4,7 +4,7 @@ import { usePageMeta } from "../../hooks/usePageMeta";
 export default function HouseCalls() {
   usePageMeta({
     title: "House Calls",
-    description: "For the things life leaves unfinished. The 2x3, the 4x5, hourly, and continuity retainer — concierge house calls in Los Angeles.",
+    description: "For the things life leaves unfinished. Fixed rate, hourly, and continuity — concierge house calls in Los Angeles.",
   });
   return (
     <div className="page">
@@ -60,7 +60,7 @@ export default function HouseCalls() {
               "Home re-entry after travel",
               "Guest and event prep",
               "Remote family check-ins",
-              "The 4x5 — a 4-hour focused reset",
+              "4-Hour Practical Reset",
             ].map((item, i, arr) => (
               <li key={i} style={{ fontSize: "14px", color: "var(--ink)", padding: "8px 0", borderBottom: i < arr.length - 1 ? "1px solid var(--linen)" : "none" }}>{item}</li>
             ))}
@@ -99,18 +99,18 @@ export default function HouseCalls() {
           <h2 style={{ fontSize: "18px", fontWeight: 700, color: "var(--char)", margin: "0 0 20px" }}>Pricing</h2>
           <table className="pricing-table">
             <tbody>
-              <tr><td>The 2x3 — 2-Hour House Call</td><td>$300 flat</td></tr>
-              <tr><td>The 4x5 — 4-Hour Practical Reset</td><td>$500 flat</td></tr>
+              <tr><td>2-Hour House Call</td><td>$300 flat</td></tr>
+              <tr><td>4-Hour Practical Reset</td><td>$500 flat</td></tr>
               <tr><td>Hourly (beyond a flat block)</td><td>$175/hr · 2 hr minimum</td></tr>
               <tr><td>Continuity Retainer</td><td>$500/mo</td></tr>
             </tbody>
           </table>
           <p style={{ fontSize: "12px", color: "var(--sand)", marginTop: "8px" }}>No membership. No subscription. Ease comes from relationship, not a forced plan. Retainer includes priority scheduling and dedicated continuity across sessions.</p>
-          <p style={{ fontSize: "12px", color: "var(--sand)", marginTop: "8px", marginBottom: "48px" }}>Tech setup, troubleshooting, and bulk donation routing all fit inside a House Call — usually a 2x3 if it's contained, or a 4x5 if it's stacked with other practical loose ends.</p>
+          <p style={{ fontSize: "12px", color: "var(--sand)", marginTop: "8px", marginBottom: "48px" }}>Tech setup, troubleshooting, and bulk donation routing all fit inside a House Call — a 2-hour block if it's contained, or the 4-hour reset if it's stacked with other practical loose ends.</p>
 
           <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
-            <Link href="/contact?offer=housecall" className="btn btn-dark">Book a 2x3</Link>
-            <Link href="/contact?offer=4hour" className="btn btn-outline">Book a 4x5</Link>
+            <Link href="/contact?offer=housecall" className="btn btn-dark">Book a House Call</Link>
+            <Link href="/contact?offer=4hour" className="btn btn-outline">Book a 4-Hour Reset</Link>
             <Link href="/services" style={{ fontSize: "12px", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--stone)", display: "flex", alignItems: "center", textDecoration: "none" }}>← All Services</Link>
           </div>
         </div>
