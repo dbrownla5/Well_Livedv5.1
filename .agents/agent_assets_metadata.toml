@@ -4,10 +4,10 @@ uploads = []
 id = "EgLOpqvQsF05yys8fo2s_"
 uri = "file://artifacts/well-lived-citizen/public/images/hero-bg.png"
 type = "image"
-title = "wlc hero bg warm LA interior"
+title = "wlc hero bg v2 crystal candles"
 
 [[outputs]]
 id = "ldsDVTpJDuSS7WYpfS4y4"
 uri = "file://artifacts/well-lived-citizen/public/images/hero-bg.png"
 type = "image"
-title = "Hero Background — WLC"
+title = "Hero Background v2 — crystal, candles, LA books"
