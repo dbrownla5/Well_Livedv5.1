@@ -196,6 +196,7 @@ function Router() {
     <Switch>
       <Route path="/" component={HomeRedirect} />
       <Route path="/sign-in/*?" component={SignInPage} />
+      <Route path="/login" component={SignInPage} />
       <Route path="/inventory">
         <ProtectedRoute component={Inventory} />
       </Route>
