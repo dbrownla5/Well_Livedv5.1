@@ -88,6 +88,28 @@ interface ListingCopyState {
   facebook: CopyPlatform;
 }
 
+function isCopyPlatform(v: unknown): v is CopyPlatform {
+  if (!v || typeof v !== "object") return false;
+  const o = v as Record<string, unknown>;
+  return typeof o["title"] === "string" && typeof o["description"] === "string";
+}
+
+function isListingCopyState(v: unknown): v is ListingCopyState {
+  if (!v || typeof v !== "object") return false;
+  const o = v as Record<string, unknown>;
+  return isCopyPlatform(o["poshmark"]) && isCopyPlatform(o["ebay"]) &&
+         isCopyPlatform(o["etsy"]) && isCopyPlatform(o["facebook"]);
+}
+
+function isMarketSourceArray(v: unknown): v is MarketSource[] {
+  if (!Array.isArray(v)) return false;
+  return v.every(
+    (s) => s && typeof s === "object" &&
+      typeof (s as Record<string, unknown>)["platform"] === "string" &&
+      typeof (s as Record<string, unknown>)["price"] === "number",
+  );
+}
+
 function PublishStatusBadge({ status }: { status: string }) {
   const map: Record<string, { label: string; variant: "default" | "secondary" | "destructive" | "outline" }> = {
     Listed: { label: "Listed", variant: "default" },
@@ -146,8 +168,8 @@ export default function InventoryItem() {
         color: item.color || "",
         condition: item.condition || "",
         conditionNotes: item.conditionNotes || "",
-        style: (item as unknown as { style?: string | null }).style || "",
-        fabric: (item as unknown as { fabric?: string | null }).fabric || "",
+        style: item.style || "",
+        fabric: item.fabric || "",
         marketPrice: item.marketPrice || "",
         floorPrice: item.floorPrice || "",
         platform: item.platform || "",
@@ -156,7 +178,7 @@ export default function InventoryItem() {
         shippingLogic: item.shippingLogic || "",
         listingDescription: item.listingDescription || "",
       });
-      if (item.priceRangeLow && item.marketSources) {
+      if (item.priceRangeLow && isMarketSourceArray(item.marketSources)) {
         setPricing({
           itemId: item.id,
           priceLow: Number(item.priceRangeLow),
@@ -164,11 +186,11 @@ export default function InventoryItem() {
           estimatedDaysToSell: item.estimatedDaysToSell ?? 30,
           recommendedPlatform: item.recommendedPlatform ?? item.platform,
           platformRationale: item.platformRationale ?? "",
-          sources: (item.marketSources as MarketSource[]) ?? [],
+          sources: item.marketSources,
         });
       }
-      if (item.listingCopy) {
-        setListingCopy(item.listingCopy as ListingCopyState);
+      if (isListingCopyState(item.listingCopy)) {
+        setListingCopy(item.listingCopy);
       }
       setPublishResult(null);
     }

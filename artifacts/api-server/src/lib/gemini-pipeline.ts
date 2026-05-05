@@ -392,9 +392,11 @@ No prose, no markdown fences. Just the JSON.`;
     const title = scrubForbidden(coerceString(raw["title"]) ?? `${item.brand} ${item.model}`).slice(0, 80);
     const description = scrubForbidden(coerceString(raw["description"]) ?? "");
     const hashtags = Array.isArray(raw["hashtags"])
-      ? (raw["hashtags"] as unknown[]).filter((h) => typeof h === "string").map((h) => h as string)
+      ? (raw["hashtags"] as unknown[])
+          .filter((h): h is string => typeof h === "string")
+          .map((h) => scrubForbidden(h))
       : [];
-    const measurements = coerceString(raw["measurements"]) ?? "";
+    const measurements = scrubForbidden(coerceString(raw["measurements"]) ?? "");
     return { title, description, hashtags, measurements };
   }
 
