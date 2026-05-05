@@ -54,3 +54,9 @@ channel = "stable-25_05"
 
 [userenv.shared]
 OPERATOR_EMAILS = "dayna@daynabrown.com,operator@daynabrown.com"
+
+[userenv.development]
+Admin = "Daynabrown310@gmail.com"
+
+[userenv.production]
+Admin = "Daynabrown310@gmail.com"
