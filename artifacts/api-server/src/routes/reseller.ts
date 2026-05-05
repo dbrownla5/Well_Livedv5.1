@@ -334,12 +334,8 @@ router.post("/reseller/ai/analyze-batch", async (req, res): Promise<void> => {
     res.status(400).json({ error: parsed.error.message });
     return;
   }
-  const { jobId, photos, operatorEmail } = parsed.data;
-  const operator =
-    operatorEmail ??
-    (typeof req.headers["x-operator-email"] === "string"
-      ? req.headers["x-operator-email"]
-      : null);
+  const { jobId, photos } = parsed.data;
+  const operator = req.operatorEmail ?? null;
 
   const [job] = await db
     .select()

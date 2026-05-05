@@ -534,8 +534,6 @@ components:
       properties:
         jobId:
           type: integer
-        operatorEmail:
-          type: ["string", "null"]
         photos:
           type: array
           items:

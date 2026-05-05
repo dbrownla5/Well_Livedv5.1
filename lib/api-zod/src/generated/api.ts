@@ -295,7 +295,6 @@ export const GetDashboardSummaryResponse = zod.object({
 
 export const AnalyzePhotoBatchBody = zod.object({
   jobId: zod.number(),
-  operatorEmail: zod.string().nullish(),
   photos: zod
     .array(
       zod.object({

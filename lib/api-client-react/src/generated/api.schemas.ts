@@ -142,8 +142,6 @@ export interface AnalyzeBatchPhoto {
 
 export interface AnalyzeBatchBody {
   jobId: number;
-  /** @nullable */
-  operatorEmail?: string | null;
   /** @minItems 1 */
   photos: AnalyzeBatchPhoto[];
 }

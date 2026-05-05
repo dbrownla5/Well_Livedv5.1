@@ -10,7 +10,6 @@ import {
 } from "@workspace/api-client-react";
 import { useQueryClient } from "@tanstack/react-query";
 import { useToast } from "@/hooks/use-toast";
-import { useUser } from "@clerk/react";
 
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -27,7 +26,6 @@ export default function JobDetail() {
   const [, setLocation] = useLocation();
   const { toast } = useToast();
   const queryClient = useQueryClient();
-  const { user } = useUser();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const { data: job, isLoading: jobLoading, error } = useGetJob(id);
@@ -90,7 +88,6 @@ export default function JobDetail() {
         {
           data: {
             jobId: id,
-            operatorEmail: user?.primaryEmailAddress?.emailAddress ?? user?.id ?? undefined,
             photos
           }
         },
