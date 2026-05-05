@@ -2,6 +2,18 @@ import type { RequestHandler } from "express";
 import { getAuth, clerkClient } from "@clerk/express";
 import type { EmailAddress } from "@clerk/express";
 
+function parseAllowlist(raw: string | undefined): Set<string> {
+  if (!raw) return new Set();
+  return new Set(
+    raw
+      .split(",")
+      .map((s) => s.trim().toLowerCase())
+      .filter((s) => s.length > 0),
+  );
+}
+
+const allowlist = parseAllowlist(process.env.OPERATOR_EMAILS);
+
 export const requireOperator: RequestHandler = async (req, res, next) => {
   const auth = getAuth(req);
   const userId = auth?.userId;
@@ -21,6 +33,12 @@ export const requireOperator: RequestHandler = async (req, res, next) => {
     if (!email) {
       req.log.warn({ userId }, "Clerk user has no email address");
       res.status(403).json({ error: "Operator email not found" });
+      return;
+    }
+
+    if (allowlist.size > 0 && !allowlist.has(email.toLowerCase())) {
+      req.log.warn({ email }, "Rejected non-allowlisted operator");
+      res.status(403).json({ error: "Operator not authorized" });
       return;
     }
 
