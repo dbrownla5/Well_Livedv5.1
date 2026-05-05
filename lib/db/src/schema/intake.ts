@@ -1,6 +1,6 @@
 import { pgTable, serial, text, timestamp, jsonb } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
-import { z } from "zod";
+import type { z } from "zod";
 
 export const intakeSubmissions = pgTable("intake_submissions", {
   id: serial("id").primaryKey(),
@@ -15,11 +15,7 @@ export const intakeSubmissions = pgTable("intake_submissions", {
   status: text("status").default("new").notNull(),
 });
 
-export const insertIntakeSchema = createInsertSchema(intakeSubmissions).omit({
-  id: true,
-  createdAt: true,
-  status: true,
-});
-
-export type InsertIntake = z.infer<typeof insertIntakeSchema>;
+const _insertIntakeSchema = createInsertSchema(intakeSubmissions) as unknown as z.ZodTypeAny;
+export const insertIntakeSchema = _insertIntakeSchema;
 export type IntakeSubmission = typeof intakeSubmissions.$inferSelect;
+export type InsertIntake = typeof intakeSubmissions.$inferInsert;

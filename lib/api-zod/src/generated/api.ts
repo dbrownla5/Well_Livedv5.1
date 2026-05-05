@@ -8,9 +8,336 @@
 import * as zod from "zod";
 
 /**
- * Returns server health status
  * @summary Health check
  */
 export const HealthCheckResponse = zod.object({
   status: zod.string(),
+});
+
+/**
+ * @summary List clients
+ */
+export const ListClientsResponseItem = zod.object({
+  id: zod.number(),
+  createdAt: zod.coerce.date(),
+  name: zod.string(),
+  household: zod.string().nullish(),
+  contactEmail: zod.string().nullish(),
+  contactPhone: zod.string().nullish(),
+  notes: zod.string().nullish(),
+});
+export const ListClientsResponse = zod.array(ListClientsResponseItem);
+
+/**
+ * @summary Create a client
+ */
+
+export const CreateClientBody = zod.object({
+  name: zod.string().min(1),
+  household: zod.string().nullish(),
+  contactEmail: zod.string().nullish(),
+  contactPhone: zod.string().nullish(),
+  notes: zod.string().nullish(),
+});
+
+export const CreateClientResponse = zod.object({
+  id: zod.number(),
+  createdAt: zod.coerce.date(),
+  name: zod.string(),
+  household: zod.string().nullish(),
+  contactEmail: zod.string().nullish(),
+  contactPhone: zod.string().nullish(),
+  notes: zod.string().nullish(),
+});
+
+/**
+ * @summary Get a client
+ */
+export const GetClientParams = zod.object({
+  clientId: zod.coerce.number(),
+});
+
+export const GetClientResponse = zod.object({
+  id: zod.number(),
+  createdAt: zod.coerce.date(),
+  name: zod.string(),
+  household: zod.string().nullish(),
+  contactEmail: zod.string().nullish(),
+  contactPhone: zod.string().nullish(),
+  notes: zod.string().nullish(),
+});
+
+/**
+ * @summary List jobs
+ */
+export const ListJobsQueryParams = zod.object({
+  clientId: zod.coerce.number().optional(),
+});
+
+export const ListJobsResponseItem = zod.object({
+  id: zod.number(),
+  createdAt: zod.coerce.date(),
+  clientId: zod.number(),
+  title: zod.string(),
+  jobType: zod.string(),
+  status: zod.string(),
+  notes: zod.string().nullish(),
+  clientName: zod.string().nullish(),
+  itemCount: zod.number().nullish(),
+});
+export const ListJobsResponse = zod.array(ListJobsResponseItem);
+
+/**
+ * @summary Create a job
+ */
+
+export const createJobBodyJobTypeDefault = `estate-clearout`;
+export const createJobBodyStatusDefault = `active`;
+
+export const CreateJobBody = zod.object({
+  clientId: zod.number(),
+  title: zod.string().min(1),
+  jobType: zod.string().default(createJobBodyJobTypeDefault),
+  status: zod.string().default(createJobBodyStatusDefault),
+  notes: zod.string().nullish(),
+});
+
+export const CreateJobResponse = zod.object({
+  id: zod.number(),
+  createdAt: zod.coerce.date(),
+  clientId: zod.number(),
+  title: zod.string(),
+  jobType: zod.string(),
+  status: zod.string(),
+  notes: zod.string().nullish(),
+  clientName: zod.string().nullish(),
+  itemCount: zod.number().nullish(),
+});
+
+/**
+ * @summary Get a job
+ */
+export const GetJobParams = zod.object({
+  jobId: zod.coerce.number(),
+});
+
+export const GetJobResponse = zod.object({
+  id: zod.number(),
+  createdAt: zod.coerce.date(),
+  clientId: zod.number(),
+  title: zod.string(),
+  jobType: zod.string(),
+  status: zod.string(),
+  notes: zod.string().nullish(),
+  clientName: zod.string().nullish(),
+  itemCount: zod.number().nullish(),
+});
+
+/**
+ * @summary List inventory items
+ */
+export const ListItemsQueryParams = zod.object({
+  jobId: zod.coerce.number().optional(),
+  clientId: zod.coerce.number().optional(),
+  platform: zod.coerce.string().optional(),
+  status: zod.coerce.string().optional(),
+});
+
+export const ListItemsResponseItem = zod.object({
+  id: zod.number(),
+  createdAt: zod.coerce.date(),
+  updatedAt: zod.coerce.date(),
+  jobId: zod.number(),
+  clientId: zod.number(),
+  brand: zod.string(),
+  model: zod.string(),
+  marketPrice: zod.string().nullish(),
+  floorPrice: zod.string().nullish(),
+  platform: zod.string(),
+  shippingLogic: zod.string().nullish(),
+  status: zod.string(),
+  disposition: zod.string(),
+  listingDescription: zod.string().nullish(),
+  createdBy: zod.string().nullish(),
+  clientName: zod.string().nullish(),
+  jobTitle: zod.string().nullish(),
+});
+export const ListItemsResponse = zod.array(ListItemsResponseItem);
+
+/**
+ * @summary Get an inventory item
+ */
+export const GetItemParams = zod.object({
+  itemId: zod.coerce.number(),
+});
+
+export const GetItemResponse = zod.object({
+  id: zod.number(),
+  createdAt: zod.coerce.date(),
+  updatedAt: zod.coerce.date(),
+  jobId: zod.number(),
+  clientId: zod.number(),
+  brand: zod.string(),
+  model: zod.string(),
+  marketPrice: zod.string().nullish(),
+  floorPrice: zod.string().nullish(),
+  platform: zod.string(),
+  shippingLogic: zod.string().nullish(),
+  status: zod.string(),
+  disposition: zod.string(),
+  listingDescription: zod.string().nullish(),
+  createdBy: zod.string().nullish(),
+  clientName: zod.string().nullish(),
+  jobTitle: zod.string().nullish(),
+});
+
+/**
+ * @summary Update an inventory item
+ */
+export const UpdateItemParams = zod.object({
+  itemId: zod.coerce.number(),
+});
+
+export const UpdateItemBody = zod.object({
+  brand: zod.string().optional(),
+  model: zod.string().optional(),
+  marketPrice: zod.string().nullish(),
+  floorPrice: zod.string().nullish(),
+  platform: zod.string().optional(),
+  shippingLogic: zod.string().nullish(),
+  status: zod.string().optional(),
+  disposition: zod.string().optional(),
+  listingDescription: zod.string().nullish(),
+});
+
+export const UpdateItemResponse = zod.object({
+  id: zod.number(),
+  createdAt: zod.coerce.date(),
+  updatedAt: zod.coerce.date(),
+  jobId: zod.number(),
+  clientId: zod.number(),
+  brand: zod.string(),
+  model: zod.string(),
+  marketPrice: zod.string().nullish(),
+  floorPrice: zod.string().nullish(),
+  platform: zod.string(),
+  shippingLogic: zod.string().nullish(),
+  status: zod.string(),
+  disposition: zod.string(),
+  listingDescription: zod.string().nullish(),
+  createdBy: zod.string().nullish(),
+  clientName: zod.string().nullish(),
+  jobTitle: zod.string().nullish(),
+});
+
+/**
+ * @summary Delete an inventory item
+ */
+export const DeleteItemParams = zod.object({
+  itemId: zod.coerce.number(),
+});
+
+export const DeleteItemResponse = zod.object({
+  ok: zod.boolean(),
+});
+
+/**
+ * @summary Aggregate counts and pipeline value across inventory
+ */
+export const GetDashboardSummaryResponse = zod.object({
+  totalItems: zod.number(),
+  newItems: zod.number(),
+  duplicateItems: zod.number(),
+  donateItems: zod.number(),
+  totalClients: zod.number(),
+  totalJobs: zod.number(),
+  marketValue: zod.number(),
+  floorValue: zod.number(),
+  byPlatform: zod.array(
+    zod.object({
+      platform: zod.string(),
+      count: zod.number(),
+      marketValue: zod.number(),
+    }),
+  ),
+  byStatus: zod.array(
+    zod.object({
+      status: zod.string(),
+      count: zod.number(),
+    }),
+  ),
+  recentItems: zod.array(
+    zod.object({
+      id: zod.number(),
+      createdAt: zod.coerce.date(),
+      updatedAt: zod.coerce.date(),
+      jobId: zod.number(),
+      clientId: zod.number(),
+      brand: zod.string(),
+      model: zod.string(),
+      marketPrice: zod.string().nullish(),
+      floorPrice: zod.string().nullish(),
+      platform: zod.string(),
+      shippingLogic: zod.string().nullish(),
+      status: zod.string(),
+      disposition: zod.string(),
+      listingDescription: zod.string().nullish(),
+      createdBy: zod.string().nullish(),
+      clientName: zod.string().nullish(),
+      jobTitle: zod.string().nullish(),
+    }),
+  ),
+});
+
+/**
+ * @summary Run the v2 Gemini batch pipeline on a set of photos for a job
+ */
+
+export const AnalyzePhotoBatchBody = zod.object({
+  jobId: zod.number(),
+  operatorEmail: zod.string().nullish(),
+  photos: zod
+    .array(
+      zod.object({
+        filename: zod.string(),
+        mimeType: zod.string(),
+        dataBase64: zod
+          .string()
+          .describe("Base64-encoded image bytes (no data URL prefix)"),
+      }),
+    )
+    .min(1),
+});
+
+export const AnalyzePhotoBatchResponse = zod.object({
+  items: zod.array(
+    zod.object({
+      brand: zod.string(),
+      model: zod.string(),
+      marketPrice: zod.string().nullish(),
+      floorPrice: zod.string().nullish(),
+      platform: zod.string(),
+      shippingLogic: zod.string().nullish(),
+      status: zod.string().describe("New | Duplicate"),
+      disposition: zod.string().describe("list | donate | wipe-recycle"),
+      savedItemId: zod.number().nullish(),
+    }),
+  ),
+  savedCount: zod.number(),
+  duplicateCount: zod.number(),
+  donateCount: zod.number(),
+});
+
+/**
+ * @summary Generate an SEO-optimized platform-specific listing description for an item
+ */
+export const GenerateListingDescriptionBody = zod.object({
+  itemId: zod.number(),
+});
+
+export const GenerateListingDescriptionResponse = zod.object({
+  itemId: zod.number(),
+  platform: zod.string(),
+  title: zod.string(),
+  description: zod.string(),
 });

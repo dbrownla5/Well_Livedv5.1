@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/studio/"
+title = "DB Reseller Studio"
+version = "1.0.0"
+id = "artifacts/reseller-studio"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/studio/" ]
+localPort = 8082
+
+[services.development]
+run = "pnpm --filter @workspace/reseller-studio run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/reseller-studio", "run", "build" ]
+publicDir = "artifacts/reseller-studio/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "8082"
+BASE_PATH = "/studio/"

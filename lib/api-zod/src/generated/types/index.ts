@@ -6,4 +6,22 @@
  * OpenAPI spec version: 0.1.0
  */
 
+export * from "./analyzeBatchBody";
+export * from "./analyzeBatchPhoto";
+export * from "./analyzeBatchResult";
+export * from "./analyzedItem";
+export * from "./client";
+export * from "./clientInput";
+export * from "./dashboardSummary";
 export * from "./healthStatus";
+export * from "./item";
+export * from "./itemUpdate";
+export * from "./job";
+export * from "./jobInput";
+export * from "./listingDescriptionBody";
+export * from "./listingDescriptionResult";
+export * from "./listItemsParams";
+export * from "./listJobsParams";
+export * from "./okResponse";
+export * from "./platformBucket";
+export * from "./statusBucket";

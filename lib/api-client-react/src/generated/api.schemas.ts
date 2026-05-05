@@ -8,3 +8,189 @@
 export interface HealthStatus {
   status: string;
 }
+
+export interface OkResponse {
+  ok: boolean;
+}
+
+export interface Client {
+  id: number;
+  createdAt: string;
+  name: string;
+  /** @nullable */
+  household?: string | null;
+  /** @nullable */
+  contactEmail?: string | null;
+  /** @nullable */
+  contactPhone?: string | null;
+  /** @nullable */
+  notes?: string | null;
+}
+
+export interface ClientInput {
+  /** @minLength 1 */
+  name: string;
+  /** @nullable */
+  household?: string | null;
+  /** @nullable */
+  contactEmail?: string | null;
+  /** @nullable */
+  contactPhone?: string | null;
+  /** @nullable */
+  notes?: string | null;
+}
+
+export interface Job {
+  id: number;
+  createdAt: string;
+  clientId: number;
+  title: string;
+  jobType: string;
+  status: string;
+  /** @nullable */
+  notes?: string | null;
+  /** @nullable */
+  clientName?: string | null;
+  /** @nullable */
+  itemCount?: number | null;
+}
+
+export interface JobInput {
+  clientId: number;
+  /** @minLength 1 */
+  title: string;
+  jobType?: string;
+  status?: string;
+  /** @nullable */
+  notes?: string | null;
+}
+
+export interface Item {
+  id: number;
+  createdAt: string;
+  updatedAt: string;
+  jobId: number;
+  clientId: number;
+  brand: string;
+  model: string;
+  /** @nullable */
+  marketPrice?: string | null;
+  /** @nullable */
+  floorPrice?: string | null;
+  platform: string;
+  /** @nullable */
+  shippingLogic?: string | null;
+  status: string;
+  disposition: string;
+  /** @nullable */
+  listingDescription?: string | null;
+  /** @nullable */
+  createdBy?: string | null;
+  /** @nullable */
+  clientName?: string | null;
+  /** @nullable */
+  jobTitle?: string | null;
+}
+
+export interface ItemUpdate {
+  brand?: string;
+  model?: string;
+  /** @nullable */
+  marketPrice?: string | null;
+  /** @nullable */
+  floorPrice?: string | null;
+  platform?: string;
+  /** @nullable */
+  shippingLogic?: string | null;
+  status?: string;
+  disposition?: string;
+  /** @nullable */
+  listingDescription?: string | null;
+}
+
+export interface PlatformBucket {
+  platform: string;
+  count: number;
+  marketValue: number;
+}
+
+export interface StatusBucket {
+  status: string;
+  count: number;
+}
+
+export interface DashboardSummary {
+  totalItems: number;
+  newItems: number;
+  duplicateItems: number;
+  donateItems: number;
+  totalClients: number;
+  totalJobs: number;
+  marketValue: number;
+  floorValue: number;
+  byPlatform: PlatformBucket[];
+  byStatus: StatusBucket[];
+  recentItems: Item[];
+}
+
+export interface AnalyzeBatchPhoto {
+  filename: string;
+  mimeType: string;
+  /** Base64-encoded image bytes (no data URL prefix) */
+  dataBase64: string;
+}
+
+export interface AnalyzeBatchBody {
+  jobId: number;
+  /** @nullable */
+  operatorEmail?: string | null;
+  /** @minItems 1 */
+  photos: AnalyzeBatchPhoto[];
+}
+
+export interface AnalyzedItem {
+  brand: string;
+  model: string;
+  /** @nullable */
+  marketPrice?: string | null;
+  /** @nullable */
+  floorPrice?: string | null;
+  platform: string;
+  /** @nullable */
+  shippingLogic?: string | null;
+  /** New | Duplicate */
+  status: string;
+  /** list | donate | wipe-recycle */
+  disposition: string;
+  /** @nullable */
+  savedItemId?: number | null;
+}
+
+export interface AnalyzeBatchResult {
+  items: AnalyzedItem[];
+  savedCount: number;
+  duplicateCount: number;
+  donateCount: number;
+}
+
+export interface ListingDescriptionBody {
+  itemId: number;
+}
+
+export interface ListingDescriptionResult {
+  itemId: number;
+  platform: string;
+  title: string;
+  description: string;
+}
+
+export type ListJobsParams = {
+  clientId?: number;
+};
+
+export type ListItemsParams = {
+  jobId?: number;
+  clientId?: number;
+  platform?: string;
+  status?: string;
+};

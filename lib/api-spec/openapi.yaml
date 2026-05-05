@@ -10,13 +10,20 @@ servers:
 tags:
   - name: health
     description: Health operations
+  - name: clients
+    description: Reseller clients (households)
+  - name: jobs
+    description: Estate clear-out jobs
+  - name: items
+    description: Master inventory items
+  - name: ai
+    description: AI photo analysis and listing copy
 paths:
   /healthz:
     get:
       operationId: healthCheck
       tags: [health]
       summary: Health check
-      description: Returns server health status
       responses:
         "200":
           description: Healthy
@@ -24,6 +31,261 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+
+  /reseller/clients:
+    get:
+      operationId: listClients
+      tags: [clients]
+      summary: List clients
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Client"
+    post:
+      operationId: createClient
+      tags: [clients]
+      summary: Create a client
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ClientInput"
+      responses:
+        "200":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Client"
+
+  /reseller/clients/{clientId}:
+    get:
+      operationId: getClient
+      tags: [clients]
+      summary: Get a client
+      parameters:
+        - in: path
+          name: clientId
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Client"
+
+  /reseller/jobs:
+    get:
+      operationId: listJobs
+      tags: [jobs]
+      summary: List jobs
+      parameters:
+        - in: query
+          name: clientId
+          required: false
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Job"
+    post:
+      operationId: createJob
+      tags: [jobs]
+      summary: Create a job
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/JobInput"
+      responses:
+        "200":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Job"
+
+  /reseller/jobs/{jobId}:
+    get:
+      operationId: getJob
+      tags: [jobs]
+      summary: Get a job
+      parameters:
+        - in: path
+          name: jobId
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Job"
+
+  /reseller/items:
+    get:
+      operationId: listItems
+      tags: [items]
+      summary: List inventory items
+      parameters:
+        - in: query
+          name: jobId
+          required: false
+          schema:
+            type: integer
+        - in: query
+          name: clientId
+          required: false
+          schema:
+            type: integer
+        - in: query
+          name: platform
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: status
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Item"
+
+  /reseller/items/{itemId}:
+    get:
+      operationId: getItem
+      tags: [items]
+      summary: Get an inventory item
+      parameters:
+        - in: path
+          name: itemId
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Item"
+    patch:
+      operationId: updateItem
+      tags: [items]
+      summary: Update an inventory item
+      parameters:
+        - in: path
+          name: itemId
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ItemUpdate"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Item"
+    delete:
+      operationId: deleteItem
+      tags: [items]
+      summary: Delete an inventory item
+      parameters:
+        - in: path
+          name: itemId
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Deleted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OkResponse"
+
+  /reseller/dashboard/summary:
+    get:
+      operationId: getDashboardSummary
+      tags: [items]
+      summary: Aggregate counts and pipeline value across inventory
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DashboardSummary"
+
+  /reseller/ai/analyze-batch:
+    post:
+      operationId: analyzePhotoBatch
+      tags: [ai]
+      summary: Run the v2 Gemini batch pipeline on a set of photos for a job
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AnalyzeBatchBody"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnalyzeBatchResult"
+
+  /reseller/ai/listing-description:
+    post:
+      operationId: generateListingDescription
+      tags: [ai]
+      summary: Generate an SEO-optimized platform-specific listing description for an item
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ListingDescriptionBody"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListingDescriptionResult"
+
 components:
   schemas:
     HealthStatus:
@@ -31,6 +293,312 @@ components:
       properties:
         status:
           type: string
-      required:
-        - status
+      required: [status]
 
+    OkResponse:
+      type: object
+      properties:
+        ok:
+          type: boolean
+      required: [ok]
+
+    Client:
+      type: object
+      properties:
+        id:
+          type: integer
+        createdAt:
+          type: string
+          format: date-time
+        name:
+          type: string
+        household:
+          type: ["string", "null"]
+        contactEmail:
+          type: ["string", "null"]
+        contactPhone:
+          type: ["string", "null"]
+        notes:
+          type: ["string", "null"]
+      required: [id, createdAt, name]
+
+    ClientInput:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+        household:
+          type: ["string", "null"]
+        contactEmail:
+          type: ["string", "null"]
+        contactPhone:
+          type: ["string", "null"]
+        notes:
+          type: ["string", "null"]
+      required: [name]
+
+    Job:
+      type: object
+      properties:
+        id:
+          type: integer
+        createdAt:
+          type: string
+          format: date-time
+        clientId:
+          type: integer
+        title:
+          type: string
+        jobType:
+          type: string
+        status:
+          type: string
+        notes:
+          type: ["string", "null"]
+        clientName:
+          type: ["string", "null"]
+        itemCount:
+          type: ["integer", "null"]
+      required: [id, createdAt, clientId, title, jobType, status]
+
+    JobInput:
+      type: object
+      properties:
+        clientId:
+          type: integer
+        title:
+          type: string
+          minLength: 1
+        jobType:
+          type: string
+          default: estate-clearout
+        status:
+          type: string
+          default: active
+        notes:
+          type: ["string", "null"]
+      required: [clientId, title]
+
+    Item:
+      type: object
+      properties:
+        id:
+          type: integer
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        jobId:
+          type: integer
+        clientId:
+          type: integer
+        brand:
+          type: string
+        model:
+          type: string
+        marketPrice:
+          type: ["string", "null"]
+        floorPrice:
+          type: ["string", "null"]
+        platform:
+          type: string
+        shippingLogic:
+          type: ["string", "null"]
+        status:
+          type: string
+        disposition:
+          type: string
+        listingDescription:
+          type: ["string", "null"]
+        createdBy:
+          type: ["string", "null"]
+        clientName:
+          type: ["string", "null"]
+        jobTitle:
+          type: ["string", "null"]
+      required:
+        - id
+        - createdAt
+        - updatedAt
+        - jobId
+        - clientId
+        - brand
+        - model
+        - platform
+        - status
+        - disposition
+
+    ItemUpdate:
+      type: object
+      properties:
+        brand:
+          type: string
+        model:
+          type: string
+        marketPrice:
+          type: ["string", "null"]
+        floorPrice:
+          type: ["string", "null"]
+        platform:
+          type: string
+        shippingLogic:
+          type: ["string", "null"]
+        status:
+          type: string
+        disposition:
+          type: string
+        listingDescription:
+          type: ["string", "null"]
+
+    DashboardSummary:
+      type: object
+      properties:
+        totalItems:
+          type: integer
+        newItems:
+          type: integer
+        duplicateItems:
+          type: integer
+        donateItems:
+          type: integer
+        totalClients:
+          type: integer
+        totalJobs:
+          type: integer
+        marketValue:
+          type: number
+        floorValue:
+          type: number
+        byPlatform:
+          type: array
+          items:
+            $ref: "#/components/schemas/PlatformBucket"
+        byStatus:
+          type: array
+          items:
+            $ref: "#/components/schemas/StatusBucket"
+        recentItems:
+          type: array
+          items:
+            $ref: "#/components/schemas/Item"
+      required:
+        - totalItems
+        - newItems
+        - duplicateItems
+        - donateItems
+        - totalClients
+        - totalJobs
+        - marketValue
+        - floorValue
+        - byPlatform
+        - byStatus
+        - recentItems
+
+    PlatformBucket:
+      type: object
+      properties:
+        platform:
+          type: string
+        count:
+          type: integer
+        marketValue:
+          type: number
+      required: [platform, count, marketValue]
+
+    StatusBucket:
+      type: object
+      properties:
+        status:
+          type: string
+        count:
+          type: integer
+      required: [status, count]
+
+    AnalyzeBatchPhoto:
+      type: object
+      properties:
+        filename:
+          type: string
+        mimeType:
+          type: string
+        dataBase64:
+          type: string
+          description: Base64-encoded image bytes (no data URL prefix)
+      required: [filename, mimeType, dataBase64]
+
+    AnalyzeBatchBody:
+      type: object
+      properties:
+        jobId:
+          type: integer
+        operatorEmail:
+          type: ["string", "null"]
+        photos:
+          type: array
+          items:
+            $ref: "#/components/schemas/AnalyzeBatchPhoto"
+          minItems: 1
+      required: [jobId, photos]
+
+    AnalyzedItem:
+      type: object
+      properties:
+        brand:
+          type: string
+        model:
+          type: string
+        marketPrice:
+          type: ["string", "null"]
+        floorPrice:
+          type: ["string", "null"]
+        platform:
+          type: string
+        shippingLogic:
+          type: ["string", "null"]
+        status:
+          type: string
+          description: "New | Duplicate"
+        disposition:
+          type: string
+          description: "list | donate | wipe-recycle"
+        savedItemId:
+          type: ["integer", "null"]
+      required: [brand, model, platform, status, disposition]
+
+    AnalyzeBatchResult:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/AnalyzedItem"
+        savedCount:
+          type: integer
+        duplicateCount:
+          type: integer
+        donateCount:
+          type: integer
+      required: [items, savedCount, duplicateCount, donateCount]
+
+    ListingDescriptionBody:
+      type: object
+      properties:
+        itemId:
+          type: integer
+      required: [itemId]
+
+    ListingDescriptionResult:
+      type: object
+      properties:
+        itemId:
+          type: integer
+        platform:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+      required: [itemId, platform, title, description]
