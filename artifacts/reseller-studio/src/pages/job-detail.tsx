@@ -12,6 +12,7 @@ import {
   getGetJobQueryKey,
   type AnalyzeBatchResult,
   type AnalyzedItem,
+  type Item,
 } from "@workspace/api-client-react";
 import { useQueryClient } from "@tanstack/react-query";
 import { useToast } from "@/hooks/use-toast";
@@ -26,13 +27,43 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { formatCurrency } from "@/lib/constants";
-import { ArrowLeft, UploadCloud, Image as ImageIcon, CheckCircle2, PackageSearch, TrendingUp, FileText, ArrowRight, Pencil, Save, X } from "lucide-react";
+import { ArrowLeft, UploadCloud, Image as ImageIcon, CheckCircle2, PackageSearch, TrendingUp, FileText, ArrowRight, Pencil, Save, X, Copy } from "lucide-react";
 
 const CARD_CATEGORIES = [
   "Clothing","Shoes","Accessories","Jewelry","Furniture","Decor",
   "Art","Electronics","Kitchen","Books","Toys","Vintage","Collectibles","Other",
 ];
 const CARD_CONDITIONS = ["Excellent", "Good", "Fair", "Poor"];
+
+/* ── type guards for JSON columns ── */
+interface CopyPlatform { title: string; description: string; hashtags: string[]; measurements: string; }
+interface ListingCopyState { poshmark: CopyPlatform; ebay: CopyPlatform; etsy: CopyPlatform; facebook: CopyPlatform; }
+interface MarketSource { platform: string; title: string; price: number; condition: string; soldDate: string; }
+
+function isCopyPlatform(v: unknown): v is CopyPlatform {
+  if (!v || typeof v !== "object") return false;
+  const o = v as Record<string, unknown>;
+  return typeof o["title"] === "string" && typeof o["description"] === "string";
+}
+function isListingCopyState(v: unknown): v is ListingCopyState {
+  if (!v || typeof v !== "object") return false;
+  const o = v as Record<string, unknown>;
+  return isCopyPlatform(o["poshmark"]) && isCopyPlatform(o["ebay"]) &&
+         isCopyPlatform(o["etsy"]) && isCopyPlatform(o["facebook"]);
+}
+function isMarketSourceArray(v: unknown): v is MarketSource[] {
+  if (!Array.isArray(v)) return false;
+  return v.every(s => s && typeof s === "object" &&
+    typeof (s as Record<string, unknown>)["platform"] === "string" &&
+    typeof (s as Record<string, unknown>)["price"] === "number");
+}
+
+const COPY_PLATFORM_COLORS: Record<string, string> = {
+  poshmark: "bg-red-100 text-red-700 border-red-200 data-[active=true]:bg-red-600 data-[active=true]:text-white",
+  ebay:     "bg-yellow-100 text-yellow-800 border-yellow-200 data-[active=true]:bg-yellow-500 data-[active=true]:text-white",
+  etsy:     "bg-orange-100 text-orange-700 border-orange-200 data-[active=true]:bg-orange-500 data-[active=true]:text-white",
+  facebook: "bg-blue-100 text-blue-700 border-blue-200 data-[active=true]:bg-blue-600 data-[active=true]:text-white",
+};
 
 const BASE_PATH = import.meta.env.BASE_URL ?? "/studio/";
 
@@ -96,23 +127,44 @@ function dispositionConfig(disposition: string, status: string) {
   return { label: "Saved", cls: "bg-green-100 text-green-700 border-green-200" };
 }
 
-function AnalyzedItemCard({ item }: { item: AnalyzedItem }) {
+function AnalyzedItemCard({ item, dbItem }: { item: AnalyzedItem; dbItem?: Item }) {
   const dc = dispositionConfig(item.disposition, item.status);
   const angles = item.angleLabels ?? [];
   const photoIds = item.photoIds ?? [];
   const savedItemId = item.savedItemId ?? null;
+
+  const pricing = isMarketSourceArray(dbItem?.marketSources) ? {
+    priceLow: Number(dbItem!.priceRangeLow ?? 0),
+    priceHigh: Number(dbItem!.priceRangeHigh ?? dbItem!.priceRangeLow ?? 0),
+    estimatedDaysToSell: dbItem!.estimatedDaysToSell ?? null,
+    recommendedPlatform: dbItem!.recommendedPlatform ?? null,
+    platformRationale: dbItem!.platformRationale ?? null,
+    sources: dbItem!.marketSources as MarketSource[],
+  } : null;
+  const listingCopy = isListingCopyState(dbItem?.listingCopy) ? dbItem!.listingCopy as ListingCopyState : null;
 
   const { toast } = useToast();
   const queryClient = useQueryClient();
   const updateItem = useUpdateItem();
 
   const [editing, setEditing] = useState(false);
+  const [listingTab, setListingTab] = useState<"poshmark" | "ebay" | "etsy" | "facebook">("poshmark");
+  const [copiedTab, setCopiedTab] = useState<string | null>(null);
   const [draft, setDraft] = useState({
     brand: item.brand,
     category: item.category ?? "",
     condition: item.condition ?? "",
     conditionNotes: item.conditionNotes ?? "",
   });
+
+  const copyListingText = (platform: "poshmark" | "ebay" | "etsy" | "facebook") => {
+    if (!listingCopy) return;
+    const p = listingCopy[platform];
+    const text = [p.title, "", p.description, "", p.hashtags.map(h => `#${h}`).join(" ")].filter(Boolean).join("\n");
+    navigator.clipboard.writeText(text).catch(() => {});
+    setCopiedTab(platform);
+    setTimeout(() => setCopiedTab(null), 2000);
+  };
 
   const handleSave = () => {
     if (!savedItemId) return;
@@ -264,33 +316,104 @@ function AnalyzedItemCard({ item }: { item: AnalyzedItem }) {
             {item.conditionNotes && (
               <p className="text-xs text-muted-foreground italic">"{item.conditionNotes}"</p>
             )}
+
+            {/* ── Pricing comps ── populated after "Price All" runs */}
+            {pricing && (
+              <div className="pt-2 border-t border-border/40 space-y-1.5">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-1.5">
+                    <TrendingUp className="w-3 h-3 text-emerald-600 flex-shrink-0" />
+                    <span className="text-xs font-bold text-foreground">
+                      ${pricing.priceLow.toFixed(0)} – ${pricing.priceHigh.toFixed(0)}
+                    </span>
+                    {pricing.estimatedDaysToSell && (
+                      <span className="text-[10px] text-muted-foreground">~{pricing.estimatedDaysToSell}d</span>
+                    )}
+                  </div>
+                  {pricing.recommendedPlatform && (
+                    <span className={`text-[10px] px-1.5 py-0.5 rounded-full border font-medium ${platformBadgeClass(pricing.recommendedPlatform)}`}>
+                      ★ {pricing.recommendedPlatform}
+                    </span>
+                  )}
+                </div>
+                {pricing.platformRationale && (
+                  <p className="text-[10px] text-muted-foreground leading-snug">{pricing.platformRationale}</p>
+                )}
+                {pricing.sources.length > 0 && (
+                  <div className="space-y-0.5">
+                    {pricing.sources.slice(0, 4).map((s, i) => (
+                      <div key={i} className="flex items-center justify-between text-[10px]">
+                        <span className="text-muted-foreground truncate max-w-[140px]">{s.title}</span>
+                        <span className="font-semibold text-foreground ml-1 flex-shrink-0">${s.price}</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* ── Per-platform listing copy ── populated after "Generate All Listings" runs */}
+            {listingCopy && (
+              <div className="pt-2 border-t border-border/40 space-y-1.5">
+                <div className="flex items-center gap-1 flex-wrap">
+                  <FileText className="w-3 h-3 text-blue-600 flex-shrink-0" />
+                  {(["poshmark", "ebay", "etsy", "facebook"] as const).map(p => (
+                    <button
+                      key={p}
+                      data-active={listingTab === p ? "true" : "false"}
+                      onClick={() => setListingTab(p)}
+                      className={`text-[10px] px-1.5 py-0.5 rounded border font-medium capitalize transition-colors ${
+                        listingTab === p
+                          ? (p === "poshmark" ? "bg-red-600 text-white border-transparent" :
+                             p === "ebay"     ? "bg-yellow-500 text-white border-transparent" :
+                             p === "etsy"     ? "bg-orange-500 text-white border-transparent" :
+                                               "bg-blue-600 text-white border-transparent")
+                          : (COPY_PLATFORM_COLORS[p] ?? "bg-muted text-muted-foreground border-border")
+                      }`}
+                    >
+                      {p === "facebook" ? "FB" : p.charAt(0).toUpperCase() + p.slice(1)}
+                    </button>
+                  ))}
+                </div>
+                <p className="text-xs font-medium text-foreground leading-snug line-clamp-2">
+                  {listingCopy[listingTab].title}
+                </p>
+                <p className="text-[10px] text-muted-foreground leading-snug line-clamp-3">
+                  {listingCopy[listingTab].description}
+                </p>
+                <button
+                  onClick={() => copyListingText(listingTab)}
+                  className="text-[10px] text-primary hover:underline flex items-center gap-0.5"
+                >
+                  {copiedTab === listingTab
+                    ? <><CheckCircle2 className="w-2.5 h-2.5" /> Copied!</>
+                    : <><Copy className="w-2.5 h-2.5" /> Copy listing</>}
+                </button>
+              </div>
+            )}
           </>
         )}
 
-        {/* Footer: platform + price range + detail link */}
-        <div className="space-y-1 pt-1 border-t border-border/50">
-          {/* AI price estimate */}
-          {(item.marketPrice || item.floorPrice) && (
-            <div className="flex items-center gap-1.5">
-              <TrendingUp className="w-3 h-3 text-muted-foreground flex-shrink-0" />
-              <span className="text-xs text-muted-foreground">AI est.</span>
-              <span className="text-xs font-semibold text-foreground">
-                {item.floorPrice && item.marketPrice
-                  ? `$${item.floorPrice} – $${item.marketPrice}`
-                  : `$${item.marketPrice ?? item.floorPrice}`}
-              </span>
-            </div>
-          )}
-          <div className="flex items-center justify-between">
+        {/* Footer: platform badge + detail link */}
+        <div className="flex items-center justify-between pt-1 border-t border-border/50">
+          <div className="flex items-center gap-1.5">
             <span className={`inline-flex items-center px-1.5 py-0.5 rounded-full text-[10px] font-medium border ${platformBadgeClass(item.platform)}`}>
               {item.platform}
             </span>
-            {savedItemId && (
-              <Link href={`/inventory/${savedItemId}`} className="text-xs text-primary hover:underline flex items-center gap-0.5 font-medium">
-                Pricing & Listings <ArrowRight className="w-3 h-3" />
-              </Link>
+            {/* AI quick estimate when no full pricing comps yet */}
+            {!pricing && (item.marketPrice || item.floorPrice) && (
+              <span className="text-xs font-semibold text-foreground">
+                {item.floorPrice && item.marketPrice
+                  ? `$${item.floorPrice}–$${item.marketPrice}`
+                  : `$${item.marketPrice ?? item.floorPrice}`}
+              </span>
             )}
           </div>
+          {savedItemId && (
+            <Link href={`/inventory/${savedItemId}`} className="text-xs text-primary hover:underline flex items-center gap-0.5 font-medium">
+              Full Detail <ArrowRight className="w-3 h-3" />
+            </Link>
+          )}
         </div>
       </div>
     </div>
@@ -586,7 +709,7 @@ export default function JobDetail() {
                   <p className="text-xs font-semibold uppercase tracking-wider text-green-700">Saved to inventory ({savedItems.length})</p>
                   <div className="grid grid-cols-2 gap-2">
                     {savedItems.map((item, i) => (
-                      <AnalyzedItemCard key={i} item={item} />
+                      <AnalyzedItemCard key={i} item={item} dbItem={items?.find(it => it.id === item.savedItemId)} />
                     ))}
                   </div>
                 </div>
@@ -598,7 +721,7 @@ export default function JobDetail() {
                   <p className="text-xs font-semibold uppercase tracking-wider text-amber-600">Duplicates ({dupItems.length})</p>
                   <div className="grid grid-cols-2 gap-2">
                     {dupItems.map((item, i) => (
-                      <AnalyzedItemCard key={i} item={item} />
+                      <AnalyzedItemCard key={i} item={item} dbItem={items?.find(it => it.id === item.savedItemId)} />
                     ))}
                   </div>
                 </div>
@@ -610,7 +733,7 @@ export default function JobDetail() {
                   <p className="text-xs font-semibold uppercase tracking-wider text-purple-600">Donate / Recycle ({donateItems.length})</p>
                   <div className="grid grid-cols-2 gap-2">
                     {donateItems.map((item, i) => (
-                      <AnalyzedItemCard key={i} item={item} />
+                      <AnalyzedItemCard key={i} item={item} dbItem={items?.find(it => it.id === item.savedItemId)} />
                     ))}
                   </div>
                 </div>
