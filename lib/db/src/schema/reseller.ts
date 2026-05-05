@@ -83,7 +83,7 @@ export const itemPhotos = pgTable("reseller_item_photos", {
   itemId: integer("item_id").references(() => items.id, { onDelete: "set null" }),
   filename: text("filename").notNull(),
   mimeType: text("mime_type").notNull(),
-  data: text("data").notNull(),
+  storageKey: text("storage_key"),
 });
 
 export type ItemPhoto = typeof itemPhotos.$inferSelect;

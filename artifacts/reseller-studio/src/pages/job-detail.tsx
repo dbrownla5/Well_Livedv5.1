@@ -18,7 +18,32 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { formatCurrency } from "@/lib/constants";
-import { ArrowLeft, UploadCloud, Image as ImageIcon, CheckCircle2, AlertCircle, PackageSearch } from "lucide-react";
+import { ArrowLeft, UploadCloud, Image as ImageIcon, CheckCircle2, PackageSearch } from "lucide-react";
+
+const BASE_PATH = import.meta.env.BASE_URL ?? "/studio/";
+
+async function uploadPhotoToStorage(file: File): Promise<string> {
+  const urlRes = await fetch(`${BASE_PATH}api/storage/uploads/request-url`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    credentials: "include",
+    body: JSON.stringify({ name: file.name, size: file.size, contentType: file.type }),
+  });
+  if (!urlRes.ok) {
+    throw new Error(`Failed to get upload URL: ${urlRes.status}`);
+  }
+  const { uploadURL, objectPath } = (await urlRes.json()) as { uploadURL: string; objectPath: string };
+
+  const putRes = await fetch(uploadURL, {
+    method: "PUT",
+    headers: { "Content-Type": file.type },
+    body: file,
+  });
+  if (!putRes.ok) {
+    throw new Error(`Failed to upload to storage: ${putRes.status}`);
+  }
+  return objectPath;
+}
 
 export default function JobDetail() {
   const { jobId } = useParams<{ jobId: string }>();
@@ -34,6 +59,7 @@ export default function JobDetail() {
 
   const [uploading, setUploading] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [statusText, setStatusText] = useState("");
   const [batchResult, setBatchResult] = useState<AnalyzeBatchResult | null>(null);
 
   if (error || isNaN(id)) {
@@ -63,37 +89,37 @@ export default function JobDetail() {
     if (!files || files.length === 0) return;
 
     setUploading(true);
-    setProgress(10);
+    setProgress(5);
     setBatchResult(null);
 
     try {
-      const photos = await Promise.all(
-        Array.from(files).map(async (file) => {
-          const buffer = await file.arrayBuffer();
-          const base64 = btoa(
-            new Uint8Array(buffer).reduce((data, byte) => data + String.fromCharCode(byte), '')
-          );
-          
-          return {
-            filename: file.name,
-            mimeType: file.type,
-            dataBase64: base64
-          };
-        })
-      );
+      // Step 1: Upload each photo directly to object storage
+      setStatusText("Uploading photos to storage...");
+      const fileArray = Array.from(files);
+      const storageKeys: string[] = [];
+      for (let i = 0; i < fileArray.length; i++) {
+        const file = fileArray[i];
+        const key = await uploadPhotoToStorage(file);
+        storageKeys.push(key);
+        setProgress(5 + Math.round(((i + 1) / fileArray.length) * 35));
+      }
 
       setProgress(40);
+      setStatusText("Analyzing with Gemini AI...");
+
+      // Step 2: Send storage keys to analyze-batch
+      const photos = fileArray.map((file, i) => ({
+        filename: file.name,
+        mimeType: file.type,
+        storageKey: storageKeys[i],
+      }));
 
       analyzeBatch.mutate(
-        {
-          data: {
-            jobId: id,
-            photos
-          }
-        },
+        { data: { jobId: id, photos } },
         {
           onSuccess: (result) => {
             setProgress(100);
+            setStatusText("");
             setBatchResult(result);
             toast({ title: "Batch analysis complete!" });
             queryClient.invalidateQueries({ queryKey: getListItemsQueryKey() });
@@ -104,16 +130,15 @@ export default function JobDetail() {
             console.error("Batch error:", err);
             toast({ variant: "destructive", title: "Failed to analyze photos." });
             setUploading(false);
-          }
-        }
+          },
+        },
       );
     } catch (err) {
-      console.error("File processing error:", err);
-      toast({ variant: "destructive", title: "Failed to process files locally." });
+      console.error("Upload error:", err);
+      toast({ variant: "destructive", title: "Failed to upload photos to storage." });
       setUploading(false);
     }
-    
-    // Reset file input
+
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
     }
@@ -154,19 +179,19 @@ export default function JobDetail() {
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                <input 
-                  type="file" 
-                  multiple 
-                  accept="image/jpeg,image/png,image/webp" 
-                  className="hidden" 
+                <input
+                  type="file"
+                  multiple
+                  accept="image/jpeg,image/png,image/webp"
+                  className="hidden"
                   ref={fileInputRef}
                   onChange={handleFileChange}
                 />
-                
+
                 {!uploading && (
-                  <Button 
-                    className="w-full h-24 flex flex-col gap-2" 
-                    variant="outline" 
+                  <Button
+                    className="w-full h-24 flex flex-col gap-2"
+                    variant="outline"
                     onClick={() => fileInputRef.current?.click()}
                   >
                     <UploadCloud className="w-6 h-6 text-muted-foreground" />
@@ -177,12 +202,12 @@ export default function JobDetail() {
                 {uploading && (
                   <div className="space-y-2 p-4 bg-card rounded-md border">
                     <div className="flex justify-between text-sm mb-1">
-                      <span>Processing...</span>
+                      <span>{statusText || "Processing..."}</span>
                       <span>{progress}%</span>
                     </div>
                     <Progress value={progress} className="h-2" />
                     <p className="text-xs text-muted-foreground text-center mt-2">
-                      Sending to Gemini AI...
+                      {progress < 40 ? "Uploading to secure storage..." : "Sending to Gemini AI..."}
                     </p>
                   </div>
                 )}
@@ -240,8 +265,8 @@ export default function JobDetail() {
                   </TableRow>
                 ) : items && items.length > 0 ? (
                   items.map((item) => (
-                    <TableRow 
-                      key={item.id} 
+                    <TableRow
+                      key={item.id}
                       className="cursor-pointer hover:bg-muted/50 transition-colors"
                       onClick={() => setLocation(`/inventory/${item.id}`)}
                     >
@@ -254,11 +279,11 @@ export default function JobDetail() {
                       </TableCell>
                       <TableCell className="text-sm font-medium">{formatCurrency(item.marketPrice)}</TableCell>
                       <TableCell>
-                        <Badge 
+                        <Badge
                           variant={
-                            item.status === 'Sold' ? 'default' : 
-                            item.status === 'New' ? 'destructive' : 
-                            'outline'
+                            item.status === "Sold" ? "default" :
+                            item.status === "New" ? "destructive" :
+                            "outline"
                           }
                           className="text-xs"
                         >

@@ -25,6 +25,10 @@ import {
   analyzeBatch,
   generateListingDescription,
 } from "../lib/gemini-pipeline";
+import { ObjectStorageService, ObjectNotFoundError } from "../lib/objectStorage";
+import { Readable } from "stream";
+
+const objectStorage = new ObjectStorageService();
 
 const router: IRouter = Router();
 
@@ -355,26 +359,47 @@ router.post("/reseller/ai/analyze-batch", async (req, res): Promise<void> => {
     "Running Gemini analyze-batch",
   );
 
+  // Download photo bytes from object storage for Gemini inline data
+  let photosForGemini: { mimeType: string; dataBase64: string }[];
+  try {
+    photosForGemini = await Promise.all(
+      photos.map(async (p) => {
+        const file = await objectStorage.getObjectEntityFile(p.storageKey);
+        const nodeStream = file.createReadStream();
+        const chunks: Buffer[] = [];
+        for await (const chunk of nodeStream) {
+          chunks.push(Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk));
+        }
+        return { mimeType: p.mimeType, dataBase64: Buffer.concat(chunks).toString("base64") };
+      }),
+    );
+  } catch (err) {
+    req.log.error({ err }, "Failed to download photos from storage");
+    if (err instanceof ObjectNotFoundError) {
+      res.status(400).json({ error: "One or more photo storage keys are invalid" });
+    } else {
+      res.status(502).json({ error: "Failed to retrieve photos from storage" });
+    }
+    return;
+  }
+
   let analyzed;
   try {
-    analyzed = await analyzeBatch(
-      photos.map((p) => ({ mimeType: p.mimeType, dataBase64: p.dataBase64 })),
-      existing,
-    );
+    analyzed = await analyzeBatch(photosForGemini, existing);
   } catch (err) {
     req.log.error({ err }, "Gemini analysis failed");
     res.status(502).json({ error: "AI analysis failed" });
     return;
   }
 
-  // Persist photos for the job
+  // Persist photo metadata (storage keys) for the job
   if (photos.length) {
     await db.insert(itemPhotosTable).values(
       photos.map((p) => ({
         jobId,
         filename: p.filename,
         mimeType: p.mimeType,
-        data: p.dataBase64,
+        storageKey: p.storageKey,
       })),
     );
   }

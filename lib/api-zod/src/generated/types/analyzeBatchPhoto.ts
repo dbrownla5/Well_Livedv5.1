@@ -9,6 +9,6 @@
 export interface AnalyzeBatchPhoto {
   filename: string;
   mimeType: string;
-  /** Base64-encoded image bytes (no data URL prefix) */
-  dataBase64: string;
+  /** Object path returned by /storage/uploads/request-url (e.g. /objects/uploads/uuid) */
+  storageKey: string;
 }

@@ -136,8 +136,26 @@ export interface DashboardSummary {
 export interface AnalyzeBatchPhoto {
   filename: string;
   mimeType: string;
-  /** Base64-encoded image bytes (no data URL prefix) */
-  dataBase64: string;
+  /** Object path returned by /storage/uploads/request-url (e.g. /objects/uploads/uuid) */
+  storageKey: string;
+}
+
+export interface UploadUrlRequest {
+  /** @minLength 1 */
+  name: string;
+  /** @minimum 1 */
+  size: number;
+  /** @minLength 1 */
+  contentType: string;
+}
+
+export interface UploadUrlResponse {
+  uploadURL: string;
+  objectPath: string;
+}
+
+export interface ErrorEnvelope {
+  error: string;
 }
 
 export interface AnalyzeBatchBody {

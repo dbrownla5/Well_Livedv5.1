@@ -300,9 +300,11 @@ export const AnalyzePhotoBatchBody = zod.object({
       zod.object({
         filename: zod.string(),
         mimeType: zod.string(),
-        dataBase64: zod
+        storageKey: zod
           .string()
-          .describe("Base64-encoded image bytes (no data URL prefix)"),
+          .describe(
+            "Object path returned by \/storage\/uploads\/request-url (e.g. \/objects\/uploads\/uuid)",
+          ),
       }),
     )
     .min(1),
@@ -325,6 +327,28 @@ export const AnalyzePhotoBatchResponse = zod.object({
   savedCount: zod.number(),
   duplicateCount: zod.number(),
   donateCount: zod.number(),
+});
+
+/**
+ * @summary Request a presigned URL for file upload
+ */
+
+export const RequestUploadUrlBody = zod.object({
+  name: zod.string().min(1),
+  size: zod.number().min(1),
+  contentType: zod.string().min(1),
+});
+
+export const RequestUploadUrlResponse = zod.object({
+  uploadURL: zod.string().url(),
+  objectPath: zod.string(),
+});
+
+/**
+ * @summary Serve a stored object (photo)
+ */
+export const GetStorageObjectParams = zod.object({
+  objectPath: zod.coerce.string(),
 });
 
 /**
