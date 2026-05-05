@@ -67,6 +67,9 @@ export const items = pgTable("reseller_items", {
   listingDescription: text("listing_description"),
   aiRaw: jsonb("ai_raw"),
   createdBy: text("created_by"),
+  platformListingId: text("platform_listing_id"),
+  platformListingUrl: text("platform_listing_url"),
+  platformPublishError: text("platform_publish_error"),
 });
 
 const _insertItemSchema = createInsertSchema(items) as unknown as z.ZodTypeAny;

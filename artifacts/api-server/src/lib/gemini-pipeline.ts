@@ -1,4 +1,5 @@
 import { ai } from "@workspace/integrations-gemini-ai";
+import { scrubForbidden } from "./forbidden-scrub";
 
 export interface AnalyzedItem {
   brand: string;
@@ -140,27 +141,6 @@ export async function analyzeBatch(
       disposition: coerceDisposition(item["disposition"]),
     };
   });
-}
-
-const FORBIDDEN_LANGUAGE = [
-  "elder care",
-  "estate sale",
-  "asset management",
-  "liquidation",
-  "fall prevention",
-  "small repairs",
-  "closet systems",
-  "luxury organizing",
-  "ADHD closet edits",
-];
-
-function scrubForbidden(text: string): string {
-  let out = text;
-  for (const term of FORBIDDEN_LANGUAGE) {
-    const re = new RegExp(term, "gi");
-    out = out.replace(re, "");
-  }
-  return out.replace(/\s{2,}/g, " ").trim();
 }
 
 export async function generateListingDescription(item: {

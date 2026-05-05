@@ -31,4 +31,10 @@ export interface Item {
   clientName?: string | null;
   /** @nullable */
   jobTitle?: string | null;
+  /** @nullable */
+  platformListingId?: string | null;
+  /** @nullable */
+  platformListingUrl?: string | null;
+  /** @nullable */
+  platformPublishError?: string | null;
 }

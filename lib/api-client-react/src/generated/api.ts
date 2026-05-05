@@ -33,6 +33,8 @@ import type {
   ListingDescriptionBody,
   ListingDescriptionResult,
   OkResponse,
+  PublishItemResult,
+  SyncStatusResult,
   UploadUrlRequest,
   UploadUrlResponse,
 } from "./api.schemas";
@@ -1297,6 +1299,176 @@ export function useGetStorageObject<
 
   return { ...query, queryKey: queryOptions.queryKey };
 }
+
+/**
+ * @summary Publish (or save as draft) an item to its routed platform
+ */
+export const getPublishItemUrl = (itemId: number) => {
+  return `/api/reseller/items/${itemId}/publish`;
+};
+
+export const publishItem = async (
+  itemId: number,
+  options?: RequestInit,
+): Promise<PublishItemResult> => {
+  return customFetch<PublishItemResult>(getPublishItemUrl(itemId), {
+    ...options,
+    method: "POST",
+  });
+};
+
+export const getPublishItemMutationOptions = <
+  TError = ErrorType<ErrorEnvelope>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof publishItem>>,
+    TError,
+    { itemId: number },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof publishItem>>,
+  TError,
+  { itemId: number },
+  TContext
+> => {
+  const mutationKey = ["publishItem"];
+  const { mutation: mutationOptions, request: requestOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey }, request: undefined };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof publishItem>>,
+    { itemId: number }
+  > = (props) => {
+    const { itemId } = props ?? {};
+
+    return publishItem(itemId, requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type PublishItemMutationResult = NonNullable<
+  Awaited<ReturnType<typeof publishItem>>
+>;
+
+export type PublishItemMutationError = ErrorType<ErrorEnvelope>;
+
+/**
+ * @summary Publish (or save as draft) an item to its routed platform
+ */
+export const usePublishItem = <
+  TError = ErrorType<ErrorEnvelope>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof publishItem>>,
+    TError,
+    { itemId: number },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationResult<
+  Awaited<ReturnType<typeof publishItem>>,
+  TError,
+  { itemId: number },
+  TContext
+> => {
+  return useMutation(getPublishItemMutationOptions(options));
+};
+
+/**
+ * @summary Poll the routed platform API for the current listing state and update the master inventory status (Draft / Listed / Sold / Error). For platforms without a public API (Poshmark, Chairish, Facebook Marketplace) returns a message instructing the operator to update manually.
+
+ */
+export const getSyncItemPlatformStatusUrl = (itemId: number) => {
+  return `/api/reseller/items/${itemId}/sync-platform-status`;
+};
+
+export const syncItemPlatformStatus = async (
+  itemId: number,
+  options?: RequestInit,
+): Promise<SyncStatusResult> => {
+  return customFetch<SyncStatusResult>(getSyncItemPlatformStatusUrl(itemId), {
+    ...options,
+    method: "POST",
+  });
+};
+
+export const getSyncItemPlatformStatusMutationOptions = <
+  TError = ErrorType<ErrorEnvelope>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof syncItemPlatformStatus>>,
+    TError,
+    { itemId: number },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof syncItemPlatformStatus>>,
+  TError,
+  { itemId: number },
+  TContext
+> => {
+  const mutationKey = ["syncItemPlatformStatus"];
+  const { mutation: mutationOptions, request: requestOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey }, request: undefined };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof syncItemPlatformStatus>>,
+    { itemId: number }
+  > = (props) => {
+    const { itemId } = props ?? {};
+
+    return syncItemPlatformStatus(itemId, requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type SyncItemPlatformStatusMutationResult = NonNullable<
+  Awaited<ReturnType<typeof syncItemPlatformStatus>>
+>;
+
+export type SyncItemPlatformStatusMutationError = ErrorType<ErrorEnvelope>;
+
+/**
+ * @summary Poll the routed platform API for the current listing state and update the master inventory status (Draft / Listed / Sold / Error). For platforms without a public API (Poshmark, Chairish, Facebook Marketplace) returns a message instructing the operator to update manually.
+
+ */
+export const useSyncItemPlatformStatus = <
+  TError = ErrorType<ErrorEnvelope>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof syncItemPlatformStatus>>,
+    TError,
+    { itemId: number },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationResult<
+  Awaited<ReturnType<typeof syncItemPlatformStatus>>,
+  TError,
+  { itemId: number },
+  TContext
+> => {
+  return useMutation(getSyncItemPlatformStatusMutationOptions(options));
+};
 
 /**
  * @summary Generate an SEO-optimized platform-specific listing description for an item

@@ -326,6 +326,78 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorEnvelope"
 
+  /reseller/items/{itemId}/publish:
+    post:
+      operationId: publishItem
+      tags: [items]
+      summary: Publish (or save as draft) an item to its routed platform
+      parameters:
+        - in: path
+          name: itemId
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PublishItemResult"
+        "400":
+          description: Bad request (e.g. Local Pickup or missing description)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorEnvelope"
+        "404":
+          description: Item not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorEnvelope"
+        "502":
+          description: Platform API error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorEnvelope"
+
+  /reseller/items/{itemId}/sync-platform-status:
+    post:
+      operationId: syncItemPlatformStatus
+      tags: [items]
+      summary: >
+        Poll the routed platform API for the current listing state and update the
+        master inventory status (Draft / Listed / Sold / Error). For platforms
+        without a public API (Poshmark, Chairish, Facebook Marketplace) returns
+        a message instructing the operator to update manually.
+      parameters:
+        - in: path
+          name: itemId
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SyncStatusResult"
+        "404":
+          description: Item not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorEnvelope"
+        "502":
+          description: Platform API error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorEnvelope"
+
   /reseller/ai/listing-description:
     post:
       operationId: generateListingDescription
@@ -477,6 +549,12 @@ components:
         clientName:
           type: ["string", "null"]
         jobTitle:
+          type: ["string", "null"]
+        platformListingId:
+          type: ["string", "null"]
+        platformListingUrl:
+          type: ["string", "null"]
+        platformPublishError:
           type: ["string", "null"]
       required:
         - id
@@ -696,3 +774,44 @@ components:
         description:
           type: string
       required: [itemId, platform, title, description]
+
+    SyncStatusResult:
+      type: object
+      properties:
+        itemId:
+          type: integer
+        platform:
+          type: string
+        newStatus:
+          type: string
+          description: "The updated status written to the inventory: Draft | Listed | Sold | Error"
+        message:
+          type: string
+        apiCalled:
+          type: boolean
+      required: [itemId, platform, newStatus, message, apiCalled]
+
+    PublishItemResult:
+      type: object
+      properties:
+        itemId:
+          type: integer
+        platform:
+          type: string
+        mode:
+          type: string
+          description: >
+            "live" - listing posted and is active on the platform;
+            "draft" - a draft was saved via the platform API (e.g. eBay Seller Hub, Etsy Shop Manager);
+            "draft_prepared" - platform has no public listing API (Poshmark, Chairish, Facebook Marketplace);
+            a local draft reference is stored and copy-ready content + a direct link to the
+            platform listing form are returned for manual completion.
+        platformListingId:
+          type: ["string", "null"]
+        platformListingUrl:
+          type: ["string", "null"]
+        message:
+          type: string
+        newStatus:
+          type: string
+      required: [itemId, platform, mode, message, newStatus]

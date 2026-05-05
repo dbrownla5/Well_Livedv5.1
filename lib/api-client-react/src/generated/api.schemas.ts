@@ -90,6 +90,12 @@ export interface Item {
   clientName?: string | null;
   /** @nullable */
   jobTitle?: string | null;
+  /** @nullable */
+  platformListingId?: string | null;
+  /** @nullable */
+  platformListingUrl?: string | null;
+  /** @nullable */
+  platformPublishError?: string | null;
 }
 
 export interface ItemUpdate {
@@ -202,6 +208,29 @@ export interface ListingDescriptionResult {
   platform: string;
   title: string;
   description: string;
+}
+
+export interface SyncStatusResult {
+  itemId: number;
+  platform: string;
+  /** The updated status written to the inventory: Draft | Listed | Sold | Error */
+  newStatus: string;
+  message: string;
+  apiCalled: boolean;
+}
+
+export interface PublishItemResult {
+  itemId: number;
+  platform: string;
+  /** "live" - listing posted and is active on the platform; "draft" - a draft was saved via the platform API (e.g. eBay Seller Hub, Etsy Shop Manager); "draft_prepared" - platform has no public listing API (Poshmark, Chairish, Facebook Marketplace); a local draft reference is stored and copy-ready content + a direct link to the platform listing form are returned for manual completion.
+   */
+  mode: string;
+  /** @nullable */
+  platformListingId?: string | null;
+  /** @nullable */
+  platformListingUrl?: string | null;
+  message: string;
+  newStatus: string;
 }
 
 export type ListJobsParams = {

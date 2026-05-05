@@ -25,6 +25,8 @@ export * from "./listItemsParams";
 export * from "./listJobsParams";
 export * from "./okResponse";
 export * from "./platformBucket";
+export * from "./publishItemResult";
 export * from "./statusBucket";
+export * from "./syncStatusResult";
 export * from "./uploadUrlRequest";
 export * from "./uploadUrlResponse";

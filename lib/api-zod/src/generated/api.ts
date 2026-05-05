@@ -161,6 +161,9 @@ export const ListItemsResponseItem = zod.object({
   createdBy: zod.string().nullish(),
   clientName: zod.string().nullish(),
   jobTitle: zod.string().nullish(),
+  platformListingId: zod.string().nullish(),
+  platformListingUrl: zod.string().nullish(),
+  platformPublishError: zod.string().nullish(),
 });
 export const ListItemsResponse = zod.array(ListItemsResponseItem);
 
@@ -189,6 +192,9 @@ export const GetItemResponse = zod.object({
   createdBy: zod.string().nullish(),
   clientName: zod.string().nullish(),
   jobTitle: zod.string().nullish(),
+  platformListingId: zod.string().nullish(),
+  platformListingUrl: zod.string().nullish(),
+  platformPublishError: zod.string().nullish(),
 });
 
 /**
@@ -228,6 +234,9 @@ export const UpdateItemResponse = zod.object({
   createdBy: zod.string().nullish(),
   clientName: zod.string().nullish(),
   jobTitle: zod.string().nullish(),
+  platformListingId: zod.string().nullish(),
+  platformListingUrl: zod.string().nullish(),
+  platformPublishError: zod.string().nullish(),
 });
 
 /**
@@ -285,6 +294,9 @@ export const GetDashboardSummaryResponse = zod.object({
       createdBy: zod.string().nullish(),
       clientName: zod.string().nullish(),
       jobTitle: zod.string().nullish(),
+      platformListingId: zod.string().nullish(),
+      platformListingUrl: zod.string().nullish(),
+      platformPublishError: zod.string().nullish(),
     }),
   ),
 });
@@ -351,6 +363,47 @@ export const RequestUploadUrlResponse = zod.object({
  */
 export const GetStorageObjectParams = zod.object({
   objectPath: zod.coerce.string(),
+});
+
+/**
+ * @summary Publish (or save as draft) an item to its routed platform
+ */
+export const PublishItemParams = zod.object({
+  itemId: zod.coerce.number(),
+});
+
+export const PublishItemResponse = zod.object({
+  itemId: zod.number(),
+  platform: zod.string(),
+  mode: zod
+    .string()
+    .describe(
+      '\"live\" - listing posted and is active on the platform; \"draft\" - a draft was saved via the platform API (e.g. eBay Seller Hub, Etsy Shop Manager); \"draft_prepared\" - platform has no public listing API (Poshmark, Chairish, Facebook Marketplace); a local draft reference is stored and copy-ready content + a direct link to the platform listing form are returned for manual completion.\n',
+    ),
+  platformListingId: zod.string().nullish(),
+  platformListingUrl: zod.string().nullish(),
+  message: zod.string(),
+  newStatus: zod.string(),
+});
+
+/**
+ * @summary Poll the routed platform API for the current listing state and update the master inventory status (Draft / Listed / Sold / Error). For platforms without a public API (Poshmark, Chairish, Facebook Marketplace) returns a message instructing the operator to update manually.
+
+ */
+export const SyncItemPlatformStatusParams = zod.object({
+  itemId: zod.coerce.number(),
+});
+
+export const SyncItemPlatformStatusResponse = zod.object({
+  itemId: zod.number(),
+  platform: zod.string(),
+  newStatus: zod
+    .string()
+    .describe(
+      "The updated status written to the inventory: Draft | Listed | Sold | Error",
+    ),
+  message: zod.string(),
+  apiCalled: zod.boolean(),
 });
 
 /**

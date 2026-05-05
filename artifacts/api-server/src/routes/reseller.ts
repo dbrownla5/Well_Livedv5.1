@@ -25,6 +25,7 @@ import {
   analyzeBatch,
   generateListingDescription,
 } from "../lib/gemini-pipeline";
+import { publishItem, syncPlatformStatus } from "../lib/platform-adapters";
 import { ObjectStorageService, ObjectNotFoundError } from "../lib/objectStorage";
 import { Readable } from "stream";
 
@@ -174,6 +175,9 @@ router.get("/reseller/items", async (req, res): Promise<void> => {
       createdBy: itemsTable.createdBy,
       clientName: clientsTable.name,
       jobTitle: jobsTable.title,
+      platformListingId: itemsTable.platformListingId,
+      platformListingUrl: itemsTable.platformListingUrl,
+      platformPublishError: itemsTable.platformPublishError,
     })
     .from(itemsTable)
     .leftJoin(clientsTable, eq(clientsTable.id, itemsTable.clientId))
@@ -208,6 +212,9 @@ router.get("/reseller/items/:itemId", async (req, res): Promise<void> => {
       createdBy: itemsTable.createdBy,
       clientName: clientsTable.name,
       jobTitle: jobsTable.title,
+      platformListingId: itemsTable.platformListingId,
+      platformListingUrl: itemsTable.platformListingUrl,
+      platformPublishError: itemsTable.platformPublishError,
     })
     .from(itemsTable)
     .leftJoin(clientsTable, eq(clientsTable.id, itemsTable.clientId))
@@ -309,6 +316,9 @@ router.get("/reseller/dashboard/summary", async (_req, res): Promise<void> => {
       createdBy: itemsTable.createdBy,
       clientName: clientsTable.name,
       jobTitle: jobsTable.title,
+      platformListingId: itemsTable.platformListingId,
+      platformListingUrl: itemsTable.platformListingUrl,
+      platformPublishError: itemsTable.platformPublishError,
     })
     .from(itemsTable)
     .leftJoin(clientsTable, eq(clientsTable.id, itemsTable.clientId))
@@ -458,6 +468,181 @@ router.post("/reseller/ai/analyze-batch", async (req, res): Promise<void> => {
     donateCount,
   });
 });
+
+// ---------- publish ----------
+router.post("/reseller/items/:itemId/publish", async (req, res): Promise<void> => {
+  const params = GetItemParams.safeParse(req.params);
+  if (!params.success) {
+    res.status(400).json({ error: params.error.message });
+    return;
+  }
+
+  const [item] = await db
+    .select()
+    .from(itemsTable)
+    .where(eq(itemsTable.id, params.data.itemId));
+
+  if (!item) {
+    res.status(404).json({ error: "Item not found" });
+    return;
+  }
+
+  if (item.platform === "Local Pickup") {
+    res.status(400).json({ error: "Local Pickup listings must be managed manually." });
+    return;
+  }
+
+  // Platforms explicitly excluded from any automated publishing per policy
+  const FORBIDDEN_PUBLISH_PLATFORMS = new Set([
+    "Depop", "Grailed", "Mercari", "Thumbtack",
+  ]);
+  if (FORBIDDEN_PUBLISH_PLATFORMS.has(item.platform)) {
+    res.status(400).json({
+      error: `Publishing to ${item.platform} is not permitted by platform policy. Reassign to a supported platform.`,
+    });
+    return;
+  }
+
+  // Only items with a "list" disposition should reach a sales platform
+  if (item.disposition && item.disposition !== "list") {
+    res.status(400).json({
+      error: `Cannot publish an item with disposition "${item.disposition}". Change disposition to "list" before publishing.`,
+    });
+    return;
+  }
+
+  const description = item.listingDescription;
+  if (!description || !description.trim()) {
+    res.status(400).json({ error: "Item has no listing description. Generate one first." });
+    return;
+  }
+
+  const title = `${item.brand} ${item.model}`.slice(0, 80);
+
+  let result;
+  try {
+    result = await publishItem({
+      itemId: item.id,
+      brand: item.brand,
+      model: item.model,
+      platform: item.platform,
+      listingDescription: description,
+      title,
+      marketPrice: item.marketPrice ?? null,
+      floorPrice: item.floorPrice ?? null,
+      shippingLogic: item.shippingLogic ?? null,
+    });
+  } catch (err) {
+    req.log.error({ err, itemId: item.id }, "Platform publish failed");
+    const errMsg = err instanceof Error ? err.message : String(err);
+    await db
+      .update(itemsTable)
+      .set({ status: "Error", platformPublishError: errMsg })
+      .where(eq(itemsTable.id, item.id));
+    res.status(502).json({ error: `Platform API error: ${errMsg}` });
+    return;
+  }
+
+  const newStatus = result.mode === "live" ? "Listed" : "Draft";
+
+  await db
+    .update(itemsTable)
+    .set({
+      status: newStatus,
+      platformListingId: result.platformListingId ?? null,
+      platformListingUrl: result.platformListingUrl ?? null,
+      platformPublishError: result.mode === "draft_prepared" ? result.message : null,
+    })
+    .where(eq(itemsTable.id, item.id));
+
+  req.log.info(
+    { itemId: item.id, platform: item.platform, mode: result.mode },
+    "Item published",
+  );
+
+  res.json({
+    itemId: item.id,
+    platform: item.platform,
+    mode: result.mode,
+    platformListingId: result.platformListingId,
+    platformListingUrl: result.platformListingUrl,
+    message: result.message,
+    newStatus,
+  });
+});
+
+// ---------- sync platform status ----------
+router.post(
+  "/reseller/items/:itemId/sync-platform-status",
+  async (req, res): Promise<void> => {
+    const params = GetItemParams.safeParse(req.params);
+    if (!params.success) {
+      res.status(400).json({ error: params.error.message });
+      return;
+    }
+
+    const [item] = await db
+      .select()
+      .from(itemsTable)
+      .where(eq(itemsTable.id, params.data.itemId));
+
+    if (!item) {
+      res.status(404).json({ error: "Item not found" });
+      return;
+    }
+
+    const sku = `DBRES-${item.id}`;
+
+    let result;
+    try {
+      result = await syncPlatformStatus(
+        item.platform,
+        item.platformListingId ?? null,
+        sku,
+      );
+    } catch (err) {
+      req.log.error({ err, itemId: item.id }, "Platform status sync failed");
+      const errMsg = err instanceof Error ? err.message : String(err);
+      await db
+        .update(itemsTable)
+        .set({ status: "Error", platformPublishError: errMsg })
+        .where(eq(itemsTable.id, item.id));
+      res.status(502).json({ error: `Platform sync error: ${errMsg}` });
+      return;
+    }
+
+    // Only persist the resolved status when we actually called the platform API.
+    // Skipping the write for no-API platforms avoids clobbering a manually
+    // maintained status (e.g. an operator who already marked the item as Sold).
+    if (result.apiCalled) {
+      await db
+        .update(itemsTable)
+        .set({ status: result.newStatus })
+        .where(eq(itemsTable.id, item.id));
+    }
+
+    req.log.info(
+      {
+        itemId: item.id,
+        platform: item.platform,
+        newStatus: result.apiCalled ? result.newStatus : "(not written — no API)",
+        apiCalled: result.apiCalled,
+      },
+      "Platform status sync complete",
+    );
+
+    // Return the item's effective current status so the UI stays consistent
+    const effectiveStatus = result.apiCalled ? result.newStatus : item.status;
+
+    res.json({
+      itemId: item.id,
+      platform: item.platform,
+      newStatus: effectiveStatus,
+      message: result.message,
+      apiCalled: result.apiCalled,
+    });
+  },
+);
 
 router.post(
   "/reseller/ai/listing-description",
