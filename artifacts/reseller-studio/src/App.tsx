@@ -4,6 +4,7 @@ import { publishableKeyFromHost } from "@clerk/react/internal";
 import { shadcn } from "@clerk/themes";
 import { Switch, Route, useLocation, Router as WouterRouter, Redirect } from "wouter";
 import { QueryClient, QueryClientProvider, useQueryClient } from "@tanstack/react-query";
+import { setAuthTokenGetter } from "@workspace/api-client-react";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 
@@ -113,6 +114,19 @@ function ClerkQueryClientCacheInvalidator() {
     });
     return unsubscribe;
   }, [addListener, qc]);
+
+  return null;
+}
+
+function ClerkAuthTokenSetup() {
+  const { session } = useClerk();
+
+  useEffect(() => {
+    setAuthTokenGetter(() => session?.getToken() ?? null);
+    return () => {
+      setAuthTokenGetter(null);
+    };
+  }, [session]);
 
   return null;
 }
@@ -233,6 +247,7 @@ function ClerkProviderWithRoutes() {
     >
       <QueryClientProvider client={queryClient}>
         <ClerkQueryClientCacheInvalidator />
+        <ClerkAuthTokenSetup />
         <TooltipProvider>
           <Router />
           <Toaster />
