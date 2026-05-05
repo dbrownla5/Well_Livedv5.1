@@ -880,8 +880,14 @@ export default function InventoryItem() {
                       </div>
                       {activeCopyPlatform.measurements && (
                         <div>
-                          <Label className="text-xs">Measurements</Label>
-                          <div className="text-sm text-muted-foreground mt-1">{activeCopyPlatform.measurements}</div>
+                          <div className="flex items-center justify-between mb-1">
+                            <Label className="text-xs">Measurements</Label>
+                            <button onClick={() => copyToClipboard(activeCopyPlatform.measurements, `${copyTab}-meas`)} className="text-xs text-muted-foreground hover:text-foreground flex items-center gap-1">
+                              {copiedKey === `${copyTab}-meas` ? <Check className="w-3 h-3 text-green-500" /> : <Copy className="w-3 h-3" />}
+                              {copiedKey === `${copyTab}-meas` ? "Copied" : "Copy"}
+                            </button>
+                          </div>
+                          <div className="text-sm text-muted-foreground bg-muted/40 rounded-md p-2">{activeCopyPlatform.measurements}</div>
                         </div>
                       )}
                       {activeCopyPlatform.hashtags.length > 0 && (
