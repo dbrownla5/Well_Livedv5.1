@@ -154,9 +154,18 @@ export default function Inventory() {
                   <TableCell className="text-sm font-medium">{formatCurrency(item.marketPrice)}</TableCell>
                   <TableCell className="text-sm text-muted-foreground">{formatCurrency(item.floorPrice)}</TableCell>
                   <TableCell>
-                    <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium border ${platformBadgeClass(item.platform)}`}>
-                      {item.platform}
-                    </span>
+                    <div className="space-y-1">
+                      <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium border ${platformBadgeClass(item.platform)}`}>
+                        {item.platform}
+                      </span>
+                      {item.recommendedPlatform && item.recommendedPlatform !== item.platform && (
+                        <div>
+                          <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium border ${platformBadgeClass(item.recommendedPlatform)}`}>
+                            ★ {item.recommendedPlatform}
+                          </span>
+                        </div>
+                      )}
+                    </div>
                   </TableCell>
                   <TableCell>
                     <Badge 
