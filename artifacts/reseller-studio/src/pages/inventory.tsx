@@ -10,6 +10,18 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Skeleton } from "@/components/ui/skeleton";
 import { Search } from "lucide-react";
 
+function platformBadgeClass(platform: string): string {
+  const map: Record<string, string> = {
+    "Poshmark":            "bg-red-100 text-red-700 border-red-200",
+    "eBay":                "bg-yellow-100 text-yellow-800 border-yellow-200",
+    "Etsy":                "bg-orange-100 text-orange-700 border-orange-200",
+    "Facebook Marketplace":"bg-blue-100 text-blue-700 border-blue-200",
+    "Chairish":            "bg-emerald-100 text-emerald-700 border-emerald-200",
+    "Local Pickup":        "bg-gray-100 text-gray-600 border-gray-200",
+  };
+  return map[platform] ?? "bg-gray-100 text-gray-600 border-gray-200";
+}
+
 export default function Inventory() {
   const [, setLocation] = useLocation();
   const [platform, setPlatform] = useState<string>("all");
@@ -142,7 +154,9 @@ export default function Inventory() {
                   <TableCell className="text-sm font-medium">{formatCurrency(item.marketPrice)}</TableCell>
                   <TableCell className="text-sm text-muted-foreground">{formatCurrency(item.floorPrice)}</TableCell>
                   <TableCell>
-                    <Badge variant="secondary" className="font-normal">{item.platform}</Badge>
+                    <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium border ${platformBadgeClass(item.platform)}`}>
+                      {item.platform}
+                    </span>
                   </TableCell>
                   <TableCell>
                     <Badge 

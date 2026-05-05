@@ -151,8 +151,25 @@ export const ListItemsResponseItem = zod.object({
   clientId: zod.number(),
   brand: zod.string(),
   model: zod.string(),
+  category: zod.string().nullish(),
+  color: zod.string().nullish(),
+  condition: zod.string().nullish(),
+  conditionNotes: zod.string().nullish(),
   marketPrice: zod.string().nullish(),
   floorPrice: zod.string().nullish(),
+  priceRangeLow: zod.string().nullish(),
+  priceRangeHigh: zod.string().nullish(),
+  estimatedDaysToSell: zod.number().nullish(),
+  marketSources: zod
+    .unknown()
+    .optional()
+    .describe("Array of comparable sold listings (JSON)"),
+  recommendedPlatform: zod.string().nullish(),
+  platformRationale: zod.string().nullish(),
+  listingCopy: zod
+    .unknown()
+    .optional()
+    .describe("Per-platform listing copy (JSON)"),
   platform: zod.string(),
   shippingLogic: zod.string().nullish(),
   status: zod.string(),
@@ -182,8 +199,25 @@ export const GetItemResponse = zod.object({
   clientId: zod.number(),
   brand: zod.string(),
   model: zod.string(),
+  category: zod.string().nullish(),
+  color: zod.string().nullish(),
+  condition: zod.string().nullish(),
+  conditionNotes: zod.string().nullish(),
   marketPrice: zod.string().nullish(),
   floorPrice: zod.string().nullish(),
+  priceRangeLow: zod.string().nullish(),
+  priceRangeHigh: zod.string().nullish(),
+  estimatedDaysToSell: zod.number().nullish(),
+  marketSources: zod
+    .unknown()
+    .optional()
+    .describe("Array of comparable sold listings (JSON)"),
+  recommendedPlatform: zod.string().nullish(),
+  platformRationale: zod.string().nullish(),
+  listingCopy: zod
+    .unknown()
+    .optional()
+    .describe("Per-platform listing copy (JSON)"),
   platform: zod.string(),
   shippingLogic: zod.string().nullish(),
   status: zod.string(),
@@ -207,6 +241,10 @@ export const UpdateItemParams = zod.object({
 export const UpdateItemBody = zod.object({
   brand: zod.string().optional(),
   model: zod.string().optional(),
+  category: zod.string().nullish(),
+  color: zod.string().nullish(),
+  condition: zod.string().nullish(),
+  conditionNotes: zod.string().nullish(),
   marketPrice: zod.string().nullish(),
   floorPrice: zod.string().nullish(),
   platform: zod.string().optional(),
@@ -224,8 +262,25 @@ export const UpdateItemResponse = zod.object({
   clientId: zod.number(),
   brand: zod.string(),
   model: zod.string(),
+  category: zod.string().nullish(),
+  color: zod.string().nullish(),
+  condition: zod.string().nullish(),
+  conditionNotes: zod.string().nullish(),
   marketPrice: zod.string().nullish(),
   floorPrice: zod.string().nullish(),
+  priceRangeLow: zod.string().nullish(),
+  priceRangeHigh: zod.string().nullish(),
+  estimatedDaysToSell: zod.number().nullish(),
+  marketSources: zod
+    .unknown()
+    .optional()
+    .describe("Array of comparable sold listings (JSON)"),
+  recommendedPlatform: zod.string().nullish(),
+  platformRationale: zod.string().nullish(),
+  listingCopy: zod
+    .unknown()
+    .optional()
+    .describe("Per-platform listing copy (JSON)"),
   platform: zod.string(),
   shippingLogic: zod.string().nullish(),
   status: zod.string(),
@@ -284,8 +339,25 @@ export const GetDashboardSummaryResponse = zod.object({
       clientId: zod.number(),
       brand: zod.string(),
       model: zod.string(),
+      category: zod.string().nullish(),
+      color: zod.string().nullish(),
+      condition: zod.string().nullish(),
+      conditionNotes: zod.string().nullish(),
       marketPrice: zod.string().nullish(),
       floorPrice: zod.string().nullish(),
+      priceRangeLow: zod.string().nullish(),
+      priceRangeHigh: zod.string().nullish(),
+      estimatedDaysToSell: zod.number().nullish(),
+      marketSources: zod
+        .unknown()
+        .optional()
+        .describe("Array of comparable sold listings (JSON)"),
+      recommendedPlatform: zod.string().nullish(),
+      platformRationale: zod.string().nullish(),
+      listingCopy: zod
+        .unknown()
+        .optional()
+        .describe("Per-platform listing copy (JSON)"),
       platform: zod.string(),
       shippingLogic: zod.string().nullish(),
       status: zod.string(),
@@ -329,6 +401,10 @@ export const AnalyzePhotoBatchResponse = zod.object({
     zod.object({
       brand: zod.string(),
       model: zod.string(),
+      category: zod.string().nullish(),
+      color: zod.string().nullish(),
+      condition: zod.string().nullish(),
+      conditionNotes: zod.string().nullish(),
       marketPrice: zod.string().nullish(),
       floorPrice: zod.string().nullish(),
       platform: zod.string(),
@@ -418,4 +494,92 @@ export const GenerateListingDescriptionResponse = zod.object({
   platform: zod.string(),
   title: zod.string(),
   description: zod.string(),
+});
+
+/**
+ * @summary Run AI market pricing for a single inventory item
+ */
+export const PriceItemParams = zod.object({
+  itemId: zod.coerce.number(),
+});
+
+export const PriceItemResponse = zod.object({
+  itemId: zod.number(),
+  priceLow: zod.number(),
+  priceHigh: zod.number(),
+  estimatedDaysToSell: zod.number(),
+  recommendedPlatform: zod.string(),
+  platformRationale: zod.string(),
+  sources: zod.array(
+    zod.object({
+      platform: zod.string(),
+      title: zod.string(),
+      price: zod.number(),
+      condition: zod.string(),
+      soldDate: zod.string(),
+    }),
+  ),
+});
+
+/**
+ * @summary Run AI market pricing for all listable items in a job
+ */
+export const PriceJobItemsParams = zod.object({
+  jobId: zod.coerce.number(),
+});
+
+export const PriceJobItemsResponse = zod.object({
+  jobId: zod.number(),
+  processed: zod.number(),
+  skipped: zod.number(),
+  errors: zod.number(),
+});
+
+/**
+ * @summary Generate multi-platform listing copy for a single inventory item
+ */
+export const GenerateItemListingsParams = zod.object({
+  itemId: zod.coerce.number(),
+});
+
+export const GenerateItemListingsResponse = zod.object({
+  itemId: zod.number(),
+  poshmark: zod.object({
+    title: zod.string(),
+    description: zod.string(),
+    hashtags: zod.array(zod.string()),
+    measurements: zod.string(),
+  }),
+  ebay: zod.object({
+    title: zod.string(),
+    description: zod.string(),
+    hashtags: zod.array(zod.string()),
+    measurements: zod.string(),
+  }),
+  etsy: zod.object({
+    title: zod.string(),
+    description: zod.string(),
+    hashtags: zod.array(zod.string()),
+    measurements: zod.string(),
+  }),
+  facebook: zod.object({
+    title: zod.string(),
+    description: zod.string(),
+    hashtags: zod.array(zod.string()),
+    measurements: zod.string(),
+  }),
+});
+
+/**
+ * @summary Generate multi-platform listing copy for all listable items in a job
+ */
+export const GenerateJobListingsParams = zod.object({
+  jobId: zod.coerce.number(),
+});
+
+export const GenerateJobListingsResponse = zod.object({
+  jobId: zod.number(),
+  processed: zod.number(),
+  skipped: zod.number(),
+  errors: zod.number(),
 });

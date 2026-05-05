@@ -10,6 +10,14 @@ export interface AnalyzedItem {
   brand: string;
   model: string;
   /** @nullable */
+  category?: string | null;
+  /** @nullable */
+  color?: string | null;
+  /** @nullable */
+  condition?: string | null;
+  /** @nullable */
+  conditionNotes?: string | null;
+  /** @nullable */
   marketPrice?: string | null;
   /** @nullable */
   floorPrice?: string | null;

@@ -4,6 +4,8 @@ import {
   useGetJob,
   useListItems,
   useAnalyzePhotoBatch,
+  usePriceJobItems,
+  useGenerateJobListings,
   getListItemsQueryKey,
   getGetJobQueryKey,
   type AnalyzeBatchResult,
@@ -18,7 +20,7 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { formatCurrency } from "@/lib/constants";
-import { ArrowLeft, UploadCloud, Image as ImageIcon, CheckCircle2, PackageSearch } from "lucide-react";
+import { ArrowLeft, UploadCloud, Image as ImageIcon, CheckCircle2, PackageSearch, TrendingUp, FileText } from "lucide-react";
 
 const BASE_PATH = import.meta.env.BASE_URL ?? "/studio/";
 
@@ -61,6 +63,18 @@ async function uploadPhotoToStorage(file: File): Promise<UploadedPhoto> {
   return { storageKey: objectPath, width: dims?.width ?? null, height: dims?.height ?? null };
 }
 
+function platformBadgeClass(platform: string): string {
+  const map: Record<string, string> = {
+    "Poshmark":             "bg-red-100 text-red-700 border-red-200",
+    "eBay":                 "bg-yellow-100 text-yellow-800 border-yellow-200",
+    "Etsy":                 "bg-orange-100 text-orange-700 border-orange-200",
+    "Facebook Marketplace": "bg-blue-100 text-blue-700 border-blue-200",
+    "Chairish":             "bg-emerald-100 text-emerald-700 border-emerald-200",
+    "Local Pickup":         "bg-gray-100 text-gray-600 border-gray-200",
+  };
+  return map[platform] ?? "bg-gray-100 text-gray-600 border-gray-200";
+}
+
 export default function JobDetail() {
   const { jobId } = useParams<{ jobId: string }>();
   const id = Number(jobId);
@@ -72,18 +86,23 @@ export default function JobDetail() {
   const { data: job, isLoading: jobLoading, error } = useGetJob(id);
   const { data: items, isLoading: itemsLoading } = useListItems({ jobId: id });
   const analyzeBatch = useAnalyzePhotoBatch();
+  const priceJobMutation = usePriceJobItems();
+  const generateJobListingsMutation = useGenerateJobListings();
 
   const [uploading, setUploading] = useState(false);
   const [progress, setProgress] = useState(0);
   const [statusText, setStatusText] = useState("");
   const [batchResult, setBatchResult] = useState<AnalyzeBatchResult | null>(null);
+  const [batchActionResult, setBatchActionResult] = useState<{
+    type: "pricing" | "listings";
+    processed: number;
+    errors: number;
+  } | null>(null);
 
   if (error || isNaN(id)) {
     return (
       <div className="p-8">
-        <div className="bg-destructive/10 text-destructive p-4 rounded-md">
-          Job not found.
-        </div>
+        <div className="bg-destructive/10 text-destructive p-4 rounded-md">Job not found.</div>
         <Button variant="outline" className="mt-4" onClick={() => setLocation("/jobs")}>
           <ArrowLeft className="w-4 h-4 mr-2" /> Back to Jobs
         </Button>
@@ -107,9 +126,9 @@ export default function JobDetail() {
     setUploading(true);
     setProgress(5);
     setBatchResult(null);
+    setBatchActionResult(null);
 
     try {
-      // Step 1: Upload each photo directly to object storage
       setStatusText("Uploading photos to storage...");
       const fileArray = Array.from(files);
       const uploaded: UploadedPhoto[] = [];
@@ -122,7 +141,6 @@ export default function JobDetail() {
       setProgress(40);
       setStatusText("Analyzing with Gemini AI...");
 
-      // Step 2: Send storage keys + dimensions to analyze-batch
       const photos = fileArray.map((file, i) => ({
         filename: file.name,
         mimeType: file.type,
@@ -156,10 +174,45 @@ export default function JobDetail() {
       setUploading(false);
     }
 
-    if (fileInputRef.current) {
-      fileInputRef.current.value = "";
-    }
+    if (fileInputRef.current) fileInputRef.current.value = "";
   };
+
+  const handlePriceAll = () => {
+    setBatchActionResult(null);
+    priceJobMutation.mutate(
+      { jobId: id },
+      {
+        onSuccess: (data) => {
+          setBatchActionResult({ type: "pricing", processed: data.processed, errors: data.errors });
+          toast({ title: `Pricing complete — ${data.processed} items priced.` });
+          queryClient.invalidateQueries({ queryKey: getListItemsQueryKey() });
+        },
+        onError: () => {
+          toast({ variant: "destructive", title: "Failed to run batch pricing." });
+        },
+      }
+    );
+  };
+
+  const handleGenerateAllListings = () => {
+    setBatchActionResult(null);
+    generateJobListingsMutation.mutate(
+      { jobId: id },
+      {
+        onSuccess: (data) => {
+          setBatchActionResult({ type: "listings", processed: data.processed, errors: data.errors });
+          toast({ title: `Listings generated — ${data.processed} items updated.` });
+          queryClient.invalidateQueries({ queryKey: getListItemsQueryKey() });
+        },
+        onError: () => {
+          toast({ variant: "destructive", title: "Failed to generate batch listings." });
+        },
+      }
+    );
+  };
+
+  const batchActionsRunning = priceJobMutation.isPending || generateJobListingsMutation.isPending;
+  const hasListableItems = (items?.filter(i => i.disposition === "list") ?? []).length > 0;
 
   return (
     <div className="p-8 max-w-6xl mx-auto space-y-6">
@@ -184,6 +237,7 @@ export default function JobDetail() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* ── Left panel: intake + batch actions ── */}
         <div className="lg:col-span-1 space-y-6">
           <Card className="shadow-sm border-dashed border-2 bg-muted/20">
             <CardHeader>
@@ -206,11 +260,7 @@ export default function JobDetail() {
                 />
 
                 {!uploading && (
-                  <Button
-                    className="w-full h-24 flex flex-col gap-2"
-                    variant="outline"
-                    onClick={() => fileInputRef.current?.click()}
-                  >
+                  <Button className="w-full h-24 flex flex-col gap-2" variant="outline" onClick={() => fileInputRef.current?.click()}>
                     <UploadCloud className="w-6 h-6 text-muted-foreground" />
                     <span>Select Photos</span>
                   </Button>
@@ -253,8 +303,58 @@ export default function JobDetail() {
               </div>
             </CardContent>
           </Card>
+
+          {/* Batch AI Actions */}
+          {hasListableItems && (
+            <Card className="shadow-sm">
+              <CardHeader className="pb-3">
+                <CardTitle className="text-sm font-medium text-muted-foreground uppercase tracking-wide">Batch AI Actions</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-2">
+                <Button
+                  className="w-full justify-start"
+                  variant="outline"
+                  size="sm"
+                  onClick={handlePriceAll}
+                  disabled={batchActionsRunning}
+                >
+                  <TrendingUp className="w-4 h-4 mr-2 text-emerald-600" />
+                  {priceJobMutation.isPending ? "Pricing items…" : "Price All Items"}
+                </Button>
+                <Button
+                  className="w-full justify-start"
+                  variant="outline"
+                  size="sm"
+                  onClick={handleGenerateAllListings}
+                  disabled={batchActionsRunning}
+                >
+                  <FileText className="w-4 h-4 mr-2 text-blue-600" />
+                  {generateJobListingsMutation.isPending ? "Generating listings…" : "Generate All Listings"}
+                </Button>
+
+                {batchActionsRunning && (
+                  <p className="text-xs text-muted-foreground text-center pt-1">
+                    Processing each item sequentially — this may take a minute…
+                  </p>
+                )}
+
+                {batchActionResult && (
+                  <div className="mt-2 p-2.5 bg-muted/50 border border-border rounded-md text-xs space-y-0.5">
+                    <p className="font-medium">
+                      {batchActionResult.type === "pricing" ? "Pricing" : "Listings"} complete
+                    </p>
+                    <p className="text-muted-foreground">
+                      {batchActionResult.processed} items updated
+                      {batchActionResult.errors > 0 && `, ${batchActionResult.errors} errors`}
+                    </p>
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          )}
         </div>
 
+        {/* ── Right panel: inventory table ── */}
         <div className="lg:col-span-2">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-xl font-serif font-medium flex items-center gap-2">
@@ -269,10 +369,10 @@ export default function JobDetail() {
               <TableHeader>
                 <TableRow className="bg-muted/50 hover:bg-muted/50">
                   <TableHead>Item</TableHead>
+                  <TableHead>Category / Condition</TableHead>
                   <TableHead>Platform</TableHead>
                   <TableHead>Market</TableHead>
                   <TableHead>Status</TableHead>
-                  <TableHead>Disposition</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -289,26 +389,31 @@ export default function JobDetail() {
                     >
                       <TableCell>
                         <div className="font-medium text-foreground">{item.brand}</div>
-                        <div className="text-sm text-muted-foreground truncate max-w-[180px]">{item.model}</div>
+                        <div className="text-sm text-muted-foreground truncate max-w-[150px]">{item.model}</div>
                       </TableCell>
                       <TableCell>
-                        <Badge variant="secondary" className="font-normal text-xs">{item.platform}</Badge>
+                        <div className="text-sm">{item.category ?? "—"}</div>
+                        {item.condition && (
+                          <div className="text-xs text-muted-foreground">{item.condition}</div>
+                        )}
                       </TableCell>
-                      <TableCell className="text-sm font-medium">{formatCurrency(item.marketPrice)}</TableCell>
+                      <TableCell>
+                        <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium border ${platformBadgeClass(item.platform)}`}>
+                          {item.platform}
+                        </span>
+                      </TableCell>
+                      <TableCell className="text-sm font-medium">
+                        {item.priceRangeLow && item.priceRangeHigh
+                          ? `$${Number(item.priceRangeLow).toFixed(0)}–$${Number(item.priceRangeHigh).toFixed(0)}`
+                          : formatCurrency(item.marketPrice)}
+                      </TableCell>
                       <TableCell>
                         <Badge
-                          variant={
-                            item.status === "Sold" ? "default" :
-                            item.status === "New" ? "destructive" :
-                            "outline"
-                          }
+                          variant={item.status === "Sold" ? "default" : item.status === "New" ? "destructive" : "outline"}
                           className="text-xs"
                         >
                           {item.status}
                         </Badge>
-                      </TableCell>
-                      <TableCell>
-                        <span className="text-sm capitalize">{item.disposition}</span>
                       </TableCell>
                     </TableRow>
                   ))

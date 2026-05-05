@@ -8,8 +8,10 @@ import {
   useGenerateListingDescription,
   usePublishItem,
   useSyncItemPlatformStatus,
+  usePriceItem,
+  useGenerateItemListings,
   getGetItemQueryKey,
-  getListItemsQueryKey
+  getListItemsQueryKey,
 } from "@workspace/api-client-react";
 import { PLATFORMS, STATUSES, DISPOSITIONS, formatCurrency } from "@/lib/constants";
 
@@ -22,7 +24,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
-import { ArrowLeft, Sparkles, Trash2, Save, Send, ExternalLink, AlertCircle, CheckCircle2, Info, RefreshCw } from "lucide-react";
+import {
+  ArrowLeft, Sparkles, Trash2, Save, Send, ExternalLink, AlertCircle,
+  CheckCircle2, Info, RefreshCw, TrendingUp, Copy, Check, FileText,
+} from "lucide-react";
 import { 
   AlertDialog,
   AlertDialogAction,
@@ -37,14 +42,58 @@ import {
 
 const NO_API_PLATFORMS = new Set(["Poshmark", "Chairish", "Facebook Marketplace"]);
 const MANUAL_PLATFORMS = new Set(["Local Pickup"]);
+const CONDITIONS = ["Excellent", "Good", "Fair", "Poor"];
+const CATEGORIES = [
+  "Clothing","Shoes","Accessories","Jewelry","Furniture","Decor",
+  "Art","Electronics","Kitchen","Books","Toys","Vintage","Collectibles","Other",
+];
+
+const COPY_TAB_COLORS: Record<string, { active: string; inactive: string }> = {
+  poshmark: { active: "bg-red-500 text-white border-transparent", inactive: "bg-red-50 text-red-600 border-red-200" },
+  ebay:     { active: "bg-yellow-500 text-white border-transparent", inactive: "bg-yellow-50 text-yellow-700 border-yellow-200" },
+  etsy:     { active: "bg-orange-500 text-white border-transparent", inactive: "bg-orange-50 text-orange-600 border-orange-200" },
+  facebook: { active: "bg-blue-600 text-white border-transparent", inactive: "bg-blue-50 text-blue-600 border-blue-200" },
+};
+
+interface MarketSource {
+  platform: string;
+  title: string;
+  price: number;
+  condition: string;
+  soldDate: string;
+}
+
+interface PricingState {
+  itemId: number;
+  priceLow: number;
+  priceHigh: number;
+  estimatedDaysToSell: number;
+  recommendedPlatform: string;
+  platformRationale: string;
+  sources: MarketSource[];
+}
+
+interface CopyPlatform {
+  title: string;
+  description: string;
+  hashtags: string[];
+  measurements: string;
+}
+
+interface ListingCopyState {
+  poshmark: CopyPlatform;
+  ebay: CopyPlatform;
+  etsy: CopyPlatform;
+  facebook: CopyPlatform;
+}
 
 function PublishStatusBadge({ status }: { status: string }) {
   const map: Record<string, { label: string; variant: "default" | "secondary" | "destructive" | "outline" }> = {
     Listed: { label: "Listed", variant: "default" },
-    Draft: { label: "Draft", variant: "secondary" },
-    Error: { label: "Error", variant: "destructive" },
-    New: { label: "New", variant: "outline" },
-    Sold: { label: "Sold", variant: "default" },
+    Draft:  { label: "Draft",  variant: "secondary" },
+    Error:  { label: "Error",  variant: "destructive" },
+    New:    { label: "New",    variant: "outline" },
+    Sold:   { label: "Sold",   variant: "default" },
   };
   const config = map[status] ?? { label: status, variant: "outline" };
   return <Badge variant={config.variant}>{config.label}</Badge>;
@@ -63,30 +112,27 @@ export default function InventoryItem() {
   const generateDesc = useGenerateListingDescription();
   const publishItemMutation = usePublishItem();
   const syncStatusMutation = useSyncItemPlatformStatus();
+  const priceItemMutation = usePriceItem();
+  const generateListingsMutation = useGenerateItemListings();
 
   const [formData, setFormData] = useState({
-    brand: "",
-    model: "",
-    marketPrice: "",
-    floorPrice: "",
-    platform: "",
-    status: "",
-    disposition: "",
-    shippingLogic: "",
-    listingDescription: "",
+    brand: "", model: "", category: "", color: "", condition: "",
+    conditionNotes: "", marketPrice: "", floorPrice: "", platform: "",
+    status: "", disposition: "", shippingLogic: "", listingDescription: "",
   });
 
+  const [pricing, setPricing] = useState<PricingState | null>(null);
+  const [listingCopy, setListingCopy] = useState<ListingCopyState | null>(null);
+  const [copyTab, setCopyTab] = useState<"poshmark" | "ebay" | "etsy" | "facebook">("poshmark");
+  const [copiedKey, setCopiedKey] = useState<string | null>(null);
+
   const [publishResult, setPublishResult] = useState<{
-    mode: string;
-    message: string;
+    mode: string; message: string;
     platformListingUrl?: string | null;
-    listingTitle?: string;
-    listingDescription?: string;
+    listingTitle?: string; listingDescription?: string;
   } | null>(null);
   const [syncResult, setSyncResult] = useState<{
-    newStatus: string;
-    message: string;
-    apiCalled: boolean;
+    newStatus: string; message: string; apiCalled: boolean;
   } | null>(null);
   const [copied, setCopied] = useState(false);
 
@@ -95,6 +141,10 @@ export default function InventoryItem() {
       setFormData({
         brand: item.brand || "",
         model: item.model || "",
+        category: item.category || "",
+        color: item.color || "",
+        condition: item.condition || "",
+        conditionNotes: item.conditionNotes || "",
         marketPrice: item.marketPrice || "",
         floorPrice: item.floorPrice || "",
         platform: item.platform || "",
@@ -103,6 +153,20 @@ export default function InventoryItem() {
         shippingLogic: item.shippingLogic || "",
         listingDescription: item.listingDescription || "",
       });
+      if (item.priceRangeLow && item.marketSources) {
+        setPricing({
+          itemId: item.id,
+          priceLow: Number(item.priceRangeLow),
+          priceHigh: Number(item.priceRangeHigh ?? item.priceRangeLow),
+          estimatedDaysToSell: item.estimatedDaysToSell ?? 30,
+          recommendedPlatform: item.recommendedPlatform ?? item.platform,
+          platformRationale: item.platformRationale ?? "",
+          sources: (item.marketSources as MarketSource[]) ?? [],
+        });
+      }
+      if (item.listingCopy) {
+        setListingCopy(item.listingCopy as ListingCopyState);
+      }
       setPublishResult(null);
     }
   }, [item]);
@@ -136,6 +200,10 @@ export default function InventoryItem() {
         data: {
           brand: formData.brand,
           model: formData.model,
+          category: formData.category || null,
+          color: formData.color || null,
+          condition: formData.condition || null,
+          conditionNotes: formData.conditionNotes || null,
           marketPrice: formData.marketPrice || null,
           floorPrice: formData.floorPrice || null,
           platform: formData.platform,
@@ -143,7 +211,7 @@ export default function InventoryItem() {
           disposition: formData.disposition,
           shippingLogic: formData.shippingLogic || null,
           listingDescription: formData.listingDescription || null,
-        } 
+        },
       },
       {
         onSuccess: () => {
@@ -153,7 +221,7 @@ export default function InventoryItem() {
         },
         onError: () => {
           toast({ variant: "destructive", title: "Failed to update item." });
-        }
+        },
       }
     );
   };
@@ -169,7 +237,7 @@ export default function InventoryItem() {
         },
         onError: () => {
           toast({ variant: "destructive", title: "Failed to delete item." });
-        }
+        },
       }
     );
   };
@@ -185,7 +253,40 @@ export default function InventoryItem() {
         },
         onError: () => {
           toast({ variant: "destructive", title: "Failed to generate description." });
-        }
+        },
+      }
+    );
+  };
+
+  const handleGetPricing = () => {
+    priceItemMutation.mutate(
+      { itemId: id },
+      {
+        onSuccess: (data) => {
+          setPricing(data as PricingState);
+          toast({ title: "Market pricing generated!" });
+          queryClient.invalidateQueries({ queryKey: getGetItemQueryKey(id) });
+        },
+        onError: () => {
+          toast({ variant: "destructive", title: "Failed to generate market pricing." });
+        },
+      }
+    );
+  };
+
+  const handleGenerateListings = () => {
+    generateListingsMutation.mutate(
+      { itemId: id },
+      {
+        onSuccess: (data) => {
+          const { itemId: _id, ...copy } = data as { itemId: number } & ListingCopyState;
+          setListingCopy(copy);
+          toast({ title: "Listing copy generated!" });
+          queryClient.invalidateQueries({ queryKey: getGetItemQueryKey(id) });
+        },
+        onError: () => {
+          toast({ variant: "destructive", title: "Failed to generate listing copy." });
+        },
       }
     );
   };
@@ -196,8 +297,7 @@ export default function InventoryItem() {
       {
         onSuccess: (data) => {
           setPublishResult({
-            mode: data.mode,
-            message: data.message,
+            mode: data.mode, message: data.message,
             platformListingUrl: data.platformListingUrl,
             listingTitle: formData.brand + " " + formData.model,
             listingDescription: formData.listingDescription,
@@ -205,18 +305,14 @@ export default function InventoryItem() {
           setFormData(prev => ({ ...prev, status: data.newStatus }));
           queryClient.invalidateQueries({ queryKey: getGetItemQueryKey(id) });
           queryClient.invalidateQueries({ queryKey: getListItemsQueryKey() });
-          if (data.mode === "live") {
-            toast({ title: `Listed on ${data.platform}!` });
-          } else if (data.mode === "draft") {
-            toast({ title: `Draft saved on ${data.platform}.` });
-          } else {
-            toast({ title: `Draft prepared for ${data.platform}.` });
-          }
+          if (data.mode === "live") toast({ title: `Listed on ${data.platform}!` });
+          else if (data.mode === "draft") toast({ title: `Draft saved on ${data.platform}.` });
+          else toast({ title: `Draft prepared for ${data.platform}.` });
         },
         onError: (err: unknown) => {
           const msg = err instanceof Error ? err.message : "Failed to publish item.";
           toast({ variant: "destructive", title: msg });
-        }
+        },
       }
     );
   };
@@ -227,11 +323,7 @@ export default function InventoryItem() {
       { itemId: id },
       {
         onSuccess: (data) => {
-          setSyncResult({
-            newStatus: data.newStatus,
-            message: data.message,
-            apiCalled: data.apiCalled,
-          });
+          setSyncResult({ newStatus: data.newStatus, message: data.message, apiCalled: data.apiCalled });
           setFormData(prev => ({ ...prev, status: data.newStatus }));
           queryClient.invalidateQueries({ queryKey: getGetItemQueryKey(id) });
           queryClient.invalidateQueries({ queryKey: getListItemsQueryKey() });
@@ -240,7 +332,7 @@ export default function InventoryItem() {
         onError: (err: unknown) => {
           const msg = err instanceof Error ? err.message : "Failed to sync platform status.";
           toast({ variant: "destructive", title: msg });
-        }
+        },
       }
     );
   };
@@ -259,6 +351,13 @@ export default function InventoryItem() {
     });
   };
 
+  const copyToClipboard = (text: string, key: string) => {
+    void navigator.clipboard.writeText(text).then(() => {
+      setCopiedKey(key);
+      setTimeout(() => setCopiedKey(null), 2000);
+    });
+  };
+
   const isPublishable =
     !MANUAL_PLATFORMS.has(formData.platform) &&
     formData.disposition === "list" &&
@@ -269,6 +368,8 @@ export default function InventoryItem() {
     if (NO_API_PLATFORMS.has(formData.platform)) return `Prepare Draft for ${formData.platform}`;
     return `Publish to ${formData.platform}`;
   };
+
+  const activeCopyPlatform = listingCopy?.[copyTab];
 
   return (
     <div className="p-8 max-w-4xl mx-auto space-y-6">
@@ -313,7 +414,6 @@ export default function InventoryItem() {
         </div>
       </div>
 
-      {/* Publish result banner */}
       {publishResult && (
         <div className={`flex items-start gap-3 p-4 rounded-lg border text-sm ${
           publishResult.mode === "live"
@@ -331,14 +431,12 @@ export default function InventoryItem() {
           )}
           <div className="flex-1">
             <p className="font-medium">
-              {publishResult.mode === "live"
-                ? "Live listing created"
-                : publishResult.mode === "draft"
-                  ? "Draft saved"
-                  : "Draft prepared"}
+              {publishResult.mode === "live" ? "Live listing created"
+                : publishResult.mode === "draft" ? "Draft saved"
+                : "Draft prepared"}
             </p>
             <p className="mt-0.5">{publishResult.message}</p>
-                {publishResult.mode === "draft_prepared" && (
+            {publishResult.mode === "draft_prepared" && (
               <div className="flex gap-2 mt-2 flex-wrap">
                 <button
                   onClick={handleCopyListing}
@@ -373,6 +471,7 @@ export default function InventoryItem() {
       )}
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {/* ── Left column ── */}
         <div className="md:col-span-2 space-y-6">
           <Card className="shadow-sm">
             <CardHeader>
@@ -382,45 +481,71 @@ export default function InventoryItem() {
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label>Brand</Label>
-                  <Input 
-                    value={formData.brand} 
-                    onChange={e => setFormData({...formData, brand: e.target.value})} 
-                  />
+                  <Input value={formData.brand} onChange={e => setFormData({...formData, brand: e.target.value})} />
                 </div>
                 <div className="space-y-2">
                   <Label>Model / Title</Label>
-                  <Input 
-                    value={formData.model} 
-                    onChange={e => setFormData({...formData, model: e.target.value})} 
-                  />
+                  <Input value={formData.model} onChange={e => setFormData({...formData, model: e.target.value})} />
                 </div>
               </div>
+              <div className="grid grid-cols-3 gap-4">
+                <div className="space-y-2">
+                  <Label>Category</Label>
+                  <Select value={formData.category} onValueChange={v => setFormData({...formData, category: v})}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Category" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {CATEGORIES.map(c => <SelectItem key={c} value={c}>{c}</SelectItem>)}
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div className="space-y-2">
+                  <Label>Color</Label>
+                  <Input
+                    value={formData.color}
+                    onChange={e => setFormData({...formData, color: e.target.value})}
+                    placeholder="e.g. Navy Blue"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label>Condition</Label>
+                  <Select value={formData.condition} onValueChange={v => setFormData({...formData, condition: v})}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Condition" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {CONDITIONS.map(c => <SelectItem key={c} value={c}>{c}</SelectItem>)}
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+              {formData.condition && formData.condition !== "Excellent" && (
+                <div className="space-y-2">
+                  <Label>Condition Notes</Label>
+                  <Input
+                    value={formData.conditionNotes}
+                    onChange={e => setFormData({...formData, conditionNotes: e.target.value})}
+                    placeholder="Brief note on flaws or wear…"
+                  />
+                </div>
+              )}
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label>Market Price</Label>
-                  <Input 
-                    type="number" 
-                    step="0.01"
-                    value={formData.marketPrice} 
-                    onChange={e => setFormData({...formData, marketPrice: e.target.value})} 
-                  />
+                  <Input type="number" step="0.01" value={formData.marketPrice} onChange={e => setFormData({...formData, marketPrice: e.target.value})} />
                 </div>
                 <div className="space-y-2">
                   <Label>Floor Price</Label>
-                  <Input 
-                    type="number"
-                    step="0.01" 
-                    value={formData.floorPrice} 
-                    onChange={e => setFormData({...formData, floorPrice: e.target.value})} 
-                  />
+                  <Input type="number" step="0.01" value={formData.floorPrice} onChange={e => setFormData({...formData, floorPrice: e.target.value})} />
                 </div>
               </div>
               <div className="space-y-2">
                 <Label>Shipping Logic / Notes</Label>
-                <Input 
-                  value={formData.shippingLogic} 
-                  onChange={e => setFormData({...formData, shippingLogic: e.target.value})} 
-                  placeholder="e.g. Needs custom crate, Local only"
+                <Input
+                  value={formData.shippingLogic}
+                  onChange={e => setFormData({...formData, shippingLogic: e.target.value})}
+                  placeholder="e.g. USPS Priority Medium box, Local pickup only"
                 />
               </div>
             </CardContent>
@@ -429,19 +554,14 @@ export default function InventoryItem() {
           <Card className="shadow-sm">
             <CardHeader className="flex flex-row items-center justify-between pb-2">
               <CardTitle className="text-lg">Listing Description</CardTitle>
-              <Button 
-                variant="secondary" 
-                size="sm" 
-                onClick={handleGenerateDesc}
-                disabled={generateDesc.isPending}
-              >
+              <Button variant="secondary" size="sm" onClick={handleGenerateDesc} disabled={generateDesc.isPending}>
                 <Sparkles className="w-4 h-4 mr-2 text-blue-500" />
                 {generateDesc.isPending ? "Generating..." : "Generate with AI"}
               </Button>
             </CardHeader>
             <CardContent>
-              <Textarea 
-                className="min-h-[200px]" 
+              <Textarea
+                className="min-h-[200px]"
                 value={formData.listingDescription}
                 onChange={e => setFormData({...formData, listingDescription: e.target.value})}
                 placeholder="Item description for the listing platform..."
@@ -450,6 +570,7 @@ export default function InventoryItem() {
           </Card>
         </div>
 
+        {/* ── Right column ── */}
         <div className="space-y-6">
           <Card className="shadow-sm">
             <CardHeader>
@@ -459,27 +580,25 @@ export default function InventoryItem() {
               <div className="space-y-2">
                 <Label>Platform</Label>
                 <Select value={formData.platform} onValueChange={v => setFormData({...formData, platform: v})}>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select platform" />
-                  </SelectTrigger>
+                  <SelectTrigger><SelectValue placeholder="Select platform" /></SelectTrigger>
                   <SelectContent>
-                    {PLATFORMS.map(p => (
-                      <SelectItem key={p} value={p}>{p}</SelectItem>
-                    ))}
+                    {PLATFORMS.map(p => <SelectItem key={p} value={p}>{p}</SelectItem>)}
                   </SelectContent>
                 </Select>
               </div>
+              {pricing?.recommendedPlatform && pricing.recommendedPlatform !== formData.platform && (
+                <div className="text-xs bg-amber-50 border border-amber-200 rounded-md p-2.5 text-amber-700 space-y-1">
+                  <p>AI recommends: <strong>{pricing.recommendedPlatform}</strong></p>
+                  {pricing.platformRationale && <p className="text-amber-600">{pricing.platformRationale}</p>}
+                </div>
+              )}
               <div className="space-y-2">
                 <Label>Status</Label>
                 <div className="flex items-center gap-2">
                   <Select value={formData.status} onValueChange={v => setFormData({...formData, status: v})}>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select status" />
-                    </SelectTrigger>
+                    <SelectTrigger><SelectValue placeholder="Select status" /></SelectTrigger>
                     <SelectContent>
-                      {STATUSES.map(s => (
-                        <SelectItem key={s} value={s}>{s}</SelectItem>
-                      ))}
+                      {STATUSES.map(s => <SelectItem key={s} value={s}>{s}</SelectItem>)}
                     </SelectContent>
                   </Select>
                   <PublishStatusBadge status={formData.status} />
@@ -488,20 +607,15 @@ export default function InventoryItem() {
               <div className="space-y-2">
                 <Label>Disposition</Label>
                 <Select value={formData.disposition} onValueChange={v => setFormData({...formData, disposition: v})}>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select disposition" />
-                  </SelectTrigger>
+                  <SelectTrigger><SelectValue placeholder="Select disposition" /></SelectTrigger>
                   <SelectContent>
-                    {DISPOSITIONS.map(d => (
-                      <SelectItem key={d} value={d} className="capitalize">{d}</SelectItem>
-                    ))}
+                    {DISPOSITIONS.map(d => <SelectItem key={d} value={d} className="capitalize">{d}</SelectItem>)}
                   </SelectContent>
                 </Select>
               </div>
             </CardContent>
           </Card>
 
-          {/* Publish card */}
           <Card className="shadow-sm border-primary/20">
             <CardHeader className="pb-3">
               <CardTitle className="text-lg flex items-center gap-2">
@@ -525,12 +639,7 @@ export default function InventoryItem() {
               )}
 
               {item.platformListingUrl && (
-                <a
-                  href={item.platformListingUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 text-sm text-primary hover:underline"
-                >
+                <a href={item.platformListingUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-sm text-primary hover:underline">
                   <ExternalLink className="w-3.5 h-3.5" />
                   View existing listing
                 </a>
@@ -543,22 +652,13 @@ export default function InventoryItem() {
                 </div>
               )}
 
-              <Button
-                className="w-full"
-                onClick={handlePublish}
-                disabled={publishItemMutation.isPending || !isPublishable}
-              >
+              <Button className="w-full" onClick={handlePublish} disabled={publishItemMutation.isPending || !isPublishable}>
                 <Send className="w-4 h-4 mr-2" />
                 {publishButtonLabel()}
               </Button>
 
               {!MANUAL_PLATFORMS.has(formData.platform) && item.platformListingId && (
-                <Button
-                  variant="outline"
-                  className="w-full"
-                  onClick={handleSyncStatus}
-                  disabled={syncStatusMutation.isPending}
-                >
+                <Button variant="outline" className="w-full" onClick={handleSyncStatus} disabled={syncStatusMutation.isPending}>
                   <RefreshCw className={`w-4 h-4 mr-2 ${syncStatusMutation.isPending ? "animate-spin" : ""}`} />
                   {syncStatusMutation.isPending ? "Syncing…" : "Sync Status from Platform"}
                 </Button>
@@ -566,9 +666,7 @@ export default function InventoryItem() {
 
               {syncResult && (
                 <div className={`flex items-start gap-2 text-xs p-2 rounded border ${
-                  syncResult.apiCalled
-                    ? "bg-blue-50 border-blue-200 text-blue-800"
-                    : "bg-amber-50 border-amber-200 text-amber-800"
+                  syncResult.apiCalled ? "bg-blue-50 border-blue-200 text-blue-800" : "bg-amber-50 border-amber-200 text-amber-800"
                 }`}>
                   <Info className="w-3.5 h-3.5 flex-shrink-0 mt-0.5" />
                   <span>{syncResult.message}</span>
@@ -587,12 +685,179 @@ export default function InventoryItem() {
             <p>Created: {new Date(item.createdAt).toLocaleString()}</p>
             <p>Last updated: {new Date(item.updatedAt).toLocaleString()}</p>
             <p>Created by: {item.createdBy || "Unknown"}</p>
-            {item.platformListingId && (
-              <p>Platform ID: {item.platformListingId}</p>
-            )}
+            {item.platformListingId && <p>Platform ID: {item.platformListingId}</p>}
           </div>
         </div>
       </div>
+
+      {/* ── Market Pricing ── */}
+      <Card className="shadow-sm">
+        <CardHeader className="flex flex-row items-center justify-between pb-3">
+          <CardTitle className="text-lg flex items-center gap-2">
+            <TrendingUp className="w-4 h-4 text-emerald-600" />
+            Market Pricing
+          </CardTitle>
+          <Button variant="secondary" size="sm" onClick={handleGetPricing} disabled={priceItemMutation.isPending}>
+            <Sparkles className="w-4 h-4 mr-2 text-emerald-500" />
+            {priceItemMutation.isPending ? "Analyzing market…" : pricing ? "Refresh Pricing" : "Get AI Pricing"}
+          </Button>
+        </CardHeader>
+        <CardContent>
+          {pricing ? (
+            <div className="space-y-4">
+              <div className="grid grid-cols-3 gap-4">
+                <div className="bg-muted/40 rounded-lg p-3 text-center">
+                  <div className="text-xs text-muted-foreground mb-1">Price Range</div>
+                  <div className="font-semibold">${pricing.priceLow} – ${pricing.priceHigh}</div>
+                </div>
+                <div className="bg-muted/40 rounded-lg p-3 text-center">
+                  <div className="text-xs text-muted-foreground mb-1">Est. Days to Sell</div>
+                  <div className="font-semibold">{pricing.estimatedDaysToSell}d</div>
+                </div>
+                <div className="bg-muted/40 rounded-lg p-3 text-center">
+                  <div className="text-xs text-muted-foreground mb-1">Best Platform</div>
+                  <div className="font-semibold text-sm truncate">{pricing.recommendedPlatform}</div>
+                </div>
+              </div>
+              {pricing.platformRationale && (
+                <p className="text-xs text-muted-foreground italic">{pricing.platformRationale}</p>
+              )}
+              {pricing.sources.length > 0 && (
+                <div>
+                  <p className="text-xs font-medium text-muted-foreground mb-2">Comparable Sold Listings</p>
+                  <div className="border rounded-lg overflow-hidden">
+                    <table className="w-full text-xs">
+                      <thead className="bg-muted/50">
+                        <tr>
+                          <th className="text-left p-2 font-medium text-muted-foreground">Platform</th>
+                          <th className="text-left p-2 font-medium text-muted-foreground">Item</th>
+                          <th className="text-left p-2 font-medium text-muted-foreground">Condition</th>
+                          <th className="text-right p-2 font-medium text-muted-foreground">Sold</th>
+                          <th className="text-right p-2 font-medium text-muted-foreground">Date</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {pricing.sources.map((src, i) => (
+                          <tr key={i} className="border-t border-border/50 hover:bg-muted/30">
+                            <td className="p-2 text-muted-foreground">{src.platform}</td>
+                            <td className="p-2 max-w-[180px] truncate">{src.title}</td>
+                            <td className="p-2 text-muted-foreground">{src.condition}</td>
+                            <td className="p-2 text-right font-medium">${src.price}</td>
+                            <td className="p-2 text-right text-muted-foreground">{src.soldDate}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              )}
+            </div>
+          ) : (
+            <p className="text-sm text-muted-foreground py-6 text-center">
+              No pricing data yet. Click "Get AI Pricing" to generate market comps based on recent sold listings.
+            </p>
+          )}
+        </CardContent>
+      </Card>
+
+      {/* ── Multi-Platform Listing Copy ── */}
+      <Card className="shadow-sm">
+        <CardHeader className="flex flex-row items-center justify-between pb-3">
+          <CardTitle className="text-lg flex items-center gap-2">
+            <FileText className="w-4 h-4 text-blue-600" />
+            Multi-Platform Listing Copy
+          </CardTitle>
+          <Button variant="secondary" size="sm" onClick={handleGenerateListings} disabled={generateListingsMutation.isPending}>
+            <Sparkles className="w-4 h-4 mr-2 text-blue-500" />
+            {generateListingsMutation.isPending ? "Generating…" : listingCopy ? "Regenerate" : "Generate Listings"}
+          </Button>
+        </CardHeader>
+        <CardContent>
+          {listingCopy ? (
+            <div className="space-y-4">
+              <div className="flex gap-2 flex-wrap">
+                {(["poshmark", "ebay", "etsy", "facebook"] as const).map((p) => {
+                  const colors = COPY_TAB_COLORS[p];
+                  const isActive = copyTab === p;
+                  const labels: Record<string, string> = { poshmark: "Poshmark", ebay: "eBay", etsy: "Etsy", facebook: "Facebook" };
+                  return (
+                    <button
+                      key={p}
+                      onClick={() => setCopyTab(p)}
+                      className={`px-3 py-1.5 rounded-full text-xs font-medium border transition-colors ${isActive ? colors.active : colors.inactive}`}
+                    >
+                      {labels[p]}
+                    </button>
+                  );
+                })}
+              </div>
+
+              {activeCopyPlatform && (
+                <div className="space-y-3">
+                  <div>
+                    <div className="flex items-center justify-between mb-1">
+                      <Label className="text-xs">Title</Label>
+                      <button
+                        onClick={() => copyToClipboard(activeCopyPlatform.title, `${copyTab}-title`)}
+                        className="text-xs text-muted-foreground hover:text-foreground flex items-center gap-1"
+                      >
+                        {copiedKey === `${copyTab}-title` ? <Check className="w-3 h-3 text-green-500" /> : <Copy className="w-3 h-3" />}
+                        {copiedKey === `${copyTab}-title` ? "Copied" : "Copy"}
+                      </button>
+                    </div>
+                    <div className="text-sm bg-muted/40 rounded-md p-3 font-medium">{activeCopyPlatform.title}</div>
+                  </div>
+
+                  <div>
+                    <div className="flex items-center justify-between mb-1">
+                      <Label className="text-xs">Description</Label>
+                      <button
+                        onClick={() => copyToClipboard(activeCopyPlatform.description, `${copyTab}-desc`)}
+                        className="text-xs text-muted-foreground hover:text-foreground flex items-center gap-1"
+                      >
+                        {copiedKey === `${copyTab}-desc` ? <Check className="w-3 h-3 text-green-500" /> : <Copy className="w-3 h-3" />}
+                        {copiedKey === `${copyTab}-desc` ? "Copied" : "Copy"}
+                      </button>
+                    </div>
+                    <div className="text-sm bg-muted/40 rounded-md p-3 whitespace-pre-wrap leading-relaxed">{activeCopyPlatform.description}</div>
+                  </div>
+
+                  {activeCopyPlatform.measurements && (
+                    <div>
+                      <Label className="text-xs">Measurements</Label>
+                      <div className="text-sm text-muted-foreground mt-1">{activeCopyPlatform.measurements}</div>
+                    </div>
+                  )}
+
+                  {activeCopyPlatform.hashtags.length > 0 && (
+                    <div>
+                      <div className="flex items-center justify-between mb-1">
+                        <Label className="text-xs">Hashtags</Label>
+                        <button
+                          onClick={() => copyToClipboard(activeCopyPlatform.hashtags.map(h => `#${h}`).join(" "), `${copyTab}-tags`)}
+                          className="text-xs text-muted-foreground hover:text-foreground flex items-center gap-1"
+                        >
+                          {copiedKey === `${copyTab}-tags` ? <Check className="w-3 h-3 text-green-500" /> : <Copy className="w-3 h-3" />}
+                          {copiedKey === `${copyTab}-tags` ? "Copied" : "Copy all"}
+                        </button>
+                      </div>
+                      <div className="flex flex-wrap gap-1">
+                        {activeCopyPlatform.hashtags.map((tag, i) => (
+                          <span key={i} className="text-xs bg-primary/10 text-primary px-2 py-0.5 rounded-full">#{tag}</span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          ) : (
+            <p className="text-sm text-muted-foreground py-6 text-center">
+              No listing copy yet. Click "Generate Listings" to create platform-specific title, description, and hashtags for Poshmark, eBay, Etsy, and Facebook.
+            </p>
+          )}
+        </CardContent>
+      </Card>
     </div>
   );
 }

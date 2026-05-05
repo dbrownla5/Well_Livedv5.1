@@ -24,6 +24,8 @@ import {
 import {
   analyzeBatch,
   generateListingDescription,
+  fetchMarketPricing,
+  generateListingCopy,
 } from "../lib/gemini-pipeline";
 import { publishItem, syncPlatformStatus } from "../lib/platform-adapters";
 import { ObjectStorageService, ObjectNotFoundError } from "../lib/objectStorage";
@@ -165,8 +167,19 @@ router.get("/reseller/items", async (req, res): Promise<void> => {
       clientId: itemsTable.clientId,
       brand: itemsTable.brand,
       model: itemsTable.model,
+      category: itemsTable.category,
+      color: itemsTable.color,
+      condition: itemsTable.condition,
+      conditionNotes: itemsTable.conditionNotes,
       marketPrice: itemsTable.marketPrice,
       floorPrice: itemsTable.floorPrice,
+      priceRangeLow: itemsTable.priceRangeLow,
+      priceRangeHigh: itemsTable.priceRangeHigh,
+      estimatedDaysToSell: itemsTable.estimatedDaysToSell,
+      marketSources: itemsTable.marketSources,
+      recommendedPlatform: itemsTable.recommendedPlatform,
+      platformRationale: itemsTable.platformRationale,
+      listingCopy: itemsTable.listingCopy,
       platform: itemsTable.platform,
       shippingLogic: itemsTable.shippingLogic,
       status: itemsTable.status,
@@ -202,8 +215,19 @@ router.get("/reseller/items/:itemId", async (req, res): Promise<void> => {
       clientId: itemsTable.clientId,
       brand: itemsTable.brand,
       model: itemsTable.model,
+      category: itemsTable.category,
+      color: itemsTable.color,
+      condition: itemsTable.condition,
+      conditionNotes: itemsTable.conditionNotes,
       marketPrice: itemsTable.marketPrice,
       floorPrice: itemsTable.floorPrice,
+      priceRangeLow: itemsTable.priceRangeLow,
+      priceRangeHigh: itemsTable.priceRangeHigh,
+      estimatedDaysToSell: itemsTable.estimatedDaysToSell,
+      marketSources: itemsTable.marketSources,
+      recommendedPlatform: itemsTable.recommendedPlatform,
+      platformRationale: itemsTable.platformRationale,
+      listingCopy: itemsTable.listingCopy,
       platform: itemsTable.platform,
       shippingLogic: itemsTable.shippingLogic,
       status: itemsTable.status,
@@ -306,8 +330,19 @@ router.get("/reseller/dashboard/summary", async (_req, res): Promise<void> => {
       clientId: itemsTable.clientId,
       brand: itemsTable.brand,
       model: itemsTable.model,
+      category: itemsTable.category,
+      color: itemsTable.color,
+      condition: itemsTable.condition,
+      conditionNotes: itemsTable.conditionNotes,
       marketPrice: itemsTable.marketPrice,
       floorPrice: itemsTable.floorPrice,
+      priceRangeLow: itemsTable.priceRangeLow,
+      priceRangeHigh: itemsTable.priceRangeHigh,
+      estimatedDaysToSell: itemsTable.estimatedDaysToSell,
+      marketSources: itemsTable.marketSources,
+      recommendedPlatform: itemsTable.recommendedPlatform,
+      platformRationale: itemsTable.platformRationale,
+      listingCopy: itemsTable.listingCopy,
       platform: itemsTable.platform,
       shippingLogic: itemsTable.shippingLogic,
       status: itemsTable.status,
@@ -444,6 +479,10 @@ router.post("/reseller/ai/analyze-batch", async (req, res): Promise<void> => {
         clientId: job.clientId,
         brand: a.brand,
         model: a.model,
+        category: (a as unknown as Record<string, string | null>).category ?? null,
+        color: (a as unknown as Record<string, string | null>).color ?? null,
+        condition: (a as unknown as Record<string, string | null>).condition ?? null,
+        conditionNotes: (a as unknown as Record<string, string | null>).conditionNotes ?? null,
         marketPrice: a.marketPrice,
         floorPrice: a.floorPrice,
         platform: a.platform,
@@ -690,5 +729,183 @@ router.post(
     });
   },
 );
+
+// ---------- market pricing ----------
+
+router.post("/reseller/items/:itemId/pricing", async (req, res): Promise<void> => {
+  const params = GetItemParams.safeParse(req.params);
+  if (!params.success) {
+    res.status(400).json({ error: params.error.message });
+    return;
+  }
+  const [item] = await db.select().from(itemsTable).where(eq(itemsTable.id, params.data.itemId));
+  if (!item) {
+    res.status(404).json({ error: "Item not found" });
+    return;
+  }
+  let pricing;
+  try {
+    pricing = await fetchMarketPricing({
+      brand: item.brand,
+      model: item.model,
+      category: item.category,
+      color: item.color,
+      condition: item.condition,
+      conditionNotes: item.conditionNotes,
+      platform: item.platform,
+    });
+  } catch (err) {
+    req.log.error({ err }, "Market pricing failed");
+    res.status(502).json({ error: "AI pricing failed" });
+    return;
+  }
+  await db
+    .update(itemsTable)
+    .set({
+      priceRangeLow: String(pricing.priceLow),
+      priceRangeHigh: String(pricing.priceHigh),
+      estimatedDaysToSell: pricing.estimatedDaysToSell,
+      marketSources: pricing.sources as unknown as Record<string, unknown>[],
+      recommendedPlatform: pricing.recommendedPlatform,
+      platformRationale: pricing.platformRationale,
+    })
+    .where(eq(itemsTable.id, item.id));
+  res.json({ itemId: item.id, ...pricing });
+});
+
+router.post("/reseller/jobs/:jobId/pricing", async (req, res): Promise<void> => {
+  const params = GetJobParams.safeParse(req.params);
+  if (!params.success) {
+    res.status(400).json({ error: params.error.message });
+    return;
+  }
+  const [job] = await db.select().from(jobsTable).where(eq(jobsTable.id, params.data.jobId));
+  if (!job) {
+    res.status(404).json({ error: "Job not found" });
+    return;
+  }
+  const jobItems = await db
+    .select()
+    .from(itemsTable)
+    .where(and(eq(itemsTable.jobId, params.data.jobId), eq(itemsTable.disposition, "list")));
+
+  let processed = 0;
+  let errors = 0;
+  for (const it of jobItems) {
+    try {
+      const pricing = await fetchMarketPricing({
+        brand: it.brand,
+        model: it.model,
+        category: it.category,
+        color: it.color,
+        condition: it.condition,
+        conditionNotes: it.conditionNotes,
+        platform: it.platform,
+      });
+      await db
+        .update(itemsTable)
+        .set({
+          priceRangeLow: String(pricing.priceLow),
+          priceRangeHigh: String(pricing.priceHigh),
+          estimatedDaysToSell: pricing.estimatedDaysToSell,
+          marketSources: pricing.sources as unknown as Record<string, unknown>[],
+          recommendedPlatform: pricing.recommendedPlatform,
+          platformRationale: pricing.platformRationale,
+        })
+        .where(eq(itemsTable.id, it.id));
+      processed++;
+    } catch (err) {
+      req.log.error({ err, itemId: it.id }, "Pricing failed for item");
+      errors++;
+    }
+  }
+  res.json({ jobId: params.data.jobId, processed, skipped: 0, errors });
+});
+
+// ---------- listing copy ----------
+
+router.post("/reseller/items/:itemId/listings", async (req, res): Promise<void> => {
+  const params = GetItemParams.safeParse(req.params);
+  if (!params.success) {
+    res.status(400).json({ error: params.error.message });
+    return;
+  }
+  const [item] = await db.select().from(itemsTable).where(eq(itemsTable.id, params.data.itemId));
+  if (!item) {
+    res.status(404).json({ error: "Item not found" });
+    return;
+  }
+  let copy;
+  try {
+    copy = await generateListingCopy({
+      brand: item.brand,
+      model: item.model,
+      category: item.category,
+      color: item.color,
+      condition: item.condition,
+      conditionNotes: item.conditionNotes,
+      marketPrice: item.marketPrice,
+      floorPrice: item.floorPrice,
+      shippingLogic: item.shippingLogic,
+      priceLow: item.priceRangeLow ? Number(item.priceRangeLow) : null,
+      priceHigh: item.priceRangeHigh ? Number(item.priceRangeHigh) : null,
+    });
+  } catch (err) {
+    req.log.error({ err }, "Listing copy generation failed");
+    res.status(502).json({ error: "AI listing copy failed" });
+    return;
+  }
+  await db
+    .update(itemsTable)
+    .set({ listingCopy: copy as unknown as Record<string, unknown> })
+    .where(eq(itemsTable.id, item.id));
+  res.json({ itemId: item.id, ...copy });
+});
+
+router.post("/reseller/jobs/:jobId/listings", async (req, res): Promise<void> => {
+  const params = GetJobParams.safeParse(req.params);
+  if (!params.success) {
+    res.status(400).json({ error: params.error.message });
+    return;
+  }
+  const [job] = await db.select().from(jobsTable).where(eq(jobsTable.id, params.data.jobId));
+  if (!job) {
+    res.status(404).json({ error: "Job not found" });
+    return;
+  }
+  const jobItems = await db
+    .select()
+    .from(itemsTable)
+    .where(and(eq(itemsTable.jobId, params.data.jobId), eq(itemsTable.disposition, "list")));
+
+  let processed = 0;
+  let errors = 0;
+  for (const it of jobItems) {
+    try {
+      const copy = await generateListingCopy({
+        brand: it.brand,
+        model: it.model,
+        category: it.category,
+        color: it.color,
+        condition: it.condition,
+        conditionNotes: it.conditionNotes,
+        marketPrice: it.marketPrice,
+        floorPrice: it.floorPrice,
+        shippingLogic: it.shippingLogic,
+        priceLow: it.priceRangeLow ? Number(it.priceRangeLow) : null,
+        priceHigh: it.priceRangeHigh ? Number(it.priceRangeHigh) : null,
+      });
+      await db
+        .update(itemsTable)
+        .set({ listingCopy: copy as unknown as Record<string, unknown> })
+        .where(eq(itemsTable.id, it.id));
+      processed++;
+    } catch (err) {
+      req.log.error({ err, itemId: it.id }, "Listing copy failed for item");
+      errors++;
+    }
+  }
+  res.json({ jobId: params.data.jobId, processed, skipped: 0, errors });
+});
 
 export default router;

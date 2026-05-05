@@ -20,6 +20,8 @@ tags:
     description: AI photo analysis and listing copy
   - name: storage
     description: Object storage upload and serving endpoints
+  - name: pricing
+    description: AI market pricing and listing copy generation
 paths:
   /healthz:
     get:
@@ -417,6 +419,118 @@ paths:
               schema:
                 $ref: "#/components/schemas/ListingDescriptionResult"
 
+  /reseller/items/{itemId}/pricing:
+    post:
+      operationId: priceItem
+      tags: [pricing]
+      summary: Run AI market pricing for a single inventory item
+      parameters:
+        - in: path
+          name: itemId
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MarketPricingResult"
+        "404":
+          description: Item not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorEnvelope"
+        "502":
+          description: AI error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorEnvelope"
+
+  /reseller/jobs/{jobId}/pricing:
+    post:
+      operationId: priceJobItems
+      tags: [pricing]
+      summary: Run AI market pricing for all listable items in a job
+      parameters:
+        - in: path
+          name: jobId
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JobActionResult"
+        "404":
+          description: Job not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorEnvelope"
+
+  /reseller/items/{itemId}/listings:
+    post:
+      operationId: generateItemListings
+      tags: [pricing]
+      summary: Generate multi-platform listing copy for a single inventory item
+      parameters:
+        - in: path
+          name: itemId
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListingCopyResult"
+        "404":
+          description: Item not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorEnvelope"
+        "502":
+          description: AI error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorEnvelope"
+
+  /reseller/jobs/{jobId}/listings:
+    post:
+      operationId: generateJobListings
+      tags: [pricing]
+      summary: Generate multi-platform listing copy for all listable items in a job
+      parameters:
+        - in: path
+          name: jobId
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JobActionResult"
+        "404":
+          description: Job not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorEnvelope"
+
 components:
   schemas:
     HealthStatus:
@@ -530,10 +644,32 @@ components:
           type: string
         model:
           type: string
+        category:
+          type: ["string", "null"]
+        color:
+          type: ["string", "null"]
+        condition:
+          type: ["string", "null"]
+        conditionNotes:
+          type: ["string", "null"]
         marketPrice:
           type: ["string", "null"]
         floorPrice:
           type: ["string", "null"]
+        priceRangeLow:
+          type: ["string", "null"]
+        priceRangeHigh:
+          type: ["string", "null"]
+        estimatedDaysToSell:
+          type: ["integer", "null"]
+        marketSources:
+          description: Array of comparable sold listings (JSON)
+        recommendedPlatform:
+          type: ["string", "null"]
+        platformRationale:
+          type: ["string", "null"]
+        listingCopy:
+          description: Per-platform listing copy (JSON)
         platform:
           type: string
         shippingLogic:
@@ -575,6 +711,14 @@ components:
           type: string
         model:
           type: string
+        category:
+          type: ["string", "null"]
+        color:
+          type: ["string", "null"]
+        condition:
+          type: ["string", "null"]
+        conditionNotes:
+          type: ["string", "null"]
         marketPrice:
           type: ["string", "null"]
         floorPrice:
@@ -722,6 +866,14 @@ components:
           type: string
         model:
           type: string
+        category:
+          type: ["string", "null"]
+        color:
+          type: ["string", "null"]
+        condition:
+          type: ["string", "null"]
+        conditionNotes:
+          type: ["string", "null"]
         marketPrice:
           type: ["string", "null"]
         floorPrice:
@@ -739,6 +891,85 @@ components:
         savedItemId:
           type: ["integer", "null"]
       required: [brand, model, platform, status, disposition]
+
+    ItemMarketSource:
+      type: object
+      properties:
+        platform:
+          type: string
+        title:
+          type: string
+        price:
+          type: number
+        condition:
+          type: string
+        soldDate:
+          type: string
+      required: [platform, title, price, condition, soldDate]
+
+    MarketPricingResult:
+      type: object
+      properties:
+        itemId:
+          type: integer
+        priceLow:
+          type: number
+        priceHigh:
+          type: number
+        estimatedDaysToSell:
+          type: integer
+        recommendedPlatform:
+          type: string
+        platformRationale:
+          type: string
+        sources:
+          type: array
+          items:
+            $ref: "#/components/schemas/ItemMarketSource"
+      required: [itemId, priceLow, priceHigh, estimatedDaysToSell, recommendedPlatform, platformRationale, sources]
+
+    ListingCopyPlatform:
+      type: object
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        hashtags:
+          type: array
+          items:
+            type: string
+        measurements:
+          type: string
+      required: [title, description, hashtags, measurements]
+
+    ListingCopyResult:
+      type: object
+      properties:
+        itemId:
+          type: integer
+        poshmark:
+          $ref: "#/components/schemas/ListingCopyPlatform"
+        ebay:
+          $ref: "#/components/schemas/ListingCopyPlatform"
+        etsy:
+          $ref: "#/components/schemas/ListingCopyPlatform"
+        facebook:
+          $ref: "#/components/schemas/ListingCopyPlatform"
+      required: [itemId, poshmark, ebay, etsy, facebook]
+
+    JobActionResult:
+      type: object
+      properties:
+        jobId:
+          type: integer
+        processed:
+          type: integer
+        skipped:
+          type: integer
+        errors:
+          type: integer
+      required: [jobId, processed, skipped, errors]
 
     AnalyzeBatchResult:
       type: object

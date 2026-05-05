@@ -15,9 +15,31 @@ export interface Item {
   brand: string;
   model: string;
   /** @nullable */
+  category?: string | null;
+  /** @nullable */
+  color?: string | null;
+  /** @nullable */
+  condition?: string | null;
+  /** @nullable */
+  conditionNotes?: string | null;
+  /** @nullable */
   marketPrice?: string | null;
   /** @nullable */
   floorPrice?: string | null;
+  /** @nullable */
+  priceRangeLow?: string | null;
+  /** @nullable */
+  priceRangeHigh?: string | null;
+  /** @nullable */
+  estimatedDaysToSell?: number | null;
+  /** Array of comparable sold listings (JSON) */
+  marketSources?: unknown;
+  /** @nullable */
+  recommendedPlatform?: string | null;
+  /** @nullable */
+  platformRationale?: string | null;
+  /** Per-platform listing copy (JSON) */
+  listingCopy?: unknown;
   platform: string;
   /** @nullable */
   shippingLogic?: string | null;

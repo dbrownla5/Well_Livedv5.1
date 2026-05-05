@@ -4,6 +4,10 @@ import { scrubForbidden } from "./forbidden-scrub";
 export interface AnalyzedItem {
   brand: string;
   model: string;
+  category: string | null;
+  color: string | null;
+  condition: string | null;
+  conditionNotes: string | null;
   marketPrice: string | null;
   floorPrice: string | null;
   platform: string;
@@ -17,6 +21,37 @@ export interface ExistingInventoryRow {
   model: string;
 }
 
+export interface MarketSource {
+  platform: string;
+  title: string;
+  price: number;
+  condition: string;
+  soldDate: string;
+}
+
+export interface MarketPricingResult {
+  priceLow: number;
+  priceHigh: number;
+  estimatedDaysToSell: number;
+  recommendedPlatform: string;
+  platformRationale: string;
+  sources: MarketSource[];
+}
+
+export interface ListingCopyPlatform {
+  title: string;
+  description: string;
+  hashtags: string[];
+  measurements: string;
+}
+
+export interface ListingCopyResult {
+  poshmark: ListingCopyPlatform;
+  ebay: ListingCopyPlatform;
+  etsy: ListingCopyPlatform;
+  facebook: ListingCopyPlatform;
+}
+
 const ALLOWED_PLATFORMS = [
   "eBay",
   "Poshmark",
@@ -24,6 +59,23 @@ const ALLOWED_PLATFORMS = [
   "Chairish",
   "Facebook Marketplace",
   "Local Pickup",
+];
+
+const ITEM_CATEGORIES = [
+  "Clothing",
+  "Shoes",
+  "Accessories",
+  "Jewelry",
+  "Furniture",
+  "Decor",
+  "Art",
+  "Electronics",
+  "Kitchen",
+  "Books",
+  "Toys",
+  "Vintage",
+  "Collectibles",
+  "Other",
 ];
 
 function buildPrompt(existing: ExistingInventoryRow[]): string {
@@ -36,7 +88,7 @@ You will receive a batch of photos taken at a single household. The photos may s
 
 Your job:
 1. GROUP the photos by physical object (multi-angle shots of one item collapse into ONE entry).
-2. For each grouped item, extract: brand, model (or descriptive model name), estimated market price (USD), suggested floor price (USD), and the BEST resale platform.
+2. For each grouped item, extract all attributes listed below.
 3. DEDUPE against existing master inventory (listed below). If the same brand+model already exists, set status="Duplicate". Otherwise status="New".
 4. DISPOSITION:
    - "list" if the item is resaleable on a real platform.
@@ -48,6 +100,11 @@ PLATFORM CONSTRAINTS — only use one of these EXACT strings:
 ${ALLOWED_PLATFORMS.map((p) => `- ${p}`).join("\n")}
 Do NOT suggest Depop, Grailed, Mercari, or Thumbtack. Ever.
 
+CATEGORY — only use one of these EXACT strings:
+${ITEM_CATEGORIES.map((c) => `- ${c}`).join("\n")}
+
+CONDITION — only use one of: Excellent, Good, Fair, Poor
+
 EXISTING INVENTORY (treat brand+model match as duplicate):
 ${existingList}
 
@@ -55,6 +112,10 @@ Return ONLY a JSON array. Each element must match this shape exactly:
 {
   "brand": "string",
   "model": "string",
+  "category": "one of the allowed categories above",
+  "color": "primary color as a simple string (e.g. Black, Navy Blue, Ivory)",
+  "condition": "Excellent | Good | Fair | Poor",
+  "conditionNotes": "brief note on flaws/wear or null if pristine",
   "marketPrice": "string-decimal or null",
   "floorPrice": "string-decimal or null",
   "platform": "one of the allowed platforms above",
@@ -95,6 +156,19 @@ function coerceDisposition(d: unknown): "list" | "donate" | "wipe-recycle" {
   return "list";
 }
 
+function coerceString(v: unknown): string | null {
+  return typeof v === "string" && v.trim() ? v.trim() : null;
+}
+
+function coerceNumber(v: unknown): number {
+  if (typeof v === "number" && Number.isFinite(v)) return Math.max(0, v);
+  if (typeof v === "string") {
+    const n = Number(v.replace(/[^0-9.]/g, ""));
+    return Number.isFinite(n) ? Math.max(0, n) : 0;
+  }
+  return 0;
+}
+
 export async function analyzeBatch(
   photos: { mimeType: string; dataBase64: string }[],
   existing: ExistingInventoryRow[],
@@ -130,6 +204,10 @@ export async function analyzeBatch(
     return {
       brand: typeof item["brand"] === "string" ? item["brand"] : "Unknown",
       model: typeof item["model"] === "string" ? item["model"] : "Unknown",
+      category: coerceString(item["category"]),
+      color: coerceString(item["color"]),
+      condition: coerceString(item["condition"]),
+      conditionNotes: coerceString(item["conditionNotes"]),
       marketPrice: coercePrice(item["marketPrice"]),
       floorPrice: coercePrice(item["floorPrice"]),
       platform: coercePlatform(item["platform"]),
@@ -141,6 +219,173 @@ export async function analyzeBatch(
       disposition: coerceDisposition(item["disposition"]),
     };
   });
+}
+
+export async function fetchMarketPricing(item: {
+  brand: string;
+  model: string;
+  category: string | null;
+  color: string | null;
+  condition: string | null;
+  conditionNotes: string | null;
+  platform: string;
+}): Promise<MarketPricingResult> {
+  const prompt = `You are a resale market pricing expert with deep knowledge of eBay sold listings, Poshmark sales, Etsy, and Facebook Marketplace.
+
+Provide realistic market pricing data for this pre-owned item:
+Brand: ${item.brand}
+Model/Description: ${item.model}
+Category: ${item.category ?? "Unknown"}
+Color: ${item.color ?? "Unknown"}
+Condition: ${item.condition ?? "Good"}
+Condition notes: ${item.conditionNotes ?? "None"}
+Current platform assignment: ${item.platform}
+
+Based on your knowledge of actual resale prices for similar items:
+1. Generate 4-8 comparable sold listings (realistic items that sell on these platforms)
+2. A price range (low = quick sale price, high = patient seller price)
+3. Estimated days to sell at the midpoint price
+4. The single best platform recommendation with a one-sentence reason
+
+PLATFORM — only recommend one of: eBay, Poshmark, Etsy, Chairish, Facebook Marketplace
+
+Return ONLY JSON:
+{
+  "priceLow": number,
+  "priceHigh": number,
+  "estimatedDaysToSell": number,
+  "recommendedPlatform": "platform name",
+  "platformRationale": "one sentence reason",
+  "sources": [
+    { "platform": "eBay|Poshmark|Etsy|Facebook Marketplace|Chairish", "title": "string", "price": number, "condition": "string", "soldDate": "YYYY-MM" }
+  ]
+}
+No prose, no markdown fences. Just the JSON.`;
+
+  const response = await ai.models.generateContent({
+    model: "gemini-2.5-flash",
+    contents: [{ role: "user", parts: [{ text: prompt }] }],
+    config: { responseMimeType: "application/json" },
+  });
+
+  const text = response.text ?? "{}";
+  let parsed: Record<string, unknown> = {};
+  try {
+    parsed = JSON.parse(text) as Record<string, unknown>;
+  } catch {
+    const m = text.match(/\{[\s\S]*\}/);
+    if (m) parsed = JSON.parse(m[0]) as Record<string, unknown>;
+  }
+
+  const sourcesRaw = Array.isArray(parsed["sources"]) ? parsed["sources"] : [];
+  const sources: MarketSource[] = sourcesRaw.map((s) => {
+    const src = s as Record<string, unknown>;
+    return {
+      platform: coerceString(src["platform"]) ?? "eBay",
+      title: coerceString(src["title"]) ?? `${item.brand} ${item.model}`,
+      price: coerceNumber(src["price"]),
+      condition: coerceString(src["condition"]) ?? "Good",
+      soldDate: coerceString(src["soldDate"]) ?? "",
+    };
+  });
+
+  return {
+    priceLow: coerceNumber(parsed["priceLow"]),
+    priceHigh: coerceNumber(parsed["priceHigh"]),
+    estimatedDaysToSell: Math.round(coerceNumber(parsed["estimatedDaysToSell"])) || 30,
+    recommendedPlatform: coercePlatform(parsed["recommendedPlatform"]),
+    platformRationale: coerceString(parsed["platformRationale"]) ?? "",
+    sources,
+  };
+}
+
+export async function generateListingCopy(item: {
+  brand: string;
+  model: string;
+  category: string | null;
+  color: string | null;
+  condition: string | null;
+  conditionNotes: string | null;
+  marketPrice: string | null;
+  floorPrice: string | null;
+  shippingLogic: string | null;
+  priceLow?: number | null;
+  priceHigh?: number | null;
+}): Promise<ListingCopyResult> {
+  const priceRange =
+    item.priceLow && item.priceHigh
+      ? `$${item.priceLow}–$${item.priceHigh}`
+      : item.floorPrice
+        ? `$${item.floorPrice}`
+        : item.marketPrice
+          ? `$${item.marketPrice}`
+          : "price TBD";
+
+  const prompt = `Write pre-owned resale listing copy for 4 platforms for this item.
+
+Brand: ${item.brand}
+Model/Description: ${item.model}
+Category: ${item.category ?? "General"}
+Color: ${item.color ?? "see photos"}
+Condition: ${item.condition ?? "Good"}
+Condition notes: ${item.conditionNotes ?? "None"}
+Price range: ${priceRange}
+Shipping: ${item.shippingLogic ?? "Standard shipping"}
+
+Platform tone guidelines:
+- Poshmark: friendly, conversational, community feel, includes measurements, 5-8 hashtags
+- eBay: factual, keyword-dense, condition-forward, shipping details prominent, no hashtags
+- Etsy: warm, story-driven, vintage/unique aesthetic emphasized if applicable, 5-8 hashtags
+- Facebook Marketplace: direct, local-buyer-friendly, concise, no hashtags
+
+Rules:
+- Do NOT use any of these terms: estate sale, liquidation, lot, elder care, deceased, inherited, clearout, asset management
+- Describe all items as pre-owned, gently used, or vintage as appropriate
+- Each title: max 80 characters, keyword-rich
+- Each description: 60-120 words
+- Measurements: provide realistic estimates if unknown (e.g. clothing: "approx. size S/M"; bags: "approx. 12\\"W × 8\\"H × 4\\"D"; furniture: include approx. dimensions)
+
+Return ONLY JSON:
+{
+  "poshmark": { "title": "string", "description": "string", "hashtags": ["string"], "measurements": "string" },
+  "ebay": { "title": "string", "description": "string", "hashtags": [], "measurements": "string" },
+  "etsy": { "title": "string", "description": "string", "hashtags": ["string"], "measurements": "string" },
+  "facebook": { "title": "string", "description": "string", "hashtags": [], "measurements": "string" }
+}
+No prose, no markdown fences. Just the JSON.`;
+
+  const response = await ai.models.generateContent({
+    model: "gemini-2.5-flash",
+    contents: [{ role: "user", parts: [{ text: prompt }] }],
+    config: { responseMimeType: "application/json" },
+  });
+
+  const text = response.text ?? "{}";
+  let parsed: Record<string, unknown> = {};
+  try {
+    parsed = JSON.parse(text) as Record<string, unknown>;
+  } catch {
+    const m = text.match(/\{[\s\S]*\}/);
+    if (m) parsed = JSON.parse(m[0]) as Record<string, unknown>;
+  }
+
+  function parsePlatformCopy(key: string): ListingCopyPlatform {
+    const raw = (parsed[key] ?? {}) as Record<string, unknown>;
+    const title = scrubForbidden(coerceString(raw["title"]) ?? `${item.brand} ${item.model}`).slice(0, 80);
+    const description = scrubForbidden(coerceString(raw["description"]) ?? "");
+    const hashtags = Array.isArray(raw["hashtags"])
+      ? (raw["hashtags"] as unknown[]).filter((h) => typeof h === "string").map((h) => h as string)
+      : [];
+    const measurements = coerceString(raw["measurements"]) ?? "";
+    return { title, description, hashtags, measurements };
+  }
+
+  return {
+    poshmark: parsePlatformCopy("poshmark"),
+    ebay: parsePlatformCopy("ebay"),
+    etsy: parsePlatformCopy("etsy"),
+    facebook: parsePlatformCopy("facebook"),
+  };
 }
 
 export async function generateListingDescription(item: {

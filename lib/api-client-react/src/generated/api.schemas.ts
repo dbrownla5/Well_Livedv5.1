@@ -74,9 +74,31 @@ export interface Item {
   brand: string;
   model: string;
   /** @nullable */
+  category?: string | null;
+  /** @nullable */
+  color?: string | null;
+  /** @nullable */
+  condition?: string | null;
+  /** @nullable */
+  conditionNotes?: string | null;
+  /** @nullable */
   marketPrice?: string | null;
   /** @nullable */
   floorPrice?: string | null;
+  /** @nullable */
+  priceRangeLow?: string | null;
+  /** @nullable */
+  priceRangeHigh?: string | null;
+  /** @nullable */
+  estimatedDaysToSell?: number | null;
+  /** Array of comparable sold listings (JSON) */
+  marketSources?: unknown;
+  /** @nullable */
+  recommendedPlatform?: string | null;
+  /** @nullable */
+  platformRationale?: string | null;
+  /** Per-platform listing copy (JSON) */
+  listingCopy?: unknown;
   platform: string;
   /** @nullable */
   shippingLogic?: string | null;
@@ -101,6 +123,14 @@ export interface Item {
 export interface ItemUpdate {
   brand?: string;
   model?: string;
+  /** @nullable */
+  category?: string | null;
+  /** @nullable */
+  color?: string | null;
+  /** @nullable */
+  condition?: string | null;
+  /** @nullable */
+  conditionNotes?: string | null;
   /** @nullable */
   marketPrice?: string | null;
   /** @nullable */
@@ -178,6 +208,14 @@ export interface AnalyzedItem {
   brand: string;
   model: string;
   /** @nullable */
+  category?: string | null;
+  /** @nullable */
+  color?: string | null;
+  /** @nullable */
+  condition?: string | null;
+  /** @nullable */
+  conditionNotes?: string | null;
+  /** @nullable */
   marketPrice?: string | null;
   /** @nullable */
   floorPrice?: string | null;
@@ -190,6 +228,46 @@ export interface AnalyzedItem {
   disposition: string;
   /** @nullable */
   savedItemId?: number | null;
+}
+
+export interface ItemMarketSource {
+  platform: string;
+  title: string;
+  price: number;
+  condition: string;
+  soldDate: string;
+}
+
+export interface MarketPricingResult {
+  itemId: number;
+  priceLow: number;
+  priceHigh: number;
+  estimatedDaysToSell: number;
+  recommendedPlatform: string;
+  platformRationale: string;
+  sources: ItemMarketSource[];
+}
+
+export interface ListingCopyPlatform {
+  title: string;
+  description: string;
+  hashtags: string[];
+  measurements: string;
+}
+
+export interface ListingCopyResult {
+  itemId: number;
+  poshmark: ListingCopyPlatform;
+  ebay: ListingCopyPlatform;
+  etsy: ListingCopyPlatform;
+  facebook: ListingCopyPlatform;
+}
+
+export interface JobActionResult {
+  jobId: number;
+  processed: number;
+  skipped: number;
+  errors: number;
 }
 
 export interface AnalyzeBatchResult {

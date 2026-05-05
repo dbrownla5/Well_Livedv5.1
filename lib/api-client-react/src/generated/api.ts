@@ -27,11 +27,14 @@ import type {
   Item,
   ItemUpdate,
   Job,
+  JobActionResult,
   JobInput,
   ListItemsParams,
   ListJobsParams,
+  ListingCopyResult,
   ListingDescriptionBody,
   ListingDescriptionResult,
+  MarketPricingResult,
   OkResponse,
   PublishItemResult,
   SyncStatusResult,
@@ -1558,4 +1561,340 @@ export const useGenerateListingDescription = <
   TContext
 > => {
   return useMutation(getGenerateListingDescriptionMutationOptions(options));
+};
+
+/**
+ * @summary Run AI market pricing for a single inventory item
+ */
+export const getPriceItemUrl = (itemId: number) => {
+  return `/api/reseller/items/${itemId}/pricing`;
+};
+
+export const priceItem = async (
+  itemId: number,
+  options?: RequestInit,
+): Promise<MarketPricingResult> => {
+  return customFetch<MarketPricingResult>(getPriceItemUrl(itemId), {
+    ...options,
+    method: "POST",
+  });
+};
+
+export const getPriceItemMutationOptions = <
+  TError = ErrorType<ErrorEnvelope>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof priceItem>>,
+    TError,
+    { itemId: number },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof priceItem>>,
+  TError,
+  { itemId: number },
+  TContext
+> => {
+  const mutationKey = ["priceItem"];
+  const { mutation: mutationOptions, request: requestOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey }, request: undefined };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof priceItem>>,
+    { itemId: number }
+  > = (props) => {
+    const { itemId } = props ?? {};
+
+    return priceItem(itemId, requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type PriceItemMutationResult = NonNullable<
+  Awaited<ReturnType<typeof priceItem>>
+>;
+
+export type PriceItemMutationError = ErrorType<ErrorEnvelope>;
+
+/**
+ * @summary Run AI market pricing for a single inventory item
+ */
+export const usePriceItem = <
+  TError = ErrorType<ErrorEnvelope>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof priceItem>>,
+    TError,
+    { itemId: number },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationResult<
+  Awaited<ReturnType<typeof priceItem>>,
+  TError,
+  { itemId: number },
+  TContext
+> => {
+  return useMutation(getPriceItemMutationOptions(options));
+};
+
+/**
+ * @summary Run AI market pricing for all listable items in a job
+ */
+export const getPriceJobItemsUrl = (jobId: number) => {
+  return `/api/reseller/jobs/${jobId}/pricing`;
+};
+
+export const priceJobItems = async (
+  jobId: number,
+  options?: RequestInit,
+): Promise<JobActionResult> => {
+  return customFetch<JobActionResult>(getPriceJobItemsUrl(jobId), {
+    ...options,
+    method: "POST",
+  });
+};
+
+export const getPriceJobItemsMutationOptions = <
+  TError = ErrorType<ErrorEnvelope>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof priceJobItems>>,
+    TError,
+    { jobId: number },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof priceJobItems>>,
+  TError,
+  { jobId: number },
+  TContext
+> => {
+  const mutationKey = ["priceJobItems"];
+  const { mutation: mutationOptions, request: requestOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey }, request: undefined };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof priceJobItems>>,
+    { jobId: number }
+  > = (props) => {
+    const { jobId } = props ?? {};
+
+    return priceJobItems(jobId, requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type PriceJobItemsMutationResult = NonNullable<
+  Awaited<ReturnType<typeof priceJobItems>>
+>;
+
+export type PriceJobItemsMutationError = ErrorType<ErrorEnvelope>;
+
+/**
+ * @summary Run AI market pricing for all listable items in a job
+ */
+export const usePriceJobItems = <
+  TError = ErrorType<ErrorEnvelope>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof priceJobItems>>,
+    TError,
+    { jobId: number },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationResult<
+  Awaited<ReturnType<typeof priceJobItems>>,
+  TError,
+  { jobId: number },
+  TContext
+> => {
+  return useMutation(getPriceJobItemsMutationOptions(options));
+};
+
+/**
+ * @summary Generate multi-platform listing copy for a single inventory item
+ */
+export const getGenerateItemListingsUrl = (itemId: number) => {
+  return `/api/reseller/items/${itemId}/listings`;
+};
+
+export const generateItemListings = async (
+  itemId: number,
+  options?: RequestInit,
+): Promise<ListingCopyResult> => {
+  return customFetch<ListingCopyResult>(getGenerateItemListingsUrl(itemId), {
+    ...options,
+    method: "POST",
+  });
+};
+
+export const getGenerateItemListingsMutationOptions = <
+  TError = ErrorType<ErrorEnvelope>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof generateItemListings>>,
+    TError,
+    { itemId: number },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof generateItemListings>>,
+  TError,
+  { itemId: number },
+  TContext
+> => {
+  const mutationKey = ["generateItemListings"];
+  const { mutation: mutationOptions, request: requestOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey }, request: undefined };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof generateItemListings>>,
+    { itemId: number }
+  > = (props) => {
+    const { itemId } = props ?? {};
+
+    return generateItemListings(itemId, requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type GenerateItemListingsMutationResult = NonNullable<
+  Awaited<ReturnType<typeof generateItemListings>>
+>;
+
+export type GenerateItemListingsMutationError = ErrorType<ErrorEnvelope>;
+
+/**
+ * @summary Generate multi-platform listing copy for a single inventory item
+ */
+export const useGenerateItemListings = <
+  TError = ErrorType<ErrorEnvelope>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof generateItemListings>>,
+    TError,
+    { itemId: number },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationResult<
+  Awaited<ReturnType<typeof generateItemListings>>,
+  TError,
+  { itemId: number },
+  TContext
+> => {
+  return useMutation(getGenerateItemListingsMutationOptions(options));
+};
+
+/**
+ * @summary Generate multi-platform listing copy for all listable items in a job
+ */
+export const getGenerateJobListingsUrl = (jobId: number) => {
+  return `/api/reseller/jobs/${jobId}/listings`;
+};
+
+export const generateJobListings = async (
+  jobId: number,
+  options?: RequestInit,
+): Promise<JobActionResult> => {
+  return customFetch<JobActionResult>(getGenerateJobListingsUrl(jobId), {
+    ...options,
+    method: "POST",
+  });
+};
+
+export const getGenerateJobListingsMutationOptions = <
+  TError = ErrorType<ErrorEnvelope>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof generateJobListings>>,
+    TError,
+    { jobId: number },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof generateJobListings>>,
+  TError,
+  { jobId: number },
+  TContext
+> => {
+  const mutationKey = ["generateJobListings"];
+  const { mutation: mutationOptions, request: requestOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey }, request: undefined };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof generateJobListings>>,
+    { jobId: number }
+  > = (props) => {
+    const { jobId } = props ?? {};
+
+    return generateJobListings(jobId, requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type GenerateJobListingsMutationResult = NonNullable<
+  Awaited<ReturnType<typeof generateJobListings>>
+>;
+
+export type GenerateJobListingsMutationError = ErrorType<ErrorEnvelope>;
+
+/**
+ * @summary Generate multi-platform listing copy for all listable items in a job
+ */
+export const useGenerateJobListings = <
+  TError = ErrorType<ErrorEnvelope>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof generateJobListings>>,
+    TError,
+    { jobId: number },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationResult<
+  Awaited<ReturnType<typeof generateJobListings>>,
+  TError,
+  { jobId: number },
+  TContext
+> => {
+  return useMutation(getGenerateJobListingsMutationOptions(options));
 };
