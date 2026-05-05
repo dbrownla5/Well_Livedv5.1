@@ -728,173 +728,167 @@ export default function InventoryItem() {
         </div>
       </div>
 
-      {/* ── Market Pricing ── */}
+      {/* ── Market Pricing + Listing Copy Tabs ── */}
       <Card className="shadow-sm">
-        <CardHeader className="flex flex-row items-center justify-between pb-3">
-          <CardTitle className="text-lg flex items-center gap-2">
-            <TrendingUp className="w-4 h-4 text-emerald-600" />
-            Market Pricing
-          </CardTitle>
-          <Button variant="secondary" size="sm" onClick={handleGetPricing} disabled={priceItemMutation.isPending}>
-            <Sparkles className="w-4 h-4 mr-2 text-emerald-500" />
-            {priceItemMutation.isPending ? "Analyzing market…" : pricing ? "Refresh Pricing" : "Get AI Pricing"}
-          </Button>
-        </CardHeader>
-        <CardContent>
-          {pricing ? (
-            <div className="space-y-4">
-              <div className="grid grid-cols-3 gap-4">
-                <div className="bg-muted/40 rounded-lg p-3 text-center">
-                  <div className="text-xs text-muted-foreground mb-1">Price Range</div>
-                  <div className="font-semibold">${pricing.priceLow} – ${pricing.priceHigh}</div>
-                </div>
-                <div className="bg-muted/40 rounded-lg p-3 text-center">
-                  <div className="text-xs text-muted-foreground mb-1">Est. Days to Sell</div>
-                  <div className="font-semibold">{pricing.estimatedDaysToSell}d</div>
-                </div>
-                <div className="bg-muted/40 rounded-lg p-3 text-center">
-                  <div className="text-xs text-muted-foreground mb-1">Best Platform</div>
-                  <div className="font-semibold text-sm truncate">{pricing.recommendedPlatform}</div>
-                </div>
+        <Tabs defaultValue="pricing">
+          <CardHeader className="pb-0">
+            <div className="flex items-center justify-between gap-4 flex-wrap">
+              <TabsList className="h-9">
+                <TabsTrigger value="pricing" className="flex items-center gap-1.5 text-xs">
+                  <TrendingUp className="w-3.5 h-3.5" /> Market Pricing
+                </TabsTrigger>
+                <TabsTrigger value="listings" className="flex items-center gap-1.5 text-xs">
+                  <FileText className="w-3.5 h-3.5" /> Listing Copy
+                </TabsTrigger>
+              </TabsList>
+              <div className="flex gap-2">
+                <Button variant="secondary" size="sm" onClick={handleGetPricing} disabled={priceItemMutation.isPending}>
+                  <Sparkles className="w-4 h-4 mr-1.5 text-emerald-500" />
+                  {priceItemMutation.isPending ? "Analyzing…" : pricing ? "Refresh Pricing" : "Get Pricing"}
+                </Button>
+                <Button variant="secondary" size="sm" onClick={handleGenerateListings} disabled={generateListingsMutation.isPending}>
+                  <Sparkles className="w-4 h-4 mr-1.5 text-blue-500" />
+                  {generateListingsMutation.isPending ? "Generating…" : listingCopy ? "Regen Copy" : "Generate Copy"}
+                </Button>
               </div>
-              {pricing.platformRationale && (
-                <p className="text-xs text-muted-foreground italic">{pricing.platformRationale}</p>
-              )}
-              {pricing.sources.length > 0 && (
-                <div>
-                  <p className="text-xs font-medium text-muted-foreground mb-2">Comparable Sold Listings</p>
-                  <div className="border rounded-lg overflow-hidden">
-                    <table className="w-full text-xs">
-                      <thead className="bg-muted/50">
-                        <tr>
-                          <th className="text-left p-2 font-medium text-muted-foreground">Platform</th>
-                          <th className="text-left p-2 font-medium text-muted-foreground">Item</th>
-                          <th className="text-left p-2 font-medium text-muted-foreground">Condition</th>
-                          <th className="text-right p-2 font-medium text-muted-foreground">Sold</th>
-                          <th className="text-right p-2 font-medium text-muted-foreground">Date</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {pricing.sources.map((src, i) => (
-                          <tr key={i} className="border-t border-border/50 hover:bg-muted/30">
-                            <td className="p-2 text-muted-foreground">{src.platform}</td>
-                            <td className="p-2 max-w-[180px] truncate">{src.title}</td>
-                            <td className="p-2 text-muted-foreground">{src.condition}</td>
-                            <td className="p-2 text-right font-medium">${src.price}</td>
-                            <td className="p-2 text-right text-muted-foreground">{src.soldDate}</td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              )}
             </div>
-          ) : (
-            <p className="text-sm text-muted-foreground py-6 text-center">
-              No pricing data yet. Click "Get AI Pricing" to generate market comps based on recent sold listings.
-            </p>
-          )}
-        </CardContent>
-      </Card>
+          </CardHeader>
 
-      {/* ── Multi-Platform Listing Copy ── */}
-      <Card className="shadow-sm">
-        <CardHeader className="flex flex-row items-center justify-between pb-3">
-          <CardTitle className="text-lg flex items-center gap-2">
-            <FileText className="w-4 h-4 text-blue-600" />
-            Multi-Platform Listing Copy
-          </CardTitle>
-          <Button variant="secondary" size="sm" onClick={handleGenerateListings} disabled={generateListingsMutation.isPending}>
-            <Sparkles className="w-4 h-4 mr-2 text-blue-500" />
-            {generateListingsMutation.isPending ? "Generating…" : listingCopy ? "Regenerate" : "Generate Listings"}
-          </Button>
-        </CardHeader>
-        <CardContent>
-          {listingCopy ? (
-            <div className="space-y-4">
-              <div className="flex gap-2 flex-wrap">
-                {(["poshmark", "ebay", "etsy", "facebook"] as const).map((p) => {
-                  const colors = COPY_TAB_COLORS[p];
-                  const isActive = copyTab === p;
-                  const labels: Record<string, string> = { poshmark: "Poshmark", ebay: "eBay", etsy: "Etsy", facebook: "Facebook" };
-                  return (
-                    <button
-                      key={p}
-                      onClick={() => setCopyTab(p)}
-                      className={`px-3 py-1.5 rounded-full text-xs font-medium border transition-colors ${isActive ? colors.active : colors.inactive}`}
-                    >
-                      {labels[p]}
-                    </button>
-                  );
-                })}
-              </div>
-
-              {activeCopyPlatform && (
-                <div className="space-y-3">
-                  <div>
-                    <div className="flex items-center justify-between mb-1">
-                      <Label className="text-xs">Title</Label>
-                      <button
-                        onClick={() => copyToClipboard(activeCopyPlatform.title, `${copyTab}-title`)}
-                        className="text-xs text-muted-foreground hover:text-foreground flex items-center gap-1"
-                      >
-                        {copiedKey === `${copyTab}-title` ? <Check className="w-3 h-3 text-green-500" /> : <Copy className="w-3 h-3" />}
-                        {copiedKey === `${copyTab}-title` ? "Copied" : "Copy"}
-                      </button>
+          <TabsContent value="pricing">
+            <CardContent className="pt-4">
+              {pricing ? (
+                <div className="space-y-4">
+                  <div className="grid grid-cols-3 gap-4">
+                    <div className="bg-muted/40 rounded-lg p-3 text-center">
+                      <div className="text-xs text-muted-foreground mb-1">Price Range</div>
+                      <div className="font-semibold">${pricing.priceLow} – ${pricing.priceHigh}</div>
                     </div>
-                    <div className="text-sm bg-muted/40 rounded-md p-3 font-medium">{activeCopyPlatform.title}</div>
-                  </div>
-
-                  <div>
-                    <div className="flex items-center justify-between mb-1">
-                      <Label className="text-xs">Description</Label>
-                      <button
-                        onClick={() => copyToClipboard(activeCopyPlatform.description, `${copyTab}-desc`)}
-                        className="text-xs text-muted-foreground hover:text-foreground flex items-center gap-1"
-                      >
-                        {copiedKey === `${copyTab}-desc` ? <Check className="w-3 h-3 text-green-500" /> : <Copy className="w-3 h-3" />}
-                        {copiedKey === `${copyTab}-desc` ? "Copied" : "Copy"}
-                      </button>
+                    <div className="bg-muted/40 rounded-lg p-3 text-center">
+                      <div className="text-xs text-muted-foreground mb-1">Est. Days to Sell</div>
+                      <div className="font-semibold">{pricing.estimatedDaysToSell}d</div>
                     </div>
-                    <div className="text-sm bg-muted/40 rounded-md p-3 whitespace-pre-wrap leading-relaxed">{activeCopyPlatform.description}</div>
+                    <div className="bg-muted/40 rounded-lg p-3 text-center">
+                      <div className="text-xs text-muted-foreground mb-1">Best Platform</div>
+                      <div className="font-semibold text-sm truncate">{pricing.recommendedPlatform}</div>
+                    </div>
                   </div>
-
-                  {activeCopyPlatform.measurements && (
+                  {pricing.platformRationale && (
+                    <p className="text-xs text-muted-foreground italic">{pricing.platformRationale}</p>
+                  )}
+                  {pricing.sources.length > 0 && (
                     <div>
-                      <Label className="text-xs">Measurements</Label>
-                      <div className="text-sm text-muted-foreground mt-1">{activeCopyPlatform.measurements}</div>
+                      <p className="text-xs font-medium text-muted-foreground mb-2">Comparable Sold Listings</p>
+                      <div className="border rounded-lg overflow-hidden">
+                        <table className="w-full text-xs">
+                          <thead className="bg-muted/50">
+                            <tr>
+                              <th className="text-left p-2 font-medium text-muted-foreground">Platform</th>
+                              <th className="text-left p-2 font-medium text-muted-foreground">Item</th>
+                              <th className="text-left p-2 font-medium text-muted-foreground">Condition</th>
+                              <th className="text-right p-2 font-medium text-muted-foreground">Sold</th>
+                              <th className="text-right p-2 font-medium text-muted-foreground">Date</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {pricing.sources.map((src, i) => (
+                              <tr key={i} className="border-t border-border/50 hover:bg-muted/30">
+                                <td className="p-2 text-muted-foreground">{src.platform}</td>
+                                <td className="p-2 max-w-[180px] truncate">{src.title}</td>
+                                <td className="p-2 text-muted-foreground">{src.condition}</td>
+                                <td className="p-2 text-right font-medium">${src.price}</td>
+                                <td className="p-2 text-right text-muted-foreground">{src.soldDate}</td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
                     </div>
                   )}
+                </div>
+              ) : (
+                <p className="text-sm text-muted-foreground py-6 text-center">
+                  No pricing data yet. Click "Get Pricing" to generate market comps from recent sold listings.
+                </p>
+              )}
+            </CardContent>
+          </TabsContent>
 
-                  {activeCopyPlatform.hashtags.length > 0 && (
-                    <div>
-                      <div className="flex items-center justify-between mb-1">
-                        <Label className="text-xs">Hashtags</Label>
+          <TabsContent value="listings">
+            <CardContent className="pt-4">
+              {listingCopy ? (
+                <div className="space-y-4">
+                  <div className="flex gap-2 flex-wrap">
+                    {(["poshmark", "ebay", "etsy", "facebook"] as const).map((p) => {
+                      const colors = COPY_TAB_COLORS[p];
+                      const isActive = copyTab === p;
+                      const labels: Record<string, string> = { poshmark: "Poshmark", ebay: "eBay", etsy: "Etsy", facebook: "Facebook" };
+                      return (
                         <button
-                          onClick={() => copyToClipboard(activeCopyPlatform.hashtags.map(h => `#${h}`).join(" "), `${copyTab}-tags`)}
-                          className="text-xs text-muted-foreground hover:text-foreground flex items-center gap-1"
+                          key={p}
+                          onClick={() => setCopyTab(p)}
+                          className={`px-3 py-1.5 rounded-full text-xs font-medium border transition-colors ${isActive ? colors.active : colors.inactive}`}
                         >
-                          {copiedKey === `${copyTab}-tags` ? <Check className="w-3 h-3 text-green-500" /> : <Copy className="w-3 h-3" />}
-                          {copiedKey === `${copyTab}-tags` ? "Copied" : "Copy all"}
+                          {labels[p]}
                         </button>
+                      );
+                    })}
+                  </div>
+
+                  {activeCopyPlatform && (
+                    <div className="space-y-3">
+                      <div>
+                        <div className="flex items-center justify-between mb-1">
+                          <Label className="text-xs">Title</Label>
+                          <button onClick={() => copyToClipboard(activeCopyPlatform.title, `${copyTab}-title`)} className="text-xs text-muted-foreground hover:text-foreground flex items-center gap-1">
+                            {copiedKey === `${copyTab}-title` ? <Check className="w-3 h-3 text-green-500" /> : <Copy className="w-3 h-3" />}
+                            {copiedKey === `${copyTab}-title` ? "Copied" : "Copy"}
+                          </button>
+                        </div>
+                        <div className="text-sm bg-muted/40 rounded-md p-3 font-medium">{activeCopyPlatform.title}</div>
                       </div>
-                      <div className="flex flex-wrap gap-1">
-                        {activeCopyPlatform.hashtags.map((tag, i) => (
-                          <span key={i} className="text-xs bg-primary/10 text-primary px-2 py-0.5 rounded-full">#{tag}</span>
-                        ))}
+                      <div>
+                        <div className="flex items-center justify-between mb-1">
+                          <Label className="text-xs">Description</Label>
+                          <button onClick={() => copyToClipboard(activeCopyPlatform.description, `${copyTab}-desc`)} className="text-xs text-muted-foreground hover:text-foreground flex items-center gap-1">
+                            {copiedKey === `${copyTab}-desc` ? <Check className="w-3 h-3 text-green-500" /> : <Copy className="w-3 h-3" />}
+                            {copiedKey === `${copyTab}-desc` ? "Copied" : "Copy"}
+                          </button>
+                        </div>
+                        <div className="text-sm bg-muted/40 rounded-md p-3 whitespace-pre-wrap leading-relaxed">{activeCopyPlatform.description}</div>
                       </div>
+                      {activeCopyPlatform.measurements && (
+                        <div>
+                          <Label className="text-xs">Measurements</Label>
+                          <div className="text-sm text-muted-foreground mt-1">{activeCopyPlatform.measurements}</div>
+                        </div>
+                      )}
+                      {activeCopyPlatform.hashtags.length > 0 && (
+                        <div>
+                          <div className="flex items-center justify-between mb-1">
+                            <Label className="text-xs">Hashtags</Label>
+                            <button onClick={() => copyToClipboard(activeCopyPlatform.hashtags.map(h => `#${h}`).join(" "), `${copyTab}-tags`)} className="text-xs text-muted-foreground hover:text-foreground flex items-center gap-1">
+                              {copiedKey === `${copyTab}-tags` ? <Check className="w-3 h-3 text-green-500" /> : <Copy className="w-3 h-3" />}
+                              {copiedKey === `${copyTab}-tags` ? "Copied" : "Copy all"}
+                            </button>
+                          </div>
+                          <div className="flex flex-wrap gap-1">
+                            {activeCopyPlatform.hashtags.map((tag, i) => (
+                              <span key={i} className="text-xs bg-primary/10 text-primary px-2 py-0.5 rounded-full">#{tag}</span>
+                            ))}
+                          </div>
+                        </div>
+                      )}
                     </div>
                   )}
                 </div>
+              ) : (
+                <p className="text-sm text-muted-foreground py-6 text-center">
+                  No listing copy yet. Click "Generate Copy" to create platform-specific titles, descriptions, and hashtags.
+                </p>
               )}
-            </div>
-          ) : (
-            <p className="text-sm text-muted-foreground py-6 text-center">
-              No listing copy yet. Click "Generate Listings" to create platform-specific title, description, and hashtags for Poshmark, eBay, Etsy, and Facebook.
-            </p>
-          )}
-        </CardContent>
+            </CardContent>
+          </TabsContent>
+        </Tabs>
       </Card>
     </div>
   );

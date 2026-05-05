@@ -4,9 +4,11 @@ import {
   useGetJob,
   useListItems,
   useAnalyzePhotoBatch,
+  useUpdateItem,
   usePriceJobItems,
   useGenerateJobListings,
   getListItemsQueryKey,
+  getGetItemQueryKey,
   getGetJobQueryKey,
   type AnalyzeBatchResult,
   type AnalyzedItem,
@@ -16,12 +18,21 @@ import { useToast } from "@/hooks/use-toast";
 
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { formatCurrency } from "@/lib/constants";
-import { ArrowLeft, UploadCloud, Image as ImageIcon, CheckCircle2, PackageSearch, TrendingUp, FileText, ArrowRight } from "lucide-react";
+import { ArrowLeft, UploadCloud, Image as ImageIcon, CheckCircle2, PackageSearch, TrendingUp, FileText, ArrowRight, Pencil, Save, X } from "lucide-react";
+
+const CARD_CATEGORIES = [
+  "Clothing","Shoes","Accessories","Jewelry","Furniture","Decor",
+  "Art","Electronics","Kitchen","Books","Toys","Vintage","Collectibles","Other",
+];
+const CARD_CONDITIONS = ["Excellent", "Good", "Fair", "Poor"];
 
 const BASE_PATH = import.meta.env.BASE_URL ?? "/studio/";
 
@@ -85,61 +96,155 @@ function dispositionConfig(disposition: string, status: string) {
   return { label: "Saved", cls: "bg-green-100 text-green-700 border-green-200" };
 }
 
-function AnalyzedItemCard({ item, index }: { item: AnalyzedItem; index: number }) {
+function AnalyzedItemCard({ item }: { item: AnalyzedItem }) {
   const dc = dispositionConfig(item.disposition, item.status);
   const angles = (item as unknown as { angleLabels?: string[] }).angleLabels ?? [];
   const style = (item as unknown as { style?: string | null }).style;
   const fabric = (item as unknown as { fabric?: string | null }).fabric;
   const savedItemId = (item as unknown as { savedItemId?: number | null }).savedItemId;
 
+  const { toast } = useToast();
+  const queryClient = useQueryClient();
+  const updateItem = useUpdateItem();
+
+  const [editing, setEditing] = useState(false);
+  const [draft, setDraft] = useState({
+    brand: item.brand,
+    category: item.category ?? "",
+    condition: item.condition ?? "",
+    conditionNotes: item.conditionNotes ?? "",
+  });
+
+  const handleSave = () => {
+    if (!savedItemId) return;
+    updateItem.mutate(
+      {
+        itemId: savedItemId,
+        data: {
+          brand: draft.brand,
+          category: draft.category || null,
+          condition: draft.condition || null,
+          conditionNotes: draft.conditionNotes || null,
+        },
+      },
+      {
+        onSuccess: () => {
+          toast({ title: "Item updated." });
+          setEditing(false);
+          queryClient.invalidateQueries({ queryKey: getGetItemQueryKey(savedItemId) });
+          queryClient.invalidateQueries({ queryKey: getListItemsQueryKey() });
+        },
+        onError: () => toast({ variant: "destructive", title: "Update failed." }),
+      }
+    );
+  };
+
   return (
     <div className="bg-card border border-border rounded-lg p-3 space-y-2.5">
+      {/* Header row */}
       <div className="flex items-start justify-between gap-2">
         <div className="flex-1 min-w-0">
-          <p className="font-semibold text-sm text-foreground truncate">{item.brand}</p>
-          <p className="text-xs text-muted-foreground truncate">{item.model}</p>
+          {editing ? (
+            <Input
+              className="h-7 text-sm font-semibold"
+              value={draft.brand}
+              onChange={e => setDraft({ ...draft, brand: e.target.value })}
+            />
+          ) : (
+            <>
+              <p className="font-semibold text-sm text-foreground truncate">{item.brand}</p>
+              <p className="text-xs text-muted-foreground truncate">{item.model}</p>
+            </>
+          )}
         </div>
-        <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium border shrink-0 ${dc.cls}`}>
-          {dc.label}
-        </span>
+        <div className="flex items-center gap-1 shrink-0">
+          <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium border ${dc.cls}`}>
+            {dc.label}
+          </span>
+          {savedItemId && !editing && (
+            <button onClick={() => setEditing(true)} className="text-muted-foreground hover:text-foreground p-0.5 rounded" title="Edit">
+              <Pencil className="w-3 h-3" />
+            </button>
+          )}
+        </div>
       </div>
 
-      {/* Attribute pills */}
-      <div className="flex flex-wrap gap-1">
-        {item.category && (
-          <span className="text-xs bg-muted px-1.5 py-0.5 rounded text-muted-foreground">{item.category}</span>
-        )}
-        {item.color && (
-          <span className="text-xs bg-muted px-1.5 py-0.5 rounded text-muted-foreground">{item.color}</span>
-        )}
-        {item.condition && (
-          <span className={`text-xs px-1.5 py-0.5 rounded font-medium ${
-            item.condition === "Excellent" ? "bg-green-100 text-green-700" :
-            item.condition === "Good" ? "bg-blue-100 text-blue-700" :
-            item.condition === "Fair" ? "bg-yellow-100 text-yellow-700" :
-            "bg-red-100 text-red-700"
-          }`}>{item.condition}</span>
-        )}
-        {style && (
-          <span className="text-xs bg-violet-50 text-violet-700 px-1.5 py-0.5 rounded border border-violet-200">{style}</span>
-        )}
-        {fabric && (
-          <span className="text-xs bg-teal-50 text-teal-700 px-1.5 py-0.5 rounded border border-teal-200">{fabric}</span>
-        )}
-      </div>
-
-      {/* Angle labels */}
-      {angles.length > 0 && (
-        <div className="flex flex-wrap gap-1">
-          {angles.map((a) => (
-            <span key={a} className="text-[10px] bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded uppercase tracking-wide font-medium">{a}</span>
-          ))}
+      {editing ? (
+        /* ── Inline edit form ── */
+        <div className="space-y-2">
+          <div className="grid grid-cols-2 gap-1.5">
+            <div>
+              <Label className="text-[10px] uppercase tracking-wide text-muted-foreground">Category</Label>
+              <Select value={draft.category} onValueChange={v => setDraft({ ...draft, category: v })}>
+                <SelectTrigger className="h-7 text-xs">
+                  <SelectValue placeholder="Category" />
+                </SelectTrigger>
+                <SelectContent>
+                  {CARD_CATEGORIES.map(c => <SelectItem key={c} value={c} className="text-xs">{c}</SelectItem>)}
+                </SelectContent>
+              </Select>
+            </div>
+            <div>
+              <Label className="text-[10px] uppercase tracking-wide text-muted-foreground">Condition</Label>
+              <Select value={draft.condition} onValueChange={v => setDraft({ ...draft, condition: v })}>
+                <SelectTrigger className="h-7 text-xs">
+                  <SelectValue placeholder="Condition" />
+                </SelectTrigger>
+                <SelectContent>
+                  {CARD_CONDITIONS.map(c => <SelectItem key={c} value={c} className="text-xs">{c}</SelectItem>)}
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+          <div>
+            <Label className="text-[10px] uppercase tracking-wide text-muted-foreground">Condition Notes</Label>
+            <Input
+              className="h-7 text-xs"
+              placeholder="Brief note on flaws…"
+              value={draft.conditionNotes}
+              onChange={e => setDraft({ ...draft, conditionNotes: e.target.value })}
+            />
+          </div>
+          <div className="flex gap-1.5 pt-1">
+            <Button size="sm" className="h-7 text-xs flex-1" onClick={handleSave} disabled={updateItem.isPending}>
+              <Save className="w-3 h-3 mr-1" /> {updateItem.isPending ? "Saving…" : "Save"}
+            </Button>
+            <Button size="sm" variant="outline" className="h-7 text-xs" onClick={() => setEditing(false)}>
+              <X className="w-3 h-3" />
+            </Button>
+          </div>
         </div>
-      )}
+      ) : (
+        <>
+          {/* Attribute pills */}
+          <div className="flex flex-wrap gap-1">
+            {item.category && <span className="text-xs bg-muted px-1.5 py-0.5 rounded text-muted-foreground">{item.category}</span>}
+            {item.color && <span className="text-xs bg-muted px-1.5 py-0.5 rounded text-muted-foreground">{item.color}</span>}
+            {item.condition && (
+              <span className={`text-xs px-1.5 py-0.5 rounded font-medium ${
+                item.condition === "Excellent" ? "bg-green-100 text-green-700" :
+                item.condition === "Good" ? "bg-blue-100 text-blue-700" :
+                item.condition === "Fair" ? "bg-yellow-100 text-yellow-700" :
+                "bg-red-100 text-red-700"
+              }`}>{item.condition}</span>
+            )}
+            {style && <span className="text-xs bg-violet-50 text-violet-700 px-1.5 py-0.5 rounded border border-violet-200">{style}</span>}
+            {fabric && <span className="text-xs bg-teal-50 text-teal-700 px-1.5 py-0.5 rounded border border-teal-200">{fabric}</span>}
+          </div>
 
-      {/* Condition notes */}
-      {item.conditionNotes && (
-        <p className="text-xs text-muted-foreground italic">"{item.conditionNotes}"</p>
+          {/* Angle labels */}
+          {angles.length > 0 && (
+            <div className="flex flex-wrap gap-1">
+              {angles.map((a) => (
+                <span key={a} className="text-[10px] bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded uppercase tracking-wide font-medium">{a}</span>
+              ))}
+            </div>
+          )}
+
+          {item.conditionNotes && (
+            <p className="text-xs text-muted-foreground italic">"{item.conditionNotes}"</p>
+          )}
+        </>
       )}
 
       {/* Footer: platform + price + link */}
@@ -451,7 +556,7 @@ export default function JobDetail() {
                   <p className="text-xs font-semibold uppercase tracking-wider text-green-700">Saved to inventory ({savedItems.length})</p>
                   <div className="grid grid-cols-2 gap-2">
                     {savedItems.map((item, i) => (
-                      <AnalyzedItemCard key={i} item={item} index={i} />
+                      <AnalyzedItemCard key={i} item={item} />
                     ))}
                   </div>
                 </div>
@@ -463,7 +568,7 @@ export default function JobDetail() {
                   <p className="text-xs font-semibold uppercase tracking-wider text-amber-600">Duplicates ({dupItems.length})</p>
                   <div className="grid grid-cols-2 gap-2">
                     {dupItems.map((item, i) => (
-                      <AnalyzedItemCard key={i} item={item} index={i} />
+                      <AnalyzedItemCard key={i} item={item} />
                     ))}
                   </div>
                 </div>
@@ -475,7 +580,7 @@ export default function JobDetail() {
                   <p className="text-xs font-semibold uppercase tracking-wider text-purple-600">Donate / Recycle ({donateItems.length})</p>
                   <div className="grid grid-cols-2 gap-2">
                     {donateItems.map((item, i) => (
-                      <AnalyzedItemCard key={i} item={item} index={i} />
+                      <AnalyzedItemCard key={i} item={item} />
                     ))}
                   </div>
                 </div>
