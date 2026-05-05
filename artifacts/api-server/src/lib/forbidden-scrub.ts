@@ -1,4 +1,4 @@
-const FORBIDDEN_LANGUAGE = [
+const FORBIDDEN_PHRASES = [
   "elder care",
   "estate sale",
   "asset management",
@@ -10,11 +10,16 @@ const FORBIDDEN_LANGUAGE = [
   "ADHD closet edits",
 ];
 
+// Word-boundary terms — matched only when they appear as whole words
+const FORBIDDEN_WORDS = ["lot", "lots"];
+
 export function scrubForbidden(text: string): string {
   let out = text;
-  for (const term of FORBIDDEN_LANGUAGE) {
-    const re = new RegExp(term, "gi");
-    out = out.replace(re, "");
+  for (const phrase of FORBIDDEN_PHRASES) {
+    out = out.replace(new RegExp(phrase, "gi"), "");
+  }
+  for (const word of FORBIDDEN_WORDS) {
+    out = out.replace(new RegExp(`\\b${word}\\b`, "gi"), "");
   }
   return out.replace(/\s{2,}/g, " ").trim();
 }
