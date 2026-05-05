@@ -57,17 +57,7 @@ export default function HomeOrganization() {
           </ul>
           <p style={{ fontSize: "13px", color: "var(--stone)", marginBottom: "40px" }}>For deeper spaces like closets, offices, storage rooms, and linen systems, product support is quoted after walkthrough based on hidden volume and actual dimensions.</p>
 
-          <h2 style={{ fontSize: "18px", fontWeight: 700, color: "var(--char)", margin: "0 0 20px" }}>Pricing</h2>
-          <table className="pricing-table">
-            <tbody>
-              <tr><td>Hourly</td><td>$150/hr · 3 hr minimum</td></tr>
-              <tr><td>10-hour Flex Block</td><td>$1,250 ($125/hr)</td></tr>
-              <tr><td>25-hour Flex Block</td><td>$3,125 ($125/hr)</td></tr>
-              <tr><td>Studio / 1BR Move Reset</td><td>$1,200 flat — up to 8 hours straight</td></tr>
-              <tr><td>Larger homes & multi-room projects</td><td>Quoted after call</td></tr>
-            </tbody>
-          </table>
-          <p style={{ fontSize: "12px", color: "var(--sand)", marginTop: "8px", marginBottom: "56px" }}>Flex blocks never expire. The $1,200 flat rate is reserved for studio and 1-bedroom moves only — footprints that can realistically be packed, landed, or reset in a single uninterrupted day. Larger homes scope as projects.</p>
+          <p style={{ fontSize: "14px", color: "var(--stone)", lineHeight: 1.75, marginBottom: "56px" }}>Hourly is $150 with a three-hour minimum. Flex blocks and project rates available. Studio and one-bedroom move resets book as a flat day rate. <Link href="/pricing" style={{ color: "var(--rust)" }}>Full pricing →</Link></p>
 
           {/* Gayle testimonial */}
           <div style={{ borderTop: "1px solid var(--linen)", paddingTop: "48px" }}>

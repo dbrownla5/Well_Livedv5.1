@@ -69,16 +69,7 @@ export default function HouseCalls() {
             ))}
           </ul>
 
-          <h2 style={{ fontSize: "18px", fontWeight: 700, color: "var(--char)", margin: "0 0 20px" }}>Pricing</h2>
-          <table className="pricing-table">
-            <tbody>
-              <tr><td>2-Hour House Call</td><td>$350 flat</td></tr>
-              <tr><td>4-Hour Practical Reset</td><td>$500 flat</td></tr>
-              <tr><td>Hourly (beyond a flat block)</td><td>$175/hr · 2 hr minimum</td></tr>
-              <tr><td>Continuity Retainer</td><td>$500/mo</td></tr>
-            </tbody>
-          </table>
-          <p style={{ fontSize: "12px", color: "var(--sand)", marginTop: "8px", marginBottom: "48px" }}>No membership. No subscription. Ease comes from relationship, not a forced plan. Retainer includes priority scheduling and dedicated continuity across sessions.</p>
+          <p style={{ fontSize: "14px", color: "var(--stone)", lineHeight: 1.75, marginBottom: "32px" }}>Flat-rate blocks start at $350 for two hours, $500 for four. Hourly is $175 with a two-hour minimum. Continuity retainer is $500/month. <Link href="/pricing" style={{ color: "var(--rust)" }}>Full pricing →</Link></p>
 
           <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
             <Link href="/contact?offer=housecall" className="btn btn-dark">Book a House Call</Link>

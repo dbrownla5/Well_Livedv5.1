@@ -120,16 +120,7 @@ export default function CuratedResale() {
             <p style={{ fontSize: "14px", color: "var(--stone)", lineHeight: 1.8, fontStyle: "italic" }}>The point is not volume. The point is thoughtful curation that creates the best next life for the item and the most realistic return for the client.</p>
           </div>
 
-          <h2 style={{ fontSize: "18px", fontWeight: 700, color: "var(--char)", margin: "0 0 20px" }}>Commission structure</h2>
-          <table className="pricing-table">
-            <tbody>
-              <tr><td>Clothing & Accessories</td><td>55% client / 45% Dayna</td></tr>
-              <tr><td>Designer</td><td>50 / 50</td></tr>
-              <tr><td>Furniture & Significant Home Pieces</td><td>50 / 50</td></tr>
-            </tbody>
-          </table>
-          <p style={{ fontSize: "13px", color: "var(--stone)", marginTop: "16px", lineHeight: 1.6 }}>Monthly report by the 1st · Payout by the 5th · Clean split of net proceeds after platform fees</p>
-          <p style={{ fontSize: "12px", color: "var(--sand)", marginTop: "8px", marginBottom: "40px" }}>Agreement required. No upfront cost. Commission calculated on net proceeds after platform fees.</p>
+          <p style={{ fontSize: "14px", color: "var(--stone)", lineHeight: 1.75, marginBottom: "40px" }}>No upfront cost. Commission is split on net proceeds — you keep the larger share on clothing and accessories. Agreement required before intake. <Link href="/pricing#resale" style={{ color: "var(--rust)" }}>Full commission structure →</Link></p>
 
           <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
             <Link href="/contact?service=resale" className="btn btn-dark">Schedule a Pickup</Link>

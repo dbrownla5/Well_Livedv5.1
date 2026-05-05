@@ -71,18 +71,7 @@ export default function Legacy() {
           <h2 style={{ fontSize: "18px", fontWeight: 700, color: "var(--char)", margin: "40px 0 16px" }}>How project timelines work</h2>
           <p style={{ fontSize: "14px", color: "var(--ink)", lineHeight: 1.8, marginBottom: "40px" }}>Larger projects are completed across focused work sessions over a shared timeline, rather than continuous daily presence. A two-week catalog may look like three focused 11–4 sessions, with off-site documentation, resale routing, and continuity work completed between visits.</p>
 
-          <h2 style={{ fontSize: "18px", fontWeight: 700, color: "var(--char)", margin: "0 0 20px" }}>Pricing</h2>
-          <table className="pricing-table">
-            <tbody>
-              <tr><td>Hourly</td><td>$175/hr · 2 hr minimum</td></tr>
-              <tr><td>10-hour Flex Block</td><td>$1,500 ($150/hr)</td></tr>
-              <tr><td>25-hour Flex Block</td><td>$3,650</td></tr>
-              <tr><td>Legacy Project</td><td>From $3,500 / 20–30 hrs</td></tr>
-              <tr><td>Whole home</td><td>Quoted after walkthrough</td></tr>
-              <tr><td>Ongoing Continuity</td><td>$500/mo</td></tr>
-            </tbody>
-          </table>
-          <p style={{ fontSize: "12px", color: "var(--sand)", marginTop: "8px", marginBottom: "40px" }}>Larger estates and whole-home projects are quoted after walkthrough only. No fixed tier. Flex blocks never expire.</p>
+          <p style={{ fontSize: "14px", color: "var(--stone)", lineHeight: 1.75, marginBottom: "40px" }}>Hourly is $175 with a two-hour minimum. Larger projects and whole-home catalogs are scoped and quoted after a walkthrough. <Link href="/pricing" style={{ color: "var(--rust)" }}>Full pricing →</Link></p>
 
           <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
             <Link href="/contact?service=legacy" className="btn btn-dark">Book your time</Link>
