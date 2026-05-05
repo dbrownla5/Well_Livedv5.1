@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" fill="none">
+  <rect width="40" height="40" rx="10" fill="#6a4a36"/>
+  <path d="M10 14h20v2H10zM10 24h20v2H10z" fill="#f8f6f2" opacity="0.5"/>
+  <rect x="12" y="16" width="16" height="8" rx="1" fill="#f8f6f2" opacity="0.15"/>
+  <text x="20" y="23" font-family="Georgia, serif" font-size="9" font-weight="bold" fill="#f8f6f2" text-anchor="middle">DB</text>
+</svg>
