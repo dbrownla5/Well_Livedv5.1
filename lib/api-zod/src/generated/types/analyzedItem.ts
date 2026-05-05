@@ -35,4 +35,6 @@ export interface AnalyzedItem {
   disposition: string;
   /** @nullable */
   savedItemId?: number | null;
+  /** UUIDs of itemPhotos records linked to this item after analysis */
+  photoIds?: string[];
 }

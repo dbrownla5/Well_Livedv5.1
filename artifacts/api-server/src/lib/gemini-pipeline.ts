@@ -11,6 +11,7 @@ export interface AnalyzedItem {
   style: string | null;
   fabric: string | null;
   angleLabels: string[];
+  photoIndices: number[];
   marketPrice: string | null;
   floorPrice: string | null;
   platform: string;
@@ -122,6 +123,7 @@ Return ONLY a JSON array. Each element must match this shape exactly:
   "style": "overall style descriptor e.g. Mid-Century Modern, Bohemian, Classic, Streetwear, Art Deco, or null if not applicable",
   "fabric": "primary material or fabric e.g. Cotton, Linen, Velvet, Walnut, Brass, Ceramic, or null if not determinable",
   "angleLabels": ["front", "back"] (subset of: front|back|left-side|right-side|top|bottom|detail|label|damage — only include angles visible in the photos for this item),
+  "photoIndices": [0, 1, 2] (zero-based indices of the input photos that belong to this item — these are the photos you grouped to identify it),
   "marketPrice": "string-decimal or null",
   "floorPrice": "string-decimal or null",
   "platform": "one of the allowed platforms above",
@@ -218,6 +220,11 @@ export async function analyzeBatch(
       fabric: coerceString(item["fabric"]),
       angleLabels: Array.isArray(item["angleLabels"])
         ? (item["angleLabels"] as unknown[]).filter((l): l is string => typeof l === "string")
+        : [],
+      photoIndices: Array.isArray(item["photoIndices"])
+        ? (item["photoIndices"] as unknown[]).filter(
+            (i): i is number => typeof i === "number" && Number.isInteger(i) && i >= 0,
+          )
         : [],
       marketPrice: coercePrice(item["marketPrice"]),
       floorPrice: coercePrice(item["floorPrice"]),

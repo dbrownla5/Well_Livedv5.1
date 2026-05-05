@@ -98,10 +98,9 @@ function dispositionConfig(disposition: string, status: string) {
 
 function AnalyzedItemCard({ item }: { item: AnalyzedItem }) {
   const dc = dispositionConfig(item.disposition, item.status);
-  const angles = (item as unknown as { angleLabels?: string[] }).angleLabels ?? [];
-  const style = (item as unknown as { style?: string | null }).style;
-  const fabric = (item as unknown as { fabric?: string | null }).fabric;
-  const savedItemId = (item as unknown as { savedItemId?: number | null }).savedItemId;
+  const angles = item.angleLabels ?? [];
+  const photoIds = item.photoIds ?? [];
+  const savedItemId = item.savedItemId ?? null;
 
   const { toast } = useToast();
   const queryClient = useQueryClient();
@@ -140,128 +139,150 @@ function AnalyzedItemCard({ item }: { item: AnalyzedItem }) {
   };
 
   return (
-    <div className="bg-card border border-border rounded-lg p-3 space-y-2.5">
-      {/* Header row */}
-      <div className="flex items-start justify-between gap-2">
-        <div className="flex-1 min-w-0">
-          {editing ? (
-            <Input
-              className="h-7 text-sm font-semibold"
-              value={draft.brand}
-              onChange={e => setDraft({ ...draft, brand: e.target.value })}
+    <div className="bg-card border border-border rounded-lg overflow-hidden">
+      {/* Photo thumbnail strip */}
+      {photoIds.length > 0 && (
+        <div className="flex gap-px bg-muted overflow-x-auto">
+          {photoIds.slice(0, 5).map((pid) => (
+            <img
+              key={pid}
+              src={`${BASE_PATH}api/reseller/item-photos/${pid}/serve`}
+              alt="item photo"
+              className="w-20 h-20 object-cover flex-shrink-0"
+              loading="lazy"
             />
-          ) : (
-            <>
-              <p className="font-semibold text-sm text-foreground truncate">{item.brand}</p>
-              <p className="text-xs text-muted-foreground truncate">{item.model}</p>
-            </>
-          )}
-        </div>
-        <div className="flex items-center gap-1 shrink-0">
-          <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium border ${dc.cls}`}>
-            {dc.label}
-          </span>
-          {savedItemId && !editing && (
-            <button onClick={() => setEditing(true)} className="text-muted-foreground hover:text-foreground p-0.5 rounded" title="Edit">
-              <Pencil className="w-3 h-3" />
-            </button>
-          )}
-        </div>
-      </div>
-
-      {editing ? (
-        /* ── Inline edit form ── */
-        <div className="space-y-2">
-          <div className="grid grid-cols-2 gap-1.5">
-            <div>
-              <Label className="text-[10px] uppercase tracking-wide text-muted-foreground">Category</Label>
-              <Select value={draft.category} onValueChange={v => setDraft({ ...draft, category: v })}>
-                <SelectTrigger className="h-7 text-xs">
-                  <SelectValue placeholder="Category" />
-                </SelectTrigger>
-                <SelectContent>
-                  {CARD_CATEGORIES.map(c => <SelectItem key={c} value={c} className="text-xs">{c}</SelectItem>)}
-                </SelectContent>
-              </Select>
-            </div>
-            <div>
-              <Label className="text-[10px] uppercase tracking-wide text-muted-foreground">Condition</Label>
-              <Select value={draft.condition} onValueChange={v => setDraft({ ...draft, condition: v })}>
-                <SelectTrigger className="h-7 text-xs">
-                  <SelectValue placeholder="Condition" />
-                </SelectTrigger>
-                <SelectContent>
-                  {CARD_CONDITIONS.map(c => <SelectItem key={c} value={c} className="text-xs">{c}</SelectItem>)}
-                </SelectContent>
-              </Select>
-            </div>
-          </div>
-          <div>
-            <Label className="text-[10px] uppercase tracking-wide text-muted-foreground">Condition Notes</Label>
-            <Input
-              className="h-7 text-xs"
-              placeholder="Brief note on flaws…"
-              value={draft.conditionNotes}
-              onChange={e => setDraft({ ...draft, conditionNotes: e.target.value })}
-            />
-          </div>
-          <div className="flex gap-1.5 pt-1">
-            <Button size="sm" className="h-7 text-xs flex-1" onClick={handleSave} disabled={updateItem.isPending}>
-              <Save className="w-3 h-3 mr-1" /> {updateItem.isPending ? "Saving…" : "Save"}
-            </Button>
-            <Button size="sm" variant="outline" className="h-7 text-xs" onClick={() => setEditing(false)}>
-              <X className="w-3 h-3" />
-            </Button>
-          </div>
-        </div>
-      ) : (
-        <>
-          {/* Attribute pills */}
-          <div className="flex flex-wrap gap-1">
-            {item.category && <span className="text-xs bg-muted px-1.5 py-0.5 rounded text-muted-foreground">{item.category}</span>}
-            {item.color && <span className="text-xs bg-muted px-1.5 py-0.5 rounded text-muted-foreground">{item.color}</span>}
-            {item.condition && (
-              <span className={`text-xs px-1.5 py-0.5 rounded font-medium ${
-                item.condition === "Excellent" ? "bg-green-100 text-green-700" :
-                item.condition === "Good" ? "bg-blue-100 text-blue-700" :
-                item.condition === "Fair" ? "bg-yellow-100 text-yellow-700" :
-                "bg-red-100 text-red-700"
-              }`}>{item.condition}</span>
-            )}
-            {style && <span className="text-xs bg-violet-50 text-violet-700 px-1.5 py-0.5 rounded border border-violet-200">{style}</span>}
-            {fabric && <span className="text-xs bg-teal-50 text-teal-700 px-1.5 py-0.5 rounded border border-teal-200">{fabric}</span>}
-          </div>
-
-          {/* Angle labels */}
-          {angles.length > 0 && (
-            <div className="flex flex-wrap gap-1">
-              {angles.map((a) => (
-                <span key={a} className="text-[10px] bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded uppercase tracking-wide font-medium">{a}</span>
-              ))}
+          ))}
+          {photoIds.length > 5 && (
+            <div className="w-20 h-20 flex items-center justify-center bg-muted flex-shrink-0 text-xs text-muted-foreground font-medium">
+              +{photoIds.length - 5}
             </div>
           )}
-
-          {item.conditionNotes && (
-            <p className="text-xs text-muted-foreground italic">"{item.conditionNotes}"</p>
-          )}
-        </>
+        </div>
       )}
 
-      {/* Footer: platform + price + link */}
-      <div className="flex items-center justify-between pt-1 border-t border-border/50">
-        <div className="flex items-center gap-1.5">
-          <span className={`inline-flex items-center px-1.5 py-0.5 rounded-full text-[10px] font-medium border ${platformBadgeClass(item.platform)}`}>
-            {item.platform}
-          </span>
-          {item.marketPrice && (
-            <span className="text-xs font-medium text-foreground">${item.marketPrice}</span>
+      <div className="p-3 space-y-2.5">
+        {/* Header row */}
+        <div className="flex items-start justify-between gap-2">
+          <div className="flex-1 min-w-0">
+            {editing ? (
+              <Input
+                className="h-7 text-sm font-semibold"
+                value={draft.brand}
+                onChange={e => setDraft({ ...draft, brand: e.target.value })}
+              />
+            ) : (
+              <>
+                <p className="font-semibold text-sm text-foreground truncate">{item.brand}</p>
+                <p className="text-xs text-muted-foreground truncate">{item.model}</p>
+              </>
+            )}
+          </div>
+          <div className="flex items-center gap-1 shrink-0">
+            <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium border ${dc.cls}`}>
+              {dc.label}
+            </span>
+            {savedItemId && !editing && (
+              <button onClick={() => setEditing(true)} className="text-muted-foreground hover:text-foreground p-0.5 rounded" title="Edit">
+                <Pencil className="w-3 h-3" />
+              </button>
+            )}
+          </div>
+        </div>
+
+        {editing ? (
+          /* ── Inline edit form ── */
+          <div className="space-y-2">
+            <div className="grid grid-cols-2 gap-1.5">
+              <div>
+                <Label className="text-[10px] uppercase tracking-wide text-muted-foreground">Category</Label>
+                <Select value={draft.category} onValueChange={v => setDraft({ ...draft, category: v })}>
+                  <SelectTrigger className="h-7 text-xs">
+                    <SelectValue placeholder="Category" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {CARD_CATEGORIES.map(c => <SelectItem key={c} value={c} className="text-xs">{c}</SelectItem>)}
+                  </SelectContent>
+                </Select>
+              </div>
+              <div>
+                <Label className="text-[10px] uppercase tracking-wide text-muted-foreground">Condition</Label>
+                <Select value={draft.condition} onValueChange={v => setDraft({ ...draft, condition: v })}>
+                  <SelectTrigger className="h-7 text-xs">
+                    <SelectValue placeholder="Condition" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {CARD_CONDITIONS.map(c => <SelectItem key={c} value={c} className="text-xs">{c}</SelectItem>)}
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+            <div>
+              <Label className="text-[10px] uppercase tracking-wide text-muted-foreground">Condition Notes</Label>
+              <Input
+                className="h-7 text-xs"
+                placeholder="Brief note on flaws…"
+                value={draft.conditionNotes}
+                onChange={e => setDraft({ ...draft, conditionNotes: e.target.value })}
+              />
+            </div>
+            <div className="flex gap-1.5 pt-1">
+              <Button size="sm" className="h-7 text-xs flex-1" onClick={handleSave} disabled={updateItem.isPending}>
+                <Save className="w-3 h-3 mr-1" /> {updateItem.isPending ? "Saving…" : "Save"}
+              </Button>
+              <Button size="sm" variant="outline" className="h-7 text-xs" onClick={() => setEditing(false)}>
+                <X className="w-3 h-3" />
+              </Button>
+            </div>
+          </div>
+        ) : (
+          <>
+            {/* Attribute pills */}
+            <div className="flex flex-wrap gap-1">
+              {item.category && <span className="text-xs bg-muted px-1.5 py-0.5 rounded text-muted-foreground">{item.category}</span>}
+              {item.color && <span className="text-xs bg-muted px-1.5 py-0.5 rounded text-muted-foreground">{item.color}</span>}
+              {item.condition && (
+                <span className={`text-xs px-1.5 py-0.5 rounded font-medium ${
+                  item.condition === "Excellent" ? "bg-green-100 text-green-700" :
+                  item.condition === "Good" ? "bg-blue-100 text-blue-700" :
+                  item.condition === "Fair" ? "bg-yellow-100 text-yellow-700" :
+                  "bg-red-100 text-red-700"
+                }`}>{item.condition}</span>
+              )}
+              {item.style && <span className="text-xs bg-violet-50 text-violet-700 px-1.5 py-0.5 rounded border border-violet-200">{item.style}</span>}
+              {item.fabric && <span className="text-xs bg-teal-50 text-teal-700 px-1.5 py-0.5 rounded border border-teal-200">{item.fabric}</span>}
+            </div>
+
+            {/* Angle labels */}
+            {angles.length > 0 && (
+              <div className="flex flex-wrap gap-1">
+                {angles.map((a) => (
+                  <span key={a} className="text-[10px] bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded uppercase tracking-wide font-medium">{a}</span>
+                ))}
+              </div>
+            )}
+
+            {item.conditionNotes && (
+              <p className="text-xs text-muted-foreground italic">"{item.conditionNotes}"</p>
+            )}
+          </>
+        )}
+
+        {/* Footer: platform + price + link */}
+        <div className="flex items-center justify-between pt-1 border-t border-border/50">
+          <div className="flex items-center gap-1.5">
+            <span className={`inline-flex items-center px-1.5 py-0.5 rounded-full text-[10px] font-medium border ${platformBadgeClass(item.platform)}`}>
+              {item.platform}
+            </span>
+            {item.marketPrice && (
+              <span className="text-xs font-medium text-foreground">${item.marketPrice}</span>
+            )}
+          </div>
+          {savedItemId && (
+            <Link href={`/inventory/${savedItemId}`} className="text-xs text-primary hover:underline flex items-center gap-0.5">
+              View <ArrowRight className="w-3 h-3" />
+            </Link>
           )}
         </div>
-        {savedItemId && (
-          <Link href={`/inventory/${savedItemId}`} className="text-xs text-primary hover:underline flex items-center gap-0.5">
-            View <ArrowRight className="w-3 h-3" />
-          </Link>
-        )}
       </div>
     </div>
   );

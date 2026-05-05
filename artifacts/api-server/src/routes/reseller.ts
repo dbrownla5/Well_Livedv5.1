@@ -1,5 +1,5 @@
 import { Router, type IRouter } from "express";
-import { and, desc, eq, sql } from "drizzle-orm";
+import { and, desc, eq, inArray, sql } from "drizzle-orm";
 import {
   db,
   clients as clientsTable,
@@ -446,18 +446,23 @@ router.post("/reseller/ai/analyze-batch", async (req, res): Promise<void> => {
     return;
   }
 
-  // Persist photo metadata (storage keys + dimensions) for the job
+  // Persist photo metadata and capture UUIDs for photo→item linking
+  let insertedPhotoIds: string[] = [];
   if (photos.length) {
-    await db.insert(itemPhotosTable).values(
-      photos.map((p) => ({
-        jobId,
-        filename: p.filename,
-        mimeType: p.mimeType,
-        storageKey: p.storageKey,
-        width: p.width ?? null,
-        height: p.height ?? null,
-      })),
-    );
+    const rows = await db
+      .insert(itemPhotosTable)
+      .values(
+        photos.map((p) => ({
+          jobId,
+          filename: p.filename,
+          mimeType: p.mimeType,
+          storageKey: p.storageKey,
+          width: p.width ?? null,
+          height: p.height ?? null,
+        })),
+      )
+      .returning({ id: itemPhotosTable.id });
+    insertedPhotoIds = rows.map((r) => r.id);
   }
 
   // Persist every analyzed item (including duplicates and donate) so summary
@@ -472,6 +477,7 @@ router.post("/reseller/ai/analyze-batch", async (req, res): Promise<void> => {
     status: string;
     disposition: string;
     savedItemId: number | null;
+    photoIds: string[];
   }> = [];
   let savedCount = 0;
   let duplicateCount = 0;
@@ -506,10 +512,23 @@ router.post("/reseller/ai/analyze-batch", async (req, res): Promise<void> => {
       })
       .returning({ id: itemsTable.id });
     const savedItemId = row?.id ?? null;
+
+    // Link the photos that belong to this item
+    const validIndices = a.photoIndices.filter(
+      (i) => i >= 0 && i < insertedPhotoIds.length,
+    );
+    const photoIds = validIndices.map((i) => insertedPhotoIds[i]);
+    if (photoIds.length > 0 && savedItemId) {
+      await db
+        .update(itemPhotosTable)
+        .set({ itemId: savedItemId })
+        .where(inArray(itemPhotosTable.id, photoIds));
+    }
+
     if (isDonate) donateCount++;
     else if (isDuplicate) duplicateCount++;
     else if (savedItemId) savedCount++;
-    result.push({ ...a, savedItemId });
+    result.push({ ...a, savedItemId, photoIds });
   }
 
   res.json({
@@ -518,6 +537,34 @@ router.post("/reseller/ai/analyze-batch", async (req, res): Promise<void> => {
     duplicateCount,
     donateCount,
   });
+});
+
+// ---------- photo serve ----------
+router.get("/reseller/item-photos/:photoId/serve", async (req, res): Promise<void> => {
+  const { photoId } = req.params;
+  const [photo] = await db
+    .select()
+    .from(itemPhotosTable)
+    .where(eq(itemPhotosTable.id, photoId));
+  if (!photo?.storageKey) {
+    res.status(404).json({ error: "Photo not found" });
+    return;
+  }
+  try {
+    const file = await objectStorage.getObjectEntityFile(photo.storageKey);
+    const [metadata] = await file.getMetadata();
+    res.set("Content-Type", (metadata.contentType as string) || photo.mimeType);
+    res.set("Cache-Control", "private, max-age=3600");
+    if (metadata.size) res.set("Content-Length", String(metadata.size));
+    file.createReadStream().pipe(res);
+  } catch (err) {
+    if (err instanceof ObjectNotFoundError) {
+      res.status(404).json({ error: "Photo file not found in storage" });
+    } else {
+      req.log.error({ err }, "Failed to serve item photo");
+      res.status(502).json({ error: "Failed to retrieve photo" });
+    }
+  }
 });
 
 // ---------- publish ----------

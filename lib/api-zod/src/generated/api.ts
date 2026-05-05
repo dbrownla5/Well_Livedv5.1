@@ -429,6 +429,12 @@ export const AnalyzePhotoBatchResponse = zod.object({
       status: zod.string().describe("New | Duplicate"),
       disposition: zod.string().describe("list | donate | wipe-recycle"),
       savedItemId: zod.number().nullish(),
+      photoIds: zod
+        .array(zod.string().uuid())
+        .optional()
+        .describe(
+          "UUIDs of itemPhotos records linked to this item after analysis",
+        ),
     }),
   ),
   savedCount: zod.number(),

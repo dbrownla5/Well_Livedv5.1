@@ -910,6 +910,12 @@ components:
           description: "list | donate | wipe-recycle"
         savedItemId:
           type: ["integer", "null"]
+        photoIds:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: UUIDs of itemPhotos records linked to this item after analysis
       required: [brand, model, platform, status, disposition]
 
     ItemMarketSource:
