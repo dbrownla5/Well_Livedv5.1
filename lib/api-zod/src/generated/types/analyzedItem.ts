@@ -18,6 +18,11 @@ export interface AnalyzedItem {
   /** @nullable */
   conditionNotes?: string | null;
   /** @nullable */
+  style?: string | null;
+  /** @nullable */
+  fabric?: string | null;
+  angleLabels?: string[];
+  /** @nullable */
   marketPrice?: string | null;
   /** @nullable */
   floorPrice?: string | null;

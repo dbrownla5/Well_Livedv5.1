@@ -18,6 +18,10 @@ export interface ItemUpdate {
   /** @nullable */
   conditionNotes?: string | null;
   /** @nullable */
+  style?: string | null;
+  /** @nullable */
+  fabric?: string | null;
+  /** @nullable */
   marketPrice?: string | null;
   /** @nullable */
   floorPrice?: string | null;

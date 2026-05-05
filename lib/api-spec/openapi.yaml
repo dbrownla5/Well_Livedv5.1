@@ -652,6 +652,14 @@ components:
           type: ["string", "null"]
         conditionNotes:
           type: ["string", "null"]
+        style:
+          type: ["string", "null"]
+        fabric:
+          type: ["string", "null"]
+        angleLabels:
+          type: array
+          items:
+            type: string
         marketPrice:
           type: ["string", "null"]
         floorPrice:
@@ -718,6 +726,10 @@ components:
         condition:
           type: ["string", "null"]
         conditionNotes:
+          type: ["string", "null"]
+        style:
+          type: ["string", "null"]
+        fabric:
           type: ["string", "null"]
         marketPrice:
           type: ["string", "null"]
@@ -874,6 +886,14 @@ components:
           type: ["string", "null"]
         conditionNotes:
           type: ["string", "null"]
+        style:
+          type: ["string", "null"]
+        fabric:
+          type: ["string", "null"]
+        angleLabels:
+          type: array
+          items:
+            type: string
         marketPrice:
           type: ["string", "null"]
         floorPrice:

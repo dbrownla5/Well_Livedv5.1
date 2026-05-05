@@ -8,6 +8,9 @@ export interface AnalyzedItem {
   color: string | null;
   condition: string | null;
   conditionNotes: string | null;
+  style: string | null;
+  fabric: string | null;
+  angleLabels: string[];
   marketPrice: string | null;
   floorPrice: string | null;
   platform: string;
@@ -116,6 +119,9 @@ Return ONLY a JSON array. Each element must match this shape exactly:
   "color": "primary color as a simple string (e.g. Black, Navy Blue, Ivory)",
   "condition": "Excellent | Good | Fair | Poor",
   "conditionNotes": "brief note on flaws/wear or null if pristine",
+  "style": "overall style descriptor e.g. Mid-Century Modern, Bohemian, Classic, Streetwear, Art Deco, or null if not applicable",
+  "fabric": "primary material or fabric e.g. Cotton, Linen, Velvet, Walnut, Brass, Ceramic, or null if not determinable",
+  "angleLabels": ["front", "back"] (subset of: front|back|left-side|right-side|top|bottom|detail|label|damage — only include angles visible in the photos for this item),
   "marketPrice": "string-decimal or null",
   "floorPrice": "string-decimal or null",
   "platform": "one of the allowed platforms above",
@@ -208,6 +214,11 @@ export async function analyzeBatch(
       color: coerceString(item["color"]),
       condition: coerceString(item["condition"]),
       conditionNotes: coerceString(item["conditionNotes"]),
+      style: coerceString(item["style"]),
+      fabric: coerceString(item["fabric"]),
+      angleLabels: Array.isArray(item["angleLabels"])
+        ? (item["angleLabels"] as unknown[]).filter((l): l is string => typeof l === "string")
+        : [],
       marketPrice: coercePrice(item["marketPrice"]),
       floorPrice: coercePrice(item["floorPrice"]),
       platform: coercePlatform(item["platform"]),

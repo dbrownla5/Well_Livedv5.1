@@ -9,6 +9,7 @@ import {
   getListItemsQueryKey,
   getGetJobQueryKey,
   type AnalyzeBatchResult,
+  type AnalyzedItem,
 } from "@workspace/api-client-react";
 import { useQueryClient } from "@tanstack/react-query";
 import { useToast } from "@/hooks/use-toast";
@@ -20,9 +21,11 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { formatCurrency } from "@/lib/constants";
-import { ArrowLeft, UploadCloud, Image as ImageIcon, CheckCircle2, PackageSearch, TrendingUp, FileText } from "lucide-react";
+import { ArrowLeft, UploadCloud, Image as ImageIcon, CheckCircle2, PackageSearch, TrendingUp, FileText, ArrowRight } from "lucide-react";
 
 const BASE_PATH = import.meta.env.BASE_URL ?? "/studio/";
+
+const ANGLE_LABEL_OPTIONS = ["front", "back", "left-side", "right-side", "top", "bottom", "detail", "label", "damage"] as const;
 
 interface UploadedPhoto {
   storageKey: string;
@@ -75,6 +78,90 @@ function platformBadgeClass(platform: string): string {
   return map[platform] ?? "bg-gray-100 text-gray-600 border-gray-200";
 }
 
+function dispositionConfig(disposition: string, status: string) {
+  if (status === "Duplicate") return { label: "Duplicate", cls: "bg-amber-100 text-amber-800 border-amber-200" };
+  if (disposition === "donate") return { label: "Donate", cls: "bg-purple-100 text-purple-700 border-purple-200" };
+  if (disposition === "wipe-recycle") return { label: "Recycle", cls: "bg-gray-100 text-gray-600 border-gray-200" };
+  return { label: "Saved", cls: "bg-green-100 text-green-700 border-green-200" };
+}
+
+function AnalyzedItemCard({ item, index }: { item: AnalyzedItem; index: number }) {
+  const dc = dispositionConfig(item.disposition, item.status);
+  const angles = (item as unknown as { angleLabels?: string[] }).angleLabels ?? [];
+  const style = (item as unknown as { style?: string | null }).style;
+  const fabric = (item as unknown as { fabric?: string | null }).fabric;
+  const savedItemId = (item as unknown as { savedItemId?: number | null }).savedItemId;
+
+  return (
+    <div className="bg-card border border-border rounded-lg p-3 space-y-2.5">
+      <div className="flex items-start justify-between gap-2">
+        <div className="flex-1 min-w-0">
+          <p className="font-semibold text-sm text-foreground truncate">{item.brand}</p>
+          <p className="text-xs text-muted-foreground truncate">{item.model}</p>
+        </div>
+        <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium border shrink-0 ${dc.cls}`}>
+          {dc.label}
+        </span>
+      </div>
+
+      {/* Attribute pills */}
+      <div className="flex flex-wrap gap-1">
+        {item.category && (
+          <span className="text-xs bg-muted px-1.5 py-0.5 rounded text-muted-foreground">{item.category}</span>
+        )}
+        {item.color && (
+          <span className="text-xs bg-muted px-1.5 py-0.5 rounded text-muted-foreground">{item.color}</span>
+        )}
+        {item.condition && (
+          <span className={`text-xs px-1.5 py-0.5 rounded font-medium ${
+            item.condition === "Excellent" ? "bg-green-100 text-green-700" :
+            item.condition === "Good" ? "bg-blue-100 text-blue-700" :
+            item.condition === "Fair" ? "bg-yellow-100 text-yellow-700" :
+            "bg-red-100 text-red-700"
+          }`}>{item.condition}</span>
+        )}
+        {style && (
+          <span className="text-xs bg-violet-50 text-violet-700 px-1.5 py-0.5 rounded border border-violet-200">{style}</span>
+        )}
+        {fabric && (
+          <span className="text-xs bg-teal-50 text-teal-700 px-1.5 py-0.5 rounded border border-teal-200">{fabric}</span>
+        )}
+      </div>
+
+      {/* Angle labels */}
+      {angles.length > 0 && (
+        <div className="flex flex-wrap gap-1">
+          {angles.map((a) => (
+            <span key={a} className="text-[10px] bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded uppercase tracking-wide font-medium">{a}</span>
+          ))}
+        </div>
+      )}
+
+      {/* Condition notes */}
+      {item.conditionNotes && (
+        <p className="text-xs text-muted-foreground italic">"{item.conditionNotes}"</p>
+      )}
+
+      {/* Footer: platform + price + link */}
+      <div className="flex items-center justify-between pt-1 border-t border-border/50">
+        <div className="flex items-center gap-1.5">
+          <span className={`inline-flex items-center px-1.5 py-0.5 rounded-full text-[10px] font-medium border ${platformBadgeClass(item.platform)}`}>
+            {item.platform}
+          </span>
+          {item.marketPrice && (
+            <span className="text-xs font-medium text-foreground">${item.marketPrice}</span>
+          )}
+        </div>
+        {savedItemId && (
+          <Link href={`/inventory/${savedItemId}`} className="text-xs text-primary hover:underline flex items-center gap-0.5">
+            View <ArrowRight className="w-3 h-3" />
+          </Link>
+        )}
+      </div>
+    </div>
+  );
+}
+
 export default function JobDetail() {
   const { jobId } = useParams<{ jobId: string }>();
   const id = Number(jobId);
@@ -93,6 +180,7 @@ export default function JobDetail() {
   const [progress, setProgress] = useState(0);
   const [statusText, setStatusText] = useState("");
   const [batchResult, setBatchResult] = useState<AnalyzeBatchResult | null>(null);
+  const [showReview, setShowReview] = useState(true);
   const [batchActionResult, setBatchActionResult] = useState<{
     type: "pricing" | "listings";
     processed: number;
@@ -127,6 +215,7 @@ export default function JobDetail() {
     setProgress(5);
     setBatchResult(null);
     setBatchActionResult(null);
+    setShowReview(true);
 
     try {
       setStatusText("Uploading photos to storage...");
@@ -213,6 +302,9 @@ export default function JobDetail() {
 
   const batchActionsRunning = priceJobMutation.isPending || generateJobListingsMutation.isPending;
   const hasListableItems = (items?.filter(i => i.disposition === "list") ?? []).length > 0;
+  const savedItems = batchResult?.items.filter(i => i.status !== "Duplicate" && i.disposition === "list") ?? [];
+  const dupItems = batchResult?.items.filter(i => i.status === "Duplicate") ?? [];
+  const donateItems = batchResult?.items.filter(i => i.disposition !== "list" && i.status !== "Duplicate") ?? [];
 
   return (
     <div className="p-8 max-w-6xl mx-auto space-y-6">
@@ -237,15 +329,15 @@ export default function JobDetail() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* ── Left panel: intake + batch actions ── */}
-        <div className="lg:col-span-1 space-y-6">
+        {/* ── Left: AI Photo Intake + Batch Actions ── */}
+        <div className="lg:col-span-1 space-y-4">
           <Card className="shadow-sm border-dashed border-2 bg-muted/20">
             <CardHeader>
               <CardTitle className="text-lg flex items-center gap-2">
                 <ImageIcon className="w-5 h-5 text-primary" /> AI Photo Intake
               </CardTitle>
               <CardDescription>
-                Upload clearout photos. The AI will identify items, check markets, and triage to inventory.
+                Upload clearout photos. Gemini AI groups angles, identifies items, extracts attributes, and triages to inventory.
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -274,30 +366,36 @@ export default function JobDetail() {
                     </div>
                     <Progress value={progress} className="h-2" />
                     <p className="text-xs text-muted-foreground text-center mt-2">
-                      {progress < 40 ? "Uploading to secure storage..." : "Sending to Gemini AI..."}
+                      {progress < 40 ? "Uploading to secure storage..." : "Gemini AI analyzing angles & attributes..."}
                     </p>
                   </div>
                 )}
 
                 {batchResult && !uploading && (
-                  <div className="p-4 bg-green-50 border border-green-200 dark:bg-green-950/20 dark:border-green-900 rounded-md space-y-2">
+                  <div className="p-4 bg-green-50 border border-green-200 dark:bg-green-950/20 dark:border-green-900 rounded-md space-y-3">
                     <div className="flex items-center gap-2 text-green-700 dark:text-green-400 font-medium text-sm">
                       <CheckCircle2 className="w-4 h-4" /> Analysis Complete
                     </div>
                     <div className="grid grid-cols-3 gap-2 text-center text-xs">
                       <div className="bg-background p-2 rounded border shadow-sm">
-                        <div className="font-bold text-lg">{batchResult.savedCount}</div>
+                        <div className="font-bold text-lg text-green-700">{batchResult.savedCount}</div>
                         <div className="text-muted-foreground">Saved</div>
                       </div>
                       <div className="bg-background p-2 rounded border shadow-sm">
-                        <div className="font-bold text-lg">{batchResult.duplicateCount}</div>
+                        <div className="font-bold text-lg text-amber-600">{batchResult.duplicateCount}</div>
                         <div className="text-muted-foreground">Dups</div>
                       </div>
                       <div className="bg-background p-2 rounded border shadow-sm">
-                        <div className="font-bold text-lg">{batchResult.donateCount}</div>
+                        <div className="font-bold text-lg text-purple-600">{batchResult.donateCount}</div>
                         <div className="text-muted-foreground">Donate</div>
                       </div>
                     </div>
+                    <button
+                      onClick={() => setShowReview(!showReview)}
+                      className="w-full text-xs text-center text-primary hover:underline"
+                    >
+                      {showReview ? "Hide item review" : `Show ${batchResult.items.length} items`}
+                    </button>
                   </div>
                 )}
               </div>
@@ -311,41 +409,24 @@ export default function JobDetail() {
                 <CardTitle className="text-sm font-medium text-muted-foreground uppercase tracking-wide">Batch AI Actions</CardTitle>
               </CardHeader>
               <CardContent className="space-y-2">
-                <Button
-                  className="w-full justify-start"
-                  variant="outline"
-                  size="sm"
-                  onClick={handlePriceAll}
-                  disabled={batchActionsRunning}
-                >
+                <Button className="w-full justify-start" variant="outline" size="sm" onClick={handlePriceAll} disabled={batchActionsRunning}>
                   <TrendingUp className="w-4 h-4 mr-2 text-emerald-600" />
                   {priceJobMutation.isPending ? "Pricing items…" : "Price All Items"}
                 </Button>
-                <Button
-                  className="w-full justify-start"
-                  variant="outline"
-                  size="sm"
-                  onClick={handleGenerateAllListings}
-                  disabled={batchActionsRunning}
-                >
+                <Button className="w-full justify-start" variant="outline" size="sm" onClick={handleGenerateAllListings} disabled={batchActionsRunning}>
                   <FileText className="w-4 h-4 mr-2 text-blue-600" />
                   {generateJobListingsMutation.isPending ? "Generating listings…" : "Generate All Listings"}
                 </Button>
-
                 {batchActionsRunning && (
                   <p className="text-xs text-muted-foreground text-center pt-1">
-                    Processing each item sequentially — this may take a minute…
+                    Processing sequentially — this may take a minute…
                   </p>
                 )}
-
                 {batchActionResult && (
                   <div className="mt-2 p-2.5 bg-muted/50 border border-border rounded-md text-xs space-y-0.5">
-                    <p className="font-medium">
-                      {batchActionResult.type === "pricing" ? "Pricing" : "Listings"} complete
-                    </p>
+                    <p className="font-medium">{batchActionResult.type === "pricing" ? "Pricing" : "Listings"} complete</p>
                     <p className="text-muted-foreground">
-                      {batchActionResult.processed} items updated
-                      {batchActionResult.errors > 0 && `, ${batchActionResult.errors} errors`}
+                      {batchActionResult.processed} items updated{batchActionResult.errors > 0 && `, ${batchActionResult.errors} errors`}
                     </p>
                   </div>
                 )}
@@ -354,81 +435,135 @@ export default function JobDetail() {
           )}
         </div>
 
-        {/* ── Right panel: inventory table ── */}
-        <div className="lg:col-span-2">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-xl font-serif font-medium flex items-center gap-2">
-              <PackageSearch className="w-5 h-5 text-muted-foreground" />
-              Job Inventory
-            </h2>
-            <Badge variant="secondary">{job.itemCount || 0} items</Badge>
-          </div>
+        {/* ── Right: Review Panel + Inventory Table ── */}
+        <div className="lg:col-span-2 space-y-6">
+          {/* ── Batch Review Panel ── */}
+          {batchResult && showReview && !uploading && batchResult.items.length > 0 && (
+            <div className="space-y-3">
+              <h2 className="text-lg font-serif font-medium text-foreground">Item Review</h2>
+              <p className="text-xs text-muted-foreground">
+                AI extracted category, color, condition, style, fabric, and photo angles for each item. Click "View" to edit details.
+              </p>
 
-          <div className="bg-card border border-border rounded-xl shadow-sm overflow-hidden">
-            <Table>
-              <TableHeader>
-                <TableRow className="bg-muted/50 hover:bg-muted/50">
-                  <TableHead>Item</TableHead>
-                  <TableHead>Category / Condition</TableHead>
-                  <TableHead>Platform</TableHead>
-                  <TableHead>Market</TableHead>
-                  <TableHead>Status</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {itemsLoading ? (
-                  <TableRow>
-                    <TableCell colSpan={5} className="text-center py-8"><Skeleton className="h-6 w-32 mx-auto" /></TableCell>
+              {/* Saved / listable items */}
+              {savedItems.length > 0 && (
+                <div className="space-y-2">
+                  <p className="text-xs font-semibold uppercase tracking-wider text-green-700">Saved to inventory ({savedItems.length})</p>
+                  <div className="grid grid-cols-2 gap-2">
+                    {savedItems.map((item, i) => (
+                      <AnalyzedItemCard key={i} item={item} index={i} />
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Duplicate items */}
+              {dupItems.length > 0 && (
+                <div className="space-y-2">
+                  <p className="text-xs font-semibold uppercase tracking-wider text-amber-600">Duplicates ({dupItems.length})</p>
+                  <div className="grid grid-cols-2 gap-2">
+                    {dupItems.map((item, i) => (
+                      <AnalyzedItemCard key={i} item={item} index={i} />
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Donate / recycle items */}
+              {donateItems.length > 0 && (
+                <div className="space-y-2">
+                  <p className="text-xs font-semibold uppercase tracking-wider text-purple-600">Donate / Recycle ({donateItems.length})</p>
+                  <div className="grid grid-cols-2 gap-2">
+                    {donateItems.map((item, i) => (
+                      <AnalyzedItemCard key={i} item={item} index={i} />
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* ── Job Inventory Table ── */}
+          <div>
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-xl font-serif font-medium flex items-center gap-2">
+                <PackageSearch className="w-5 h-5 text-muted-foreground" />
+                Job Inventory
+              </h2>
+              <Badge variant="secondary">{job.itemCount || 0} items</Badge>
+            </div>
+
+            <div className="bg-card border border-border rounded-xl shadow-sm overflow-hidden">
+              <Table>
+                <TableHeader>
+                  <TableRow className="bg-muted/50 hover:bg-muted/50">
+                    <TableHead>Item</TableHead>
+                    <TableHead>Attributes</TableHead>
+                    <TableHead>Platform</TableHead>
+                    <TableHead>Market</TableHead>
+                    <TableHead>Status</TableHead>
                   </TableRow>
-                ) : items && items.length > 0 ? (
-                  items.map((item) => (
-                    <TableRow
-                      key={item.id}
-                      className="cursor-pointer hover:bg-muted/50 transition-colors"
-                      onClick={() => setLocation(`/inventory/${item.id}`)}
-                    >
-                      <TableCell>
-                        <div className="font-medium text-foreground">{item.brand}</div>
-                        <div className="text-sm text-muted-foreground truncate max-w-[150px]">{item.model}</div>
-                      </TableCell>
-                      <TableCell>
-                        <div className="text-sm">{item.category ?? "—"}</div>
-                        {item.condition && (
-                          <div className="text-xs text-muted-foreground">{item.condition}</div>
-                        )}
-                      </TableCell>
-                      <TableCell>
-                        <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium border ${platformBadgeClass(item.platform)}`}>
-                          {item.platform}
-                        </span>
-                      </TableCell>
-                      <TableCell className="text-sm font-medium">
-                        {item.priceRangeLow && item.priceRangeHigh
-                          ? `$${Number(item.priceRangeLow).toFixed(0)}–$${Number(item.priceRangeHigh).toFixed(0)}`
-                          : formatCurrency(item.marketPrice)}
-                      </TableCell>
-                      <TableCell>
-                        <Badge
-                          variant={item.status === "Sold" ? "default" : item.status === "New" ? "destructive" : "outline"}
-                          className="text-xs"
-                        >
-                          {item.status}
-                        </Badge>
+                </TableHeader>
+                <TableBody>
+                  {itemsLoading ? (
+                    <TableRow>
+                      <TableCell colSpan={5} className="text-center py-8"><Skeleton className="h-6 w-32 mx-auto" /></TableCell>
+                    </TableRow>
+                  ) : items && items.length > 0 ? (
+                    items.map((item) => (
+                      <TableRow
+                        key={item.id}
+                        className="cursor-pointer hover:bg-muted/50 transition-colors"
+                        onClick={() => setLocation(`/inventory/${item.id}`)}
+                      >
+                        <TableCell>
+                          <div className="font-medium text-foreground">{item.brand}</div>
+                          <div className="text-sm text-muted-foreground truncate max-w-[150px]">{item.model}</div>
+                        </TableCell>
+                        <TableCell>
+                          <div className="flex flex-wrap gap-1">
+                            {item.category && <span className="text-xs bg-muted px-1.5 py-0.5 rounded text-muted-foreground">{item.category}</span>}
+                            {item.condition && <span className="text-xs bg-muted px-1.5 py-0.5 rounded text-muted-foreground">{item.condition}</span>}
+                            {(item as unknown as { style?: string | null }).style && (
+                              <span className="text-xs bg-violet-50 text-violet-700 px-1.5 py-0.5 rounded border border-violet-200">
+                                {(item as unknown as { style?: string | null }).style}
+                              </span>
+                            )}
+                          </div>
+                        </TableCell>
+                        <TableCell>
+                          <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium border ${platformBadgeClass(item.platform)}`}>
+                            {item.platform}
+                          </span>
+                        </TableCell>
+                        <TableCell className="text-sm font-medium">
+                          {item.priceRangeLow && item.priceRangeHigh
+                            ? `$${Number(item.priceRangeLow).toFixed(0)}–$${Number(item.priceRangeHigh).toFixed(0)}`
+                            : formatCurrency(item.marketPrice)}
+                        </TableCell>
+                        <TableCell>
+                          <Badge
+                            variant={item.status === "Sold" ? "default" : item.status === "New" ? "destructive" : "outline"}
+                            className="text-xs"
+                          >
+                            {item.status}
+                          </Badge>
+                        </TableCell>
+                      </TableRow>
+                    ))
+                  ) : (
+                    <TableRow>
+                      <TableCell colSpan={5} className="h-32 text-center text-muted-foreground">
+                        <div className="flex flex-col items-center gap-2">
+                          <ImageIcon className="w-8 h-8 text-muted-foreground/30" />
+                          <p>No items yet. Upload photos to start intaking.</p>
+                        </div>
                       </TableCell>
                     </TableRow>
-                  ))
-                ) : (
-                  <TableRow>
-                    <TableCell colSpan={5} className="h-32 text-center text-muted-foreground">
-                      <div className="flex flex-col items-center gap-2">
-                        <ImageIcon className="w-8 h-8 text-muted-foreground/30" />
-                        <p>No items in this job yet. Upload photos to start intaking.</p>
-                      </div>
-                    </TableCell>
-                  </TableRow>
-                )}
-              </TableBody>
-            </Table>
+                  )}
+                </TableBody>
+              </Table>
+            </div>
           </div>
         </div>
       </div>

@@ -117,8 +117,8 @@ export default function InventoryItem() {
 
   const [formData, setFormData] = useState({
     brand: "", model: "", category: "", color: "", condition: "",
-    conditionNotes: "", marketPrice: "", floorPrice: "", platform: "",
-    status: "", disposition: "", shippingLogic: "", listingDescription: "",
+    conditionNotes: "", style: "", fabric: "", marketPrice: "", floorPrice: "",
+    platform: "", status: "", disposition: "", shippingLogic: "", listingDescription: "",
   });
 
   const [pricing, setPricing] = useState<PricingState | null>(null);
@@ -145,6 +145,8 @@ export default function InventoryItem() {
         color: item.color || "",
         condition: item.condition || "",
         conditionNotes: item.conditionNotes || "",
+        style: (item as unknown as { style?: string | null }).style || "",
+        fabric: (item as unknown as { fabric?: string | null }).fabric || "",
         marketPrice: item.marketPrice || "",
         floorPrice: item.floorPrice || "",
         platform: item.platform || "",
@@ -204,6 +206,8 @@ export default function InventoryItem() {
           color: formData.color || null,
           condition: formData.condition || null,
           conditionNotes: formData.conditionNotes || null,
+          style: formData.style || null,
+          fabric: formData.fabric || null,
           marketPrice: formData.marketPrice || null,
           floorPrice: formData.floorPrice || null,
           platform: formData.platform,
@@ -530,6 +534,39 @@ export default function InventoryItem() {
                   />
                 </div>
               )}
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label>Style</Label>
+                  <Input
+                    value={formData.style}
+                    onChange={e => setFormData({...formData, style: e.target.value})}
+                    placeholder="e.g. Mid-Century Modern, Bohemian"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label>Material / Fabric</Label>
+                  <Input
+                    value={formData.fabric}
+                    onChange={e => setFormData({...formData, fabric: e.target.value})}
+                    placeholder="e.g. Cotton, Walnut, Brass"
+                  />
+                </div>
+              </div>
+              {(() => {
+                const angles = (item as unknown as { angleLabels?: string[] }).angleLabels ?? [];
+                return angles.length > 0 ? (
+                  <div className="space-y-1.5">
+                    <Label className="text-xs text-muted-foreground uppercase tracking-wide">Photo Angles Captured</Label>
+                    <div className="flex flex-wrap gap-1.5">
+                      {angles.map((a) => (
+                        <span key={a} className="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded uppercase tracking-wide font-medium border border-slate-200">
+                          {a}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                ) : null;
+              })()}
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label>Market Price</Label>

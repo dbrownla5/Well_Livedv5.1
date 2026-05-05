@@ -82,6 +82,11 @@ export interface Item {
   /** @nullable */
   conditionNotes?: string | null;
   /** @nullable */
+  style?: string | null;
+  /** @nullable */
+  fabric?: string | null;
+  angleLabels?: string[];
+  /** @nullable */
   marketPrice?: string | null;
   /** @nullable */
   floorPrice?: string | null;
@@ -131,6 +136,10 @@ export interface ItemUpdate {
   condition?: string | null;
   /** @nullable */
   conditionNotes?: string | null;
+  /** @nullable */
+  style?: string | null;
+  /** @nullable */
+  fabric?: string | null;
   /** @nullable */
   marketPrice?: string | null;
   /** @nullable */
@@ -215,6 +224,11 @@ export interface AnalyzedItem {
   condition?: string | null;
   /** @nullable */
   conditionNotes?: string | null;
+  /** @nullable */
+  style?: string | null;
+  /** @nullable */
+  fabric?: string | null;
+  angleLabels?: string[];
   /** @nullable */
   marketPrice?: string | null;
   /** @nullable */
