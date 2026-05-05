@@ -305,6 +305,8 @@ export const AnalyzePhotoBatchBody = zod.object({
           .describe(
             "Object path returned by \/storage\/uploads\/request-url (e.g. \/objects\/uploads\/uuid)",
           ),
+        width: zod.number().optional().describe("Image width in pixels"),
+        height: zod.number().optional().describe("Image height in pixels"),
       }),
     )
     .min(1),

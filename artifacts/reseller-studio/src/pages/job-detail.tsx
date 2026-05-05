@@ -22,16 +22,33 @@ import { ArrowLeft, UploadCloud, Image as ImageIcon, CheckCircle2, PackageSearch
 
 const BASE_PATH = import.meta.env.BASE_URL ?? "/studio/";
 
-async function uploadPhotoToStorage(file: File): Promise<string> {
-  const urlRes = await fetch(`${BASE_PATH}api/storage/uploads/request-url`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    credentials: "include",
-    body: JSON.stringify({ name: file.name, size: file.size, contentType: file.type }),
+interface UploadedPhoto {
+  storageKey: string;
+  width: number | null;
+  height: number | null;
+}
+
+function getImageDimensions(file: File): Promise<{ width: number; height: number } | null> {
+  return new Promise((resolve) => {
+    const url = URL.createObjectURL(file);
+    const img = new Image();
+    img.onload = () => { URL.revokeObjectURL(url); resolve({ width: img.naturalWidth, height: img.naturalHeight }); };
+    img.onerror = () => { URL.revokeObjectURL(url); resolve(null); };
+    img.src = url;
   });
-  if (!urlRes.ok) {
-    throw new Error(`Failed to get upload URL: ${urlRes.status}`);
-  }
+}
+
+async function uploadPhotoToStorage(file: File): Promise<UploadedPhoto> {
+  const [urlRes, dims] = await Promise.all([
+    fetch(`${BASE_PATH}api/storage/uploads/request-url`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+      body: JSON.stringify({ name: file.name, size: file.size, contentType: file.type }),
+    }),
+    getImageDimensions(file),
+  ]);
+  if (!urlRes.ok) throw new Error(`Failed to get upload URL: ${urlRes.status}`);
   const { uploadURL, objectPath } = (await urlRes.json()) as { uploadURL: string; objectPath: string };
 
   const putRes = await fetch(uploadURL, {
@@ -39,10 +56,9 @@ async function uploadPhotoToStorage(file: File): Promise<string> {
     headers: { "Content-Type": file.type },
     body: file,
   });
-  if (!putRes.ok) {
-    throw new Error(`Failed to upload to storage: ${putRes.status}`);
-  }
-  return objectPath;
+  if (!putRes.ok) throw new Error(`Failed to upload to storage: ${putRes.status}`);
+
+  return { storageKey: objectPath, width: dims?.width ?? null, height: dims?.height ?? null };
 }
 
 export default function JobDetail() {
@@ -96,22 +112,23 @@ export default function JobDetail() {
       // Step 1: Upload each photo directly to object storage
       setStatusText("Uploading photos to storage...");
       const fileArray = Array.from(files);
-      const storageKeys: string[] = [];
+      const uploaded: UploadedPhoto[] = [];
       for (let i = 0; i < fileArray.length; i++) {
-        const file = fileArray[i];
-        const key = await uploadPhotoToStorage(file);
-        storageKeys.push(key);
+        const result = await uploadPhotoToStorage(fileArray[i]);
+        uploaded.push(result);
         setProgress(5 + Math.round(((i + 1) / fileArray.length) * 35));
       }
 
       setProgress(40);
       setStatusText("Analyzing with Gemini AI...");
 
-      // Step 2: Send storage keys to analyze-batch
+      // Step 2: Send storage keys + dimensions to analyze-batch
       const photos = fileArray.map((file, i) => ({
         filename: file.name,
         mimeType: file.type,
-        storageKey: storageKeys[i],
+        storageKey: uploaded[i].storageKey,
+        width: uploaded[i].width ?? undefined,
+        height: uploaded[i].height ?? undefined,
       }));
 
       analyzeBatch.mutate(

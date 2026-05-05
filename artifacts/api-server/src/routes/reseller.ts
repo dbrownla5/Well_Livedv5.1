@@ -392,7 +392,7 @@ router.post("/reseller/ai/analyze-batch", async (req, res): Promise<void> => {
     return;
   }
 
-  // Persist photo metadata (storage keys) for the job
+  // Persist photo metadata (storage keys + dimensions) for the job
   if (photos.length) {
     await db.insert(itemPhotosTable).values(
       photos.map((p) => ({
@@ -400,6 +400,8 @@ router.post("/reseller/ai/analyze-batch", async (req, res): Promise<void> => {
         filename: p.filename,
         mimeType: p.mimeType,
         storageKey: p.storageKey,
+        width: p.width ?? null,
+        height: p.height ?? null,
       })),
     );
   }

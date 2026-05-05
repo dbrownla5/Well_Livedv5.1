@@ -84,6 +84,8 @@ export const itemPhotos = pgTable("reseller_item_photos", {
   filename: text("filename").notNull(),
   mimeType: text("mime_type").notNull(),
   storageKey: text("storage_key"),
+  width: integer("width"),
+  height: integer("height"),
 });
 
 export type ItemPhoto = typeof itemPhotos.$inferSelect;

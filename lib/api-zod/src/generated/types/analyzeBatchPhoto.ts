@@ -11,4 +11,8 @@ export interface AnalyzeBatchPhoto {
   mimeType: string;
   /** Object path returned by /storage/uploads/request-url (e.g. /objects/uploads/uuid) */
   storageKey: string;
+  /** Image width in pixels */
+  width?: number;
+  /** Image height in pixels */
+  height?: number;
 }

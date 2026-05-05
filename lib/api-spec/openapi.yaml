@@ -586,6 +586,12 @@ components:
         storageKey:
           type: string
           description: Object path returned by /storage/uploads/request-url (e.g. /objects/uploads/uuid)
+        width:
+          type: integer
+          description: Image width in pixels
+        height:
+          type: integer
+          description: Image height in pixels
       required: [filename, mimeType, storageKey]
 
     UploadUrlRequest:

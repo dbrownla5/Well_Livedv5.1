@@ -9,6 +9,7 @@ const router: IRouter = Router();
 
 router.use(healthRouter);
 router.use(intakeRouter);
+router.use("/storage", requireOperator);
 router.use(storageRouter);
 router.use("/reseller", requireOperator);
 router.use(resellerRouter);
