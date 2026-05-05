@@ -1,6 +1,10 @@
 import { Link } from "wouter";
 import { usePageMeta } from "../../hooks/usePageMeta";
 
+const Divider = () => (
+  <hr style={{ border: "none", borderTop: "1px solid var(--linen)", margin: "40px 0" }} />
+);
+
 export default function CuratedResale() {
   usePageMeta({
     title: "Curated Resale & Consignment",
@@ -23,20 +27,10 @@ export default function CuratedResale() {
             <p>It is not a donation pickup substitute, bulk textile recycling service, or a shortcut for things that are no longer in resellable condition.</p>
           </div>
 
-          {/* Shop the closet */}
-          <div style={{ background: "var(--warm)", border: "1px solid var(--linen)", padding: "28px", marginBottom: "40px" }}>
-            <div style={{ fontSize: "11px", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--rust)", marginBottom: "8px" }}>Shop the closet</div>
-            <div style={{ fontSize: "15px", fontWeight: 600, color: "var(--char)", marginBottom: "6px" }}>The Well Lived Closet</div>
-            <p style={{ fontSize: "14px", color: "var(--ink)", lineHeight: 1.7, marginBottom: "14px" }}>Curated pieces with a life left in them — designer, vintage, and the occasional treasure. Photographed clean. Shipped in two days.</p>
-            <div className="shop-buttons">
-              <a href="https://posh.mk/HLUmmsrzq2b" target="_blank" rel="noopener noreferrer">Shop Poshmark →</a>
-              <a href="https://ebay.us/m/cUjlUb" target="_blank" rel="noopener noreferrer" className="alt">Shop eBay →</a>
-              <a href="https://instagram.com/thewelllivedcloset" target="_blank" rel="noopener noreferrer" className="alt">Follow on Instagram →</a>
-            </div>
-          </div>
+          <Divider />
 
           <h2 style={{ fontSize: "18px", fontWeight: 700, color: "var(--char)", margin: "0 0 8px" }}>This service is built for</h2>
-          <ul style={{ listStyle: "none", marginBottom: "40px" }}>
+          <ul style={{ listStyle: "none", marginBottom: "0" }}>
             {[
               "Clothing and designer accessories",
               "Jewelry",
@@ -48,6 +42,8 @@ export default function CuratedResale() {
               <li key={i} style={{ fontSize: "14px", color: "var(--ink)", padding: "8px 0", borderBottom: i < arr.length - 1 ? "1px solid var(--linen)" : "none" }}>{item}</li>
             ))}
           </ul>
+
+          <Divider />
 
           <h2 style={{ fontSize: "18px", fontWeight: 700, color: "var(--char)", margin: "0 0 16px" }}>The work is not just listing. It includes:</h2>
           <ul style={{ listStyle: "none", marginBottom: "16px" }}>
@@ -64,7 +60,9 @@ export default function CuratedResale() {
               <li key={i} style={{ fontSize: "14px", color: "var(--ink)", padding: "8px 0", borderBottom: i < arr.length - 1 ? "1px solid var(--linen)" : "none" }}>{item}</li>
             ))}
           </ul>
-          <p style={{ fontSize: "15px", fontWeight: 600, color: "var(--char)", margin: "24px 0 40px", fontStyle: "italic" }}>The goal is to move the item into the right next life, not just the fastest sale.</p>
+          <p style={{ fontSize: "15px", fontWeight: 600, color: "var(--char)", margin: "24px 0 0", fontStyle: "italic" }}>The goal is to move the item into the right next life, not just the fastest sale.</p>
+
+          <Divider />
 
           <h2 style={{ fontSize: "18px", fontWeight: 700, color: "var(--char)", margin: "0 0 16px" }}>Easy handoff and pickup</h2>
           <p style={{ fontSize: "14px", color: "var(--stone)", marginBottom: "16px" }}>The handoff is intentionally easy. Depending on what makes the most sense for your week, items can move through:</p>
@@ -80,17 +78,23 @@ export default function CuratedResale() {
               <li key={i} style={{ fontSize: "14px", color: "var(--ink)", padding: "8px 0", borderBottom: i < arr.length - 1 ? "1px solid var(--linen)" : "none" }}>{item}</li>
             ))}
           </ul>
-          <p style={{ fontSize: "14px", color: "var(--stone)", marginBottom: "40px" }}>The longer we have worked together, the easier this becomes. The philosophy is simple: why spend time coordinating a bag when it can simply be in my hands by noon.</p>
+          <p style={{ fontSize: "14px", color: "var(--stone)", marginBottom: "0" }}>The longer we have worked together, the easier this becomes. The philosophy is simple: why spend time coordinating a bag when it can simply be in my hands by noon.</p>
+
+          <Divider />
 
           <h2 style={{ fontSize: "18px", fontWeight: 700, color: "var(--char)", margin: "0 0 16px" }}>What works best</h2>
           <p style={{ fontSize: "14px", color: "var(--ink)", lineHeight: 1.8, marginBottom: "16px" }}>No item count minimum. Fill what you have, send it when it's ready.</p>
           <p style={{ fontSize: "14px", color: "var(--ink)", lineHeight: 1.8, marginBottom: "16px" }}>For same-day pickup and courier handoff, I work with 60–90 quart totes — the size that fits an Uber courier cleanly and keeps the pickup easy on both ends. I keep them on hand and drop them with you, or ship them ahead from my business Amazon account.</p>
           <p style={{ fontSize: "14px", color: "var(--ink)", lineHeight: 1.8, marginBottom: "16px" }}>The strongest bags usually include a mix — contemporary designer, quality vintage, home décor, furniture, art, jewelry, or well-kept everyday brands. But I'll look at anything clean and in good faith.</p>
-          <p style={{ fontSize: "14px", color: "var(--ink)", lineHeight: 1.8, marginBottom: "40px" }}>If it's not worth listing, I'll tell you. If it's borderline, I'll still try. Patience is the advantage here — things that don't move fast elsewhere often find their buyer because I'm willing to wait for the right one. Clean non-sellable items route directly into approved donation channels without requiring separate client sorting.</p>
+          <p style={{ fontSize: "14px", color: "var(--ink)", lineHeight: 1.8, marginBottom: "0" }}>If it's not worth listing, I'll tell you. If it's borderline, I'll still try. Patience is the advantage here — things that don't move fast elsewhere often find their buyer because I'm willing to wait for the right one. Clean non-sellable items route directly into approved donation channels without requiring separate client sorting.</p>
+
+          <Divider />
 
           <h2 style={{ fontSize: "18px", fontWeight: 700, color: "var(--char)", margin: "0 0 16px" }}>Item standards</h2>
           <p style={{ fontSize: "14px", color: "var(--ink)", lineHeight: 1.8, marginBottom: "16px" }}>This is a resale and curation service. It is not waste removal, donation hauling, contaminated textile removal, a recycling substitute, or a "please get rid of this for me" service.</p>
-          <p style={{ fontSize: "14px", color: "var(--ink)", lineHeight: 1.8, marginBottom: "40px" }}>The assumption is: these are things you took care of and know deserve another life. That is the spirit of this service.</p>
+          <p style={{ fontSize: "14px", color: "var(--ink)", lineHeight: 1.8, marginBottom: "0" }}>The assumption is: these are things you took care of and know deserve another life. That is the spirit of this service.</p>
+
+          <Divider />
 
           <h2 style={{ fontSize: "18px", fontWeight: 700, color: "var(--char)", margin: "0 0 16px" }}>Where items sell</h2>
           <p style={{ fontSize: "14px", color: "var(--stone)", marginBottom: "16px" }}>Items are routed by category and market fit for maximum return:</p>
@@ -107,17 +111,35 @@ export default function CuratedResale() {
               <li key={i} style={{ fontSize: "14px", color: "var(--ink)", padding: "8px 0", borderBottom: i < arr.length - 1 ? "1px solid var(--linen)" : "none" }}>{item}</li>
             ))}
           </ul>
-          <p style={{ fontSize: "13px", color: "var(--stone)", marginBottom: "40px" }}>The route depends on item type, buyer demand, story value, platform behavior, seasonality, and speed versus premium price goals.</p>
+          <p style={{ fontSize: "13px", color: "var(--stone)", marginBottom: "0" }}>The route depends on item type, buyer demand, story value, platform behavior, seasonality, and speed versus premium price goals.</p>
+
+          <Divider />
 
           <h2 style={{ fontSize: "18px", fontWeight: 700, color: "var(--char)", margin: "0 0 16px" }}>Intake review timing</h2>
-          <p style={{ fontSize: "14px", color: "var(--ink)", lineHeight: 1.8, marginBottom: "40px" }}>Once items arrive, intake review typically takes 7–10 business days. Within that window you'll receive confirmation of what was received, what's accepted for sale, what may need hold timing, what may be rerouted, and what may not justify resale. If workload or project volume changes that timeline, I'll let you know.</p>
+          <p style={{ fontSize: "14px", color: "var(--ink)", lineHeight: 1.8, marginBottom: "0" }}>Once items arrive, intake review typically takes 7–10 business days. Within that window you'll receive confirmation of what was received, what's accepted for sale, what may need hold timing, what may be rerouted, and what may not justify resale. If workload or project volume changes that timeline, I'll let you know.</p>
+
+          <Divider />
 
           <h2 style={{ fontSize: "18px", fontWeight: 700, color: "var(--char)", margin: "0 0 16px" }}>Realistic resale timeline</h2>
-          <p style={{ fontSize: "14px", color: "var(--ink)", lineHeight: 1.8, marginBottom: "40px" }}>This is a long game, not a fast-cash service. Most strong items sell within the first 90 days. Nearly everything with real demand finds its buyer within 6 to 9 months. The right expectation is: resale rewards patience, not urgency. If immediate cash is the priority, resale may not be the best route.</p>
+          <p style={{ fontSize: "14px", color: "var(--ink)", lineHeight: 1.8, marginBottom: "0" }}>This is a long game, not a fast-cash service. Most strong items sell within the first 90 days. Nearly everything with real demand finds its buyer within 6 to 9 months. The right expectation is: resale rewards patience, not urgency. If immediate cash is the priority, resale may not be the best route.</p>
+
+          <Divider />
 
           <div style={{ background: "var(--warm)", border: "1px solid var(--linen)", padding: "28px", marginBottom: "40px" }}>
             <p style={{ fontSize: "14px", color: "var(--ink)", lineHeight: 1.8, marginBottom: "12px" }}>What makes this work is that I'm not simply uploading things. I'm deciding what deserves effort, what should wait, what gains value with story, what belongs in the collector world, what needs to leave fast, and what is better donated. I'm also choosing when emotional meaning in a listing creates the right buyer connection — and when it doesn't.</p>
             <p style={{ fontSize: "14px", color: "var(--stone)", lineHeight: 1.8, fontStyle: "italic" }}>The point is not volume. The point is thoughtful curation that creates the best next life for the item and the most realistic return for the client.</p>
+          </div>
+
+          {/* Shop the closet — moved lower */}
+          <div style={{ background: "var(--warm)", border: "1px solid var(--linen)", padding: "28px", marginBottom: "40px" }}>
+            <div style={{ fontSize: "11px", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--rust)", marginBottom: "8px" }}>Shop the closet</div>
+            <div style={{ fontSize: "15px", fontWeight: 600, color: "var(--char)", marginBottom: "6px" }}>The Well Lived Closet</div>
+            <p style={{ fontSize: "14px", color: "var(--ink)", lineHeight: 1.7, marginBottom: "14px" }}>Curated pieces with a life left in them — designer, vintage, and the occasional treasure. Photographed clean. Shipped in two days.</p>
+            <div className="shop-buttons">
+              <a href="https://posh.mk/HLUmmsrzq2b" target="_blank" rel="noopener noreferrer">Shop Poshmark →</a>
+              <a href="https://ebay.us/m/cUjlUb" target="_blank" rel="noopener noreferrer" className="alt">Shop eBay →</a>
+              <a href="https://instagram.com/thewelllivedcloset" target="_blank" rel="noopener noreferrer" className="alt">Follow on Instagram →</a>
+            </div>
           </div>
 
           <p style={{ fontSize: "14px", color: "var(--stone)", lineHeight: 1.75, marginBottom: "40px" }}>No upfront cost. Commission is split on net proceeds — you keep the larger share on clothing and accessories. Agreement required before intake. <Link href="/pricing#resale" style={{ color: "var(--rust)" }}>Full commission structure →</Link></p>

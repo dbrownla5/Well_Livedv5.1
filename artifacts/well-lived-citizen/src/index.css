@@ -48,6 +48,7 @@
 
 /* ── Hero with image ───────────────────────────────────────────────────── */
 .hero-with-image{position:relative;overflow:hidden;background-image:url("/images/hero-bg.png");background-attachment:fixed;background-size:cover;background-position:center;background-repeat:no-repeat;animation:heroBgFade 1.2s ease-out both}.hero-overlay{position:absolute;inset:0;background:var(--cream);opacity:0;pointer-events:none;z-index:0;will-change:opacity}.hero-content{position:relative;z-index:1}.hero-with-image .label{color:var(--stone)!important}.hero-with-image .hero-h1{color:var(--char)!important}.hero-with-image .hero-h1 em{color:var(--rust)!important}.hero-with-image .hero-sub{color:var(--ink)!important}.hero-with-image .hero-body{color:var(--stone)!important}.hero-with-image .hero-kicker{color:var(--char)!important}@keyframes heroBgFade{from{opacity:0}to{opacity:1}}
+@media(max-width:768px){.hero-with-image{background-attachment:scroll}}
 
 /* Dark pricing table variant */
 .pricing-table-dark td{border-bottom-color:rgba(245,240,232,.1)}
