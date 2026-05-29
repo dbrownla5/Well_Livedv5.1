@@ -36,6 +36,7 @@ minimumReleaseAgeExclude:
 
 packages:
   - artifacts/*
+  - site-build/*
   - lib/*
   - lib/integrations/*
   - scripts

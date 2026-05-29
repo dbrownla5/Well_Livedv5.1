@@ -1,2 +1,3 @@
-- [WLC site audit rules](wlc-site-audit.md) — permanent banned phrases, budget decisions, and voice dump protocol for WLC site work
-- [WLC brand vault rules](wlc-brand-vault-rules.md) — key enforcement rules distilled from 564-line vault for fast future checks
+- [WLC site audit rules](wlc-site-audit.md) — banned phrases, Gayle budget, demographic language, pillar voice
+- [WLC brand vault rules](wlc-brand-vault-rules.md) — key vault enforcement rules for voice/copy
+- [WLC artifact location](wlc-artifact-location.md) — site is registered as artifacts/wlc-site (moved from site-build/wlc-launch)
