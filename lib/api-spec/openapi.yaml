@@ -10,6 +10,8 @@ servers:
 tags:
   - name: health
     description: Health operations
+  - name: voice
+    description: Voice profile and copy analysis operations
 paths:
   /healthz:
     get:
@@ -24,6 +26,50 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+  /voice/profile:
+    get:
+      operationId: getVoiceProfile
+      tags: [voice]
+      summary: Get the voice profile
+      description: Returns the full structured voice profile document
+      responses:
+        "200":
+          description: Voice profile
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VoiceProfile"
+  /voice/analyze:
+    post:
+      operationId: analyzeVoice
+      tags: [voice]
+      summary: Analyze copy against the voice profile
+      description: Accepts a block of copy and returns a structured analysis with score, flags, and suggested rewrite
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/VoiceAnalyzeRequest"
+      responses:
+        "200":
+          description: Voice analysis result
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VoiceAnalyzeResponse"
+        "400":
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VoiceError"
+        "500":
+          description: Analysis failed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VoiceError"
 components:
   schemas:
     HealthStatus:
@@ -33,4 +79,91 @@ components:
           type: string
       required:
         - status
-
+    VoiceProfile:
+      type: object
+      properties:
+        identity:
+          type: string
+        corePrinciples:
+          type: array
+          items:
+            type: string
+        rhythmPatterns:
+          type: array
+          items:
+            type: string
+        antiPatterns:
+          type: array
+          items:
+            type: string
+        voiceTests:
+          type: array
+          items:
+            type: string
+      required:
+        - identity
+        - corePrinciples
+        - rhythmPatterns
+        - antiPatterns
+        - voiceTests
+    VoiceAnalyzeRequest:
+      type: object
+      properties:
+        copy:
+          type: string
+          description: The block of copy to analyze
+        context:
+          type: string
+          description: Optional context about where this copy appears (e.g. "service page hero", "booking CTA")
+      required:
+        - copy
+    VoiceFlag:
+      type: object
+      properties:
+        phrase:
+          type: string
+          description: The specific phrase or sentence that was flagged
+        issue:
+          type: string
+          description: Named problem category (e.g. "operational language leaking", "missing emotional routing")
+        explanation:
+          type: string
+          description: Why this phrase drifts from the voice
+        suggestion:
+          type: string
+          description: A rewritten version that stays true to the voice
+      required:
+        - phrase
+        - issue
+        - explanation
+        - suggestion
+    VoiceAnalyzeResponse:
+      type: object
+      properties:
+        score:
+          type: number
+          description: Voice match score from 0 to 100
+          minimum: 0
+          maximum: 100
+        summary:
+          type: string
+          description: One or two sentence overall assessment
+        flags:
+          type: array
+          items:
+            $ref: "#/components/schemas/VoiceFlag"
+        rewrite:
+          type: string
+          description: A full rewrite of the copy that matches the voice profile
+      required:
+        - score
+        - summary
+        - flags
+        - rewrite
+    VoiceError:
+      type: object
+      properties:
+        error:
+          type: string
+      required:
+        - error
