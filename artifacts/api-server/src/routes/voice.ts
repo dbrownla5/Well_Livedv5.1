@@ -6,13 +6,7 @@ import { voiceProfile } from "../voice-profile";
 const router: IRouter = Router();
 
 router.get("/voice/profile", (_req, res) => {
-  const data = GetVoiceProfileResponse.parse({
-    identity: voiceProfile.identity,
-    corePrinciples: voiceProfile.corePrinciples,
-    rhythmPatterns: voiceProfile.rhythmPatterns,
-    antiPatterns: voiceProfile.antiPatterns,
-    voiceTests: voiceProfile.voiceTests,
-  });
+  const data = GetVoiceProfileResponse.parse(voiceProfile);
   res.json(data);
 });
 

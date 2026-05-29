@@ -5,6 +5,8 @@
  * API specification
  * OpenAPI spec version: 0.1.0
  */
+import type { VoiceAnnotatedExample } from './voiceAnnotatedExample';
+import type { VoiceEmotionalArchitecture } from './voiceEmotionalArchitecture';
 
 export interface VoiceProfile {
   identity: string;
@@ -12,4 +14,6 @@ export interface VoiceProfile {
   rhythmPatterns: string[];
   antiPatterns: string[];
   voiceTests: string[];
+  emotionalArchitecture: VoiceEmotionalArchitecture;
+  annotatedExamples: VoiceAnnotatedExample[];
 }

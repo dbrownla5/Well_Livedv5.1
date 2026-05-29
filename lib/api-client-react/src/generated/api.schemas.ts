@@ -9,12 +9,28 @@ export interface HealthStatus {
   status: string;
 }
 
+export interface VoiceEmotionalArchitecture {
+  rule: string;
+  approach: string;
+  strongPhrases: string[];
+}
+
+export interface VoiceAnnotatedExample {
+  context: string;
+  bad: string;
+  bad_problems: string[];
+  good: string;
+  good_strengths: string[];
+}
+
 export interface VoiceProfile {
   identity: string;
   corePrinciples: string[];
   rhythmPatterns: string[];
   antiPatterns: string[];
   voiceTests: string[];
+  emotionalArchitecture: VoiceEmotionalArchitecture;
+  annotatedExamples: VoiceAnnotatedExample[];
 }
 
 export interface VoiceAnalyzeRequest {

@@ -26,7 +26,19 @@ export const GetVoiceProfileResponse = zod.object({
   "corePrinciples": zod.array(zod.string()),
   "rhythmPatterns": zod.array(zod.string()),
   "antiPatterns": zod.array(zod.string()),
-  "voiceTests": zod.array(zod.string())
+  "voiceTests": zod.array(zod.string()),
+  "emotionalArchitecture": zod.object({
+  "rule": zod.string(),
+  "approach": zod.string(),
+  "strongPhrases": zod.array(zod.string())
+}),
+  "annotatedExamples": zod.array(zod.object({
+  "context": zod.string(),
+  "bad": zod.string(),
+  "bad_problems": zod.array(zod.string()),
+  "good": zod.string(),
+  "good_strengths": zod.array(zod.string())
+}))
 })
 
 

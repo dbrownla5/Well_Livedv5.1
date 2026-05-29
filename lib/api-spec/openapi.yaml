@@ -79,6 +79,44 @@ components:
           type: string
       required:
         - status
+    VoiceEmotionalArchitecture:
+      type: object
+      properties:
+        rule:
+          type: string
+        approach:
+          type: string
+        strongPhrases:
+          type: array
+          items:
+            type: string
+      required:
+        - rule
+        - approach
+        - strongPhrases
+    VoiceAnnotatedExample:
+      type: object
+      properties:
+        context:
+          type: string
+        bad:
+          type: string
+        bad_problems:
+          type: array
+          items:
+            type: string
+        good:
+          type: string
+        good_strengths:
+          type: array
+          items:
+            type: string
+      required:
+        - context
+        - bad
+        - bad_problems
+        - good
+        - good_strengths
     VoiceProfile:
       type: object
       properties:
@@ -100,12 +138,20 @@ components:
           type: array
           items:
             type: string
+        emotionalArchitecture:
+          $ref: "#/components/schemas/VoiceEmotionalArchitecture"
+        annotatedExamples:
+          type: array
+          items:
+            $ref: "#/components/schemas/VoiceAnnotatedExample"
       required:
         - identity
         - corePrinciples
         - rhythmPatterns
         - antiPatterns
         - voiceTests
+        - emotionalArchitecture
+        - annotatedExamples
     VoiceAnalyzeRequest:
       type: object
       properties:
