@@ -185,6 +185,8 @@ This work creates thoughtful pathways for what remains useful, meaningful, insur
     "FIXED: Home.tsx — Gayle attribution updated to 'Gayle Williams · Seattle Client'",
     "FIXED: FastBagFill.tsx — 'free pickup only works if it's worth both our time / $5–$10 range / payouts closer to $3 an item' → canonical no-wrong-door addendum",
     "FIXED: Footer.tsx — Poshmark, eBay, Facebook links removed; only two Instagram handles remain",
+    "FIXED: FAQ.tsx confidentiality answer — already clean ('their homes, or what's inside them'); no 'their households' present in build",
+    "FIXED: FAQ.tsx + HouseCalls.tsx — 'independent older adults' removed from FAQ answer body text (vault rule: answer body budget = 0; pillar descriptions and question headings are explicitly approved and unchanged — Home.tsx pillar desc and FAQ/HouseCalls question headings retained)",
   ],
 
   annotatedExamples: [
