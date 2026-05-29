@@ -103,6 +103,22 @@ export const voiceProfile = {
     ],
   },
 
+  demographicLanguageRules: {
+    rule: "Demographic language must honor the person's autonomy and the reason they're booking — never their diminishment. The service is for people who are managing their lives, not being managed.",
+    approvedFraming: [
+      "'independent older adults' — approved and preferred. The word 'independent' is load-bearing: it signals the client is maintaining their autonomy, not surrendering it.",
+      "'families managing a parent's home from a distance' — approved. Addresses the generational gap (adult kids hiring Dayna on a parent's behalf) without labeling the parent.",
+      "'people who want support maintaining their homes and their autonomy' — approved for answer copy where the demographic doesn't need to be named.",
+    ],
+    bannedFraming: [
+      "'elderly' — clinical, implies helplessness",
+      "'aging parents' when used to describe the client's condition (vs. the booking context)",
+      "'seniors who need help' — frames the service around what they can't do",
+      "Any phrasing that implies the person can't manage without assistance — the service is about making the operational parts easier, not replacing the person",
+    ],
+    generationalGapNote: "The transitional generational gap is real and worth addressing: adult children often book House Calls for a parent. This is a legitimate entry point. Name it directly and tactfully — 'families managing a parent's home from a distance' — rather than describing the parent as incapable.",
+  },
+
   voiceDumpProtocol: {
     rule: "Dayna's voice recordings and concept messages are raw concept-building material, not locked copy or new pillars. She talks through examples to create frameworks. Sometimes she swears, repeats herself, or describes things in progress. The agent's job is to distill: find the concept inside the dump, express it in the master voice, and NOT create new pillars, locks, or service categories from conversational examples.",
     howToIdentify: [

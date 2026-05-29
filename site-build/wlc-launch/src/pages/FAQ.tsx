@@ -46,7 +46,7 @@ const faqSections = [
     items: [
       { q: "What's the difference between a House Call and The Reset?", a: "The Reset is a focused session for a single space or problem area. House Calls are flexible, hourly sessions for the broader running-the-household stuff — technology, home safety, errands, vendor coordination, transitions, and whatever else needs attention. House Calls have a 2-hour minimum." },
       { q: "Can I book recurring House Calls?", a: "Yes. Monthly retainer packages are available for clients who want consistent, scheduled support. These are priced individually based on frequency and scope. Ask about them during your call." },
-      { q: "Do you work with people who are aging in place, or with their families?", a: "Yes. I work with people who want support maintaining their homes and their independence. The pace is set by the person, not me — and the goal is always to make the operational parts easier without getting in the way of how they already live." },
+      { q: "Do you work with older adults?", a: "Yes. I work with independent older adults who want support maintaining their homes and their autonomy. The pace is set by the person, not me — and the goal is always to make the operational parts easier without getting in the way of how they already live." },
     ]
   },
   {

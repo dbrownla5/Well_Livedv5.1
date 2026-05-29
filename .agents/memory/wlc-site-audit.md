@@ -15,7 +15,7 @@ description: Durable rules and decisions from the brand voice audit. What to che
 
 **Footer social links** — two Instagram handles only: @thewelllivedcitizen and @thewelllivedcloset. Poshmark, eBay, and Facebook belong in JSON-LD `sameAs` (search-engine structured data) but not in the visual footer.
 
-**"Older adults" / "independent older adults"** — one-use descriptive budget. May appear in FAQ question headings (search-term containers). Must not appear in body copy answers or pillar descriptions. Rephrase to "people who want support maintaining their homes and their independence" or "anyone who needs a capable person on the ground."
+**"Independent older adults"** — approved and preferred phrasing. The word "independent" is load-bearing: it frames the client as maintaining autonomy, not surrendering it. Use it in pillar descriptions and FAQ headings. In body copy answers, "people who want support maintaining their homes and their autonomy" is the natural equivalent. Banned alternatives: "elderly," "aging parents" (as a description of the client's condition), "seniors who need help." The generational gap (adult children booking for a parent) is a legitimate, real entry point — address it directly as "families managing a parent's home from a distance."
 
 **"Their households"** — internal/formal language. Banned in confidentiality copy. Rephrase to plain language: "their homes," "what's inside them."
 

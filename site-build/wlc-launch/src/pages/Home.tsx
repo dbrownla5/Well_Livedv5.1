@@ -210,7 +210,7 @@ export default function Home() {
             {[
               { num: "01", name: "Home Reset & Move Support", desc: "Organization, unpacking, room functionality, post-move setup. The 4-Hour Reset lives here. Ongoing support billed hourly when projects run longer.", href: "/home-reset-move-support" },
               { num: "02", name: "Legacy Planning & Inventory Catalog", desc: "Inventory and documentation of the belongings and stories families don't want to lose track of — before a move, a downsize, or a transition forces the decisions in a hurry.", href: "/legacy-planning" },
-              { num: "03", name: "House Calls", desc: "Hourly household support for busy professionals, people managing a home from a distance, and anyone who needs a capable person on the ground. The 2-Hour House Call lives here.", href: "/house-calls-pillar" },
+              { num: "03", name: "House Calls", desc: "Hourly household support for busy professionals, independent older adults, and families managing a parent's home from a distance. The 2-Hour House Call lives here.", href: "/house-calls-pillar" },
               { num: "04", name: "Curated Resale & Consignment", desc: "Drop off or schedule a pickup. I sort, evaluate, route, list, and ship. You recover value from things you no longer want to manage. The Fast Bag Fill lives here.", href: "/curated-resale-consignment" },
             ].map((s, i) => (
               <FadeUp key={s.num} delay={i * 40}>
