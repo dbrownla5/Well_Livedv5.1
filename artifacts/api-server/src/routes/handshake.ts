@@ -38,8 +38,14 @@ import {
 } from "../handshake/logic";
 import * as store from "../handshake/storage";
 import { dispatchWebhook } from "../lib/webhook";
+import { DASHBOARD_HTML } from "../handshake/dashboard.html";
 
 const router: IRouter = Router();
+
+// Internal operations dashboard (keep behind hosting auth in production).
+router.get("/handshake/dashboard", (_req, res) => {
+  res.type("html").send(DASHBOARD_HTML);
+});
 
 function publicBase(): string {
   return process.env.PUBLIC_SITE_URL || "https://thewelllivedcitizen.com";
@@ -107,7 +113,7 @@ router.get("/handshake", async (_req, res) => {
   }
 });
 
-router.get("/handshake/:id(\\d+)", async (req, res) => {
+router.get("/handshake/:id", async (req, res) => {
   const id = Number(req.params.id);
   const hs = await store.getHandshake(id);
   if (!hs) {
@@ -120,7 +126,7 @@ router.get("/handshake/:id(\\d+)", async (req, res) => {
 
 // ── Advance a step (runs that step's action + emails the client) ─────────────────
 
-router.post("/handshake/:id(\\d+)/advance", async (req, res) => {
+router.post("/handshake/:id/advance", async (req, res) => {
   const id = Number(req.params.id);
   const hs = await store.getHandshake(id);
   if (!hs) {
@@ -189,7 +195,7 @@ router.post("/handshake/:id(\\d+)/advance", async (req, res) => {
 
 // ── Inventory report builder ────────────────────────────────────────────────────
 
-router.post("/handshake/:id(\\d+)/items", async (req, res) => {
+router.post("/handshake/:id/items", async (req, res) => {
   const id = Number(req.params.id);
   const hs = await store.getHandshake(id);
   if (!hs) {
@@ -215,7 +221,7 @@ router.post("/handshake/:id(\\d+)/items", async (req, res) => {
   res.json({ ok: true, item });
 });
 
-router.post("/handshake/:id(\\d+)/items/:itemId(\\d+)", async (req, res) => {
+router.post("/handshake/:id/items/:itemId", async (req, res) => {
   const itemId = Number(req.params.itemId);
   const b = req.body ?? {};
   const patch: Record<string, unknown> = {};
@@ -227,7 +233,7 @@ router.post("/handshake/:id(\\d+)/items/:itemId(\\d+)", async (req, res) => {
   res.json({ ok: true, item });
 });
 
-router.post("/handshake/:id(\\d+)/send-report", async (req, res) => {
+router.post("/handshake/:id/send-report", async (req, res) => {
   const id = Number(req.params.id);
   const hs = await store.getHandshake(id);
   if (!hs) {
@@ -257,7 +263,7 @@ router.post("/handshake/:id(\\d+)/send-report", async (req, res) => {
 
 // ── Payout ──────────────────────────────────────────────────────────────────────
 
-router.post("/handshake/:id(\\d+)/payout", async (req, res) => {
+router.post("/handshake/:id/payout", async (req, res) => {
   const id = Number(req.params.id);
   const hs = await store.getHandshake(id);
   if (!hs) {
