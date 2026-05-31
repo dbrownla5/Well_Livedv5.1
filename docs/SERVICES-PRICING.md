@@ -6,6 +6,22 @@
 
 ---
 
+## PRICING MODEL — TWO LAYERS
+*Corrected by Dayna 5/31/26. This governs all pricing below.*
+
+**Layer 1 — the three Quick Sells (promotional foot-in-the-door, "not sure where to start?"):**
+- **The 4-Hour Reset — $495 flat.** A clean 4-hour time block used toward *anything* — a room, a space, the post-baby-shower reset after everyone leaves. A promotion, not a rate. The easy first yes.
+- **The 2-Hour House Call** — entry version of the House Calls pillar.
+- **Fast Bag Fill** — entry version of the Resale pillar (commission, free pickup).
+
+**Layer 2 — the four pillars (the deeper, ongoing work):** priced per pillar below.
+
+**Prepaid flex blocks (Home Org / hourly work):** 10-hour and 25-hour blocks, bought in advance at a discount. Hours **never expire** and are used however / whenever the client wants.
+
+**Supply add-on bundles ($150 / $250 / $500):** these are **supplies only** — physical move-in/landing kits. They are **separate from, and never instead of, the hourly rate.**
+
+---
+
 ## 01 — HOME ORGANIZATION & MODERN MOVE
 *Your home, made to work for how you actually live.*
 
@@ -19,7 +35,7 @@ For the room that keeps collecting piles, the move that technically happened but
 
 **Included in every session:** planning, layout logic, sourcing recommendations, label systems, setup and install, pre-order coordination, and all daily workflow tools/utility supplies — cord wraps, Velcro, painter's tape, reusable sorting bins, cable adapters, garment steamer, tape, measuring tools, install basics, problem-solving hardware, and the random adapters/fasteners that always become necessary. One quality rolling rack travels in the car as part of the active workflow kit (closet edits, move days, landing sessions, keep/donate/resale staging, overflow clothing, steaming first-week workwear); if it's rotating at handoff quality and the room genuinely needs one, I'll suggest leaving it as part of the final system.
 
-**Move-in & first-week landing bundles** *(fixed but flexible — the mix shifts to the room's most immediate needs; budget and expectation stay clear):*
+**Move-in & first-week SUPPLY bundles (add-on — supplies only, not labor)** *(prepaid supply kits stocked to the room's most immediate needs; the hourly rate is separate; budget and expectation stay clear):*
 - **$150 — Essentials Landing.** First apartment, guest room, nursery overflow, short-term landing, stressed-mom reset, "just make it easy" move. Charging extensions, starter bins, hanger refresh, hamper, one guest-facing bin, towel/kitchen starters, trash bags/paper towels/soap/TP.
 - **$250 — Start-Up Landing.** Move-ins, professionals landing in LA, family-room transitions, work-zone startup, one-room fast reset. Stronger closet logic, towels, starter dish set (2 plates / 2 bowls / silverware), paper towels, trash flow, better charging, visible bins, shelf dividers, bathroom utility, work-zone startup.
 - **$500 — Full Landing Bundle.** New-city arrivals, life transitions, furnished-apartment resets, baby prep, post-breakup move-ins, temporary homes that still need to feel adult. The *sleep, shower, eat, charge, and get dressed tonight* bundle: towels, dish set, paper goods, soap, bins, dividers, charging, hangers, hamper, flat lamp bases, Wi-Fi bulbs, mirror, closet startup. Items move around depending on what makes the first 72 hours easiest.
@@ -30,7 +46,7 @@ For the room that keeps collecting piles, the move that technically happened but
 
 **Intake + first call:** a light intake form so I arrive prepared (first room, what keeps fighting the space, what must work tonight, logistics, optional prep photos), then a call already grounded in the real work.
 
-**PRICING:** $150/hr · 3hr minimum · landing bundles at $150 / $250 / $500 · custom product planning quoted after walkthrough.
+**PRICING:** $150/hr · 3hr minimum. Prepaid **flex blocks** (10-hour & 25-hour) at a discount — hours never expire, used however/whenever. **Supply add-on bundles** ($150 / $250 / $500) are supplies only, separate from the hourly rate. Custom product planning quoted after walkthrough. *(Also bookable as the $495 flat 4-Hour Reset Quick Sell — see Pricing Model.)*
 
 ---
 
@@ -86,5 +102,5 @@ Start with what is most real right now. Most clients move between these four ove
 
 ---
 
-## ⚠️ OPEN DECISION (must lock before this goes on the site)
-This foundation **drops the $495 flat "4-Hour Reset"** and replaces Home Org pricing with **$150/hr · 3hr min + landing bundles**. But the live homepage + brand vault (§12/13) still feature **"The 4-Hour Reset — $495 flat"** as a Quick Book foot-in-the-door offer. **Decision needed:** keep the $495 4-Hour Reset as the entry offer *and* add $150/hr for bigger jobs — or fully replace it with $150/hr · 3hr min? The site can't advertise both. House Calls ($175/hr · 2hr) is consistent across both.
+## PRICING — RESOLVED (no conflict)
+The $495 4-Hour Reset is a **Quick Sell promotion**, not a replacement for the Home Org rate. Both coexist by design: Quick Sells are the easy entry (Layer 1); the hourly + flex blocks are the pillar work (Layer 2). The supply bundles are a third, separate thing (supplies only). Homepage and vault stay correct as-is.
