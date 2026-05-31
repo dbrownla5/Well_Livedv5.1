@@ -42,4 +42,5 @@ defaultBucketID = "replit-objstore-4cad7f82-f604-4d60-afe8-939e52b4e4a8"
 [userenv.shared]
 CONTACT_TO = "dayna@thewelllivedcitizen.com"
 CONTACT_FROM = "WLC Contact Form <dayna@thewelllivedcitizen.com>"
-Gemma = "AIzaSyDHgYCjyAJu38cQ1IfuVwwPKP9-HiWNnS8"
+
+[nix]

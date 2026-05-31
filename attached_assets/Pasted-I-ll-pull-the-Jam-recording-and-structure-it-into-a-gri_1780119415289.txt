@@ -1,0 +1,19 @@
+I'll pull the Jam recording and structure it into a grid for Replit.This is your own voice feedback on the Well Lived Citizen app — homepage and intake form. Let me pull the transcript.Here's the full feedback structured into a build grid. Ordered by screen, each row is a discrete ticket with a timestamp back to the Jam, the exact change, and priority.
+
+| ID | Screen / Location | Current State | Required Change | Priority | Jam TS |
+|----|------------------|---------------|-----------------|----------|--------|
+| H1 | Homepage | "Schedule a call" + "prefer to reach out directly" shown in main area | Remove from main area. Move contact bits to **footer only**. Intake form is the primary contact driver — don't push call/email up front (creates messy contact info + dead-end silence) | High | 0:04–0:33 |
+| H2 | Homepage | Quote displayed in footer/hero | Remove the quote entirely — not real, doesn't belong. CTA should route **straight to intake form** | High | 0:28–0:38 |
+| F1 | Intake form | Progress bar at top | Remove. It's inaccurate and adds noise | High | 0:38–0:43 |
+| F2 | Intake form | Questions labeled "First question, second question…" | Remove the numbering/labels. Just ask the question | Medium | 0:43–0:50 |
+| F3 | Returning client path | Two questions: "What do you need this time around?" + "What would you like to do?" | Redundant. Keep **one**, cut the other | High | 0:52–1:02 |
+| F4 | Bag pickup flow | "Schedule a bag pickup" has a Context field | Remove Context. The pickup request *is* the context — no extra field needed | Medium | 1:06–1:14 |
+| F5 | Intake form | Field order: First name, last name, email, neighborhood | Move **neighborhood** out of top fields → into Pickup Details section | Medium | 1:15–1:23 |
+| F6 | Pickup Details | Time windows always visible | Make conditional. Time windows appear **only after** user selects delivery method (Uber/courier vs. self). Drop "be home for pickup" framing — it's a pickup, not an appointment. Once method selected → ideal pickup times surface | High | 1:24–1:40 |
+| F7 | Agreement step | Checkbox to agree — but agreement never shown | Backwards. Build a workflow: user **reads agreement on next page first**, then signs. Replace bare checkbox with a timestamped signature / initialed agreement, *then* the send action | High | 1:46–2:33 |
+| F8 | Intake form | Multiple questions have freeform context fields | Only **one** specific question should have a freestanding context field. Strip context from all others | Medium | 2:37–2:42 |
+| F9 | "Book a service again" | Has a context field | No context. Ask "which service?" → multiple choice. Current version is too thin | High | 2:45–2:58 |
+
+**Net pattern across the form:** kill freeform context fields everywhere except the one freestanding question (F8), make pickup logic conditional/progressive (F6), and fix the agreement so it's read-then-sign, not blind-checkbox (F7).
+
+Want this as a copy-paste prompt block formatted for Replit's agent (imperative build instructions instead of a review grid), or as a downloadable file?

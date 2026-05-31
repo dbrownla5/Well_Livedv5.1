@@ -21,6 +21,7 @@ interface ContactPayload {
   pickupRelease?: boolean;
   courierNotes?: string;
   agreementAccepted?: boolean;
+  agreementTimestamp?: string;
   estimatedItems?: string;
 }
 
@@ -108,10 +109,17 @@ router.post("/contact", async (req, res) => {
   }
 
   if (isResalePath(body)) {
+    let agreementLine = `Resale Agreement accepted at intake: ${body.agreementAccepted ? "YES — client signed at booking" : "NOT CONFIRMED"}`;
+    if (body.agreementAccepted && body.agreementTimestamp) {
+      const ts = new Date(body.agreementTimestamp);
+      const datePT = ts.toLocaleDateString("en-US", { timeZone: "America/Los_Angeles", month: "long", day: "numeric", year: "numeric" });
+      const timePT = ts.toLocaleTimeString("en-US", { timeZone: "America/Los_Angeles", hour: "numeric", minute: "2-digit", hour12: true });
+      agreementLine += `\nAgreement accepted: ${datePT} ${timePT} PT`;
+    }
     lines.push(
       "",
       "--- Agreement status ---",
-      `Resale Agreement accepted at intake: ${body.agreementAccepted ? "YES — client signed at booking" : "NOT CONFIRMED"}`,
+      agreementLine,
       "Resale Agreement: https://thewelllivedcitizen.com/WLC-Resale-Agreement.pdf",
     );
   }
