@@ -22,8 +22,8 @@ function FadeUp({ children, delay = 0, className = "" }: { children: React.React
 
 export default function Home() {
   usePageMeta({
-    title: "The Well Lived Citizen — Home Resets, House Calls, Resale · Los Angeles",
-    description: "One person for the move, the resale, the storage unit, and the other thing currently ruining your week. Home resets, house calls, legacy inventory, and curated resale in greater Los Angeles.",
+    title: "The Well Lived Citizen — There's an Easier Way · Los Angeles",
+    description: "One capable person for the things that quietly pile up at home and in life — sorted, set up, and handled, so everything feels easier to manage again. Greater Los Angeles.",
     path: "/",
   });
   return (
@@ -46,7 +46,7 @@ export default function Home() {
                 letterSpacing: "-0.02em",
                 marginBottom: "2rem",
               }}>
-                One person for the move, the resale, the storage unit, and the other thing currently ruining your week.
+                There's an easier way to do that.
               </h1>
               <p style={{
                 fontSize: "clamp(0.95rem, 1.8vw, 1.15rem)",
@@ -54,10 +54,9 @@ export default function Home() {
                 color: "rgba(248,244,227,0.65)",
                 lineHeight: 1.75,
                 marginBottom: "2.5rem",
-                maxWidth: 520,
+                maxWidth: 540,
               }}>
-                Home resets, moves, legacy inventory, house calls, resale.<br />
-                One number, one person, one invoice.
+                One capable person for the things that quietly pile up at home and in life — sorted, set up, and handled, so everything feels easier to manage again.
               </p>
               <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
                 <Link href="/contact" className="btn btn-sage">Schedule a Call</Link>
@@ -97,14 +96,49 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ── IF ANY OF THESE RESONATE ── */}
+      <section style={{ backgroundColor: "var(--parchment)", padding: "6.5rem 0" }}>
+        <div className="container">
+          <FadeUp>
+            <div style={{ maxWidth: 760 }}>
+              <span className="eyebrow eyebrow-sage">If any of these sound familiar</span>
+              <h2 className="display-md" style={{ color: "var(--ink)", maxWidth: 600, marginBottom: "2.5rem", marginTop: "0.5rem" }}>
+                You don't need a name for it. You just want it handled.
+              </h2>
+              <ul style={{ listStyle: "none", padding: 0, margin: "0 0 2.5rem", display: "grid", gap: "1px", backgroundColor: "var(--warm-gray-lt)", border: "1px solid var(--warm-gray-lt)" }}>
+                {[
+                  "The new phone, laptop, or TV that came in the box and never got set up.",
+                  "The room that became a staging area and just… stayed that way.",
+                  "The closet full of good things you keep meaning to sell.",
+                  "The move that technically happened, but never fully landed.",
+                  "The pile of stuff that needs to go somewhere — thoughtfully, not in a panic.",
+                  "The errands, vendors, and little fixes that keep getting pushed to next week.",
+                  "The thing you could do yourself. You just… haven't.",
+                ].map((line, i) => (
+                  <li key={i} style={{ backgroundColor: "var(--parchment)", fontSize: "1rem", fontWeight: 300, color: "var(--ink-soft)", lineHeight: 1.6, padding: "1rem 1.25rem" }}>
+                    {line}
+                  </li>
+                ))}
+              </ul>
+              <p style={{ fontSize: "1.05rem", fontWeight: 400, color: "var(--ink)", lineHeight: 1.85, marginBottom: "0.75rem" }}>
+                If any of these resonate, you're in the right place. Most people don't need four different services and a group text — they need one capable person who sees the whole picture and gets things moving again.
+              </p>
+              <p style={{ fontSize: "1rem", fontWeight: 300, color: "var(--sage-dark)", lineHeight: 1.85 }}>
+                Below are three easy ways to start right now. The deeper, project-level work is in Core Services further down. ↓
+              </p>
+            </div>
+          </FadeUp>
+        </div>
+      </section>
+
       {/* ── START HERE ── */}
       <section style={{ backgroundColor: "var(--parchment-mid)", padding: "6rem 0" }}>
         <div className="container">
           <FadeUp>
-            <span className="eyebrow eyebrow-sage">Where Most People Start</span>
-            <h2 className="display-md" style={{ color: "var(--ink)", maxWidth: 560, marginBottom: "0.75rem" }}>Three ways in.</h2>
+            <span className="eyebrow eyebrow-sage">Three Easy Ways to Start</span>
+            <h2 className="display-md" style={{ color: "var(--ink)", maxWidth: 560, marginBottom: "0.75rem" }}>Start small. Start today.</h2>
             <p style={{ fontSize: "1rem", fontWeight: 300, color: "var(--sage-dark)", maxWidth: 640, lineHeight: 1.85, marginBottom: "3.5rem" }}>
-              Book the one that matches what's actually in front of you.
+              No big project required. Pick the one that fits, and we'll take it from there.
             </p>
           </FadeUp>
 

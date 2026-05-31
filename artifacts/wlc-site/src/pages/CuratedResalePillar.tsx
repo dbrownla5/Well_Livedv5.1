@@ -60,7 +60,7 @@ export default function CuratedResalePillar() {
               It flows from everything else. A Reset surfaces what you're editing out. Legacy work uncovers what has value sitting in storage. A move closeout routes what doesn't make the truck. The resale piece is already built into the other work — it doesn't have to be its own separate project.
             </p>
             <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
-              <Link href="/contact" className="btn btn-sage">Schedule a Resale Pickup</Link>
+              <Link href="/bag-pickup" className="btn btn-sage">Schedule a Resale Pickup</Link>
               <Link href="/pricing" className="btn btn-outline-light">View Commission Structure</Link>
             </div>
           </div>
@@ -212,7 +212,7 @@ export default function CuratedResalePillar() {
                   Proceeds are split after platform fees and shipping are deducted. You agree to the resale terms when you request a pickup; possession transfers when the items reach me. After evaluation you approve the listings, and your 30-day reporting and payout cycle begins from that consent. <a href="/WLC-Resale-Agreement.pdf" target="_blank" rel="noopener noreferrer" style={{ color: "var(--sage-dark)", textDecoration: "underline", textUnderlineOffset: "2px" }}>Read the full Resale Agreement (PDF).</a>
                 </p>
                 <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
-                  <Link href="/contact" className="btn btn-ink">Schedule a Pickup</Link>
+                  <Link href="/bag-pickup" className="btn btn-ink">Schedule a Pickup</Link>
                 </div>
               </div>
               <div>
@@ -268,7 +268,7 @@ export default function CuratedResalePillar() {
                 Reach out and tell me what you have. I'll handle the evaluation, routing, and proceeds.
               </p>
               <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
-                <Link href="/contact" className="btn btn-sage">Schedule a Pickup</Link>
+                <Link href="/bag-pickup" className="btn btn-sage">Schedule a Pickup</Link>
                 <Link href="/fast-bag-fill" className="btn btn-outline-light">Fast Bag Fill</Link>
               </div>
             </div>

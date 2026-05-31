@@ -136,6 +136,71 @@ export const voiceProfile = {
     ],
   },
 
+  operationalRealismPositioning: {
+    rule: "The category IS the product. The breakthrough (locked May 2026): this business is not 'professional organizing' — that category is saturated and visually cliché. It is intelligent operational relief for complicated adult life. The positioning names the gap between the services people already know how to search for. Lead with the unifying category language; put specific service examples second.",
+    categoryDefinition:
+      "The operational side of life — handled thoughtfully. Support for the things that fall between categories, and the moments when life becomes quietly too operationally complicated to untangle alone. Closer to lifestyle operations / personal infrastructure / transition management than to 'organizer.'",
+    theRealProduct:
+      "Not boxes. Not organizing. Not resale. The real product is: containment, translation, momentum — executive functioning with emotional fluency. The invisible emotional labor surrounding logistics.",
+    dignityRule:
+      "Never frame the client as incapable. Only as overloaded, emotionally attached, or caught inside accumulated complexity. People don't buy premium services to feel pathetic — they buy them to feel supported, efficient, intelligent, and relieved. 'Most people aren't lazy. They're overloaded.' This is the line between premium positioning and shame.",
+    restraintRule:
+      "The long emotional paragraphs are beautiful but risk becoming memoir instead of positioning copy. Structure is always: recognition → category gap → solution structure → trust. The recognition creates the emotional pull; the operational competence creates the trust. Land it, then stop.",
+    signatureDevice: {
+      name: "The conversations in between",
+      rule: "The strongest, most-locked structural device. Set up what the ordinary search returns, then pivot to the human reality it doesn't cover — delivered as a short list of overheard, true-to-life lines. Creates instant recognition, feels cinematic, keeps momentum, avoids therapy-language branding, and naturally tees up the service architecture. Keep the lines spare — never wordy.",
+      canonicalSetup:
+        "Google can help you find: a mover, a home organizer, someone to list your designer clothes, a TaskRabbit, an estate sale company, or a guy named Mike with a truck. What it doesn't really cover are the conversations in between.",
+      canonicalLines: [
+        "“No, Mom, buying the iPhone is not the same thing as setting up the iPhone.”",
+        "“I know the storage unit has a system. I’m just not sure anyone else understands it.”",
+        "“Technically we moved months ago. We just never fully landed.”",
+        "“We were supposed to clean out the garage after Dad passed. Then life kept happening.”",
+        "“These things are probably worth selling. Realistically they’ve been sitting here for three years.”",
+        "“I don’t need a full organizer. I need someone to help me deal with… all this.”",
+        "“I can do it myself. I just… haven’t.”",
+      ],
+      landingLine:
+        "That's the space The Well Lived Citizen exists in. For the things that fall between categories. And the moments when life becomes quietly too operationally complicated to untangle alone. Because sometimes people don't need another platform or vendor. They need one capable person who can see the whole picture and help life start moving again.",
+    },
+    toneDescriptors: [
+      "observant", "specific", "emotionally intelligent", "restrained", "useful",
+      "slightly dry", "operationally competent", "never trying too hard",
+    ],
+    keepForeverLines: [
+      "“Technically we moved months ago. We just never fully landed.” — literary infrastructure management, not organizer copy",
+      "“the expensive mistakes we bought during difficult years” — observant, dry, human, slightly devastating",
+      "“One person instead of four strangers.” — the whole value proposition in five words",
+      "“the other thing currently ruining your week” — dry recognition; the signature register",
+      "“Most people aren’t lazy. They’re overloaded.” — the dignity line",
+      "“Seeing what’s broken before it breaks people.” — the company in one sentence",
+    ],
+    antiPatternsForThisVoice: [
+      "Becoming 'a cigarette-smoking poet sorting linen in Echo Park' — over-performing the emotional register every few sentences",
+      "'care-driven experiences' / 'branded oat milk summit' language — sounds like a wellness brand, not a trusted expert",
+      "Splitting into 'safe version' vs 'edge version' vs 'philosophy version' — it is ONE voice that scales from hero to pillars to booking; the voice IS the commercial advantage",
+      "Memoir drift — beautiful paragraphs that forget to position",
+    ],
+    heroFlowRule: {
+      rule: "CRITICAL hero principle (locked May 2026): the homepage hero must NOT name specific services (move, resale, storage unit, downsizing). Naming specifics makes people self-disqualify — a parent reads 'storage unit / move' and thinks 'not us, why would we hire her.' The hero is universal and ease-based: the promise is getting life back to ease, not surviving a crisis. Specifics belong LOWER, in the recognition bullets, where they read as an invitation ('if this is you') rather than a filter.",
+      heroVoice: "Dayna's real register, from her bio: chaos wrangler, professional problem solver, 'there's an easier way to do that,' making it easier to find your good pajamas. Capable, warm, dry. Never crisis, transition, or negativity as the entry emotion.",
+      lockedHero: "There's an easier way to do that.",
+      lockedSubheader: "One capable person for the things that quietly pile up at home and in life — sorted, set up, and handled, so everything feels easier to manage again.",
+      bannedFromHero: ["crisis", "transition", "downsizing", "storage unit", "the move", "ruining your week", "chaos (as the headline promise)"],
+      pageFlow: [
+        "1. Universal ease-based hero (no named services)",
+        "2. Recognition bullets — tight, concrete, 'if any of these sound familiar'; specifics live here as invitation",
+        "3. Bridge line: 'If any of these resonate, you're in the right place' → one capable person, not four services + a group text",
+        "4. Three Easy Ways to Start — low-commitment entry points (Reset, House Call, Fast Bag Fill)",
+        "5. Core Services below — the deeper project-level work",
+      ],
+      recognitionBulletRule: "Bullets are concrete and lightly universal — the unset-up phone/TV, the room that became a staging area, the closet of good things to sell, the move that never landed, the pile that needs to go somewhere thoughtfully, the pushed errands, 'you just haven't.' Each is something the reader recognizes without needing to be in distress. Keep them tight.",
+    },
+
+    launchRestraint:
+      "Launch is already basically done; it just needs restraint. Short, casual, controlled. DO NOT post ten graphics or a Canva quote carousel. One image: one lived-in photo, one room, one pile, one detail, one observant visual. The restraint IS the cool part — don't overperform the launch.",
+  },
+
   voiceTests: [
     "Does it sound like someone talking to a smart friend, or a brand talking at a customer?",
     "Is the business logic serving the human truth, or overriding it?",
@@ -163,6 +228,55 @@ Not sure which one you've got? Send a photo. I'll point you to the right one bef
     valueRecoveryPhilosophy: `Not everything should be donated. Not everything should be sold. And not everything should be decided in a moment of pressure.
 
 This work creates thoughtful pathways for what remains useful, meaningful, insurable, valuable, or simply too important to leave to chance.`,
+
+    operationalRealismHero: {
+      // The locked hero/subheader/bridge (RUN that merged best — May 2026).
+      hero: "The kind of help people look for when the regular version of the service isn't enough.",
+      subheader: "Practical support for complicated moves, emotional downsizing, resale decisions, household transitions, overwhelming spaces, family logistics, and all the operational realities people quietly end up managing at once.",
+      cta: ["Book a Reset", "Schedule a House Call", "Start a Resale Pickup"],
+      bridge: `Most services handle one part of the problem. What they don't always cover is the human reality that shows up before, after, and in between.
+
+The storage unit that started as temporary six years ago. The move that technically happened, except half the house still feels unsettled. The parent who insists they have the technology handled. The resale pile nobody has had time to properly go through. The room everyone quietly avoids because dealing with it means having bigger conversations.
+
+That's the space this business exists in. Not just organization. Not just resale. Not just moving. Practical support for the realities people quietly end up managing all at once.`,
+    },
+
+    canonicalLaunchPosts: {
+      // Locked launch copy. Restraint rule applies: one lived-in image per post.
+      firstPost: `The Well Lived Citizen
+
+The kind of help people look for when the regular version of the service isn't enough.
+
+Practical support for complicated moves, emotional downsizing, resale decisions, household transitions, overwhelming spaces, family logistics, and all the operational realities people quietly end up managing at once.
+
+Most people don't need a life overhaul.
+
+They need someone capable to help with the move, the vendor calls, the resale pile, the room that stopped functioning properly six months ago, and the other thing currently ruining their week.
+
+Sometimes they need someone who can sit in the middle of the chaos with them and actually help them think.
+
+That's the work.
+
+Los Angeles.
+Booking soon.`,
+
+      personalFridayNight: `Moved back to Los Angeles.
+
+Started building something new somewhere in the middle of household logistics, resale, operational chaos, and "someone should really deal with that."
+
+Turns out that's an actual business.
+
+More soon.`,
+
+      personalSaturday: `I've spent most of my career building systems, solving operational problems, noticing invisible friction, and figuring out how to make complicated things function better in the real world.
+
+Apparently the natural conclusion of that was:
+moves, resale, storage units, household resets, vendor coordination, and the other thing currently ruining your week.
+
+It's called The Well Lived Citizen.
+
+One person instead of four strangers.`,
+    },
 
     canonicalPillarDescriptions: {
       theReset: `The Reset is the relief of the room. Not just the closet — the storage unit, the baby shower gifts still in boxes, the space that stopped working and is now just something you walk past. It can be any space. A four-hour working session: sort, edit, place, and route — starting the moment I arrive.`,

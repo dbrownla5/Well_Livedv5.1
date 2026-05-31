@@ -44,7 +44,7 @@ export default function Footer() {
               WELL LIVED<br />CITIZEN
             </div>
             <p style={{ fontSize: "0.8rem", fontWeight: 300, color: "rgba(248,244,227,0.6)", lineHeight: 1.7, marginTop: "1rem", maxWidth: 220 }}>
-              One person for the move, the resale, the storage unit, and the other thing currently ruining your week.
+              One capable person for the things that quietly pile up — handled, so life feels easier to manage again.
             </p>
             <p style={{ fontSize: "0.75rem", color: "rgba(248,244,227,0.45)", marginTop: "0.75rem" }}>
               Los Angeles &amp; surrounding areas.

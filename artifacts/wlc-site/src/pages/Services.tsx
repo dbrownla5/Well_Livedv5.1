@@ -61,7 +61,7 @@ const pillars = [
 
 export default function Services() {
   usePageMeta({
-    title: "Services — One Person for the Move, the Resale, and the Other Thing | The Well Lived Citizen",
+    title: "Services — One Capable Person for What Piles Up | The Well Lived Citizen",
     description: "Four pillars and three Quick Books. Home resets, legacy planning, house calls, and curated resale in greater Los Angeles. One number, one person, one invoice.",
     path: "/services",
   });

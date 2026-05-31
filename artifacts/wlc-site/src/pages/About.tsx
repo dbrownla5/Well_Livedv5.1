@@ -117,6 +117,18 @@ export default function About() {
                   ))}
                 </div>
               </div>
+
+              <div style={{ backgroundColor: "var(--ink)", padding: "2.5rem", boxShadow: "6px 6px 0px var(--sage)" }}>
+                <p style={{ fontSize: "0.65rem", fontWeight: 600, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--sage)", marginBottom: "1.25rem" }}>
+                  The Unofficial Bio
+                </p>
+                <p style={{ fontSize: "0.98rem", fontWeight: 300, color: "rgba(248,244,227,0.82)", lineHeight: 1.75, marginBottom: "1rem" }}>
+                  Chaos wrangler. Professional problem-solver. Unofficial founder of <em>there's an easier way to do that</em> — for your home, your life, and finding your good pajamas faster.
+                </p>
+                <p style={{ fontSize: "0.98rem", fontWeight: 300, color: "rgba(248,244,227,0.62)", lineHeight: 1.75 }}>
+                  The long version is above. The short version: I'm the person you call when something should be simpler than it's quietly become.
+                </p>
+              </div>
               </div>
             </FadeUp>
 

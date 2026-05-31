@@ -52,7 +52,7 @@ export default function FastBagFill() {
               Clothing and accessories only. Home decor, furniture, art, and delicate valuables require a local consultation.
             </p>
             <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap", alignItems: "center" }}>
-              <Link href="/contact?service=fast-bag-fill" className="btn btn-ink">Schedule a Pickup</Link>
+              <Link href="/bag-pickup" className="btn btn-ink">Schedule a Pickup</Link>
               <span style={{ fontSize: "0.8rem", fontWeight: 300, color: "var(--ink)", opacity: 0.6 }}>Free pickup · No payment until something sells</span>
             </div>
           </div>
@@ -351,7 +351,7 @@ export default function FastBagFill() {
                 <h2 className="display-sm" style={{ color: "var(--parchment)", marginBottom: "0.75rem" }}>Ready to schedule a pickup?</h2>
                 <p style={{ fontSize: "0.95rem", fontWeight: 300, color: "rgba(248,244,227,0.65)" }}>Fill a bag. I'll handle the rest.</p>
               </div>
-              <Link href="/contact" className="btn btn-sage">Schedule a Pickup</Link>
+              <Link href="/bag-pickup" className="btn btn-sage">Schedule a Pickup</Link>
             </div>
           </FadeUp>
         </div>

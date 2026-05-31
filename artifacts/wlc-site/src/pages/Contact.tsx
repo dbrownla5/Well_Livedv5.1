@@ -118,6 +118,8 @@ export default function Contact() {
     setTimeout(() => setStep(next), 80);
   }
 
+  function handleChange(field: string, value: string | boolean) {
+    setForm(prev => ({ ...prev, [field]: value }));
   function pickClientType(val: ClientType) {
     setClientType(val);
     advanceTo(1);

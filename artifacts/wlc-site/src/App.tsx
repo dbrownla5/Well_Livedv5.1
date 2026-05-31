@@ -7,6 +7,9 @@ import Services from "@/pages/Services";
 import Pricing from "@/pages/Pricing";
 import FAQ from "@/pages/FAQ";
 import Contact from "@/pages/Contact";
+import BagPickup from "@/pages/BagPickup";
+import Consent from "@/pages/Consent";
+import CaptionStudio from "@/pages/CaptionStudio";
 
 import TheReset from "@/pages/TheReset";
 import HouseCalls from "@/pages/HouseCalls";
@@ -26,6 +29,9 @@ function Router() {
       <Route path="/pricing" component={Pricing} />
       <Route path="/faq" component={FAQ} />
       <Route path="/contact" component={Contact} />
+      <Route path="/bag-pickup" component={BagPickup} />
+      <Route path="/caption-studio" component={CaptionStudio} />
+      <Route path="/consent/:token" component={Consent} />
 
       <Route path="/the-reset" component={TheReset} />
       <Route path="/house-calls" component={HouseCalls} />
