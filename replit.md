@@ -14,6 +14,14 @@ A voice-consistent website and API for a Los Angeles-based resale, estate, and v
 - **`docs/HANDSHAKE.md`** — the resale chain-of-custody workflow + how to turn on bookings.
 - **`artifacts/wlc-site/`** — the website (React + Vite). Internal Caption Studio at `/caption-studio`.
 
+## How to change anything (anti-drift law)
+*For any AI agent working here. Drift = the same fact saying two different things in two places. That is always a bug, never acceptable. Follow this:*
+
+1. **Understand the whole business first.** Read the Project Map and the brand vault before touching copy. You are acting as the owner's marketing developer, not a search-and-replace tool. Localized edits that ignore the rest of the site are the #1 cause of drift.
+2. **Single source of truth.** Business facts — prices, service names, the four pillars, the hero/taglines, contact info, canonical service descriptions — must live in ONE place and be imported everywhere they appear. **Never hardcode a price, name, or tagline directly in a page.** (Target architecture: a single `brand`/content config the pages read from. If it does not exist yet, building it is the highest-priority refactor — and until it does, rule 3 is mandatory.)
+3. **A change is not done until every instance agrees.** Before changing any fact or phrase, search the ENTIRE repo for every place it appears (grep the price, the exact phrase, the service name across `artifacts/`, `docs/`, `attached_assets/`) and update all of them. Report what you changed and where.
+4. **Re-check voice after any copy change.** Confirm the edit complies with the brand vault's banned-language list and voice layers. On-brand-everywhere or it's not done.
+
 ## Run & Operate
 
 - `pnpm --filter @workspace/api-server run dev` — run the API server (port 8080)
