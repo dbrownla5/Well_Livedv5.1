@@ -78,12 +78,14 @@ Gemini handles resale listing text → Manus edits the photo and posts it. You s
 "post this," and the "this" is already written for you. That's the version that
 actually ships and actually saves you the work — not a fantasy single button.
 
-### What I can build next (your call, not tonight)
-A small **Caption Studio** page on your own site: you type a rough idea or paste
-a photo's situation, it returns three on-voice captions + suggested hashtags,
-using the voice profile. It's the realistic first brick of the engine, it uses
-the AI integration you already pay for through Replit, and it's genuinely useful
-on day one. Say the word and it's the next thing I build.
+### Now built: the Caption Studio (`/caption-studio`)
+The realistic first brick of the engine is **done and shipped in this branch**.
+It's a private page on your own site (off the public nav — clients won't see it):
+you type a rough idea or a photo's situation, pick a service and vibe, and it
+returns three on-voice captions (dry / warm / straight) with hashtags, copy-button
+included. It runs on the voice profile + the Replit AI integration you already pay
+for. To switch it on, connect AI Integrations on the Repl (see `docs/GO-LIVE.md`
+Part 3). Until then the page loads with a clear message instead of breaking.
 
 ---
 
@@ -112,8 +114,8 @@ operational task, not a build task — and it's the last real gap.
 
 ## Do This Week (in order, low effort to high)
 
-1. **Publish the site.** It's ready. Provision Postgres + set secrets per
-   `docs/HANDSHAKE.md`. If you want, I'll write you the exact click-by-click.
+1. **Publish the site.** It's ready. Follow `docs/GO-LIVE.md` — the plain-English,
+   in-order checklist (publish → bookings → caption studio).
 2. **Launch quietly.** Post copy is already written in `docs/LAUNCH-KIT.md`.
    **One** real, lived-in photo per post — not a Canva carousel. The restraint
    *is* the brand. Manus schedules it.
