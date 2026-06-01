@@ -100,6 +100,17 @@ Supply bundles (supplies only, NOT labor): $150 / $250 / $500. Monthly retainer 
 
 ---
 
+## 6.1 The intake workflow is CRM legwork — for ALL services, not just resale
+
+The signed-intake → bag-pickup → consent flow ("the handshake") is currently wired around resale pickups, but **conceptually it is the legwork of a full CRM. Treat it that way and build it that way.**
+
+- It must capture and persist **every client and inquiry across ALL services** — Home Organization & Move Support, Legacy Planning & Inventory, House Calls, Curated Resale, retainers/continuity — **not just Fast Bag Pickup.**
+- Every lead becomes a **durable client record** (the database is the system of record): name, contact, the service path they came in on, status, history, notes, and continuity for repeat/retainer clients.
+- The contact form and the intake form should feed **one client-record system**, route by service type, and support ongoing relationships over time — this is the foundation of the CRM.
+- Keep the external-CRM webhook seam intact (`WEBHOOK_URL` + `WEBHOOK_SECRET`, see `docs/HANDSHAKE.md` / `docs/PARTNER-BRIEF.md`) so records can sync to an outside CRM when Dayna chooses — but the database stays the source of truth so no lead is ever lost.
+
+When extending intake, never treat it as resale-only. It is the client relationship backbone for the entire business.
+
 ## 7. What to build next (priority order)
 
 1. **Migrate every page to `brand.ts`.** Replace hardcoded prices/names/hero/pillar text in `Home.tsx`, `Services.tsx`, `Pricing.tsx`, and the pillar/entry pages with imports from `artifacts/wlc-site/src/content/brand.ts`. This is the anti-drift protection — finish it.
