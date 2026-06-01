@@ -46,6 +46,44 @@ This is a required, fully-built feature — not a checkbox stub. The current typ
 
 **Definition of done:** a real client can be sent an agreement, review it, e-sign it, and the signed PDF + audit trail appears on their CRM profile and is downloadable by Dayna; Dayna can also upload her own documents to a profile; agreement status is visible and filterable on the dashboard. Anything less is not done.
 
+## Conditional intake form — full spec (definition of done)
+
+One form. Progressive/branching: each answer reveals only the next relevant question; irrelevant questions never appear.
+
+**Base questions (always asked):** name · email · phone · area/neighborhood · preferred contact method · "What do you need help with?" (the branch key) · free-text "tell me what's going on."
+
+**Branches (by what they need):**
+- **Home Organization & Move** → space/room, scope, timeline, move date (if a move), desired support style (side-by-side / hybrid / key handoff).
+- **House Call** → which tasks, urgency, access/availability.
+- **Legacy Planning & Inventory** → what's involved (storage / inherited / downsizing), scope, timeline.
+- **Fast Bag Pickup / Resale** → number of bags, item types, pickup method, two pickup windows → then the **e-sign resale agreement** → on submit, **opens the chain-of-custody ticket.**
+- **Not sure** → open description → routed to Dayna as a lead to triage.
+
+**Rules:** every submit (every branch) **creates or updates a client profile** and records the path + timestamp. Only the resale branch opens a ticket and triggers the resale agreement. The form must be **responsive (desktop + mobile)**, land at the top on open, validate required fields, show a clear success state, and never lose a lead (DB, with email fallback).
+
+**Done =** a person can complete the form for any service seeing only relevant questions; submission creates/updates a profile; the resale branch opens a ticket + agreement; works on phone and desktop.
+
+## Client Profile — the central record (build this; everything attaches here)
+
+The client profile is the spine of the CRM. Every intake creates one (or updates the existing one — **dedupe by email, then phone**). Everything else links to it.
+
+**Profile fields / sections:**
+- **Identity:** name, email, phone, area/neighborhood, preferred contact method.
+- **Acquisition:** first-contact date, source/path they came in on, referral source.
+- **Status:** lead → booked → active client → past client (and "reached out, didn't book"). Editable.
+- **Tags:** client type (e.g. busy professional, downsizer, inherited home, creative) + custom tags / VIP.
+- **Service history:** every inquiry and booking with dates; **booking frequency**; which services used; lifetime value (service revenue + resale payouts).
+- **Notes:** free-form, timestamped clienteling notes Dayna can add anytime.
+- **Follow-ups / tasks:** next follow-up date + reminders (feeds the calendar).
+- **Documents:** signed e-sign agreements + any files Dayna uploads/attaches.
+- **Resale tickets:** linked chain-of-custody handshakes and their current step/status.
+- **Calendar:** upcoming appointments, pickups, sale milestones.
+- **Communication log:** emails sent (confirmations, reports, payouts).
+
+**Profile page (in the internal dashboard):** open any client and see all of the above on one screen; edit notes and status; add follow-ups; attach documents; generate an agreement; see linked tickets and upcoming calendar items. From the client **list**, sort/filter by reached-out date, status (booked vs. not), tag, and booking frequency.
+
+**Done =** every intake creates/updates a deduped profile; Dayna can open any client and see contact + source/date + status + full service history + notes + documents + linked resale tickets + upcoming calendar items, and can edit notes, change status, add follow-ups, and attach files. The client list sorts/filters by who reached out and when, booked vs. not, and frequency.
+
 ## What already exists (build ON these, don't rebuild)
 - **Handshake** = the resale chain-of-custody workflow ticket (intake gate → custody → inventory → evaluation → report → consent → review → payout). This is the "Fast Bag Pickup ticket."
 - **Ops dashboard** at `/api/handshake/dashboard` — extend into the full CRM.
