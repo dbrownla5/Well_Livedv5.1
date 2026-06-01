@@ -1,5 +1,10 @@
-# CRM & Intake — Canonical Spec
+# CRM, Client Portal & Dashboard — Canonical Spec
 *Locked 2026-05-31 from Dayna. This is the backbone of the business. Build to this. Does NOT need to be built overnight — see phases at the end.*
+
+**This business runs on web-based client tools.** There is no physical product to sell — the product is **services that are paid, booked, and scheduled online**, plus, for resale clients, **their own inventory** moving through a chain of custody. So there are TWO web surfaces sharing one database:
+- **Client Portal** (client-facing) — clients book, pay, schedule, see the live status of their services and their resale inventory, message Dayna, and upload photos.
+- **Business Dashboard** (operator-facing, Dayna only, behind auth) — the CRM cockpit: clients, profiles, tickets, calendar, agreements, messages, money.
+Both must be **fully built.** The client sees only their own data; the operator sees everything.
 
 ## The core model: ONE intake form, conditional branching
 
@@ -84,17 +89,55 @@ The client profile is the spine of the CRM. Every intake creates one (or updates
 
 **Done =** every intake creates/updates a deduped profile; Dayna can open any client and see contact + source/date + status + full service history + notes + documents + linked resale tickets + upcoming calendar items, and can edit notes, change status, add follow-ups, and attach files. The client list sorts/filters by who reached out and when, booked vs. not, and frequency.
 
+## Business Dashboard — operator side (Dayna only, behind auth) — build fully
+
+The CRM cockpit. Extends the existing `/api/handshake/dashboard`. Dayna runs the whole business from here.
+
+- **Home / at-a-glance:** today's schedule, new leads since last login, open resale tickets grouped by step, follow-ups due, unread client messages, recent activity, and a money snapshot (booked/paid this week, pending payouts).
+- **Clients list:** search + sort + filter by reached-out date, status (booked vs. not), tag, service, and booking frequency. Click → the client profile page (spec'd above).
+- **Tickets board:** the chain-of-custody handshakes by step (intake → custody → inventory → evaluation → report → consent → review → payout); advance steps, edit inventory, send reports, record payouts.
+- **Calendar:** all bookings, pickups, follow-ups, and sale milestones in one view.
+- **Agreements:** every agreement with status (Draft/Sent/Viewed/Signed/Declined); open, download, re-send.
+- **Messages:** all client portal threads; read and reply.
+- **Money:** services paid/booked, invoices/receipts, resale payouts due and paid.
+- **Done =** Dayna can run the day from one screen — see who needs what, open any client, advance any ticket, reply to any message, and see what's been paid and what's owed — all behind admin auth.
+
+## Client Portal — client-facing web tools (each client sees only their own data) — build fully
+
+Clients log in and self-serve. This is where the business's "no product, all service + their inventory" model lives.
+
+- **Account & login:** client accounts with passwordless magic-link (preferred) or email + password. A profile is auto-linked to their CRM record (deduped by email).
+- **Their dashboard:** upcoming + past **bookings** and the **live status of each service**; for resale clients, **their own inventory** with live chain-of-custody status per item (received → evaluated → listed → sold → paid out), including sale price and payout.
+- **Book & schedule:** choose a service and a time; reschedule/cancel within policy. Writes to the shared calendar + creates/updates the booking on their profile.
+- **Pay:** pay for services online (Stripe — checkout + invoices/receipts); paid status reflected on the booking and the operator Money view. Deposits/flat fees/hourly as the service requires.
+- **Inventory visibility:** resale clients see each item's status, photos, listing, sale price, and payout — the client-facing view of the chain-of-custody ticket.
+- **Messaging:** a thread with Dayna **inside the portal** (with email notification on new messages).
+- **Photo upload:** clients upload pictures (items for resale, spaces for a quote, etc.) → stored in object storage, attached to their profile/booking/inventory and visible to Dayna in the dashboard.
+- **Documents:** view and e-sign agreements; download signed copies.
+- **Done =** a client can log in, book and pay for a service, see the live status of their service and their resale items, message Dayna, upload photos, and sign/download their agreement — seeing only their own data.
+
+## Architecture notes (for whoever builds it)
+- **One database, two surfaces.** Shared client/profile/ticket/booking/message tables. Operator sees all; client access is **row-scoped to their own records** (enforce server-side).
+- **Auth:** client magic-link/email auth for the portal; separate admin auth for the dashboard. Never expose the dashboard to clients.
+- **Payments:** Stripe (checkout, invoices, receipts, refunds); record every transaction on the client profile + Money view. Never hardcode keys — use secrets.
+- **Files:** object storage (the bucket already configured in `.replit`) for photo uploads + signed agreements; reference from the relevant record.
+- **Messaging:** a messages/threads table; in-portal + email notification; replies from the dashboard.
+- **Notifications:** email (Resend) for booking confirmations, schedule changes, new messages, reports, and payouts.
+- Build on the existing handshake engine + dashboard; do not rebuild the chain-of-custody logic.
+
 ## What already exists (build ON these, don't rebuild)
 - **Handshake** = the resale chain-of-custody workflow ticket (intake gate → custody → inventory → evaluation → report → consent → review → payout). This is the "Fast Bag Pickup ticket."
 - **Ops dashboard** at `/api/handshake/dashboard` — extend into the full CRM.
 - **Contact + handshake intake** both persist to the database; intake email-falls-back if the DB is off (never lose a lead).
 - **Client records:** `contact_submissions` + `handshakes` tables exist; unify them into one client model.
 
-## Suggested phases (not overnight)
-1. **One conditional intake form** + every submission creates/updates a **client record** in the CRM (all paths). Fast Bag path also opens the existing handshake ticket.
-2. **CRM dashboard:** client list with sort/filter (reached-out date, booked vs. not), per-client profile with notes + booking history/frequency.
-3. **Calendar** tie-in (bookings, follow-ups, pickups, sale milestones).
-4. **E-sign agreements** generated on the resale path (and when a visit converts to taking items), stored/attached to the client profile, plus manual document upload.
+## Suggested phases (not overnight, but every phase built fully)
+1. **Unified conditional intake form** → every submission creates/updates a deduped **client profile** (all paths); resale path opens the existing handshake ticket.
+2. **Business dashboard v1:** clients list (search/sort/filter) + client profile page (notes, status, history) + tickets board + calendar + at-a-glance home.
+3. **Client portal v1:** client login (magic link), view their bookings + service status + resale inventory status, message Dayna, upload photos.
+4. **Payments + scheduling:** Stripe pay/book/schedule online; Money view in the dashboard.
+5. **E-sign agreements (full build per spec)** + document uploads on profiles.
+6. **Polish:** notifications/automation, reporting, calendar deepening.
 
 ## Rules for whoever builds this
 - One form, conditional branching — never separate forms per service.
