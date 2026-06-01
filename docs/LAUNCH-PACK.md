@@ -1,11 +1,17 @@
 # Launch Pack — for a launch in a few hours
 *Everything you need to make + post launch content today. Built from BRAND-VOICE.md + CONTENT-SYSTEM.md.*
 
-## Which tool: use GEMINI (Google AI Studio) for both photo touch-ups and captions
-- **Photo editing:** Gemini's image model is strong, you already have a `Gemini` key, and it's free-tier friendly. **Keep edits realistic** — crop, straighten, light color/exposure cleanup. Per your brand rule, **do NOT make photos look AI-plastic.** One real, lived-in photo beats a glossy fake one.
-- **Captions:** Gemini, using the brief below.
-- **Manus:** wonky right now — don't rely on it for the launch. Use it later for assistant/account tasks if at all.
-- **Restraint rule (yours):** ONE real image per post. No ten-graphic carousel, no "Canva quote carousel that attended therapy in Silver Lake."
+## Photo editing + brand consistency: use a DESIGN tool, NOT a raw AI model
+Correction (important): Google AI Studio / Vertex are developer playgrounds — no brand kit, no layout, no scheduling — and feeding your **personal photos into raw generative image models risks altering your face**, which breaks your "no AI-plastic" rule. Use a design platform with realistic enhancement instead:
+
+- **Best (if you'll spend ~$15/mo): Canva Pro.** Set your Brand Kit (fonts, hex colors, logo) once → one-click apply across templates. Realistic photo tools (Auto Adjust, Enhance, Background Remover) clean up *real* photos without hallucinating faces. **Social scheduling is built in.** (Free tier does a lot; Brand Kit + scheduling are Pro.)
+- **Alternative: Adobe Express.** Similar one-click brand application + realistic enhancement. Stay on the enhancement sliders; **avoid "Generative Fill" on faces.** Has a free tier.
+- **Free / all-Google path:** edit real photos in **Google Photos** (Magic Editor, Photo Unblur, HDR — built to clean up real photography, not repaint it), then write the caption with the brief below.
+
+**Rule either way:** enhancement only — light, lift, sharpen, crop, background. **Never generative edits on your face.** One real, lived-in image per post. No ten-graphic carousel.
+
+## Captions: brand brief — paste into whichever AI you use
+This is the voice, not the tool. It works in **Gemini** (free), **Canva's Magic Write**, or **Claude** — give it the enhanced photo's context and let it write.
 
 ---
 
@@ -55,7 +61,10 @@ Then say, e.g.: *"Caption for a photo of a dining table that's been a staging ar
 ---
 
 ## Keeping social in one place + scheduling posts
-Yes, that's a thing. For a startup launching on Instagram:
-- **Start free: Meta Business Suite** (business.facebook.com) — native to Instagram + Facebook, free, lets you schedule posts and see both accounts in one place. Best zero-cost option for your two IG business accounts.
-- **If you want a nicer planner / more platforms: Buffer** (free plan) or **Later** (free, visual IG planner). Both keep everything in one calendar and auto-post on schedule.
-- Recommendation today: **Meta Business Suite** (free, native, reliable) to schedule the launch posts. Add Buffer/Later later only if you expand beyond IG/FB.
+- **If you use Canva Pro:** scheduling is built in — design *and* schedule in one place. Simplest if you're already there.
+- **Free, native:** **Meta Business Suite** (business.facebook.com) — schedule Instagram + Facebook and see both accounts in one place. Best zero-cost option for your two IG business accounts.
+- **Free, nicer planner / more platforms:** Buffer or Later (free tiers).
+- **Today:** Canva Pro's built-in scheduler if you go that route; otherwise Meta Business Suite (free).
+
+## Platforms to prioritize for the rollout (your brand vault answers this)
+Lead with **Instagram** — your two business handles **@thewelllivedcitizen** (the business) and **@thewelllivedcloset** (the closet/resale). Add **Facebook** via Meta Business Suite if you want it scheduled alongside. Keep personal handles out of the business rollout (vault rule). So when an AI asks "which platforms?" → *Instagram first (two business handles), Facebook optional.*
