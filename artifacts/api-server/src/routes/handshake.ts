@@ -96,8 +96,43 @@ router.post("/handshake/intake", async (req, res) => {
     logger.info({ id: hs.id, open: gate.open }, "Handshake intake");
     res.json({ ok: true, id: hs.id, token: hs.token, opened: gate.open, blocked: gate.blocked, reason: gate.reason });
   } catch (err) {
-    logger.error({ err }, "Handshake intake failed");
-    res.status(500).json({ ok: false, error: "Could not save submission." });
+    // Database not provisioned yet (no DATABASE_URL) or DB write failed.
+    // Never lose a lead: email the intake to the owner and still confirm success
+    // to the client. Full chain-of-custody tracking resumes once the DB is on.
+    logger.error({ err }, "Handshake intake DB write failed — falling back to email capture");
+    try {
+      const to = process.env.CONTACT_TO || "dayna@thewelllivedcitizen.com";
+      const lines = [
+        "New booking intake (captured by email — database not yet provisioned)",
+        "",
+        `Name: ${b.name}`,
+        `Email: ${b.email}`,
+        b.phone ? `Phone: ${b.phone}` : "",
+        b.neighborhood ? `Neighborhood: ${b.neighborhood}` : "",
+        b.summary ? `Service / summary: ${b.summary}` : "",
+        b.situation ? `Details: ${b.situation}` : "",
+        b.bagsCount ? `Bags: ${b.bagsCount}` : "",
+        b.urgency ? `Urgency: ${b.urgency}` : "",
+        b.pickupTime1 ? `Pickup window 1: ${b.pickupTime1}` : "",
+        b.pickupTime2 ? `Pickup window 2: ${b.pickupTime2}` : "",
+        b.pickupMethod ? `Pickup method: ${b.pickupMethod}` : "",
+        "",
+        `Agreement accepted: ${gate.open ? "YES" : "NO"}${gate.open && b.agreementTimestamp ? ` (${b.agreementTimestamp})` : ""}`,
+        b.signatureName ? `Signed: ${b.signatureName}` : "",
+      ].filter(Boolean);
+      const emailRes = await sendEmail({
+        to,
+        subject: `[WLC] New intake — ${b.name}${b.summary ? ` (${b.summary})` : ""}`,
+        text: lines.join("\n"),
+        replyTo: b.email,
+      });
+      void dispatchWebhook({ kind: "handshake_intake", opened: gate.open, captured: "email", ...b });
+      logger.info({ name: b.name, emailed: emailRes.delivered }, "Handshake intake captured via email fallback");
+      res.json({ ok: true, id: null, token: null, opened: gate.open, blocked: gate.blocked, reason: gate.reason, captured: "email", emailed: emailRes.delivered });
+    } catch (err2) {
+      logger.error({ err: err2 }, "Handshake intake email fallback also failed");
+      res.status(500).json({ ok: false, error: "Could not save submission." });
+    }
   }
 });
 
