@@ -24,7 +24,6 @@ type ServiceChoice =
   | "fast-bag" | "reset" | "house-call" | "closeout"
   | "bigger" | "not-sure" | "for-parent" | "";
 type ReturningNeed = "book-again" | "bag-pickup" | "just-talk" | "";
-type ReturningService = "reset" | "house-call" | "legacy" | "resale" | "other" | "";
 
 const inputStyle: React.CSSProperties = {
   width: "100%",
@@ -82,89 +81,36 @@ function ChoiceButton({
   );
 }
 
-function isBagPath(serviceChoice: ServiceChoice, returningNeed: ReturningNeed) {
-  return serviceChoice === "fast-bag" || returningNeed === "bag-pickup";
-}
-
 export default function Contact() {
   usePageMeta({
     title: "Contact Dayna Brown — The Well Lived Citizen, Los Angeles",
     description: "Schedule a call, send a message, or text directly. (323) 433-1350 · dayna@thewelllivedcitizen.com. Based in Los Angeles.",
     path: "/contact",
   });
-
   const [step, setStep] = useState<0 | 1 | 2 | 3>(0);
   const [clientType, setClientType] = useState<ClientType>("");
   const [serviceChoice, setServiceChoice] = useState<ServiceChoice>("");
   const [returningNeed, setReturningNeed] = useState<ReturningNeed>("");
-  const [returningService, setReturningService] = useState<ReturningService>("");
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
-  const [agreementRead, setAgreementRead] = useState(false);
-  const [form, setForm] = useState({
-    name: "", email: "", phone: "", neighborhood: "",
-    situation: "", bagsCount: "", urgency: "",
-    pickupTime1: "", pickupTime2: "", pickupMethod: "",
-    pickupRelease: false, courierNotes: "",
-    agreementAccepted: false, estimatedItems: "",
-  });
+  const [form, setForm] = useState({ name: "", email: "", phone: "", neighborhood: "", situation: "", bagsCount: "", urgency: "", pickupTime1: "", pickupTime2: "", pickupMethod: "", pickupRelease: false, courierNotes: "", agreementAccepted: false, estimatedItems: "" });
 
-  function handleChange(field: string, value: string | boolean) {
-    setForm(prev => ({ ...prev, [field]: value }));
-  }
-
-  function advanceTo(next: 0 | 1 | 2 | 3) {
+  function pick<T>(setter: (v: T) => void, val: T, next: 0 | 1 | 2 | 3) {
+    setter(val);
     setTimeout(() => setStep(next), 80);
   }
 
   function handleChange(field: string, value: string | boolean) {
     setForm(prev => ({ ...prev, [field]: value }));
-  function pickClientType(val: ClientType) {
-    setClientType(val);
-    advanceTo(1);
-  }
-
-  function pickServiceChoice(val: ServiceChoice) {
-    setServiceChoice(val);
-    if (val === "fast-bag") {
-      advanceTo(3);
-    } else {
-      advanceTo(2);
-    }
-  }
-
-  function pickReturningNeed(val: ReturningNeed) {
-    setReturningNeed(val);
-    if (val === "bag-pickup") {
-      advanceTo(3);
-    } else {
-      advanceTo(2);
-    }
-  }
-
-  function pickReturningService(val: ReturningService) {
-    setReturningService(val);
-    advanceTo(3);
   }
 
   function buildSummary() {
     if (clientType === "returning") {
-      if (returningNeed === "book-again") {
-        const labels: Record<ReturningService, string> = {
-          reset: "The 4-Hour Reset — returning",
-          "house-call": "House Call — returning",
-          legacy: "Legacy Planning — returning",
-          resale: "Curated Resale — returning",
-          other: "Returning client — other service",
-          "": "Returning client",
-        };
-        return labels[returningService] || "Returning client — book again";
-      }
       const needs: Record<ReturningNeed, string> = {
         "book-again": "Book a service again",
-        "bag-pickup": "Schedule a bag pickup — returning client",
-        "just-talk": "Returning client — wants a call",
+        "bag-pickup": "Schedule a bag pickup",
+        "just-talk": "Just want to talk",
         "": "",
       };
       return needs[returningNeed] || "Returning client";
@@ -183,50 +129,18 @@ export default function Contact() {
   }
 
   function getPlaceholder() {
+    if (clientType === "returning") return "What are you working with? Any context is helpful.";
     if (serviceChoice === "reset") return "What space are you thinking? Closet, bedroom, post-move? Any backstory?";
+    if (serviceChoice === "fast-bag") return "What kind of clothing and accessories are you looking to move on? A rough description is fine.";
     if (serviceChoice === "house-call") return "What's been on the list? What needs attention?";
     if (serviceChoice === "closeout") return "What's the situation? Moving, transitioning a parent's home, downsizing?";
     if (serviceChoice === "bigger") return "Tell me what's going on. The more context the better.";
     if (serviceChoice === "for-parent") return "Where is the parent located? What's the situation?";
-    if (returningNeed === "just-talk") return "What's on your mind? Any context is helpful.";
     return "What's going on? What do you need help with?";
   }
 
-  function getSidebarCopy(): { heading: string; body: string } {
-    if (step === 0) return {
-      heading: "Let's start here.",
-      body: "This helps me route your request before we talk.",
-    };
-    if (step === 1 && clientType === "returning") return {
-      heading: "Good to hear from you.",
-      body: "What are you looking to do?",
-    };
-    if (step === 1 && clientType === "new") return {
-      heading: "What brings you in?",
-      body: "Pick the one that sounds closest. Easy to adjust on the call.",
-    };
-    if (step === 2 && returningNeed === "book-again") return {
-      heading: "Which service?",
-      body: "Pick the one you're coming back for.",
-    };
-    if (step === 2) return {
-      heading: "A little background.",
-      body: "The more you share here, the more useful our first conversation will be.",
-    };
-    return {
-      heading: "Last step.",
-      body: "Where should I reach you?",
-    };
-  }
-
-  const bagPath = isBagPath(serviceChoice, returningNeed);
-
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (bagPath && (!agreementRead || !form.agreementAccepted)) {
-      setSubmitError("You need to read and accept the Resale Agreement before submitting.");
-      return;
-    }
     setSubmitting(true);
     setSubmitError("");
     const summary = buildSummary();
@@ -242,7 +156,6 @@ export default function Contact() {
           clientType,
           summary: summary || "General",
           situation: form.situation,
-          returningService,
           bagsCount: form.bagsCount,
           urgency: form.urgency,
           pickupTime1: form.pickupTime1,
@@ -251,7 +164,6 @@ export default function Contact() {
           pickupRelease: form.pickupRelease,
           courierNotes: form.courierNotes,
           agreementAccepted: form.agreementAccepted,
-          agreementTimestamp: form.agreementAccepted ? new Date().toISOString() : undefined,
           estimatedItems: form.estimatedItems,
         }),
       });
@@ -268,7 +180,7 @@ export default function Contact() {
     }
   }
 
-  const sidebar = getSidebarCopy();
+  const progressPct = step === 0 ? 10 : step === 1 ? 40 : step === 2 ? 75 : 100;
 
   return (
     <div style={{ backgroundColor: "var(--parchment)", minHeight: "100vh" }}>
@@ -277,23 +189,44 @@ export default function Contact() {
       {/* ── HERO ── */}
       <section style={{ backgroundColor: "var(--ink)", paddingTop: "10rem", paddingBottom: "5rem" }}>
         <div className="container">
-          <div style={{ maxWidth: 640 }}>
-            <span className="eyebrow" style={{ color: "rgba(248,244,227,0.45)" }}>Get in Touch</span>
-            <h1 className="display-lg" style={{ color: "var(--parchment)", marginBottom: "1.5rem" }}>
-              Let's figure out<br />what you need.
-            </h1>
-            <p style={{ fontSize: "1rem", fontWeight: 300, color: "rgba(248,244,227,0.7)", lineHeight: 1.75 }}>
-              A few quick questions, then I'll be in touch within 24 hours.
-            </p>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "5rem", alignItems: "center" }}>
+            <div>
+              <span className="eyebrow" style={{ color: "rgba(248,244,227,0.45)" }}>Get in Touch</span>
+              <h1 className="display-lg" style={{ color: "var(--parchment)", marginBottom: "1.5rem" }}>
+                Let's figure out<br />what you need.
+              </h1>
+              <p style={{ fontSize: "1rem", fontWeight: 300, color: "rgba(248,244,227,0.7)", lineHeight: 1.75 }}>
+                A few quick questions — then I'll be in touch within 24 hours to schedule a call. No pressure, no commitment.
+              </p>
+            </div>
+            <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+              <div style={{ backgroundColor: "rgba(248,244,227,0.06)", border: "1px solid rgba(248,244,227,0.12)", padding: "1.75rem" }}>
+                <h3 style={{ fontSize: "0.85rem", fontWeight: 700, color: "var(--parchment)", marginBottom: "1rem" }}>Prefer to reach out directly?</h3>
+                <div style={{ display: "flex", flexDirection: "column", gap: "0.6rem" }}>
+                  <a href="tel:3234331350" style={{ fontSize: "0.9rem", fontWeight: 400, color: "rgba(248,244,227,0.75)", textDecoration: "none", display: "flex", alignItems: "center", gap: "0.75rem" }}>
+                    <span style={{ color: "var(--sage)", fontSize: "0.65rem", fontWeight: 700 }}>CALL</span>(323) 433-1350
+                  </a>
+                  <a href="mailto:dayna@thewelllivedcitizen.com" style={{ fontSize: "0.9rem", fontWeight: 400, color: "rgba(248,244,227,0.75)", textDecoration: "none", display: "flex", alignItems: "center", gap: "0.75rem" }}>
+                    <span style={{ color: "var(--sage)", fontSize: "0.65rem", fontWeight: 700 }}>EMAIL</span>dayna@thewelllivedcitizen.com
+                  </a>
+                </div>
+              </div>
+              <div style={{ backgroundColor: "var(--sage)", padding: "1.25rem 1.75rem" }}>
+                <p style={{ fontSize: "0.85rem", fontWeight: 400, color: "var(--ink)", lineHeight: 1.65 }}>
+                  I respond to every inquiry personally. You won't get an auto-reply and then silence.
+                </p>
+                <p style={{ fontSize: "0.7rem", fontWeight: 600, letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(56,48,46,0.55)", marginTop: "0.6rem" }}>— Dayna</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ── FORM / SUCCESS ── */}
+      {/* ── FORM ── */}
       {submitted ? (
         <section style={{ backgroundColor: "var(--parchment)", padding: "8rem 0" }}>
           <div className="container">
-            {bagPath ? (
+            {(serviceChoice === "fast-bag" || returningNeed === "bag-pickup") ? (
               <div style={{ maxWidth: 580 }}>
                 <span className="eyebrow eyebrow-sage">You're on the calendar.</span>
                 <h2 className="display-md" style={{ color: "var(--ink)", marginBottom: "1.5rem" }}>Agreement signed. Pickup request received.</h2>
@@ -301,6 +234,7 @@ export default function Contact() {
                   I'll reach out within 24 hours to confirm the pickup window and lock in the logistics.
                 </p>
 
+                {/* Pickup details echo */}
                 <div style={{ backgroundColor: "var(--parchment-mid)", padding: "1.5rem", marginBottom: "1.5rem", borderLeft: "3px solid var(--sage)" }}>
                   <p style={{ fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase", color: "var(--sage-dark)", marginBottom: "1rem" }}>Your Pickup Details</p>
                   <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
@@ -322,16 +256,6 @@ export default function Contact() {
                         <span style={{ fontWeight: 300, color: "var(--ink-soft)" }}>{form.urgency}</span>
                       </div>
                     )}
-                    {form.pickupMethod && (
-                      <div style={{ display: "flex", gap: "1rem", fontSize: "0.88rem" }}>
-                        <span style={{ fontWeight: 600, color: "var(--ink)", minWidth: 130 }}>Method</span>
-                        <span style={{ fontWeight: 300, color: "var(--ink-soft)" }}>
-                          {form.pickupMethod === "in-person" && "Direct handoff"}
-                          {form.pickupMethod === "ups" && "UPS label"}
-                          {form.pickupMethod === "courier" && "Uber courier"}
-                        </span>
-                      </div>
-                    )}
                     {form.pickupTime1 && (
                       <div style={{ display: "flex", gap: "1rem", fontSize: "0.88rem" }}>
                         <span style={{ fontWeight: 600, color: "var(--ink)", minWidth: 130 }}>Window 1</span>
@@ -342,6 +266,16 @@ export default function Contact() {
                       <div style={{ display: "flex", gap: "1rem", fontSize: "0.88rem" }}>
                         <span style={{ fontWeight: 600, color: "var(--ink)", minWidth: 130 }}>Window 2</span>
                         <span style={{ fontWeight: 300, color: "var(--ink-soft)" }}>{form.pickupTime2}</span>
+                      </div>
+                    )}
+                    {form.pickupMethod && (
+                      <div style={{ display: "flex", gap: "1rem", fontSize: "0.88rem" }}>
+                        <span style={{ fontWeight: 600, color: "var(--ink)", minWidth: 130 }}>Method</span>
+                        <span style={{ fontWeight: 300, color: "var(--ink-soft)" }}>
+                          {form.pickupMethod === "in-person" && "In-person pickup"}
+                          {form.pickupMethod === "ups" && "UPS label"}
+                          {form.pickupMethod === "courier" && "Uber courier"}
+                        </span>
                       </div>
                     )}
                   </div>
@@ -357,14 +291,15 @@ export default function Contact() {
                   )}
                 </div>
 
+                {/* What comes next */}
                 <div style={{ border: "1.5px solid var(--warm-gray-lt)", padding: "1.5rem" }}>
                   <p style={{ fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase", color: "var(--sage-dark)", marginBottom: "0.75rem" }}>What happens next</p>
                   <div style={{ display: "flex", flexDirection: "column", gap: "0.6rem" }}>
                     {[
                       "I'll confirm your pickup window within 24 hours.",
-                      "After I receive the bags, I'll verify item count within 48 hours.",
-                      "7–10 business days for evaluation. You'll get a full intake report — every item, platform, starting price, estimated sale, and turn.",
-                      "24 hours to approve listings or pull items. No response means listings proceed. Your 30-day cycle begins at consent.",
+                      "After I receive the bags, I'll verify item count and send you the full inventory.",
+                      "Once evaluated, you'll get a proposed listing — every item, platform, and starting price.",
+                      "You'll have 24 hours to approve or pull any items. Once you approve, your 30-day cycle begins.",
                     ].map((line, i) => (
                       <div key={i} style={{ display: "flex", gap: "0.75rem", fontSize: "0.85rem", fontWeight: 300, color: "var(--ink-soft)", lineHeight: 1.6 }}>
                         <span style={{ color: "var(--sage)", fontWeight: 700, flexShrink: 0 }}>0{i + 1}</span>{line}
@@ -378,7 +313,7 @@ export default function Contact() {
                 <span className="eyebrow eyebrow-sage">Message Sent</span>
                 <h2 className="display-md" style={{ color: "var(--ink)", marginBottom: "1.5rem" }}>Thank you — I'll be in touch.</h2>
                 <p style={{ fontSize: "1rem", fontWeight: 300, color: "var(--ink-soft)", lineHeight: 1.8, marginBottom: "1rem" }}>
-                  Got it. I'll reach out within 24 hours.
+                  Got it — I'll be in touch within 24 hours.
                 </p>
               </div>
             )}
@@ -392,23 +327,37 @@ export default function Contact() {
 
                 {/* ── SIDEBAR ── */}
                 <div style={{ position: "sticky", top: "7rem" }}>
+                  <div style={{ marginBottom: "2rem" }}>
+                    <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "0.5rem" }}>
+                      <span style={{ fontSize: "0.65rem", fontWeight: 600, letterSpacing: "0.15em", textTransform: "uppercase", color: "var(--sage-dark)" }}>
+                        Progress
+                      </span>
+                      <span style={{ fontSize: "0.65rem", fontWeight: 600, color: "var(--sage-dark)" }}>{progressPct}%</span>
+                    </div>
+                    <div style={{ height: 3, backgroundColor: "var(--warm-gray-lt)", width: "100%" }}>
+                      <div style={{ height: "100%", width: `${progressPct}%`, backgroundColor: "var(--sage)", transition: "width 0.4s ease" }} />
+                    </div>
+                  </div>
+
                   <h2 className="display-sm" style={{ color: "var(--ink)", marginBottom: "1rem", lineHeight: 1.2 }}>
-                    {sidebar.heading}
+                    {step === 0 && "First question."}
+                    {step === 1 && clientType === "returning" && "Good to hear from you."}
+                    {step === 1 && clientType === "new" && "What brings you in?"}
+                    {step === 2 && "A little context."}
+                    {step === 3 && "Almost done."}
                   </h2>
                   <p style={{ fontSize: "0.9rem", fontWeight: 300, color: "var(--sage-dark)", lineHeight: 1.75 }}>
-                    {sidebar.body}
+                    {step === 0 && "This helps me know how to best prepare for the call."}
+                    {step === 1 && clientType === "returning" && "What do you need this time around?"}
+                    {step === 1 && clientType === "new" && "Pick the one that sounds most like your situation. You can always change it on the call."}
+                    {step === 2 && "The more context you give me, the more useful the first conversation will be. Nothing here is binding."}
+                    {step === 3 && "Where should I reach you?"}
                   </p>
 
                   {step > 0 && (
                     <button
                       type="button"
-                      onClick={() => {
-                        if (step === 3 && bagPath) {
-                          setStep(1);
-                        } else {
-                          setStep(prev => (prev - 1) as 0 | 1 | 2 | 3);
-                        }
-                      }}
+                      onClick={() => setStep(prev => (prev - 1) as 0 | 1 | 2 | 3)}
                       style={{ marginTop: "2rem", fontSize: "0.78rem", fontWeight: 500, color: "var(--sage-dark)", background: "none", border: "none", cursor: "pointer", padding: 0, textDecoration: "underline" }}
                     >
                       ← Back
@@ -419,102 +368,90 @@ export default function Contact() {
                 {/* ── FORM STEPS ── */}
                 <div>
 
-                  {/* STEP 0: New or Returning */}
+                  {/* STEP 0: Returning or New */}
                   {step === 0 && (
-                    <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem", maxWidth: 420 }}>
-                      <ChoiceButton selected={clientType === "returning"} onClick={() => pickClientType("returning")}>
-                        Yes — I'm a returning client
-                      </ChoiceButton>
-                      <ChoiceButton selected={clientType === "new"} onClick={() => pickClientType("new")}>
-                        No — reaching out for the first time
-                      </ChoiceButton>
+                    <div>
+                      <p style={{ fontSize: "1.1rem", fontWeight: 600, color: "var(--ink)", marginBottom: "1.5rem" }}>
+                        Have we worked together before?
+                      </p>
+                      <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem", maxWidth: 420 }}>
+                        <ChoiceButton selected={clientType === "returning"} onClick={() => pick(setClientType, "returning", 1)}>
+                          Yes — I'm a returning client
+                        </ChoiceButton>
+                        <ChoiceButton selected={clientType === "new"} onClick={() => pick(setClientType, "new", 1)}>
+                          No — reaching out for the first time
+                        </ChoiceButton>
+                      </div>
                     </div>
                   )}
 
                   {/* STEP 1A: Returning — what do you need */}
                   {step === 1 && clientType === "returning" && (
-                    <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem", maxWidth: 420 }}>
-                      <ChoiceButton selected={returningNeed === "book-again"} onClick={() => pickReturningNeed("book-again")}>
-                        Book a service again
-                      </ChoiceButton>
-                      <ChoiceButton selected={returningNeed === "bag-pickup"} onClick={() => pickReturningNeed("bag-pickup")}>
-                        Schedule a bag pickup
-                      </ChoiceButton>
-                      <ChoiceButton selected={returningNeed === "just-talk"} onClick={() => pickReturningNeed("just-talk")}>
-                        Just want to get on the phone
-                      </ChoiceButton>
+                    <div>
+                      <p style={{ fontSize: "1.1rem", fontWeight: 600, color: "var(--ink)", marginBottom: "1.5rem" }}>
+                        What would you like to do?
+                      </p>
+                      <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem", maxWidth: 420 }}>
+                        <ChoiceButton selected={returningNeed === "book-again"} onClick={() => pick(setReturningNeed, "book-again", 2)}>
+                          Book a service again
+                        </ChoiceButton>
+                        <ChoiceButton selected={returningNeed === "bag-pickup"} onClick={() => pick(setReturningNeed, "bag-pickup", 2)}>
+                          Schedule a bag pickup
+                        </ChoiceButton>
+                        <ChoiceButton selected={returningNeed === "just-talk"} onClick={() => pick(setReturningNeed, "just-talk", 2)}>
+                          Just want to get on the phone
+                        </ChoiceButton>
+                      </div>
                     </div>
                   )}
 
                   {/* STEP 1B: New — which service */}
                   {step === 1 && clientType === "new" && (
-                    <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
-                      <ChoiceButton selected={serviceChoice === "fast-bag"} onClick={() => pickServiceChoice("fast-bag")}>
-                        <span style={{ fontWeight: 700 }}>Fast Bag Fill</span><br />
-                        <span style={{ fontSize: "0.8rem", opacity: 0.75 }}>Free pickup · Clothing, accessories, items I'm ready to let go</span>
-                      </ChoiceButton>
-                      <ChoiceButton selected={serviceChoice === "reset"} onClick={() => pickServiceChoice("reset")}>
-                        <span style={{ fontWeight: 700 }}>The 4-Hour Reset</span><br />
-                        <span style={{ fontSize: "0.8rem", opacity: 0.75 }}>$495 flat · One focused session in one space</span>
-                      </ChoiceButton>
-                      <ChoiceButton selected={serviceChoice === "house-call"} onClick={() => pickServiceChoice("house-call")}>
-                        <span style={{ fontWeight: 700 }}>The 2-Hour House Call</span><br />
-                        <span style={{ fontSize: "0.8rem", opacity: 0.75 }}>$175/hr · Practical help with the everyday stuff</span>
-                      </ChoiceButton>
-                      <ChoiceButton selected={serviceChoice === "closeout"} onClick={() => pickServiceChoice("closeout")}>
-                        <span style={{ fontWeight: 700 }}>The Closeout</span><br />
-                        <span style={{ fontSize: "0.8rem", opacity: 0.75 }}>You go first, I close out — whole-space transition</span>
-                      </ChoiceButton>
-                      <ChoiceButton selected={serviceChoice === "bigger"} onClick={() => pickServiceChoice("bigger")}>
-                        <span style={{ fontWeight: 700 }}>Something bigger</span><br />
-                        <span style={{ fontSize: "0.8rem", opacity: 0.75 }}>Full home reset, legacy planning, or an ongoing arrangement</span>
-                      </ChoiceButton>
-                      <ChoiceButton selected={serviceChoice === "for-parent"} onClick={() => pickServiceChoice("for-parent")}>
-                        <span style={{ fontWeight: 700 }}>I'm reaching out about a parent or family member</span><br />
-                        <span style={{ fontSize: "0.8rem", opacity: 0.75 }}>House calls, check-ins, home support, or a transition</span>
-                      </ChoiceButton>
-                      <ChoiceButton selected={serviceChoice === "not-sure"} onClick={() => pickServiceChoice("not-sure")}>
-                        <span style={{ fontWeight: 700 }}>I'm not sure — let's just get on the phone</span><br />
-                        <span style={{ fontSize: "0.8rem", opacity: 0.75 }}>I'll figure out what makes sense once we talk</span>
-                      </ChoiceButton>
+                    <div>
+                      <p style={{ fontSize: "1.1rem", fontWeight: 600, color: "var(--ink)", marginBottom: "1.5rem" }}>
+                        Which sounds most like what you're looking for?
+                      </p>
+                      <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
+                        <ChoiceButton selected={serviceChoice === "fast-bag"} onClick={() => pick(setServiceChoice, "fast-bag", 2)}>
+                          <span style={{ fontWeight: 700 }}>Fast Bag Fill</span><br />
+                          <span style={{ fontSize: "0.8rem", opacity: 0.75 }}>Free pickup · Clothing, accessories, items I'm ready to let go</span>
+                        </ChoiceButton>
+                        <ChoiceButton selected={serviceChoice === "reset"} onClick={() => pick(setServiceChoice, "reset", 2)}>
+                          <span style={{ fontWeight: 700 }}>The 4-Hour Reset</span><br />
+                          <span style={{ fontSize: "0.8rem", opacity: 0.75 }}>$495 flat · One focused session in one space</span>
+                        </ChoiceButton>
+                        <ChoiceButton selected={serviceChoice === "house-call"} onClick={() => pick(setServiceChoice, "house-call", 2)}>
+                          <span style={{ fontWeight: 700 }}>The 2-Hour House Call</span><br />
+                          <span style={{ fontSize: "0.8rem", opacity: 0.75 }}>$175/hr · Practical help with the everyday stuff</span>
+                        </ChoiceButton>
+                        <ChoiceButton selected={serviceChoice === "closeout"} onClick={() => pick(setServiceChoice, "closeout", 2)}>
+                          <span style={{ fontWeight: 700 }}>The Closeout</span><br />
+                          <span style={{ fontSize: "0.8rem", opacity: 0.75 }}>You go first, I close out — whole-space transition</span>
+                        </ChoiceButton>
+                        <ChoiceButton selected={serviceChoice === "bigger"} onClick={() => pick(setServiceChoice, "bigger", 2)}>
+                          <span style={{ fontWeight: 700 }}>Something bigger</span><br />
+                          <span style={{ fontSize: "0.8rem", opacity: 0.75 }}>Full home reset, legacy planning, or an ongoing arrangement</span>
+                        </ChoiceButton>
+                        <ChoiceButton selected={serviceChoice === "for-parent"} onClick={() => pick(setServiceChoice, "for-parent", 2)}>
+                          <span style={{ fontWeight: 700 }}>I'm reaching out about a parent or family member</span><br />
+                          <span style={{ fontSize: "0.8rem", opacity: 0.75 }}>House calls, check-ins, home support, or a transition</span>
+                        </ChoiceButton>
+                        <ChoiceButton selected={serviceChoice === "not-sure"} onClick={() => pick(setServiceChoice, "not-sure", 2)}>
+                          <span style={{ fontWeight: 700 }}>I'm not sure — let's just get on the phone</span><br />
+                          <span style={{ fontSize: "0.8rem", opacity: 0.75 }}>I'll figure out what makes sense once we talk</span>
+                        </ChoiceButton>
+                      </div>
                     </div>
                   )}
 
-                  {/* STEP 2A: Book-again — which service picker */}
-                  {step === 2 && returningNeed === "book-again" && (
-                    <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem", maxWidth: 420 }}>
-                      <ChoiceButton selected={returningService === "reset"} onClick={() => pickReturningService("reset")}>
-                        The 4-Hour Reset
-                      </ChoiceButton>
-                      <ChoiceButton selected={returningService === "house-call"} onClick={() => pickReturningService("house-call")}>
-                        House Call
-                      </ChoiceButton>
-                      <ChoiceButton selected={returningService === "legacy"} onClick={() => pickReturningService("legacy")}>
-                        Legacy Planning & Inventory
-                      </ChoiceButton>
-                      <ChoiceButton selected={returningService === "resale"} onClick={() => pickReturningService("resale")}>
-                        Curated Resale
-                      </ChoiceButton>
-                      <ChoiceButton selected={returningService === "other"} onClick={() => pickReturningService("other")}>
-                        Something else
-                      </ChoiceButton>
-                    </div>
-                  )}
-
-                  {/* STEP 2B: Context — only for paths that genuinely need it */}
+                  {/* STEP 2: Context */}
                   {step === 2 && (
-                    (clientType === "returning" && returningNeed === "just-talk") ||
-                    (clientType === "new" && (
-                      serviceChoice === "reset" || serviceChoice === "house-call" ||
-                      serviceChoice === "closeout" || serviceChoice === "bigger" ||
-                      serviceChoice === "for-parent" || serviceChoice === "not-sure"
-                    ))
-                  ) && (
                     <div>
                       <div style={{ backgroundColor: "var(--parchment-mid)", padding: "1rem 1.25rem", marginBottom: "2rem", borderLeft: "3px solid var(--sage)" }}>
                         <p style={{ fontSize: "0.78rem", fontWeight: 500, color: "var(--ink)" }}>{buildSummary()}</p>
                       </div>
                       <div style={{ marginBottom: "1.75rem" }}>
+                        <label style={labelStyle}>Tell me what's going on</label>
                         <textarea
                           value={form.situation}
                           onChange={e => handleChange("situation", e.target.value)}
@@ -541,8 +478,6 @@ export default function Contact() {
                       <div style={{ backgroundColor: "var(--parchment-mid)", padding: "1rem 1.25rem", marginBottom: "2rem", borderLeft: "3px solid var(--sage)" }}>
                         <p style={{ fontSize: "0.78rem", fontWeight: 500, color: "var(--ink)" }}>{buildSummary()}</p>
                       </div>
-
-                      {/* Name + Email */}
                       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem", marginBottom: "1rem" }}>
                         <div>
                           <label style={labelStyle}>First &amp; Last Name *</label>
@@ -557,85 +492,28 @@ export default function Contact() {
                             onBlur={e => (e.target as HTMLInputElement).style.borderColor = "var(--warm-gray-lt)"} />
                         </div>
                       </div>
-
-                      {/* Phone + Neighborhood (non-bag paths only) */}
-                      <div style={{ display: "grid", gridTemplateColumns: bagPath ? "1fr" : "1fr 1fr", gap: "1rem", marginBottom: "2rem" }}>
+                      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem", marginBottom: "2rem" }}>
                         <div>
                           <label style={labelStyle}>Phone</label>
                           <input type="tel" value={form.phone} onChange={e => handleChange("phone", e.target.value)} style={inputStyle} placeholder="Your phone number"
                             onFocus={e => (e.target as HTMLInputElement).style.borderColor = "var(--sage)"}
                             onBlur={e => (e.target as HTMLInputElement).style.borderColor = "var(--warm-gray-lt)"} />
                         </div>
-                        {!bagPath && (
-                          <div>
-                            <label style={labelStyle}>Neighborhood</label>
-                            <input type="text" value={form.neighborhood} onChange={e => handleChange("neighborhood", e.target.value)} style={inputStyle} placeholder="e.g. Silver Lake, Brentwood"
-                              onFocus={e => (e.target as HTMLInputElement).style.borderColor = "var(--sage)"}
-                              onBlur={e => (e.target as HTMLInputElement).style.borderColor = "var(--warm-gray-lt)"} />
-                          </div>
-                        )}
+                        <div>
+                          <label style={labelStyle}>Neighborhood</label>
+                          <input type="text" value={form.neighborhood} onChange={e => handleChange("neighborhood", e.target.value)} style={inputStyle} placeholder="e.g. Silver Lake, Brentwood"
+                            onFocus={e => (e.target as HTMLInputElement).style.borderColor = "var(--sage)"}
+                            onBlur={e => (e.target as HTMLInputElement).style.borderColor = "var(--warm-gray-lt)"} />
+                        </div>
                       </div>
 
-                      {/* BAG PICKUP DETAILS */}
-                      {bagPath && (
+                      {/* BAG-FILL INTAKE — only shown when bag pickup is selected */}
+                      {(serviceChoice === "fast-bag" || returningNeed === "bag-pickup") && (
                         <div style={{ backgroundColor: "var(--parchment-mid)", padding: "1.5rem", marginBottom: "2rem", borderLeft: "3px solid var(--sage)" }}>
                           <p style={{ fontSize: "0.75rem", fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--sage-dark)", marginBottom: "1.25rem" }}>
                             Pickup Details
                           </p>
-
-                          {/* Delivery method FIRST */}
-                          <div style={{ marginBottom: "1.25rem" }}>
-                            <label style={labelStyle}>How should the bags get to me?</label>
-                            <select value={form.pickupMethod} onChange={e => handleChange("pickupMethod", e.target.value)} style={inputStyle}
-                              onFocus={e => (e.target as HTMLSelectElement).style.borderColor = "var(--sage)"}
-                              onBlur={e => (e.target as HTMLSelectElement).style.borderColor = "var(--warm-gray-lt)"}>
-                              <option value="">Select…</option>
-                              <option value="in-person">I'll be there — direct handoff</option>
-                              <option value="ups">Send me a UPS label</option>
-                              <option value="courier">Uber courier</option>
-                            </select>
-                          </div>
-
-                          {/* In-person release authorization */}
-                          {form.pickupMethod === "in-person" && (
-                            <label style={{ display: "flex", gap: "0.6rem", alignItems: "flex-start", marginBottom: "1.25rem", cursor: "pointer" }}>
-                              <input type="checkbox" checked={form.pickupRelease} onChange={e => handleChange("pickupRelease", e.target.checked)} style={{ marginTop: "0.2rem" }} />
-                              <span style={{ fontSize: "0.8rem", fontWeight: 300, color: "var(--ink-soft)", lineHeight: 1.5 }}>
-                                I authorize release of items to The Well Lived Citizen at pickup. Possession transfers at handoff.
-                              </span>
-                            </label>
-                          )}
-
-                          {/* Courier access notes */}
-                          {form.pickupMethod === "courier" && (
-                            <div style={{ marginBottom: "1.25rem" }}>
-                              <label style={labelStyle}>Courier access notes</label>
-                              <input type="text" value={form.courierNotes} onChange={e => handleChange("courierNotes", e.target.value)} style={inputStyle} placeholder="Gate code, building access, where to find the bags"
-                                onFocus={e => (e.target as HTMLInputElement).style.borderColor = "var(--sage)"}
-                                onBlur={e => (e.target as HTMLInputElement).style.borderColor = "var(--warm-gray-lt)"} />
-                            </div>
-                          )}
-
-                          {/* Time windows — only after delivery method is selected */}
-                          {form.pickupMethod && (
-                            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem", marginBottom: "1.25rem" }}>
-                              <div>
-                                <label style={labelStyle}>Ideal pickup time #1</label>
-                                <input type="text" value={form.pickupTime1} onChange={e => handleChange("pickupTime1", e.target.value)} style={inputStyle} placeholder="e.g. Wed AM, Fri after 3pm"
-                                  onFocus={e => (e.target as HTMLInputElement).style.borderColor = "var(--sage)"}
-                                  onBlur={e => (e.target as HTMLInputElement).style.borderColor = "var(--warm-gray-lt)"} />
-                              </div>
-                              <div>
-                                <label style={labelStyle}>Ideal pickup time #2</label>
-                                <input type="text" value={form.pickupTime2} onChange={e => handleChange("pickupTime2", e.target.value)} style={inputStyle} placeholder="e.g. Sat morning, anytime Sunday"
-                                  onFocus={e => (e.target as HTMLInputElement).style.borderColor = "var(--sage)"}
-                                  onBlur={e => (e.target as HTMLInputElement).style.borderColor = "var(--warm-gray-lt)"} />
-                              </div>
-                            </div>
-                          )}
-
-                          {/* Bag count + urgency */}
-                          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem", marginBottom: "1.25rem" }}>
+                          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem", marginBottom: "1rem" }}>
                             <div>
                               <label style={labelStyle}>How many bags?</label>
                               <select value={form.bagsCount} onChange={e => handleChange("bagsCount", e.target.value)} style={inputStyle}
@@ -643,8 +521,10 @@ export default function Contact() {
                                 onBlur={e => (e.target as HTMLSelectElement).style.borderColor = "var(--warm-gray-lt)"}>
                                 <option value="">Select…</option>
                                 <option value="1">1 bag</option>
-                                <option value="2">2 bags</option>
-                                <option value="more">More than 2 (session pickup)</option>
+                                <option value="2-3">2–3 bags</option>
+                                <option value="4-6">4–6 bags</option>
+                                <option value="closet">A full closet</option>
+                                <option value="more">More than that</option>
                               </select>
                             </div>
                             <div>
@@ -660,9 +540,55 @@ export default function Contact() {
                               </select>
                             </div>
                           </div>
+                          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
+                            <div>
+                              <label style={labelStyle}>Ideal pickup time #1</label>
+                              <input type="text" value={form.pickupTime1} onChange={e => handleChange("pickupTime1", e.target.value)} style={inputStyle} placeholder="e.g. Wed AM, Fri after 3pm"
+                                onFocus={e => (e.target as HTMLInputElement).style.borderColor = "var(--sage)"}
+                                onBlur={e => (e.target as HTMLInputElement).style.borderColor = "var(--warm-gray-lt)"} />
+                            </div>
+                            <div>
+                              <label style={labelStyle}>Ideal pickup time #2</label>
+                              <input type="text" value={form.pickupTime2} onChange={e => handleChange("pickupTime2", e.target.value)} style={inputStyle} placeholder="e.g. Sat morning, anytime Sunday"
+                                onFocus={e => (e.target as HTMLInputElement).style.borderColor = "var(--sage)"}
+                                onBlur={e => (e.target as HTMLInputElement).style.borderColor = "var(--warm-gray-lt)"} />
+                            </div>
+                          </div>
+                          <p style={{ fontSize: "0.72rem", color: "var(--sage-dark)", marginTop: "0.75rem", lineHeight: 1.5, opacity: 0.8 }}>
+                            Give me two windows that work. I'll confirm one and lock the time.
+                          </p>
 
-                          {/* Estimated items */}
-                          <div style={{ marginBottom: "1.25rem" }}>
+                          <div style={{ marginTop: "1.25rem" }}>
+                            <label style={labelStyle}>How should the bags get to me?</label>
+                            <select value={form.pickupMethod} onChange={e => handleChange("pickupMethod", e.target.value)} style={inputStyle}
+                              onFocus={e => (e.target as HTMLSelectElement).style.borderColor = "var(--sage)"}
+                              onBlur={e => (e.target as HTMLSelectElement).style.borderColor = "var(--warm-gray-lt)"}>
+                              <option value="">Select…</option>
+                              <option value="in-person">I'll be home for pickup</option>
+                              <option value="ups">Send me a UPS label</option>
+                              <option value="courier">Uber courier</option>
+                            </select>
+                          </div>
+
+                          {form.pickupMethod === "in-person" && (
+                            <label style={{ display: "flex", gap: "0.6rem", alignItems: "flex-start", marginTop: "1rem", cursor: "pointer" }}>
+                              <input type="checkbox" checked={form.pickupRelease} onChange={e => handleChange("pickupRelease", e.target.checked)} style={{ marginTop: "0.2rem" }} />
+                              <span style={{ fontSize: "0.8rem", fontWeight: 300, color: "var(--ink-soft)", lineHeight: 1.5 }}>
+                                I authorize release of items to The Well Lived Citizen at pickup. Possession transfers at handoff.
+                              </span>
+                            </label>
+                          )}
+
+                          {form.pickupMethod === "courier" && (
+                            <div style={{ marginTop: "1rem" }}>
+                              <label style={labelStyle}>Courier access notes</label>
+                              <input type="text" value={form.courierNotes} onChange={e => handleChange("courierNotes", e.target.value)} style={inputStyle} placeholder="Gate code, building access, where to find the bags"
+                                onFocus={e => (e.target as HTMLInputElement).style.borderColor = "var(--sage)"}
+                                onBlur={e => (e.target as HTMLInputElement).style.borderColor = "var(--warm-gray-lt)"} />
+                            </div>
+                          )}
+
+                          <div style={{ marginTop: "1.25rem" }}>
                             <label style={labelStyle}>Roughly how many items total?</label>
                             <input type="text" value={form.estimatedItems} onChange={e => handleChange("estimatedItems", e.target.value)} style={inputStyle} placeholder="e.g. 20–30 pieces, mostly tops and dresses"
                               onFocus={e => (e.target as HTMLInputElement).style.borderColor = "var(--sage)"}
@@ -672,70 +598,28 @@ export default function Contact() {
                             </p>
                           </div>
 
-                          {/* Neighborhood — bag paths only, here */}
-                          <div style={{ marginBottom: "0" }}>
-                            <label style={labelStyle}>Neighborhood</label>
-                            <input type="text" value={form.neighborhood} onChange={e => handleChange("neighborhood", e.target.value)} style={inputStyle} placeholder="e.g. Silver Lake, Brentwood"
-                              onFocus={e => (e.target as HTMLInputElement).style.borderColor = "var(--sage)"}
-                              onBlur={e => (e.target as HTMLInputElement).style.borderColor = "var(--warm-gray-lt)"} />
-                          </div>
-                        </div>
-                      )}
-
-                      {/* RESALE AGREEMENT — read-first flow */}
-                      {bagPath && (
-                        <div style={{ marginBottom: "2rem" }}>
-                          <div style={{ backgroundColor: "var(--parchment)", border: "1.5px solid var(--warm-gray-lt)", padding: "1.5rem" }}>
-                            <p style={{ fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--sage-dark)", marginBottom: "1rem" }}>
+                          <div style={{ backgroundColor: "var(--parchment)", border: "1.5px solid var(--warm-gray-lt)", padding: "1.25rem", marginTop: "1.25rem" }}>
+                            <p style={{ fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--sage-dark)", marginBottom: "0.75rem" }}>
                               Resale Agreement — Required
                             </p>
-
-                            {/* Key terms summary */}
-                            <div style={{ display: "flex", flexDirection: "column", gap: "0.6rem", marginBottom: "1.25rem" }}>
-                              {[
-                                "Commission is split by item tier — reviewed at intake. The split is never applied retroactively.",
-                                "Possession transfers at pickup. I am legally responsible for your items from that moment.",
-                                "Your 30-day payout clock starts when you sign consent to listings — not at pickup.",
-                                "Items that are unsanitary or biohazardous are disposed of immediately. No exceptions, no discussion.",
-                                "You have 24 hours to approve or pull items after you receive the listing report. No response means listings proceed.",
-                              ].map((term, i) => (
-                                <div key={i} style={{ display: "flex", gap: "0.75rem", fontSize: "0.82rem", fontWeight: 300, color: "var(--ink-soft)", lineHeight: 1.6 }}>
-                                  <span style={{ color: "var(--sage)", fontWeight: 700, flexShrink: 0, fontSize: "0.7rem", paddingTop: "0.15rem" }}>—</span>
-                                  {term}
-                                </div>
-                              ))}
-                            </div>
-
-                            <a href="/WLC-Resale-Agreement.pdf" target="_blank" rel="noopener noreferrer" style={{ fontSize: "0.8rem", fontWeight: 600, color: "var(--sage-dark)", textDecoration: "underline", textUnderlineOffset: "3px", display: "block", marginBottom: "1.25rem" }}>
-                              Read the full Resale Agreement (PDF) →
+                            <p style={{ fontSize: "0.82rem", fontWeight: 300, color: "var(--ink-soft)", lineHeight: 1.6, marginBottom: "1rem" }}>
+                              Scheduling a pickup means agreeing to the Resale Agreement — commission structure, custody terms, payout schedule, and how unsold or declined items are handled. Read it before you check the box.
+                            </p>
+                            <a href="/WLC-Resale-Agreement.pdf" target="_blank" rel="noopener noreferrer" style={{ fontSize: "0.8rem", fontWeight: 600, color: "var(--sage-dark)", textDecoration: "underline", textUnderlineOffset: "3px", display: "block", marginBottom: "1rem" }}>
+                              Read the Resale Agreement (PDF) →
                             </a>
-
-                            {/* Reveal checkbox toggle */}
-                            {!agreementRead && (
-                              <button
-                                type="button"
-                                onClick={() => setAgreementRead(true)}
-                                style={{ fontSize: "0.82rem", fontWeight: 600, color: "var(--ink)", background: "none", border: "1.5px solid var(--ink)", padding: "0.65rem 1.25rem", cursor: "pointer", fontFamily: "'Plus Jakarta Sans', sans-serif" }}
-                              >
-                                I've read this →
-                              </button>
-                            )}
-
-                            {/* Checkbox — only shown after agreementRead */}
-                            {agreementRead && (
-                              <label style={{ display: "flex", gap: "0.6rem", alignItems: "flex-start", cursor: "pointer" }}>
-                                <input
-                                  type="checkbox"
-                                  required
-                                  checked={form.agreementAccepted}
-                                  onChange={e => handleChange("agreementAccepted", e.target.checked)}
-                                  style={{ marginTop: "0.2rem", flexShrink: 0 }}
-                                />
-                                <span style={{ fontSize: "0.82rem", fontWeight: 500, color: "var(--ink)", lineHeight: 1.5 }}>
-                                  I have read and agree to the Resale Agreement. I understand possession transfers at pickup and my 30-day cycle begins when I approve the listing. I agree — {new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}.
-                                </span>
-                              </label>
-                            )}
+                            <label style={{ display: "flex", gap: "0.6rem", alignItems: "flex-start", cursor: "pointer" }}>
+                              <input
+                                type="checkbox"
+                                required
+                                checked={form.agreementAccepted}
+                                onChange={e => handleChange("agreementAccepted", e.target.checked)}
+                                style={{ marginTop: "0.2rem", flexShrink: 0 }}
+                              />
+                              <span style={{ fontSize: "0.82rem", fontWeight: 500, color: "var(--ink)", lineHeight: 1.5 }}>
+                                I have read and agree to the Resale Agreement. I understand that possession transfers at pickup and my 30-day reporting cycle begins when I approve the listing.
+                              </span>
+                            </label>
                           </div>
                         </div>
                       )}
@@ -745,13 +629,8 @@ export default function Contact() {
                           {submitError}
                         </p>
                       )}
-                      <button
-                        type="submit"
-                        disabled={submitting}
-                        className="btn btn-ink"
-                        style={{ width: "100%", justifyContent: "center", padding: "1rem", opacity: submitting ? 0.65 : 1, cursor: submitting ? "not-allowed" : "pointer" }}
-                      >
-                        {submitting ? "Sending…" : bagPath ? "Submit Pickup Request" : "Send Message"}
+                      <button type="submit" disabled={submitting} className="btn btn-ink" style={{ width: "100%", justifyContent: "center", padding: "1rem", opacity: submitting ? 0.65 : 1, cursor: submitting ? "not-allowed" : "pointer" }}>
+                        {submitting ? "Sending…" : "Send Message"}
                       </button>
                     </form>
                   )}

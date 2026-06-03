@@ -1,0 +1,33 @@
+# Netlify config — The Well Lived Citizen
+# Deploys the static site (artifacts/wlc-site) and a serverless function that
+# emails every lead. Auto-deploys on every push to GitHub — no manual git.
+
+[build]
+  command = "pnpm --filter @workspace/wlc-site run build"
+  publish = "artifacts/wlc-site/dist/public"
+  functions = "netlify/functions"
+
+[build.environment]
+  BASE_PATH = "/"
+  NODE_VERSION = "22"
+
+# Lead capture: the site posts to /api/contact and /api/handshake/intake.
+# Route both to the function that emails the lead (via Resend). No database
+# needed for launch — every inquiry reaches the inbox.
+[[redirects]]
+  from = "/api/contact"
+  to = "/.netlify/functions/submit"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/handshake/intake"
+  to = "/.netlify/functions/submit"
+  status = 200
+  force = true
+
+# SPA fallback — every other route serves the app.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
