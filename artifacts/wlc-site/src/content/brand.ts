@@ -54,27 +54,35 @@ export const thesisLine =
 export const entryOffers = [
   {
     id: "reset",
-    name: "4-Hour Practical Reset",
+    name: "Four-Hour Reset",
     price: "$495 · one 4-hour block",
     blurb:
-      "One focused 4-hour block to tackle a single thing in one session — one room, one task, one move stage. A defined block of time, not an open-ended hourly engagement.",
+      "Focused operational support for the area, room, or project creating the most immediate friction.",
     href: "/the-reset",
   },
   {
     id: "house-call",
-    name: "2-Hour House Call",
+    name: "Two-Hour House Call",
     price: "$350",
     blurb:
-      "Vendor access, donation routing, install days, errands, returns, guest prep, package overflow, tech — the day-to-day.",
+      "Practical support for household tasks, technology, errands, setup, organization, and operational life admin.",
     href: "/house-calls",
   },
   {
-    id: "fast-bag",
-    name: "Fast Bag Pickup",
+    id: "resale-pickup",
+    name: "Quick Resale Pickup",
     price: "Commission-based · free pickup",
     blurb:
-      "Fill a bag with clothing and accessories you're done with. I pick up, evaluate, route to the right platform, and list.",
+      "Convenient pickup and resale handling for clothing, accessories, and household items.",
     href: "/fast-bag-fill",
+  },
+  {
+    id: "move-closeout",
+    name: "Move Closeout",
+    price: "$150/hr",
+    blurb:
+      "Hourly post-move operational support for unresolved logistics, storage coordination, resale, packing, shipping, and final household wrap-up after relocation.",
+    href: "/home-reset-move-support",
   },
 ] as const;
 
