@@ -37,8 +37,8 @@ function FAQItem({ q, a }: { q: string; a: string }) {
 
 export default function LegacyPillar() {
   usePageMeta({
-    title: "Legacy Planning & Inventory — Pillar 02 | The Well Lived Citizen",
-    description: "Photographed inventory, written story archive, resale and value assessment, dispersal strategy. Done proactively, before any transition. Los Angeles.",
+    title: "Legacy Inventory & Cataloging — Pillar 02 | The Well Lived Citizen",
+    description: "Inventory and cataloging for the things that quietly accumulate in a house — downsizing prep, collection documentation, and resale planning. Decided while there's still time. Los Angeles.",
     path: "/legacy-planning",
   });
   return (
@@ -51,13 +51,13 @@ export default function LegacyPillar() {
           <div style={{ maxWidth: 740 }}>
             <span className="eyebrow eyebrow-light">Pillar 02</span>
             <h1 className="display-lg" style={{ color: "var(--parchment)", marginBottom: "1.5rem" }}>
-              Legacy Planning &amp;<br />Inventory Catalog
+              Legacy Inventory<br />&amp; Cataloging
             </h1>
             <p style={{ fontSize: "1.2rem", fontWeight: 300, color: "rgba(248,244,227,0.75)", lineHeight: 1.8, marginBottom: "0.75rem" }}>
-              The relief of the life in the hidden things.
+              The things that live quietly inside a house while a life is being lived in it.
             </p>
             <p style={{ fontSize: "1rem", fontWeight: 300, color: "rgba(248,244,227,0.6)", lineHeight: 1.8, marginBottom: "2.5rem" }}>
-              Assigning value, story, and meaning to what a life accumulates — and making a plan while there's still time to choose how it goes. Whether you're planning ahead or a situation has arrived.
+              The unopened candles. The linens still in plastic. The china nobody wants. The box marked important. Deciding what's kept, gifted, sold, donated, or documented — while you still have the time, the energy, and the stories to decide.
             </p>
             <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
               <Link href="/contact" className="btn btn-sage">Schedule a Consultation</Link>
@@ -74,30 +74,30 @@ export default function LegacyPillar() {
             <FadeUp>
               <span className="eyebrow eyebrow-sage">The Friction</span>
               <h2 className="display-md" style={{ color: "var(--ink)", marginBottom: "2rem" }}>
-                Most families don't know what they have until it's too late to ask.
+                The drawer of unopened candles. The china nobody wants.
               </h2>
               <p className="body-lg" style={{ marginBottom: "1.5rem" }}>
-                The china set in the dining room hutch. The jewelry box in the bedroom. The art on the walls that someone once mentioned was valuable. The closets no one has opened in years.
+                Every house has them — the things too important to throw out but never urgent enough to deal with. The good linens still in their plastic. The box in the closet marked important. The collection someone spent years building. The decision that's been quietly deferred for a decade.
               </p>
               <p className="body-lg" style={{ marginBottom: "1.5rem" }}>
-                When a home transitions — through a move, a change in health, or simply a decision to downsize — the people left to sort through it often have no record of what anything is, what it's worth, or what the person who owned it would have wanted done with it.
+                None of it is important enough for a will. All of it is too important to just disappear. So it stays where it is, and the decision gets handed down — usually to whoever is left to sort through the house later, with no idea what anything is, who it came from, or what should happen to it. Unpaid archaeologists, working without the one person who could have told them.
               </p>
               <p className="body-lg">
-                Legacy Planning & Inventory Catalog is the work of creating that record — assigning value, story, and meaning to what a life accumulates, and making a plan while there's still time to choose how it goes. Some people do this proactively, before any transition happens. Others call when a situation has already arrived. Both are the right time.
+                This isn't estate law, insurance, or appraisal. It's the work of going through those things now — deciding what's kept, gifted, sold, donated, or documented — while the person who knows the stories is still here to tell them. Some people do this proactively. Others call when a situation has already arrived. Both are the right time.
               </p>
             </FadeUp>
 
             <FadeUp delay={80}>
               <div style={{ backgroundColor: "var(--parchment-mid)", padding: "2.5rem", boxShadow: "6px 6px 0px var(--sage)" }}>
-                <p style={{ fontSize: "0.65rem", fontWeight: 600, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--sage-dark)", marginBottom: "1.5rem" }}>What Gets Documented</p>
+                <p style={{ fontSize: "0.65rem", fontWeight: 600, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--sage-dark)", marginBottom: "1.5rem" }}>What Gets Inventoried &amp; Cataloged</p>
                 {[
-                  "Furniture, art, and significant home pieces",
-                  "China, crystal, silverware, and tableware sets",
+                  "Furniture, art, and the bigger home pieces",
+                  "China, crystal, silver, and the sets nobody uses",
                   "Jewelry and personal accessories",
-                  "Collectibles, antiques, and story-rich objects",
-                  "Personal photographs and archival materials",
+                  "Collections, antiques, and the things with a story",
+                  "Photographs, papers, and archival materials",
                   "Warranties, certificates, and home records",
-                  "Sentimental items with family attribution notes",
+                  "Sentimental things, with notes on who they came from",
                 ].map((item, i) => (
                   <div key={i} style={{ display: "flex", gap: "0.75rem", alignItems: "flex-start", padding: "0.7rem 0", borderBottom: "1px solid var(--warm-gray-lt)" }}>
                     <span style={{ width: 5, height: 5, backgroundColor: "var(--sage)", flexShrink: 0, marginTop: "0.45rem" }} />
@@ -119,10 +119,10 @@ export default function LegacyPillar() {
           </FadeUp>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: "2rem" }}>
             {[
-              { step: "01", title: "The Walkthrough", body: "I start with a full walkthrough of the home to understand scope, prioritize rooms, and identify items that need special handling — appraisal, family attribution, or immediate routing decisions." },
-              { step: "02", title: "Photography & Documentation", body: "Every significant item is photographed and cataloged with condition notes, provenance details, and any known history. The catalog becomes a permanent record the family can reference." },
-              { step: "03", title: "Valuation Routing", body: "Items that may have significant value are flagged for appraisal. I work with trusted appraisers and can coordinate that process — I don't guess at value, and I don't let things leave the house without a record." },
-              { step: "04", title: "Distribution Planning", body: "Once the catalog is complete, I work through distribution with you — what goes to family, what goes to resale, what gets donated, and what needs special handling. The decisions are yours. The logistics are mine." },
+              { step: "01", title: "The Walkthrough", body: "We start by walking the house together. I get a sense of what's there, which rooms to start with, and which things you already have feelings about. You point, you tell me the stories, I take notes." },
+              { step: "02", title: "Inventory & Cataloging", body: "The things that matter get photographed and cataloged — condition, where it came from, who it's tied to, any history you want kept. What comes out the other side is a record the family can actually use, instead of a houseful of guesses." },
+              { step: "03", title: "Value & Resale Planning", body: "Anything that might be worth real money gets flagged. I work with trusted appraisers when something needs a real number, and I plan out what's worth listing for resale. I don't guess at value, and nothing leaves the house without a record." },
+              { step: "04", title: "Keep, Gift, Sell, Donate", body: "Once it's all down on paper, we go through it — what stays in the family, what gets sold, what gets donated, what gets documented and kept. You make the calls. I handle the logistics so it actually happens." },
             ].map((item, i) => (
               <FadeUp key={i} delay={i * 60}>
                 <div style={{ backgroundColor: "var(--parchment)", padding: "2.5rem" }}>
@@ -172,10 +172,10 @@ export default function LegacyPillar() {
                 <span className="eyebrow eyebrow-sage">Pricing</span>
                 <h2 className="display-md" style={{ color: "var(--ink)", marginBottom: "1rem" }}>Scoped by project.<br />Always disclosed upfront.</h2>
                 <p style={{ fontSize: "0.95rem", fontWeight: 300, color: "var(--ink-soft)", lineHeight: 1.75, marginBottom: "1.25rem" }}>
-                  Legacy projects are scoped after a walkthrough call. Pricing depends on the size of the home, the volume of items, and the level of documentation required.
+                  Legacy work is $175/hr with a 2-hour minimum, scoped after a walkthrough call. The price depends on the size of the home, how much there is to go through, and how much cataloging you want.
                 </p>
                 <p style={{ fontSize: "0.85rem", fontWeight: 300, color: "var(--ink-soft)", lineHeight: 1.75, marginBottom: "2rem", fontStyle: "italic" }}>
-                  This is premium, specialized work. Rates reflect the time, care, and expertise required to do it correctly.
+                  It's careful, specialized work, and the rate reflects the time it takes to do it right.
                 </p>
                 <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
                   <Link href="/contact" className="btn btn-ink">Schedule a Consultation</Link>

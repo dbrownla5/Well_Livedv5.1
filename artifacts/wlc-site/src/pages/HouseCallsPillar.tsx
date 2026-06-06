@@ -152,7 +152,7 @@ export default function HouseCallsPillar() {
                 <span className="eyebrow eyebrow-sage">Pricing</span>
                 <h2 className="display-md" style={{ color: "var(--ink)", marginBottom: "1rem" }}>$175/hr.<br />2-hour minimum.</h2>
                 <p style={{ fontSize: "0.95rem", fontWeight: 300, color: "var(--ink-soft)", lineHeight: 1.75, marginBottom: "1.25rem" }}>
-                  Ongoing continuity available for repeat clients.
+                  Ongoing support available for repeat clients.
                 </p>
                 <p style={{ fontSize: "0.85rem", fontWeight: 300, color: "var(--ink-soft)", lineHeight: 1.75, marginBottom: "2rem", fontStyle: "italic" }}>
                   No membership. No subscription. Ease comes from relationship, not a forced plan.
@@ -166,7 +166,7 @@ export default function HouseCallsPillar() {
                 {[
                   { label: "Hourly rate", value: "$175/hr" },
                   { label: "Minimum", value: "2 hours" },
-                  { label: "Ongoing continuity", value: "Retainer available" },
+                  { label: "Ongoing support", value: "Retainer available" },
                   { label: "Membership required", value: "No" },
                   { label: "Service area", value: "Los Angeles + surrounding" },
                   { label: "Quick Entry", value: "Two-Hour House Call" },
@@ -194,7 +194,7 @@ export default function HouseCallsPillar() {
               { q: "Is this designed for a specific type of client?", a: "Not at all. House Calls is for anyone who needs trusted, practical help at home — a professional who travels constantly, someone managing a parent's home from another city, or anyone who just needs an extra set of capable hands." },
               { q: "Can I book this for a family member?", a: "Yes. Many clients book House Calls on behalf of a parent or relative. I handle the coordination and make sure the session is tailored to what that person actually needs." },
               { q: "What if the task takes less than 2 hours?", a: "The 2-hour minimum is the booking unit. If I finish early, I'll use the remaining time on whatever else would be useful — a quick tech check, a donation sort, whatever makes sense." },
-              { q: "Can I set up ongoing support?", a: "Yes. Retainer continuity is available for clients who want regular, scheduled support. No membership, no subscription — just a consistent relationship built around how your home actually works." },
+              { q: "Can I set up ongoing support?", a: "Yes. A retainer is available for clients who want regular, scheduled support. No membership, no subscription — just a consistent relationship built around how your home actually works." },
               { q: "What kinds of tech issues can you handle?", a: "Phone setup and transfers, Wi-Fi troubleshooting, smart home devices, TV and streaming setup, password organization, and navigating telecom billing issues. If it's a home tech problem, I can usually get in the weeds and resolve it." },
             ].map((item, i) => (
               <FAQItem key={i} q={item.q} a={item.a} />

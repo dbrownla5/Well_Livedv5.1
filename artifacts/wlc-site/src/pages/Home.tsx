@@ -24,7 +24,7 @@ function FadeUp({ children, delay = 0, className = "" }: { children: React.React
 export default function Home() {
   usePageMeta({
     title: "The Well Lived Citizen — Professional Problem Solver for Modern Life · Los Angeles",
-    description: "One person for the move, the resale, the storage unit, and the other thing currently ruining your week. Home resets, house calls, legacy inventory, and curated resale in greater Los Angeles.",
+    description: "One person for the move, the resale, the storage unit, and the other thing currently ruining your week. Home organization, house calls, legacy inventory, and resale in greater Los Angeles.",
     path: "/",
   });
   return (
@@ -171,7 +171,7 @@ export default function Home() {
 
             <FadeUp delay={120}>
               <div style={{ backgroundColor: "var(--parchment)", padding: "2.5rem", height: "100%" }}>
-                <div className="underlay-tag" style={{ marginBottom: "1.5rem" }}>03 — Curated Resale</div>
+                <div className="underlay-tag" style={{ marginBottom: "1.5rem" }}>03 — Resale</div>
                 <h3 className="display-sm" style={{ color: "var(--ink)", marginBottom: "1rem" }}>Quick Resale Pickup</h3>
                 <p style={{ fontSize: "0.95rem", fontWeight: 300, lineHeight: 1.8, color: "var(--ink-soft)", marginBottom: "2rem" }}>
                   Fill a bag with clothing and accessories you're done with. I pick up, evaluate, route to the platform where the right buyer is, and list. You stop tripping over it. Free pickup in LA.
@@ -241,9 +241,9 @@ export default function Home() {
           <div style={{ display: "grid", gap: "1px", backgroundColor: "var(--warm-gray-lt)" }}>
             {[
               { num: "01", name: "Home Organization & Move Support", desc: "Organization, unpacking, room functionality, post-move setup. The Four-Hour Reset lives here. Ongoing support billed hourly when projects run longer.", href: "/home-reset-move-support" },
-              { num: "02", name: "Legacy Planning & Inventory Catalog", desc: "Inventory and documentation of the belongings and stories families don't want to lose track of — before a move, a downsize, or a transition forces the decisions in a hurry.", href: "/legacy-planning" },
-              { num: "03", name: "House Calls", desc: "Hourly household support for busy professionals, independent older adults, and families managing a parent's home from a distance. The Two-Hour House Call lives here.", href: "/house-calls-pillar" },
-              { num: "04", name: "Curated Resale & Consignment", desc: "Drop off or schedule a pickup. I sort, evaluate, route, list, and ship. You recover value from things you no longer want to manage. The Quick Resale Pickup lives here.", href: "/curated-resale-consignment" },
+              { num: "02", name: "Legacy Inventory & Cataloging", desc: "Inventory and cataloging of the things that quietly accumulate in a house — the china nobody uses, the box marked important, the stuff too important to disappear but never urgent enough to deal with. Sorted while there's still time to decide.", href: "/legacy-planning" },
+              { num: "03", name: "House Calls", desc: "Hourly household help for busy professionals, independent older adults, and families managing a parent's home from a distance. The Two-Hour House Call lives here.", href: "/house-calls-pillar" },
+              { num: "04", name: "Resale & Consignment", desc: "Fill a bag or schedule a pickup. I sort, evaluate, route, list, and sell — clothing, accessories, designer, and estate pieces. You get the value back without managing any of it. The Quick Resale Pickup lives here.", href: "/curated-resale-consignment" },
             ].map((s, i) => (
               <FadeUp key={s.num} delay={i * 40}>
                 <Link href={s.href}>

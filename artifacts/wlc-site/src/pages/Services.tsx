@@ -32,10 +32,10 @@ const pillars = [
   },
   {
     num: "02",
-    name: "Legacy Planning & Inventory Catalog",
-    tagline: "The relief of the life in the hidden things.",
-    description: "Most families don't know what they have until it's too late to ask. Legacy work is the process of finding out — assigning value, story, and meaning to the things a life accumulates, and making a plan while there's still time to choose how it goes. Proactive or urgent. Room by room. Object by object.",
-    includes: ["Full-home photographic inventory", "Provenance and story documentation", "Valuation routing and appraisal coordination", "Distribution planning", "Archival material organization", "Estate transition support"],
+    name: "Legacy Inventory & Cataloging",
+    tagline: "The things that live quietly inside a house.",
+    description: "The unopened china. The linens still in plastic. The box marked important. The stuff that isn't important enough for a will but too important to just disappear. Legacy work is sorting through it — deciding what's kept, gifted, sold, donated, or documented — while the person still has the energy and the stories to decide. So the family isn't left to figure it out later as unpaid archaeologists.",
+    includes: ["Room-by-room photo inventory and cataloging", "Notes on history, value, and who things came from", "Resale planning and appraisal coordination", "Downsizing prep and distribution planning", "Photos, papers, and archival material sorted", "A clear record the family can actually use"],
     quickBook: null,
     pillarHref: "/legacy-planning",
   },
@@ -50,10 +50,10 @@ const pillars = [
   },
   {
     num: "04",
-    name: "Curated Resale & Consignment",
+    name: "Resale & Consignment",
     tagline: "It flows from everything else.",
-    description: "A Reset surfaces what you're ready to part with. Legacy work uncovers what has real value sitting in storage. A move closeout routes what doesn't make the truck. The resale piece is already built into the other work — pickup, evaluation, and listing without asking you to become a part-time seller.",
-    includes: ["Free pickup within service area", "Platform matching by item category", "Buyer communication and management", "Sales report and payout every 30 days from signing", "Donation rerouting for unsold items", "Designer, furniture, art, and clothing accepted"],
+    description: "A Reset surfaces what you're ready to part with. Legacy work turns up things with real value sitting in storage. A move closeout routes what doesn't make the truck. The resale piece is already built into the other work — pickup, evaluation, and listing without you having to become a part-time seller.",
+    includes: ["Free pickup within service area", "Items matched to the platform where they actually sell", "Buyer communication handled for you", "Sales report and payout every 30 days from signing", "Donation rerouting for items that don't sell", "Clothing, accessories, designer, and estate pieces"],
     quickBook: { label: "Quick Resale Pickup", href: "/fast-bag-fill" },
     pillarHref: "/curated-resale-consignment",
   },
@@ -62,7 +62,7 @@ const pillars = [
 export default function Services() {
   usePageMeta({
     title: "Services — One Capable Person for What Piles Up | The Well Lived Citizen",
-    description: "Four pillars and three Quick Entry offers. Home resets, legacy planning, house calls, and curated resale in greater Los Angeles. One number, one person, one invoice.",
+    description: "Four pillars and three Quick Entry offers. Home organization, legacy inventory, house calls, and resale in greater Los Angeles. One number, one person, one invoice.",
     path: "/services",
   });
   return (

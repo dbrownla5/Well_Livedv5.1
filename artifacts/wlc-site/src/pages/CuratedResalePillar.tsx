@@ -37,7 +37,7 @@ function FAQItem({ q, a }: { q: string; a: string }) {
 
 export default function CuratedResalePillar() {
   usePageMeta({
-    title: "Curated Resale & Consignment — Pillar 04 | The Well Lived Citizen",
+    title: "Resale & Consignment — Pillar 04 | The Well Lived Citizen",
     description: "Resale for the things still worth something. Pickup, evaluation, photography, listing, and payout. Commission-based. Los Angeles.",
     path: "/curated-resale-consignment",
   });
@@ -51,7 +51,7 @@ export default function CuratedResalePillar() {
           <div style={{ maxWidth: 740 }}>
             <span className="eyebrow eyebrow-light">Pillar 04</span>
             <h1 className="display-lg" style={{ color: "var(--parchment)", marginBottom: "1.5rem" }}>
-              Curated Resale<br />&amp; Consignment
+              Resale<br />&amp; Consignment
             </h1>
             <p style={{ fontSize: "1.1rem", fontWeight: 300, color: "rgba(248,244,227,0.75)", lineHeight: 1.8, marginBottom: "0.75rem" }}>
               Resale for the things still worth something — handled by someone who knows where each thing actually sells.
@@ -210,6 +210,9 @@ export default function CuratedResalePillar() {
                 <h2 className="display-md" style={{ color: "var(--ink)", marginBottom: "1.5rem" }}>Fair splits. Always disclosed before pickup.</h2>
                 <p style={{ fontSize: "0.95rem", fontWeight: 300, color: "var(--ink)", lineHeight: 1.75, opacity: 0.85, marginBottom: "1.5rem" }}>
                   Proceeds are split after platform fees and shipping are deducted. You agree to the resale terms when you request a pickup; possession transfers when the items reach me. After evaluation you approve the listings, and your 30-day reporting and payout cycle begins from that consent. <a href="/WLC-Resale-Agreement.pdf" target="_blank" rel="noopener noreferrer" style={{ color: "var(--sage-dark)", textDecoration: "underline", textUnderlineOffset: "2px" }}>Read the full Resale Agreement (PDF).</a>
+                </p>
+                <p style={{ fontSize: "0.95rem", fontWeight: 500, color: "var(--ink)", lineHeight: 1.75, opacity: 0.9, marginBottom: "1.5rem" }}>
+                  I'll always try to be fair with people. But for that to work in second-life resale, buyers also need to approach it fairly, realistically, and in good faith.
                 </p>
                 <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
                   <Link href="/bag-pickup" className="btn btn-ink">Schedule a Pickup</Link>

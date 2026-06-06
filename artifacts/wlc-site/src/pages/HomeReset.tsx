@@ -91,7 +91,7 @@ export default function HomeReset() {
                   "Full key handoff",
                   "Solo resets while you're away",
                   "Packing and move prep with or without you",
-                  "Closet and system continuity after landing",
+                  "Closet and system upkeep after landing",
                 ].map((item, i) => (
                   <div key={i} style={{ display: "flex", gap: "0.75rem", alignItems: "flex-start", padding: "0.7rem 0", borderBottom: "1px solid var(--warm-gray-lt)" }}>
                     <span style={{ width: 5, height: 5, backgroundColor: "var(--sage)", flexShrink: 0, marginTop: "0.45rem" }} />

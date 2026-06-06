@@ -23,7 +23,7 @@ function FadeUp({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
 
 export default function FastBagFill() {
   usePageMeta({
-    title: "Quick Resale Pickup — Easiest Way Into Curated Resale | The Well Lived Citizen",
+    title: "Quick Resale Pickup — The Easiest Way to Resell | The Well Lived Citizen",
     description: "Fill a bag with clothing and accessories. I pick it up, evaluate, list, ship, and pay you when items sell. Commission-based. Free pickup in greater LA.",
     path: "/fast-bag-fill",
   });

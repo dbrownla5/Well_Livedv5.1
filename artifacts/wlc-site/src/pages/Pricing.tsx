@@ -24,7 +24,7 @@ function FadeUp({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
 export default function Pricing() {
   usePageMeta({
     title: "Pricing — The Well Lived Citizen",
-    description: "$495 flat Four-Hour Reset, $175/hr House Calls (2-hr minimum), Legacy quoted after walkthrough, Curated Resale commission-based with complimentary pickup. No hidden fees.",
+    description: "$495 flat Four-Hour Reset, $175/hr House Calls (2-hr minimum), Legacy quoted after walkthrough, Resale & Consignment commission-based with free pickup. No hidden fees.",
     path: "/pricing",
   });
   return (
@@ -71,18 +71,18 @@ export default function Pricing() {
               },
               {
                 num: "02",
-                service: "Legacy Planning & Inventory",
-                href: "/legacy-inventory",
+                service: "Legacy Inventory & Cataloging",
+                href: "/legacy-planning",
                 price: "$175",
                 unit: "per hour · scoped after walkthrough",
                 description: "Hourly, with project scope set after a walkthrough. Retainer available for ongoing work. No fixed packages — you only pay for the work the home needs.",
                 details: [
-                  "Photographed inventory",
-                  "Written story and memory archive",
+                  "Photo inventory and cataloging",
+                  "Notes on history, value, and who things came from",
                   "Resale and value assessment",
-                  "Dispersal strategy document",
+                  "Distribution and downsizing plan",
                   "Walkthrough before any project scope",
-                  "Retainer available for ongoing continuity",
+                  "Retainer available for ongoing work",
                 ],
                 cta: "Schedule a Walkthrough",
                 featured: false,
@@ -107,13 +107,13 @@ export default function Pricing() {
               },
               {
                 num: "04",
-                service: "Curated Resale & Consignment",
+                service: "Resale & Consignment",
                 href: "/curated-resale-consignment",
                 price: "Free",
                 unit: "pickup · commission-only",
                 description: "Free pickup. No payment up front. I evaluate, route, and list — you're paid from proceeds when items sell.",
                 details: [
-                  "Clothing, accessories, designer, furniture, decor",
+                  "Clothing, accessories, designer, and estate pieces",
                   "Quick Resale Pickup is the easy start for clothing",
                   "You agree to terms at intake, approve listings after evaluation",
                   "Custody transfers at pickup (in-person, UPS, or courier)",
@@ -247,12 +247,12 @@ export default function Pricing() {
                 notIncluded: ["Electrical or plumbing work", "Caregiving or medical support", "Cleaning services", "Same-day service (2-hr notice minimum)"],
               },
               {
-                service: "Legacy Planning",
-                included: ["Photographed inventory of significant items", "Written notes on provenance and history", "Valuation routing to trusted appraisers", "Distribution planning and strategy"],
+                service: "Legacy Inventory",
+                included: ["Photo inventory of the things that matter", "Notes on history and who things came from", "Value assessment and appraisal routing", "Distribution and downsizing plan"],
                 notIncluded: ["Estate law, wills, or legal documents", "Financial or tax advice", "Physical removal or hauling of items", "Insurance appraisals (referrals available)"],
               },
               {
-                service: "Curated Resale",
+                service: "Resale & Consignment",
                 included: ["Pickup within service area (complimentary)", "Platform matching and listing", "Buyer communication", "Sales report every 30 days, payout every 30 days from signing"],
                 notIncluded: ["Guaranteed sale or timeline", "Items outside category/condition threshold", "Junk removal or disposal", "Same-week payouts (30-day cycle)"],
               },
@@ -294,7 +294,7 @@ export default function Pricing() {
               Pre-purchase hours. Use them when you need them.
             </h2>
             <p style={{ fontSize: "0.95rem", fontWeight: 300, color: "rgba(248,244,227,0.65)", lineHeight: 1.8, marginBottom: "3rem", maxWidth: 560 }}>
-              Flex Blocks are reserved hours you can use for The Reset, House Calls, continuity work, or the things that come up between bigger projects. Your hours never expire. The point is simple: your time is already there when life needs it.
+              Flex Blocks are reserved hours you can use for The Reset, House Calls, ongoing support, or the things that come up between bigger projects. Your hours never expire. The point is simple: your time is already there when life needs it.
             </p>
           </FadeUp>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "1.5rem" }}>
@@ -306,7 +306,7 @@ export default function Pricing() {
                   The Reset · House Calls
                 </p>
                 <p style={{ fontSize: "0.88rem", fontWeight: 300, color: "rgba(248,244,227,0.65)", lineHeight: 1.7, marginBottom: "2rem" }}>
-                  Pre-purchased hours for resets, practical home support, continuity tasks, and the here-and-there asks that build up between sessions.
+                  Pre-purchased hours for resets, practical home support, and the here-and-there asks that build up between sessions.
                 </p>
                 <div style={{ display: "flex", flexDirection: "column", gap: 0 }}>
                   {[
@@ -328,32 +328,19 @@ export default function Pricing() {
               </div>
             </FadeUp>
 
-            {/* Legacy */}
+            {/* Legacy hours note — no fixed block pricing; scoped after walkthrough */}
             <FadeUp delay={80}>
               <div style={{ backgroundColor: "rgba(248,244,227,0.05)", border: "1px solid rgba(248,244,227,0.12)", padding: "2.5rem" }}>
                 <p style={{ fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--sage)", marginBottom: "0.75rem" }}>
-                  Legacy Planning
+                  Legacy Inventory
+                </p>
+                <p style={{ fontSize: "0.88rem", fontWeight: 300, color: "rgba(248,244,227,0.65)", lineHeight: 1.7, marginBottom: "1.25rem" }}>
+                  Legacy work is billed at $175/hr (2-hour minimum) and scoped after a walkthrough, not sold in pre-set blocks. The price depends on the size of the home and how much there is to go through.
                 </p>
                 <p style={{ fontSize: "0.88rem", fontWeight: 300, color: "rgba(248,244,227,0.65)", lineHeight: 1.7, marginBottom: "2rem" }}>
-                  Pre-purchased hour blocks for legacy catalog work, inventory sessions, and estate prep. Applied across multiple focused visits — not continuous daily presence. Flex blocks never expire.
+                  Applied across multiple focused visits — not daily presence. We'll set the scope together on the walkthrough call.
                 </p>
-                <div style={{ display: "flex", flexDirection: "column", gap: 0 }}>
-                  {[
-                    { label: "10-Hour Block", price: "$1,500", note: "Effective $150/hr · Save vs. $175/hr base" },
-                    { label: "25-Hour Block", price: "$3,650", note: "Effective $146/hr · Save vs. $175/hr base" },
-                  ].map((row, i) => (
-                    <div key={i} style={{
-                      display: "flex", justifyContent: "space-between", alignItems: "center",
-                      padding: "1rem 0", borderBottom: "1px solid rgba(248,244,227,0.1)",
-                    }}>
-                      <div>
-                        <p style={{ fontSize: "0.9rem", fontWeight: 600, color: "var(--parchment)", marginBottom: "0.2rem" }}>{row.label}</p>
-                        <p style={{ fontSize: "0.72rem", fontWeight: 300, color: "rgba(248,244,227,0.4)" }}>{row.note}</p>
-                      </div>
-                      <p style={{ fontSize: "1.1rem", fontWeight: 700, color: "var(--sage)" }}>{row.price}</p>
-                    </div>
-                  ))}
-                </div>
+                <Link href="/legacy-planning" className="btn btn-outline-light" style={{ fontSize: "0.65rem", padding: "0.7rem 1.4rem" }}>Legacy Details</Link>
               </div>
             </FadeUp>
 
@@ -367,9 +354,9 @@ export default function Pricing() {
                   {[
                     "Hours never expire — use them on your schedule.",
                     "Apply across sessions in 2, 4, or 6-hour blocks.",
-                    "Works for any mix of Reset, House Calls, and continuity work.",
+                    "Works for any mix of Reset, House Calls, and ongoing support.",
                     "Same rate applies whether you use them fast or over six months.",
-                    "Not applicable to project-scoped Legacy catalog or move work.",
+                    "Not applicable to project-scoped Legacy inventory or move work.",
                   ].map((line, i) => (
                     <div key={i} style={{ display: "flex", gap: "0.75rem", fontSize: "0.85rem", fontWeight: 300, color: "var(--ink)", lineHeight: 1.65 }}>
                       <span style={{ color: "var(--ink)", opacity: 0.45, flexShrink: 0 }}>—</span>{line}
@@ -440,7 +427,7 @@ export default function Pricing() {
               },
               {
                 title: "Payment",
-                body: "For services (The Reset, House Calls, Legacy), payment is due at the time of service. I accept Venmo, Zelle, and check. For Curated Resale and Quick Resale Pickup, there is no upfront payment — you're paid from proceeds after items sell. Retainer clients are billed monthly. Payment handles are confirmed when we lock the booking.",
+                body: "For services (The Reset, House Calls, Legacy), payment is due at the time of service. I accept Venmo, Zelle, and check. For Resale & Consignment and Quick Resale Pickup, there is no upfront payment — you're paid from proceeds after items sell. Retainer clients are billed monthly. Payment handles are confirmed when we lock the booking.",
               },
               {
                 title: "Travel",

@@ -71,7 +71,7 @@ export default function About() {
                 </p>
 
                 <p className="body-lg" style={{ marginBottom: "2rem" }}>
-                  The common thread is simple: helping people get things handled with competence, follow-through, and good judgment. Because often, what people actually need is not a luxury concierge or a generic organizer.
+                  The common thread is simple: helping people get things handled with competence, follow-through, and good judgment. Because often, what people actually need isn't a fancy service or a generic organizer.
                 </p>
 
                 <p style={{ fontSize: "1.15rem", fontWeight: 700, color: "var(--ink)", borderLeft: "3px solid var(--sage)", paddingLeft: "1.25rem", lineHeight: 1.5, marginTop: "2.5rem", marginBottom: "0.5rem" }}>
