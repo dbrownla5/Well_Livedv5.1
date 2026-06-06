@@ -11,6 +11,12 @@
   BASE_PATH = "/"
   NODE_VERSION = "22"
 
+# Cost control: skip Deploy Preview builds entirely. Production (main) still builds
+# and deploys normally; pull-request preview builds cancel immediately (the `ignore`
+# command exits 0 = "skip build"), so each launch costs ONE build, not two.
+[context.deploy-preview]
+  ignore = "/bin/true"
+
 # Lead capture: the site posts to /api/contact and /api/handshake/intake.
 # Route both to the function that emails the lead (via Resend). No database
 # needed for launch — every inquiry reaches the inbox.
