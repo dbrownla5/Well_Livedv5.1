@@ -328,19 +328,33 @@ export default function Pricing() {
               </div>
             </FadeUp>
 
-            {/* Legacy hours note — no fixed block pricing; scoped after walkthrough */}
+            {/* Legacy Inventory flex blocks */}
             <FadeUp delay={80}>
               <div style={{ backgroundColor: "rgba(248,244,227,0.05)", border: "1px solid rgba(248,244,227,0.12)", padding: "2.5rem" }}>
                 <p style={{ fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--sage)", marginBottom: "0.75rem" }}>
-                  Legacy Inventory
-                </p>
-                <p style={{ fontSize: "0.88rem", fontWeight: 300, color: "rgba(248,244,227,0.65)", lineHeight: 1.7, marginBottom: "1.25rem" }}>
-                  Legacy work is billed at $175/hr (2-hour minimum) and scoped after a walkthrough, not sold in pre-set blocks. The price depends on the size of the home and how much there is to go through.
+                  Legacy Inventory &amp; Cataloging
                 </p>
                 <p style={{ fontSize: "0.88rem", fontWeight: 300, color: "rgba(248,244,227,0.65)", lineHeight: 1.7, marginBottom: "2rem" }}>
-                  Applied across multiple focused visits — not daily presence. We'll set the scope together on the walkthrough call.
+                  Pre-purchased hours for inventory, cataloging, and downsizing work — applied across focused visits. Whole-home projects are scoped after a walkthrough.
                 </p>
-                <Link href="/legacy-planning" className="btn btn-outline-light" style={{ fontSize: "0.65rem", padding: "0.7rem 1.4rem" }}>Legacy Details</Link>
+                <div style={{ display: "flex", flexDirection: "column", gap: 0 }}>
+                  {[
+                    { label: "10-Hour Block", price: "$1,500", note: "Effective $150/hr · Save vs. $175/hr base" },
+                    { label: "25-Hour Block", price: "$3,650", note: "Effective $146/hr · Save vs. $175/hr base" },
+                  ].map((row, i) => (
+                    <div key={i} style={{
+                      display: "flex", justifyContent: "space-between", alignItems: "center",
+                      padding: "1rem 0", borderBottom: "1px solid rgba(248,244,227,0.1)",
+                    }}>
+                      <div>
+                        <p style={{ fontSize: "0.9rem", fontWeight: 600, color: "var(--parchment)", marginBottom: "0.2rem" }}>{row.label}</p>
+                        <p style={{ fontSize: "0.72rem", fontWeight: 300, color: "rgba(248,244,227,0.4)" }}>{row.note}</p>
+                      </div>
+                      <p style={{ fontSize: "1.1rem", fontWeight: 700, color: "var(--sage)" }}>{row.price}</p>
+                    </div>
+                  ))}
+                </div>
+                <Link href="/legacy-planning" className="btn btn-outline-light" style={{ fontSize: "0.65rem", padding: "0.7rem 1.4rem", marginTop: "1.5rem" }}>Legacy Details</Link>
               </div>
             </FadeUp>
 

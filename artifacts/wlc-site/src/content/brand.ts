@@ -27,12 +27,12 @@ export const company = {
   },
 } as const;
 
-/** LOCKED HERO — see docs/BRAND-VOICE.md. */
+/** LOCKED HERO — see docs/BRAND-VOICE.md. Landed 2026-06-06: the category, not a service. */
 export const hero = {
   headline:
-    "Professional problem solver for the things you avoid, don't have time for, or just need handled properly.",
+    "Life creates a lot to manage.",
   subhead:
-    "Moves, resale, errands, setups, storage units, logistics, tech, vendor coordination, and the things you forgot about too.",
+    "Home organization, move support, inventory cataloging, resale, and practical household support — for the things that don't fit neatly into a category but still need to get done.",
 } as const;
 
 /** Approved positioning lines — use across the site / page breaks (not the hero). */
@@ -129,6 +129,8 @@ export const pricing = {
   houseCallsHourly: "$175/hr · 2-hour minimum",
   homeCloseoutsHourly: "$150/hr (+ resale commission on items sold)",
   legacyHourly: "$175/hr · 2-hour minimum",
+  legacyFlex10hr: "$1,500 prepaid",
+  legacyFlex25hr: "$3,650 prepaid",
   legacyWholeHome: "Scoped after walkthrough",
   itemResearch: "~$25 (single item, one stop, one question)",
   retainerFrom: "Starting at $500/month",
