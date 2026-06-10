@@ -134,12 +134,15 @@ export default function Home() {
             <div style={{ maxWidth: 820 }}>
               {[
                 "The things nobody really has a category for.",
-                "The lamp that never got replaced after someone passed away.",
+                "The lightbulb that's been out for months because it needs a ladder.",
                 "The closet full of things worth reselling that's been sitting untouched for three years.",
                 "The room everyone keeps avoiding, because sorting through it means conversations no one wants to have.",
                 "The resale pile that's less about money and more about wanting things to go somewhere thoughtfully.",
+                "The \"useful someday\" boxes that look irrational to outsiders and make perfect sense once someone understands the house.",
                 "The move is one problem. The fifteen invisible problems attached to it are usually the real issue.",
-                "The \"useful someday\" boxes that look irrational to outsiders and make perfect sense up close.",
+                "The things that turn into six phone calls, three vendors, and a month of avoidance.",
+                "All the operational nonsense nobody tells you comes with adulthood.",
+                "Someone to deal with the things that become weekend projects for two consecutive years.",
               ].map((line, i) => (
                 <p
                   key={i}
