@@ -50,7 +50,7 @@ const QUICK_STARTS: { id: string; name: string; price: string; href: string; des
     price: "Commission Based",
     href: offer("resale-pickup").href,
     desc:
-      "A hands-off way to clear the bags from your hallway, porch, or trunk — you know the ones, that have been following you around for two years. What's worth selling, I sell, and you get paid. What won't, goes to someone who needs it.",
+      "A hands-off way to clear the bags from your hallway, porch, or trunk — you know the ones, that have been following you around for two years. I sort, list, and sell; you get paid on what sells, nothing out of pocket.",
   },
   {
     id: "move-closeout",
