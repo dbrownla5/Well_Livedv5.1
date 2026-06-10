@@ -121,7 +121,7 @@ export default function Contact() {
       "fast-bag": "Quick Resale Pickup — free pickup",
       "reset": "Four-Hour Reset ($495 flat)",
       "house-call": "Two-Hour House Call ($350)",
-      "closeout": "Move Closeout — transitioning a whole space",
+      "closeout": "Move Closeout — finishing out a whole space",
       "bigger": "Something bigger — full reset, legacy, or ongoing",
       "not-sure": "Not sure yet — wants a call",
       "for-parent": "Reaching out about a parent or family member",
@@ -135,7 +135,7 @@ export default function Contact() {
     if (serviceChoice === "reset") return "What space are you thinking? Closet, bedroom, post-move? Any backstory?";
     if (serviceChoice === "fast-bag") return "What kind of clothing and accessories are you looking to move on? A rough description is fine.";
     if (serviceChoice === "house-call") return "What's been on the list? What needs attention?";
-    if (serviceChoice === "closeout") return "What's the situation? Moving, transitioning a parent's home, downsizing?";
+    if (serviceChoice === "closeout") return "What's the situation? Moving, clearing a parent's home, downsizing?";
     if (serviceChoice === "bigger") return "Tell me what's going on. The more context the better.";
     if (serviceChoice === "for-parent") return "Where is the parent located? What's the situation?";
     return "What's going on? What do you need help with?";
@@ -344,7 +344,7 @@ export default function Contact() {
                         </ChoiceButton>
                         <ChoiceButton selected={serviceChoice === "closeout"} onClick={() => pick(setServiceChoice, "closeout", 2)}>
                           <span style={{ fontWeight: 700 }}>Move Closeout</span><br />
-                          <span style={{ fontSize: "0.8rem", opacity: 0.75 }}>You go first, I close out — whole-space transition</span>
+                          <span style={{ fontSize: "0.8rem", opacity: 0.75 }}>You go first, I close out — the whole space</span>
                         </ChoiceButton>
                         <ChoiceButton selected={serviceChoice === "bigger"} onClick={() => pick(setServiceChoice, "bigger", 2)}>
                           <span style={{ fontWeight: 700 }}>Something bigger</span><br />
@@ -352,7 +352,7 @@ export default function Contact() {
                         </ChoiceButton>
                         <ChoiceButton selected={serviceChoice === "for-parent"} onClick={() => pick(setServiceChoice, "for-parent", 2)}>
                           <span style={{ fontWeight: 700 }}>I'm reaching out about a parent or family member</span><br />
-                          <span style={{ fontSize: "0.8rem", opacity: 0.75 }}>House calls, check-ins, home support, or a transition</span>
+                          <span style={{ fontSize: "0.8rem", opacity: 0.75 }}>House calls, check-ins, home support, or a move</span>
                         </ChoiceButton>
                         <ChoiceButton selected={serviceChoice === "not-sure"} onClick={() => pick(setServiceChoice, "not-sure", 2)}>
                           <span style={{ fontWeight: 700 }}>I'm not sure — let's just get on the phone</span><br />
