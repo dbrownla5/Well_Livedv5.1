@@ -21,9 +21,57 @@ function FadeUp({ children, delay = 0, className = "" }: { children: React.React
   return <div ref={ref} className={`fade-up ${className}`}>{children}</div>;
 }
 
+/** Find an entry offer by id (name + price + href come from brand.ts; description is Dayna's verbatim copy). */
+function offer(id: string) {
+  return entryOffers.find((o) => o.id === id)!;
+}
+
+// Quick Start cards — name/price/href from brand.ts entryOffers, descriptions are Dayna's verbatim copy.
+const QUICK_STARTS: { id: string; name: string; price: string; href: string; desc: string }[] = [
+  {
+    id: "reset",
+    name: "Four Hour Reset",
+    price: "$495",
+    href: offer("reset").href,
+    desc:
+      'The specific room, the singular task, the aftermath of a party, or the "my mother-in-law is coming" panic. That one looming project ruining your week. Let\'s just get it handled.',
+  },
+  {
+    id: "house-call",
+    name: "House Call",
+    price: "$350",
+    href: offer("house-call").href,
+    desc:
+      "The things nobody really has a category for—tech setup, logistics, errands, and all those small details that a helpful neighbor used to handle for you.",
+  },
+  {
+    id: "resale-pickup",
+    name: "Quick Resale Pickup",
+    price: "Commission Based",
+    href: offer("resale-pickup").href,
+    desc:
+      "A hands-off way to clear the bags from your hallway, porch, or trunk. Start generating money or getting clothes to those in need. You know the ones—the bags that have been following you around for two years.",
+  },
+  {
+    id: "move-closeout",
+    name: "Move Wrap-Up",
+    price: "$150/hr",
+    href: offer("move-closeout").href,
+    desc:
+      'The truck\'s gone but the move isn\'t done — the half-unpacked rooms, the boxes marked "misc," the stuff that never got a home. I close the loop so it actually feels moved-in.',
+  },
+];
+
+const CORE_SERVICES: { name: string; href: string }[] = [
+  { name: "Home Organization & Move Support", href: "/home-reset-move-support" },
+  { name: "House Calls", href: "/house-calls-pillar" },
+  { name: "Legacy Inventory & Cataloging", href: "/legacy-planning" },
+  { name: "Resale & Consignment", href: "/curated-resale-consignment" },
+];
+
 export default function Home() {
   usePageMeta({
-    title: "The Well Lived Citizen — Professional Problem Solver for Modern Life · Los Angeles",
+    title: "The Well Lived Citizen — Chaos Wrangler. Professional Problem Solver. · Los Angeles",
     description: "One person for the move, the resale, the storage unit, and the other thing currently ruining your week. Home organization, house calls, legacy inventory, and resale in greater Los Angeles.",
     path: "/",
   });
@@ -34,299 +82,254 @@ export default function Home() {
       {/* ── HERO ── */}
       <section style={{ backgroundColor: "var(--ink)", minHeight: "100vh", display: "flex", alignItems: "center", padding: "9rem 0 5rem" }}>
         <div className="container" style={{ width: "100%" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "5rem", alignItems: "center" }}>
-
-            {/* Left — headline */}
-            <div>
-              <span className="eyebrow eyebrow-light" style={{ marginBottom: "2rem" }}>The Well Lived Citizen · Los Angeles</span>
-              <h1 style={{
-                color: "var(--parchment)",
-                fontSize: "clamp(2.2rem, 5vw, 4.2rem)",
-                fontWeight: 800,
-                lineHeight: 1.1,
-                letterSpacing: "-0.02em",
-                marginBottom: "2rem",
-              }}>
-                {hero.headline}
-              </h1>
-              <p style={{
-                fontSize: "clamp(0.95rem, 1.8vw, 1.15rem)",
-                fontWeight: 300,
-                color: "rgba(248,244,227,0.65)",
-                lineHeight: 1.75,
-                marginBottom: "2.5rem",
-                maxWidth: 540,
-              }}>
-                {hero.subhead}
-              </p>
-              <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
-                <Link href="/contact" className="btn btn-sage">Schedule a Call</Link>
-                <Link href="/services" className="btn btn-outline-light">See All Services</Link>
-              </div>
-            </div>
-
-            {/* Right — Quick Entry offers (from brand.ts) */}
-            <div style={{ borderLeft: "1px solid rgba(248,244,227,0.12)", paddingLeft: "3rem" }}>
-              <p style={{ fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--sage)", marginBottom: "1.25rem" }}>
-                Quick Entry · start today
-              </p>
-              {entryOffers.map((o) => (
-                <Link key={o.id} href={o.href} style={{ textDecoration: "none" }}>
-                  <div style={{
-                    display: "flex", justifyContent: "space-between", alignItems: "center",
-                    padding: "1.25rem 0", borderBottom: "1px solid rgba(248,244,227,0.08)",
-                    transition: "opacity 0.15s ease", cursor: "pointer",
-                  }}
-                    onMouseEnter={e => (e.currentTarget as HTMLElement).style.opacity = "0.65"}
-                    onMouseLeave={e => (e.currentTarget as HTMLElement).style.opacity = "1"}
-                  >
-                    <div>
-                      <p style={{ fontSize: "1rem", fontWeight: 600, color: "var(--parchment)", marginBottom: "0.25rem" }}>{o.name}</p>
-                      <p style={{ fontSize: "0.78rem", fontWeight: 300, color: "rgba(248,244,227,0.55)" }}>{o.price}</p>
-                    </div>
-                    <span style={{ color: "var(--sage)", fontSize: "1rem", flexShrink: 0, marginLeft: "1rem" }}>→</span>
-                  </div>
-                </Link>
-              ))}
-            </div>
-
-          </div>
+          <FadeUp>
+            <span className="eyebrow eyebrow-light" style={{ marginBottom: "2rem" }}>The Well Lived Citizen · Los Angeles</span>
+            <h1 className="display-xl" style={{ color: "var(--parchment)", maxWidth: 900 }}>
+              {hero.headline}
+            </h1>
+          </FadeUp>
         </div>
       </section>
 
-      {/* ── IF ANY OF THESE RESONATE ── */}
+      {/* ── SUBHERO ── */}
       <section style={{ backgroundColor: "var(--parchment)", padding: "6.5rem 0" }}>
         <div className="container">
           <FadeUp>
             <div style={{ maxWidth: 760 }}>
-              <span className="eyebrow eyebrow-sage">If any of these sound familiar</span>
-              <h2 className="display-md" style={{ color: "var(--ink)", maxWidth: 600, marginBottom: "2.5rem", marginTop: "0.5rem" }}>
-                You don't need a name for it. You just want it handled.
-              </h2>
-              <ul style={{ listStyle: "none", padding: 0, margin: "0 0 2.5rem", display: "grid", gap: "1px", backgroundColor: "var(--warm-gray-lt)", border: "1px solid var(--warm-gray-lt)" }}>
+              <p style={{ fontSize: "1.15rem", fontWeight: 400, color: "var(--ink)", lineHeight: 1.8, marginBottom: "0.5rem" }}>
+                You find me when you've typed:
+              </p>
+              <p style={{ fontSize: "1.3rem", fontWeight: 700, color: "var(--ink)", lineHeight: 1.5, marginBottom: "1.5rem" }}>
+                "Is there a person who..."
+              </p>
+              <ul style={{ listStyle: "none", padding: 0, margin: "0 0 2rem", display: "flex", flexDirection: "column", gap: "0.85rem" }}>
                 {[
-                  "The new phone, laptop, or TV that came in the box and never got set up.",
-                  "The room that became a staging area and just… stayed that way.",
-                  "The closet full of good things you keep meaning to sell.",
-                  "The move that technically happened, but never fully landed.",
-                  "The pile of stuff that needs to go somewhere — thoughtfully, not in a panic.",
-                  "The errands, vendors, and little fixes that keep getting pushed to next week.",
-                  "The thing you could do yourself. You just… haven't.",
+                  "...can help me figure out what to do with all this baby stuff?",
+                  "...can help me finish unpacking after a move that technically happened six months ago?",
+                  "...can help me deal with the storage unit that was supposed to be temporary?",
+                  "...can help me figure out what to keep, sell, donate, or stop paying to store?",
+                  "...can help my parents without making it a whole thing?",
+                  "...can just help me get this handled?",
                 ].map((line, i) => (
-                  <li key={i} style={{ backgroundColor: "var(--parchment)", fontSize: "1rem", fontWeight: 300, color: "var(--ink-soft)", lineHeight: 1.6, padding: "1rem 1.25rem" }}>
+                  <li key={i} style={{ fontSize: "1.05rem", fontWeight: 300, color: "var(--ink-soft)", lineHeight: 1.6, paddingLeft: "1.25rem", borderLeft: "2px solid var(--sage)" }}>
                     {line}
                   </li>
                 ))}
               </ul>
-              <p style={{ fontSize: "1.05rem", fontWeight: 400, color: "var(--ink)", lineHeight: 1.85, marginBottom: "0.75rem" }}>
-                If any of these resonate, you're in the right place. Most people don't need four different services and a group text — they need one capable person who sees the whole picture and gets things moving again.
+              <p style={{ fontSize: "1.1rem", fontWeight: 400, color: "var(--ink)", lineHeight: 1.8, marginBottom: "0.5rem" }}>
+                Usually what you need falls somewhere between categories.
               </p>
-              <p style={{ fontSize: "1rem", fontWeight: 300, color: "var(--sage-dark)", lineHeight: 1.85 }}>
-                Below are three easy ways to start right now. The deeper, project-level work is in Core Services further down. ↓
+              <p style={{ fontSize: "1.1rem", fontWeight: 600, color: "var(--ink)", lineHeight: 1.8 }}>
+                I'm Dayna.
               </p>
             </div>
           </FadeUp>
         </div>
       </section>
 
-      {/* ── START HERE ── */}
+      {/* ── RECOGNITION ── */}
+      <section style={{ backgroundColor: "var(--ink)", padding: "6.5rem 0" }}>
+        <div className="container">
+          <FadeUp>
+            <div style={{ maxWidth: 820 }}>
+              {[
+                "The things nobody really has a category for.",
+                "The nursery after the baby shower.",
+                "The move that technically happened six months ago.",
+                "The storage unit that started as temporary.",
+                "The closet that's worth dealing with but somehow never becomes today's priority.",
+                "The parent who swears they don't need help.",
+                "The project that's been following you around for two years.",
+              ].map((line, i) => (
+                <p
+                  key={i}
+                  style={{
+                    fontSize: "clamp(1.15rem, 2.2vw, 1.5rem)",
+                    fontWeight: 300,
+                    color: i === 0 ? "var(--parchment)" : "rgba(248,244,227,0.72)",
+                    lineHeight: 1.5,
+                    marginBottom: "1rem",
+                  }}
+                >
+                  {line}
+                </p>
+              ))}
+            </div>
+          </FadeUp>
+        </div>
+      </section>
+
+      {/* ── QUICK STARTS ── */}
       <section style={{ backgroundColor: "var(--parchment-mid)", padding: "6rem 0" }}>
         <div className="container">
           <FadeUp>
             <span className="eyebrow eyebrow-sage">Start here</span>
-            <h2 className="display-md" style={{ color: "var(--ink)", maxWidth: 600, marginBottom: "0.75rem" }}>Three things I can take off your plate this week.</h2>
-            <p style={{ fontSize: "1rem", fontWeight: 300, color: "var(--sage-dark)", maxWidth: 640, lineHeight: 1.85, marginBottom: "3.5rem" }}>
-              Not every job is a whole project. Pick one. Booked and handled, usually within a few days.
-            </p>
+            <h2 className="display-md" style={{ color: "var(--ink)", marginBottom: "3.5rem", marginTop: "0.5rem" }}>
+              Easy ways most people start:
+            </h2>
           </FadeUp>
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "1.5px", backgroundColor: "var(--warm-gray-lt)" }}>
-            <FadeUp delay={0}>
-              <div style={{ backgroundColor: "var(--parchment)", padding: "2.5rem", height: "100%" }}>
-                <div className="underlay-tag underlay-tag-sage" style={{ marginBottom: "1.5rem" }}>01 — The Reset</div>
-                <h3 className="display-sm" style={{ color: "var(--ink)", marginBottom: "1rem" }}>Four-Hour Reset</h3>
-                <p style={{ fontSize: "0.95rem", fontWeight: 300, lineHeight: 1.8, color: "var(--ink-soft)", marginBottom: "2rem" }}>
-                  One space, four hours, done. The closet you stop opening. The kitchen drawer everyone gave up on. The room that became a staging area eighteen months ago. I show up with a plan and leave it functional.
-                </p>
-                <div style={{ display: "flex", alignItems: "center", gap: "1rem", flexWrap: "wrap" }}>
-                  <Link href="/the-reset" className="btn btn-ink">Book a Reset</Link>
-                  <span style={{ fontSize: "0.8rem", color: "var(--sage-dark)", fontWeight: 500 }}>$495 · one 4-hour block</span>
-                </div>
-              </div>
-            </FadeUp>
-
-            <FadeUp delay={60}>
-              <div style={{ backgroundColor: "var(--parchment)", padding: "2.5rem", height: "100%" }}>
-                <div className="underlay-tag" style={{ marginBottom: "1.5rem" }}>02 — House Calls</div>
-                <h3 className="display-sm" style={{ color: "var(--ink)", marginBottom: "1rem" }}>Two-Hour House Call</h3>
-                <p style={{ fontSize: "0.95rem", fontWeight: 300, lineHeight: 1.8, color: "var(--ink-soft)", marginBottom: "2rem" }}>
-                  The short list of things that keep getting pushed: the smoke detector, the printer that hates everyone, the donation pile, the vendor who needs to be let in. Two-hour minimum, hourly after that.
-                </p>
-                <div style={{ display: "flex", alignItems: "center", gap: "1rem", flexWrap: "wrap" }}>
-                  <Link href="/house-calls" className="btn btn-ink">Book a House Call</Link>
-                  <span style={{ fontSize: "0.8rem", color: "var(--sage-dark)", fontWeight: 500 }}>$175/hr · 2-hr min</span>
-                </div>
-              </div>
-            </FadeUp>
-
-            <FadeUp delay={120}>
-              <div style={{ backgroundColor: "var(--parchment)", padding: "2.5rem", height: "100%" }}>
-                <div className="underlay-tag" style={{ marginBottom: "1.5rem" }}>03 — Resale</div>
-                <h3 className="display-sm" style={{ color: "var(--ink)", marginBottom: "1rem" }}>Quick Resale Pickup</h3>
-                <p style={{ fontSize: "0.95rem", fontWeight: 300, lineHeight: 1.8, color: "var(--ink-soft)", marginBottom: "2rem" }}>
-                  Fill a bag with clothing and accessories you're done with. I pick up, evaluate, route to the platform where the right buyer is, and list. You stop tripping over it. Free pickup in LA.
-                </p>
-                <div style={{ display: "flex", alignItems: "center", gap: "1rem", flexWrap: "wrap" }}>
-                  <Link href="/fast-bag-fill" className="btn btn-ink">Schedule a Pickup</Link>
-                  <span style={{ fontSize: "0.8rem", color: "var(--sage-dark)", fontWeight: 500 }}>Commission-based</span>
-                </div>
-              </div>
-            </FadeUp>
-          </div>
-        </div>
-      </section>
-
-      {/* ── HOUSE CALLS PITCH ── */}
-      <section style={{ backgroundColor: "var(--ink)", padding: "6rem 0" }}>
-        <div className="container">
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "5rem", alignItems: "center" }}>
-            <FadeUp>
-              <span className="eyebrow eyebrow-sage">House Calls</span>
-              <h2 className="display-md" style={{ color: "var(--parchment)", marginBottom: "1.25rem", lineHeight: 1.15 }}>
-                The list you keep meaning to get to.
-              </h2>
-              <p style={{ fontSize: "1rem", fontWeight: 300, color: "rgba(248,244,227,0.72)", lineHeight: 1.8, marginBottom: "1.25rem" }}>
-                The technology that stopped working. The safety items that have been on the list for months. The room that's slowly become harder to move through. The vendor who needs supervising. The donation drop nobody's making.
-              </p>
-              <p style={{ fontSize: "1rem", fontWeight: 300, color: "rgba(248,244,227,0.72)", lineHeight: 1.8, marginBottom: "2.5rem" }}>
-                Not crisis. Not caregiving. Just the practical, unglamorous work of keeping a household running — handled by someone who actually likes figuring it out.
-              </p>
-              <Link href="/house-calls" className="btn btn-sage">Learn About House Calls</Link>
-            </FadeUp>
-            <FadeUp delay={100}>
-              <div style={{ backgroundColor: "var(--sage)", padding: "3rem", boxShadow: "6px 6px 0px rgba(248,244,227,0.15)" }}>
-                <p style={{ fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--ink)", opacity: 0.55, marginBottom: "1.5rem" }}>Client · House Calls</p>
-                <p style={{ fontSize: "1.05rem", fontWeight: 600, color: "var(--ink)", lineHeight: 1.55, marginBottom: "1.5rem" }}>
-                  "I wake up and my clicker for all my lamps is on my bedside table. I get up and move it to the dresser by the door so every time I come back in I can turn any lamp from the doorway. My clothes are arranged by item and color, my purses on two long shelves and two short ones — I can see what I have and choose accordingly. My shoes are on four shelves where I can easily see them. The heat is set perfectly. The TV is set up with only one clicker to get to all the channels I want. Thank you for making life easier for me."
-                </p>
-                <p style={{ fontSize: "0.8rem", fontWeight: 600, color: "var(--ink)", opacity: 0.6, letterSpacing: "0.08em" }}>— Gayle Williams · Seattle Client</p>
-                <div style={{ borderTop: "1px solid rgba(56,48,46,0.2)", paddingTop: "1.5rem", marginTop: "2rem" }}>
-                  <p style={{ fontSize: "0.72rem", fontWeight: 600, letterSpacing: "0.15em", textTransform: "uppercase", color: "var(--ink)", opacity: 0.65, marginBottom: "1rem" }}>
-                    A House Call might include
+          <div
+            className="grid-cols-1 md:grid-cols-2"
+            style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.5px", backgroundColor: "var(--warm-gray-lt)" }}
+          >
+            {QUICK_STARTS.map((card, i) => (
+              <FadeUp key={card.id} delay={i * 60}>
+                <div style={{ backgroundColor: "var(--parchment)", padding: "2.5rem", height: "100%", display: "flex", flexDirection: "column" }}>
+                  <h3 className="display-sm" style={{ color: "var(--ink)", marginBottom: "0.4rem" }}>{card.name}</h3>
+                  <p style={{ fontSize: "0.85rem", fontWeight: 600, color: "var(--sage-dark)", letterSpacing: "0.04em", marginBottom: "1.25rem" }}>{card.price}</p>
+                  <p style={{ fontSize: "0.95rem", fontWeight: 300, lineHeight: 1.8, color: "var(--ink-soft)", marginBottom: "2rem", flexGrow: 1 }}>
+                    {card.desc}
                   </p>
-                  <ul style={{ listStyle: "none", padding: 0, display: "flex", flexDirection: "column", gap: "0.4rem" }}>
-                    {["Technology setup & troubleshooting", "Home safety updates", "Reorganizing for easier access", "Resale & donation preparation", "Remote family check-ins", "Post-move settling"].map(item => (
-                      <li key={item} style={{ fontSize: "0.85rem", fontWeight: 300, color: "var(--ink)", display: "flex", alignItems: "flex-start", gap: "0.75rem" }}>
-                        <span style={{ color: "var(--ink)", opacity: 0.4, flexShrink: 0, marginTop: "0.15rem" }}>—</span>{item}
-                      </li>
-                    ))}
-                  </ul>
+                  <div>
+                    <Link href={card.href} className="btn btn-ink">Book Now</Link>
+                  </div>
                 </div>
-              </div>
-            </FadeUp>
+              </FadeUp>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* ── SERVICES OVERVIEW ── */}
+      {/* ── CORE SERVICES ── */}
       <section style={{ backgroundColor: "var(--parchment)", padding: "6rem 0" }}>
         <div className="container">
           <FadeUp>
-            <span className="eyebrow eyebrow-sage">Four Pillars</span>
-            <h2 className="display-md" style={{ color: "var(--ink)", maxWidth: 520, marginBottom: "1rem" }}>One person.</h2>
-            <p style={{ fontSize: "0.95rem", fontWeight: 300, color: "var(--sage-dark)", maxWidth: 600, lineHeight: 1.8, marginBottom: "3.5rem" }}>
-              The work splits cleanly into four categories. Most clients use two or three of them at once.
-            </p>
+            <span className="eyebrow eyebrow-sage">Core Services</span>
+            <h2 className="display-md" style={{ color: "var(--ink)", marginBottom: "2.5rem", marginTop: "0.5rem" }}>
+              Or if it's bigger than that:
+            </h2>
           </FadeUp>
           <div style={{ display: "grid", gap: "1px", backgroundColor: "var(--warm-gray-lt)" }}>
-            {[
-              { num: "01", name: "Home Organization & Move Support", desc: "Organization, unpacking, room functionality, post-move setup. The Four-Hour Reset lives here. Ongoing support billed hourly when projects run longer.", href: "/home-reset-move-support" },
-              { num: "02", name: "Legacy Inventory & Cataloging", desc: "Inventory and cataloging of the things that quietly accumulate in a house — the china nobody uses, the box marked important, the stuff too important to disappear but never urgent enough to deal with. Sorted while there's still time to decide.", href: "/legacy-planning" },
-              { num: "03", name: "House Calls", desc: "Hourly household help for busy professionals, independent older adults, and families managing a parent's home from a distance. The Two-Hour House Call lives here.", href: "/house-calls-pillar" },
-              { num: "04", name: "Resale & Consignment", desc: "Fill a bag or schedule a pickup. I sort, evaluate, route, list, and sell — clothing, accessories, designer, and estate pieces. You get the value back without managing any of it. The Quick Resale Pickup lives here.", href: "/curated-resale-consignment" },
-            ].map((s, i) => (
-              <FadeUp key={s.num} delay={i * 40}>
+            {CORE_SERVICES.map((s, i) => (
+              <FadeUp key={s.href} delay={i * 40}>
                 <Link href={s.href}>
-                  <div style={{
-                    backgroundColor: "var(--parchment)", padding: "2rem 2.5rem",
-                    display: "flex", alignItems: "center", justifyContent: "space-between", gap: "2rem",
-                    transition: "background-color 0.18s ease", cursor: "pointer",
-                  }}
+                  <div
+                    style={{
+                      backgroundColor: "var(--parchment)", padding: "1.75rem 2.5rem",
+                      display: "flex", alignItems: "center", justifyContent: "space-between", gap: "2rem",
+                      transition: "background-color 0.18s ease", cursor: "pointer",
+                    }}
                     onMouseEnter={e => (e.currentTarget as HTMLElement).style.backgroundColor = "var(--parchment-mid)"}
                     onMouseLeave={e => (e.currentTarget as HTMLElement).style.backgroundColor = "var(--parchment)"}
                   >
-                    <div style={{ display: "flex", alignItems: "flex-start", gap: "2rem" }}>
-                      <span className="service-num" style={{ paddingTop: "0.2rem", flexShrink: 0 }}>{s.num}</span>
-                      <div>
-                        <h3 style={{ fontSize: "1.05rem", fontWeight: 700, color: "var(--ink)", marginBottom: "0.35rem" }}>{s.name}</h3>
-                        <p style={{ fontSize: "0.9rem", fontWeight: 300, color: "var(--sage-dark)", lineHeight: 1.65, maxWidth: 480 }}>{s.desc}</p>
-                      </div>
-                    </div>
+                    <h3 style={{ fontSize: "1.05rem", fontWeight: 700, color: "var(--ink)" }}>{s.name}</h3>
                     <span style={{ color: "var(--sage)", fontSize: "1.2rem", fontWeight: 300, flexShrink: 0 }}>→</span>
                   </div>
                 </Link>
               </FadeUp>
             ))}
           </div>
-          <FadeUp delay={200}>
-            <div style={{ marginTop: "2.5rem", display: "flex", gap: "1rem" }}>
-              <Link href="/services" className="btn btn-outline-ink">All Services</Link>
-              <Link href="/pricing" className="btn btn-outline-ink">Pricing</Link>
+        </div>
+      </section>
+
+      {/* ── BRIDGE (closer) ── */}
+      <section style={{ backgroundColor: "var(--sage)", padding: "7rem 0" }}>
+        <div className="container">
+          <FadeUp>
+            <div style={{ maxWidth: 760 }}>
+              {[
+                "Life creates a lot to manage.",
+                "Moves. Closets. Collections. Storage units. New babies. Family homes. The project that's been sitting in the corner for six months. The thing you'd handle yourself if you had the time, energy, or desire to become a part-time project manager.",
+                "I help with the practical realities of living—home organization, move support, inventory cataloging, resale, house calls, and the dozens of details that somehow don't fit neatly into one service.",
+                "One person instead of four strangers - one person who gets to know you, your home, how it all works.",
+                "Most people address the clutter. I address the friction underneath it.",
+                "Giving you clarity, ease and more time for living well.",
+                "That's the work.",
+              ].map((para, i) => (
+                <p
+                  key={i}
+                  style={{
+                    fontSize: i === 0 ? "clamp(1.4rem, 3vw, 2rem)" : "1.1rem",
+                    fontWeight: i === 0 ? 700 : 300,
+                    color: "var(--ink)",
+                    lineHeight: i === 0 ? 1.25 : 1.85,
+                    marginBottom: i === 0 ? "2rem" : "1.5rem",
+                    opacity: i === 0 ? 1 : 0.9,
+                  }}
+                >
+                  {para}
+                </p>
+              ))}
             </div>
           </FadeUp>
         </div>
       </section>
 
-      {/* ── ABOUT STRIP ── */}
-      <section style={{ backgroundColor: "var(--sage)", padding: "5rem 0" }}>
-        <div className="container">
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "4rem", alignItems: "center" }}>
-            <FadeUp>
-              <span className="eyebrow" style={{ color: "var(--sage-dark)" }}>Dayna Brown · Founder</span>
-              <h2 className="display-sm" style={{ color: "var(--ink)", marginBottom: "1.25rem", lineHeight: 1.2 }}>
-                15+ years in retail and operations. My whole career was about knowing where things go.
-              </h2>
-              <Link href="/about" className="btn btn-ink">About Dayna</Link>
-            </FadeUp>
-            <FadeUp delay={80}>
-              <p style={{ fontSize: "1rem", fontWeight: 300, color: "var(--ink)", lineHeight: 1.85, opacity: 0.85 }}>
-                I built this because there's a category of help nobody offers cleanly — too specific for a big company, too complex for a quick hire. The closet that needs editing, the parent who needs someone local to actually show up, the inherited furniture nobody knows what to do with. One person who can be all of it.
-              </p>
-            </FadeUp>
-            <FadeUp delay={140}>
-              <img
-                src="/assets/dayna-headshot-portrait.jpg"
-                alt="Dayna Brown, Founder"
-                style={{
-                  width: "100%",
-                  maxWidth: 420,
-                  aspectRatio: "3 / 4",
-                  objectFit: "cover",
-                  objectPosition: "top center",
-                  borderRadius: 0,
-                  display: "block",
-                }}
-              />
-            </FadeUp>
-          </div>
-        </div>
-      </section>
-
-      {/* ── BOTTOM CTA ── */}
+      {/* ── NEXT STEPS ── */}
       <section style={{ backgroundColor: "var(--ink)", padding: "6rem 0" }}>
         <div className="container">
           <FadeUp>
-            <div style={{ maxWidth: 600, margin: "0 auto", textAlign: "center" }}>
-              <span className="eyebrow" style={{ color: "rgba(248,244,227,0.45)" }}>Ready to start?</span>
-              <h2 className="display-md" style={{ color: "var(--parchment)", marginBottom: "1.25rem" }}>
-                Tell me what's been quietly weighing on you.
-              </h2>
-              <p style={{ fontSize: "1rem", fontWeight: 300, color: "rgba(248,244,227,0.65)", lineHeight: 1.75, marginBottom: "2.5rem" }}>
-                I'll take it from there.
-              </p>
-              <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
-                <Link href="/contact" className="btn btn-sage">Schedule a Call</Link>
-                <Link href="/pricing" className="btn btn-outline-light">See Pricing</Link>
+            <span className="eyebrow" style={{ color: "rgba(248,244,227,0.45)" }}>Next steps</span>
+            <div
+              className="grid-cols-1 md:grid-cols-2"
+              style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0 4rem", marginTop: "1.5rem", maxWidth: 820 }}
+            >
+              {[
+                { label: "Service Pages", href: "/services" },
+                { label: "More About Me", href: "/about" },
+                { label: "Pricing", href: "/pricing" },
+                { label: "Contact Me", href: "/contact" },
+                { label: "FAQ", href: "/faq" },
+                { label: "Book Now", href: "/contact" },
+              ].map((l) => (
+                <Link
+                  key={l.label}
+                  href={l.href}
+                  style={{
+                    display: "flex", justifyContent: "space-between", alignItems: "center",
+                    padding: "1.1rem 0", borderBottom: "1px solid rgba(248,244,227,0.12)",
+                    fontSize: "1rem", fontWeight: 500, color: "var(--parchment)",
+                    transition: "opacity 0.15s ease",
+                  }}
+                  onMouseEnter={e => (e.currentTarget as HTMLElement).style.opacity = "0.65"}
+                  onMouseLeave={e => (e.currentTarget as HTMLElement).style.opacity = "1"}
+                >
+                  <span>{l.label}</span>
+                  <span style={{ color: "var(--sage)", flexShrink: 0, marginLeft: "1rem" }}>→</span>
+                </Link>
+              ))}
+
+              {/* Testimonials and Socials → Instagram */}
+              <a
+                href="https://www.instagram.com/thewelllivedcitizen"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display: "flex", justifyContent: "space-between", alignItems: "center",
+                  padding: "1.1rem 0", borderBottom: "1px solid rgba(248,244,227,0.12)",
+                  fontSize: "1rem", fontWeight: 500, color: "var(--parchment)",
+                  transition: "opacity 0.15s ease",
+                }}
+                onMouseEnter={e => (e.currentTarget as HTMLElement).style.opacity = "0.65"}
+                onMouseLeave={e => (e.currentTarget as HTMLElement).style.opacity = "1"}
+              >
+                <span>Testimonials and Socials</span>
+                <span style={{ color: "var(--sage)", flexShrink: 0, marginLeft: "1rem" }}>→</span>
+              </a>
+
+              {/* Client Portal — Resale Only · coming soon (not a link) */}
+              <div
+                style={{
+                  display: "flex", justifyContent: "space-between", alignItems: "center",
+                  padding: "1.1rem 0", borderBottom: "1px solid rgba(248,244,227,0.12)",
+                  fontSize: "1rem", fontWeight: 500, color: "rgba(248,244,227,0.45)",
+                }}
+              >
+                <span>Client Portal — Resale Only</span>
+                <span style={{ fontSize: "0.72rem", fontWeight: 600, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--sage)", flexShrink: 0, marginLeft: "1rem" }}>Coming soon</span>
+              </div>
+
+              {/* Gallery · coming soon (not a link) */}
+              <div
+                style={{
+                  display: "flex", justifyContent: "space-between", alignItems: "center",
+                  padding: "1.1rem 0", borderBottom: "1px solid rgba(248,244,227,0.12)",
+                  fontSize: "1rem", fontWeight: 500, color: "rgba(248,244,227,0.45)",
+                }}
+              >
+                <span>Gallery</span>
+                <span style={{ fontSize: "0.82rem", fontWeight: 400, color: "rgba(248,244,227,0.45)", flexShrink: 0, marginLeft: "1rem" }}>(Gallery coming soon)</span>
               </div>
             </div>
           </FadeUp>

@@ -27,12 +27,11 @@ export const company = {
   },
 } as const;
 
-/** LOCKED HERO — see docs/BRAND-VOICE.md. Landed 2026-06-06: the category, not a service. */
+/** LOCKED HERO — see docs/BRAND-VOICE.md. Landed 2026-06 (Dayna verbatim). */
 export const hero = {
-  headline:
-    "Life creates a lot to manage.",
+  headline: "Chaos Wrangler. Professional Problem Solver.",
   subhead:
-    "Home organization, move support, inventory cataloging, resale, and practical household support — for the things that don't fit neatly into a category but still need to get done.",
+    "Usually what you need falls somewhere between categories.",
 } as const;
 
 /** Approved positioning lines — use across the site / page breaks (not the hero). */
@@ -78,7 +77,7 @@ export const entryOffers = [
   },
   {
     id: "move-closeout",
-    name: "Move Closeout",
+    name: "Move Wrap-Up",
     price: "$150/hr",
     blurb:
       "You already moved. The boxes, the storage unit, the resale pile, the loose ends — I close out what the move left behind.",
