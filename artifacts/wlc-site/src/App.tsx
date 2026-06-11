@@ -51,6 +51,7 @@ function Router() {
       <Route path="/legacy-planning" component={LegacyPillar} />
       <Route path="/legacy-inventory" component={LegacyPillar} />
       <Route path="/house-calls-pillar" component={HouseCallsPillar} />
+      <Route path="/resale-consignment" component={CuratedResalePillar} />
       <Route path="/curated-resale-consignment" component={CuratedResalePillar} />
       <Route path="/curated-resale" component={CuratedResalePillar} />
 

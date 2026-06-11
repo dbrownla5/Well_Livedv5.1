@@ -98,7 +98,7 @@ export default function Pricing() {
                   "2-hour minimum booking",
                   "Billed in full hours",
                   "No discovery call required",
-                  "Technology, organization, transitions",
+                  "Technology, organization, the everyday stuff",
                   "Monthly retainer packages available",
                   "Cancellation: 24-hour notice",
                 ],
@@ -108,7 +108,7 @@ export default function Pricing() {
               {
                 num: "04",
                 service: "Resale & Consignment",
-                href: "/curated-resale-consignment",
+                href: "/resale-consignment",
                 price: "Free",
                 unit: "pickup · commission-only",
                 description: "Free pickup. No payment up front. I evaluate, route, and list — you're paid from proceeds when items sell.",
@@ -242,7 +242,7 @@ export default function Pricing() {
               },
               {
                 mode: "Move Closeout",
-                tag: "For whole-home transitions",
+                tag: "For whole-home moves",
                 body: "You go through once and flag what stays. Everything else — donations, resale prep, packing, routing — gets handled after you leave. You don't have to be there for the hard part.",
               },
             ].map((item, i) => (

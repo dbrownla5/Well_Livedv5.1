@@ -333,7 +333,7 @@ export default function FastBagFill() {
               },
               {
                 q: "How fast can a pickup happen?",
-                a: "Most pickups are scheduled within 2–5 days. Urgent pickups (moves, closeouts, time-sensitive transitions) are usually doable inside 48 hours. Use the scheduling form to flag urgency.",
+                a: "Most pickups are scheduled within 2–5 days. Urgent pickups (moves, closeouts, time-sensitive situations) are usually doable inside 48 hours. Use the scheduling form to flag urgency.",
               },
             ].map((item, i) => (
               <FAQItem key={i} q={item.q} a={item.a} />

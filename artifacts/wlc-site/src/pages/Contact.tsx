@@ -287,7 +287,7 @@ export default function Contact() {
                       </ChoiceButton>
                       <ChoiceButton selected={serviceChoice === "for-parent"} onClick={() => { setServiceChoice("for-parent"); go("context"); }}>
                         <span style={{ fontWeight: 700 }}>I'm reaching out about a parent or family member</span><br />
-                        <span style={{ fontSize: "0.8rem", opacity: 0.75 }}>House calls, check-ins, home support, or a transition</span>
+                        <span style={{ fontSize: "0.8rem", opacity: 0.75 }}>House calls, check-ins, home support, or a bigger change</span>
                       </ChoiceButton>
                       <ChoiceButton selected={serviceChoice === "not-sure"} onClick={() => { setServiceChoice("not-sure"); go("context"); }}>
                         <span style={{ fontWeight: 700 }}>I'm not sure — let's just get on the phone</span><br />

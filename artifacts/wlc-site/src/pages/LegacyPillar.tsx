@@ -215,7 +215,7 @@ export default function LegacyPillar() {
               { q: "What if I don't know what's valuable?", a: "That's exactly why this service exists. I flag items that may have value and coordinate with trusted appraisers. You don't need to know in advance — that's my job." },
               { q: "Can this be done remotely if I'm managing a parent's home from another city?", a: "Yes. I can conduct the walkthrough and catalog independently, send photos and documentation in real time, and coordinate with you remotely throughout the project." },
               { q: "What happens after the catalog is complete?", a: "I'll walk you through a distribution plan — what goes to family, what goes to resale, what gets donated. The decisions are yours. I handle the logistics." },
-              { q: "Is this only for estates?", a: "No. Many clients do this proactively — before any transition happens. It's actually easier and more thorough when there's no urgency. The best time to do this work is before you need it." },
+              { q: "Is this only for estates?", a: "No. Many clients do this proactively — long before anything has to change. It's actually easier and more thorough when there's no urgency. The best time to do this work is before you need it." },
             ].map((item, i) => (
               <FAQItem key={i} q={item.q} a={item.a} />
             ))}

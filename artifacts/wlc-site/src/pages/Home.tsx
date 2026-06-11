@@ -66,7 +66,7 @@ const CORE_SERVICES: { name: string; href: string }[] = [
   { name: "Home Organization & Move Support", href: "/home-reset-move-support" },
   { name: "House Calls", href: "/house-calls-pillar" },
   { name: "Legacy Inventory & Cataloging", href: "/legacy-planning" },
-  { name: "Resale & Consignment", href: "/curated-resale-consignment" },
+  { name: "Resale & Consignment", href: "/resale-consignment" },
 ];
 
 export default function Home() {

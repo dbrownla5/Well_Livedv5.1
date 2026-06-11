@@ -113,7 +113,7 @@ export const pillars = [
     name: "Resale & Consignment",
     desc: "Fill a bag or schedule a pickup. I sort, evaluate, route, list, and sell — clothing, accessories, designer, and estate pieces. You recover the value without managing any of it. Free pickup.",
     price: "Commission-based · free pickup",
-    href: "/curated-resale-consignment",
+    href: "/resale-consignment",
   },
 ] as const;
 

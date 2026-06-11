@@ -39,7 +39,7 @@ export default function CuratedResalePillar() {
   usePageMeta({
     title: "Resale & Consignment — Fill a Bag, I Handle the Rest | The Well Lived Citizen",
     description: "Resale for the things still worth something. Pickup, evaluation, photography, listing, and payout. Commission-based. Los Angeles.",
-    path: "/curated-resale-consignment",
+    path: "/resale-consignment",
   });
   return (
     <div style={{ backgroundColor: "var(--parchment)", minHeight: "100vh" }}>
