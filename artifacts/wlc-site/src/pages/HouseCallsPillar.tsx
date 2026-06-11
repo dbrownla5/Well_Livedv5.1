@@ -48,17 +48,17 @@ export default function HouseCallsPillar() {
       {/* ── HERO ── */}
       <section style={{ backgroundColor: "var(--ink)", paddingTop: "10rem", paddingBottom: "7rem" }}>
         <div className="container">
-          <div style={{ maxWidth: 740 }}>
-            <span className="eyebrow eyebrow-light">Pillar 03</span>
-            <h1 className="display-lg" style={{ color: "var(--parchment)", marginBottom: "1.5rem" }}>House Calls</h1>
-            <p style={{ fontSize: "1.2rem", fontWeight: 300, color: "rgba(248,244,227,0.75)", lineHeight: 1.8, marginBottom: "0.75rem" }}>
-              For the things life leaves unfinished.
+          <div style={{ maxWidth: 760 }}>
+            <span className="eyebrow eyebrow-light">House Calls · Los Angeles</span>
+            <h1 className="display-lg" style={{ color: "var(--parchment)", marginBottom: "1.75rem" }}>The person you used to be able to call.</h1>
+            <p style={{ fontSize: "1.15rem", fontWeight: 300, color: "rgba(248,244,227,0.78)", lineHeight: 1.8, marginBottom: "1rem" }}>
+              Remember when there was someone? Not a company, not a help line — a person who could just figure it out, and would catch the problem before it became a bigger one. House Calls is that, back.
             </p>
             <p style={{ fontSize: "1rem", fontWeight: 300, color: "rgba(248,244,227,0.6)", lineHeight: 1.8, marginBottom: "2.5rem" }}>
-              For when the issue isn't the room — it's the person you used to have to call.
+              The Wi-Fi that dropped. The smoke detector chirping at 2am. The install you don't want to be home alone for. The parent two states away who "says they're fine." Handled — by someone who treats your home, or theirs, like it matters.
             </p>
             <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
-              <Link href="/contact" className="btn btn-sage">Book Practical Help</Link>
+              <Link href="/contact" className="btn btn-sage">Book a House Call</Link>
               <Link href="/pricing" className="btn btn-outline-light">View Pricing</Link>
             </div>
           </div>
