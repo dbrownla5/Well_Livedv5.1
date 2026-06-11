@@ -21,13 +21,11 @@ function FadeUp({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
 }
 
 /**
- * Dayna's REAL résumé — transcribed verbatim from her prior build. Never
- * embellish, round up, or invent any of this.
- * TWO items were cut off in the source screenshot and are flagged for Dayna
- * to confirm (NOT invented):
- *   - Nordstrom: role + dates were below the screenshot crop (left blank).
- *   - "Background" opening: the first words were above the crop; reconstructed
- *     conservatively as a gerund with no fabricated tenure/number.
+ * Dayna's REAL résumé — from her prior build, with the two previously-cropped
+ * items now filled from her own experience PDF (DAYNABROWN_EXPERIENCE_V_2):
+ *   - Nordstrom: Retail Division Manager, Full Line & Rack, LA · 2011–2014.
+ *   - "Background" opener: tenure grounded in her real dates (2011–2025).
+ * Never embellish, round up, or invent any of this.
  */
 const COMPANIES: { name: string; role: string; brands?: string }[] = [
   { name: "SVP Worldwide", role: "Regional Retail Director, West & Central · 2023–2025", brands: "Singer, Husqvarna Viking, PFAFF" },
@@ -35,7 +33,7 @@ const COMPANIES: { name: string; role: string; brands?: string }[] = [
   { name: "The Collected Group", role: "Regional Brand Director, Southern California · 2016–2020", brands: "Joie, Equipment, Current/Elliott" },
   { name: "BCBG Max Azria Group", role: "District Manager, Los Angeles · 2016–2018" },
   { name: "Bonobos", role: "Guideshop Management, Southern California · 2014–2016" },
-  { name: "Nordstrom", role: "" }, // role/dates cut off in source screenshot — confirm with Dayna
+  { name: "Nordstrom", role: "Retail Division Manager, Full Line & Rack, Los Angeles · 2011–2014" },
 ];
 
 const HIGHLIGHTS: { label: string; body: string }[] = [
@@ -86,7 +84,7 @@ export default function About() {
               <div style={{ borderLeft: "3px solid var(--sage)", paddingLeft: "1.5rem" }}>
                 <p className="eyebrow eyebrow-sage" style={{ marginBottom: "1rem" }}>Background</p>
                 <p style={{ fontSize: "1rem", fontWeight: 300, color: "var(--ink-soft)", lineHeight: 1.8, marginBottom: "1.25rem" }}>
-                  Leading large-scale operations, teams, and transformation initiatives for national brands — designing systems that solve invisible friction before it becomes visible failure.
+                  More than a decade leading large-scale operations, teams, and transformation initiatives for national brands — designing systems that solve invisible friction before it becomes visible failure.
                 </p>
                 <p style={{ fontSize: "1rem", fontWeight: 300, color: "var(--ink-soft)", lineHeight: 1.8, marginBottom: "1.25rem" }}>
                   That same philosophy now lives inside The Well Lived Citizen.
