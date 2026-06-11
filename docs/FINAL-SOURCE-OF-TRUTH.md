@@ -4,10 +4,9 @@
 
 ## Precedence order (highest wins)
 
-1. **`docs/AWLC-SERVICES-MASTER-FINAL.md`** — Dayna's final services + pricing master, verbatim. Facts come from here.
-2. **Dayna's MASTER PARTS BIN + homepage Draft** (Chaos Wrangler persona: "CHAOS WRANGLER. PROFESSIONAL PROBLEM SOLVER.", "Is there a person who…", recognition lists, "I'm Dayna.") — homepage and voice come from here.
-3. `docs/SERVICES-PAGES-FINAL-COPY.md` — expanded page copy in the final persona; facts corrected to match #1.
-4. ~~`docs/SERVICES-PRICING.md`~~, ~~`src/content/brand.ts`~~, ~~the brand vault~~ — **SUPERSEDED wherever they conflict with the above.** Still useful for company constants (email, entity, social handles) and the banned-word list, nothing else.
+1. **`docs/AWLC-SERVICES-MASTER-FINAL.md`** — Dayna's final services + pricing master, verbatim. Facts AND verbiage come from here. Do not rewrite, expand, or "improve" this copy — use it as written.
+2. **Dayna's MASTER PARTS BIN + homepage Draft** (Chaos Wrangler persona: "CHAOS WRANGLER. PROFESSIONAL PROBLEM SOLVER.", "Is there a person who…", recognition lists, "I'm Dayna.") — homepage verbiage comes from here, verbatim.
+3. ~~`docs/SERVICES-PRICING.md`~~, ~~`src/content/brand.ts`~~, ~~the brand vault~~ — **SUPERSEDED wherever they conflict with the above.** Still useful for company constants (email, entity, social handles) and the banned-word list, nothing else.
 
 ## FACT CORRECTIONS — old repo/site vs. Dayna's FINAL master
 
