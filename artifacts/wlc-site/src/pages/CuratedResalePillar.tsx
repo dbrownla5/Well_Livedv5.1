@@ -37,7 +37,7 @@ function FAQItem({ q, a }: { q: string; a: string }) {
 
 export default function CuratedResalePillar() {
   usePageMeta({
-    title: "Resale & Consignment — Pillar 04 | The Well Lived Citizen",
+    title: "Resale & Consignment — Fill a Bag, I Handle the Rest | The Well Lived Citizen",
     description: "Resale for the things still worth something. Pickup, evaluation, photography, listing, and payout. Commission-based. Los Angeles.",
     path: "/curated-resale-consignment",
   });
@@ -48,20 +48,20 @@ export default function CuratedResalePillar() {
       {/* ── HERO ── */}
       <section style={{ backgroundColor: "var(--ink)", paddingTop: "10rem", paddingBottom: "7rem" }}>
         <div className="container">
-          <div style={{ maxWidth: 740 }}>
-            <span className="eyebrow eyebrow-light">Pillar 04</span>
-            <h1 className="display-lg" style={{ color: "var(--parchment)", marginBottom: "1.5rem" }}>
-              Resale<br />&amp; Consignment
+          <div style={{ maxWidth: 760 }}>
+            <span className="eyebrow eyebrow-light">Resale &amp; Consignment · Los Angeles</span>
+            <h1 className="display-lg" style={{ color: "var(--parchment)", marginBottom: "1.75rem" }}>
+              The bag by the door. The pile in the corner. Handled.
             </h1>
-            <p style={{ fontSize: "1.1rem", fontWeight: 300, color: "rgba(248,244,227,0.75)", lineHeight: 1.8, marginBottom: "0.75rem" }}>
-              Resale for the things still worth something — handled by someone who knows where each thing actually sells.
+            <p style={{ fontSize: "1.15rem", fontWeight: 300, color: "rgba(248,244,227,0.78)", lineHeight: 1.8, marginBottom: "1rem" }}>
+              The bag you keep meaning to drop off. The pile you <em>know</em> is worth something. Good chance there's real money in that bag — and I know how to route the pile, item by item, to where each piece actually sells. The only call left to you: pickup or shipping, and when.
             </p>
             <p style={{ fontSize: "1rem", fontWeight: 300, color: "rgba(248,244,227,0.6)", lineHeight: 1.8, marginBottom: "2.5rem" }}>
-              It flows from everything else. A Reset surfaces what you're editing out. Legacy work uncovers what has value sitting in storage. A move closeout routes what doesn't make the truck. The resale piece is already built into the other work — it doesn't have to be its own separate project.
+              You make one decision. I make the next fifty.
             </p>
             <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
               <Link href="/bag-pickup" className="btn btn-sage">Schedule a Resale Pickup</Link>
-              <Link href="/pricing" className="btn btn-outline-light">View Commission Structure</Link>
+              <Link href="/pricing" className="btn btn-outline-light">See the commission split</Link>
             </div>
           </div>
         </div>
@@ -72,16 +72,16 @@ export default function CuratedResalePillar() {
         <div className="container">
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "5rem", alignItems: "start" }}>
             <FadeUp>
-              <span className="eyebrow eyebrow-sage">What This Is</span>
-              <h2 className="display-md" style={{ color: "var(--ink)", marginBottom: "2rem" }}>For the things that still have value — but not your time.</h2>
+              <span className="eyebrow eyebrow-sage">When the easy way isn't the right way</span>
+              <h2 className="display-md" style={{ color: "var(--ink)", marginBottom: "2rem" }}>Not everything fits in a zippered tote.</h2>
               <p className="body-lg" style={{ marginBottom: "1.5rem" }}>
-                I help clients sort through belongings, identify value, and route items through the resale channels that make the most sense for their category, condition, and potential. From clothing and accessories to collections, decor, storage units, and inherited belongings.
+                The easy way isn't every situation. High price-point, vintage, and rare pieces. Whole-closet cleanouts. Anything that needs care or a delicate hand — I'm prepared for it.
               </p>
               <p className="body-lg" style={{ marginBottom: "1.5rem" }}>
-                The goal is simple: recover value where it still exists and help things move to their next place responsibly.
+                The scope runs all the way up to most household items with real resale value — plus coordinating the removal of the things that just need to, well… go.
               </p>
               <p className="body-lg">
-                No marketplace burnout. No figuring it all out alone. No piles sitting in limbo for another two years. Just practical help getting things moving again.
+                No marketplace burnout. No figuring it out alone. No piles sitting in limbo for another two years.
               </p>
             </FadeUp>
 
@@ -200,40 +200,22 @@ export default function CuratedResalePillar() {
         </div>
       </section>
 
-      {/* ── COMMISSION ── */}
+      {/* ── COMMISSION POINTER (detail lives on /pricing) ── */}
       <section style={{ backgroundColor: "var(--sage)", padding: "5rem 0" }}>
         <div className="container">
           <FadeUp>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "4rem", alignItems: "start" }}>
-              <div>
-                <span className="eyebrow" style={{ color: "var(--sage-dark)" }}>Commission Structure</span>
-                <h2 className="display-md" style={{ color: "var(--ink)", marginBottom: "1.5rem" }}>Fair splits. Always disclosed before pickup.</h2>
-                <p style={{ fontSize: "0.95rem", fontWeight: 300, color: "var(--ink)", lineHeight: 1.75, opacity: 0.85, marginBottom: "1.5rem" }}>
-                  Proceeds are split after platform fees and shipping are deducted. You agree to the resale terms when you request a pickup; possession transfers when the items reach me. After evaluation you approve the listings, and your 30-day reporting and payout cycle begins from that consent. <a href="/WLC-Resale-Agreement.pdf" target="_blank" rel="noopener noreferrer" style={{ color: "var(--sage-dark)", textDecoration: "underline", textUnderlineOffset: "2px" }}>Read the full Resale Agreement (PDF).</a>
-                </p>
-                <p style={{ fontSize: "0.95rem", fontWeight: 500, color: "var(--ink)", lineHeight: 1.75, opacity: 0.9, marginBottom: "1.5rem" }}>
-                  I'll always try to be fair with people. But for that to work in second-life resale, buyers also need to approach it fairly, realistically, and in good faith.
-                </p>
-                <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
-                  <Link href="/bag-pickup" className="btn btn-ink">Schedule a Pickup</Link>
-                </div>
-              </div>
-              <div>
-                {[
-                  { category: "Clothing & Accessories", split: "45% to you / 55% WLC", note: "Standard items, shoes, bags, jewelry" },
-                  { category: "Designer & Luxury", split: "50% to you / 50% WLC", note: "Designer handbags, luxury clothing, fine jewelry" },
-                  { category: "Furniture & Significant Home Pieces", split: "50% to you / 50% WLC", note: "Furniture, art, significant home pieces" },
-                  { category: "Full Closet Liquidation", split: "45% to you / 55% WLC", note: "Whole-closet edits, multi-piece engagements" },
-                  { category: "Low-Value Volume", split: "35% to you / 65% WLC", note: "Primarily $5–$10 resale range · reviewed at intake, never applied retroactively" },
-                ].map((row, i) => (
-                  <div key={i} style={{ padding: "1.25rem 0", borderBottom: "1px solid rgba(56,48,46,0.15)" }}>
-                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: "1rem", marginBottom: "0.35rem" }}>
-                      <span style={{ fontSize: "0.9rem", fontWeight: 700, color: "var(--ink)" }}>{row.category}</span>
-                      <span style={{ fontSize: "0.85rem", fontWeight: 700, color: "var(--sage-dark)", whiteSpace: "nowrap" }}>{row.split}</span>
-                    </div>
-                    <p style={{ fontSize: "0.75rem", fontWeight: 300, color: "var(--ink)", opacity: 0.65 }}>{row.note}</p>
-                  </div>
-                ))}
+            <div style={{ maxWidth: 680 }}>
+              <span className="eyebrow" style={{ color: "var(--sage-dark)" }}>Commission</span>
+              <h2 className="display-md" style={{ color: "var(--ink)", marginBottom: "1.5rem" }}>Fair splits, always disclosed before pickup.</h2>
+              <p style={{ fontSize: "0.95rem", fontWeight: 300, color: "var(--ink)", lineHeight: 1.75, opacity: 0.85, marginBottom: "1.5rem" }}>
+                Proceeds split after platform fees and shipping — the rate depends on the category. The full breakdown lives on the Pricing page, and the Resale Agreement is yours to read up front. You e-sign it when you book a pickup, before a single item ships.
+              </p>
+              <p style={{ fontSize: "0.95rem", fontWeight: 500, color: "var(--ink)", lineHeight: 1.75, opacity: 0.9, marginBottom: "2rem" }}>
+                I'll always try to be fair with people. For that to work in second-life resale, buyers need to meet it the same way — fairly, realistically, and in good faith.
+              </p>
+              <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+                <Link href="/pricing" className="btn btn-ink">See the commission split</Link>
+                <a href="/WLC-Resale-Agreement.pdf" target="_blank" rel="noopener noreferrer" className="btn btn-outline-ink">Read the Resale Agreement</a>
               </div>
             </div>
           </FadeUp>

@@ -175,6 +175,47 @@ export default function Pricing() {
         </div>
       </section>
 
+      {/* ── RESALE COMMISSION STRUCTURE ── */}
+      <section style={{ backgroundColor: "var(--sage)", padding: "5rem 0" }}>
+        <div className="container">
+          <FadeUp>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "4rem", alignItems: "start" }}>
+              <div>
+                <span className="eyebrow" style={{ color: "var(--sage-dark)" }}>Resale Commission</span>
+                <h2 className="display-md" style={{ color: "var(--ink)", marginBottom: "1.5rem" }}>What you keep, by category.</h2>
+                <p style={{ fontSize: "0.95rem", fontWeight: 300, color: "var(--ink)", lineHeight: 1.75, opacity: 0.85, marginBottom: "1.5rem" }}>
+                  Proceeds are split after platform fees and shipping are deducted. You agree to the resale terms when you book a pickup, and possession transfers when items reach me. After evaluation you approve the listings, and your 30-day reporting and payout cycle begins from that consent.
+                </p>
+                <p style={{ fontSize: "0.95rem", fontWeight: 500, color: "var(--ink)", lineHeight: 1.75, opacity: 0.9, marginBottom: "2rem" }}>
+                  The Resale Agreement is yours to read up front — and you e-sign it at booking, before a single item ships.
+                </p>
+                <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+                  <a href="/WLC-Resale-Agreement.pdf" target="_blank" rel="noopener noreferrer" className="btn btn-ink">Read the Resale Agreement</a>
+                  <Link href="/bag-pickup" className="btn btn-outline-ink">Schedule a Pickup</Link>
+                </div>
+              </div>
+              <div>
+                {[
+                  { category: "Clothing & Accessories", split: "45% to you / 55% WLC", note: "Standard items, shoes, bags, jewelry" },
+                  { category: "Designer & Luxury", split: "50% to you / 50% WLC", note: "Designer handbags, luxury clothing, fine jewelry" },
+                  { category: "Furniture & Significant Home Pieces", split: "50% to you / 50% WLC", note: "Furniture, art, significant home pieces" },
+                  { category: "Full Closet Liquidation", split: "45% to you / 55% WLC", note: "Whole-closet edits, multi-piece engagements" },
+                  { category: "Low-Value Volume", split: "35% to you / 65% WLC", note: "Primarily $5–$10 resale range · reviewed at intake, never applied retroactively" },
+                ].map((row, i) => (
+                  <div key={i} style={{ padding: "1.25rem 0", borderBottom: "1px solid rgba(56,48,46,0.15)" }}>
+                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: "1rem", marginBottom: "0.35rem" }}>
+                      <span style={{ fontSize: "0.9rem", fontWeight: 700, color: "var(--ink)" }}>{row.category}</span>
+                      <span style={{ fontSize: "0.85rem", fontWeight: 700, color: "var(--sage-dark)", whiteSpace: "nowrap" }}>{row.split}</span>
+                    </div>
+                    <p style={{ fontSize: "0.75rem", fontWeight: 300, color: "var(--ink)", opacity: 0.65 }}>{row.note}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </FadeUp>
+        </div>
+      </section>
+
       {/* ── HOW A RESET WORKS ── */}
       <section style={{ backgroundColor: "var(--parchment-mid)", padding: "5rem 0" }}>
         <div className="container">
