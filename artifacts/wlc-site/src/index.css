@@ -2,7 +2,7 @@
  * THE WELL LIVED CITIZEN — GLOBAL DESIGN SYSTEM
  * Palette: Warm parchment (#F8F4E3) + warm grays (#D4CDC3, #D5D0CD)
  * Palette (from Dayna's swatches): warm TAN (#EAE3D4) base · neutral CHARCOAL/BLACK
- *          (#2D2F2F / #1C1C1C) — NOT brown espresso · STEEL-BLUE accent (#495B69)
+ *          (#2D2F2F / #1C1C1C) — NOT brown espresso · STEEL-BLUE accent (#57514A)
  *          · grayer OLIVE (#616359) used sparingly · light gray (#C9C9C3).
  * NO brown espresso, NO yellow cream. The legacy token names --sage / --sage-dark
  * are kept (used ~200×) but now hold a muted steel accent / warm gray.
@@ -46,13 +46,13 @@
   --parchment-mid: #DED5C4;  /* deeper tan — alt sections / cards */
   --warm-gray-lt:  #C9C9C3;  /* light gray — borders */
   --warm-gray-md:  #D5D0CD;
-  /* Steel-blue accent + neutral charcoal. Deep slate = filled buttons/panels with
-     light text; muted = inline accents (eyebrows, arrows) that must read on both
+  /* Warm neutral accent + charcoal — NO blue. Deep accent = filled buttons / panels
+     with light text; muted = inline accents (eyebrows, arrows) that read on both
      the tan AND the dark charcoal sections. */
-  --slate:         #495B69; /* steel blue — accent fills / buttons (light text on it) */
-  --slate-deep:    #394753; /* hover / pressed */
-  --sage:          #8FA0AA; /* LEGACY NAME — muted steel inline accent (reads on light + dark) */
-  --sage-dark:     #7C7A70; /* LEGACY NAME — warm gray-olive for muted text */
+  --slate:         #57514A; /* warm dark taupe — accent fills / buttons (light text on it) */
+  --slate-deep:    #403B34; /* hover / pressed */
+  --sage:          #9A9383; /* muted warm greige — inline accent (reads on light + dark) */
+  --sage-dark:     #7C7A70; /* warm gray-olive for muted text */
   --ink:           #2D2F2F; /* neutral CHARCOAL — replaces the brown espresso */
   --ink-soft:      #474B4C; /* charcoal-soft */
 
@@ -74,7 +74,7 @@
   --popover-foreground:   #2D2F2F;
   --primary:              #2D2F2F;
   --primary-foreground:   #EAE3D4;
-  --secondary:            #495B69;
+  --secondary:            #57514A;
   --secondary-foreground: #EAE3D4;
   --muted:                #DED5C4;
   --muted-foreground:     #7C7A70;
@@ -82,7 +82,7 @@
   --destructive:          oklch(0.577 0.245 27.325);
   --border:               #C9C9C3;
   --input:                #C9C9C3;
-  --ring:                 #495B69;
+  --ring:                 #57514A;
 }
 
 @layer base {

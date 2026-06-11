@@ -24,7 +24,7 @@ function FadeUp({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
 export default function HouseCalls() {
   usePageMeta({
     title: "Two-Hour House Call — $175/hr | The Well Lived Citizen",
-    description: "Practical hourly help with the everyday running of a household. Technology, safety, organization, transitions. 2-hour minimum. Los Angeles.",
+    description: "Practical hourly help with the everyday running of a household. Technology, safety, organization, errands. 2-hour minimum. Los Angeles.",
     path: "/house-calls",
   });
   return (
@@ -64,7 +64,7 @@ export default function HouseCalls() {
                 Practical support for the things nobody really has a person for.
               </h2>
               <p className="body-lg" style={{ marginBottom: "1.5rem" }}>
-                That might mean changing a smoke detector on a high ceiling, troubleshooting household technology, coordinating vendors, reorganizing a space that stopped functioning well, setting up a room after a move, preparing items for resale, handling donation drop-offs, helping a parent reset their home after a transition, or checking in on a storage unit that's gotten out of control.
+                That might mean changing a smoke detector on a high ceiling, troubleshooting household technology, coordinating vendors, reorganizing a space that stopped functioning well, setting up a room after a move, preparing items for resale, handling donation drop-offs, helping a parent reset their home after a move, or checking in on a storage unit that's gotten out of control.
               </p>
               <p className="body-lg" style={{ marginBottom: "1.5rem" }}>
                 There's no discovery call required. You tell me what needs attention, I show up and handle it. Two-hour minimum, billed hourly after that.
@@ -104,7 +104,7 @@ export default function HouseCalls() {
               { category: "Technology & Setup", items: ["Printer, router, and device setup", "Phone and computer troubleshooting", "Smart home device installation", "Cable management and organization", "Streaming and TV setup"] },
               { category: "Home Safety & Maintenance", items: ["Smoke and CO detector updates", "Light bulb and battery replacement", "Safety assessment walk-through", "High bulb changes and similar tasks", "Handyperson coordination"] },
               { category: "Organization & Sorting", items: ["Paperwork and mail sorting", "Medicine cabinet and bathroom edit", "Garage and storage unit sorting", "Donation routing and drop-off", "Pre-move or post-move sorting"] },
-              { category: "Transitions & Support", items: ["Post-move settling and unpacking", "Support after loss or major change", "Preparing a home for a new resident", "Downsizing assistance", "Post-loss household coordination"] },
+              { category: "After a Move or a Change", items: ["Post-move settling and unpacking", "Support after loss or major change", "Preparing a home for a new resident", "Downsizing assistance", "Post-loss household coordination"] },
               { category: "Ongoing Household", items: ["Recurring household tasks", "Seasonal organization", "Pre-event or pre-guest preparation", "Home re-entry resets after travel", "Whatever the household needs"] },
               { category: "Resale & Documentation", items: ["Item photography and cataloguing", "Heirloom identification", "Storage inventory", "Donation coordination", "Routing items to the right next place"] },
             ].map((cat, i) => (
@@ -174,7 +174,7 @@ export default function HouseCalls() {
           </FadeUp>
           <div style={{ maxWidth: 720 }}>
             {[
-              { q: "What's the difference between a House Call and The Reset?", a: "The Reset is a focused session for a single space. House Calls are flexible, hourly sessions for the broader running-the-household stuff — technology, home safety, errands, vendor coordination, transitions. House Calls have a 2-hour minimum." },
+              { q: "What's the difference between a House Call and The Reset?", a: "The Reset is a focused session for a single space. House Calls are flexible, hourly sessions for the broader running-the-household stuff — technology, home safety, errands, vendor coordination, and the rest of it. House Calls have a 2-hour minimum." },
               { q: "Can I book recurring House Calls?", a: "Yes. Monthly retainer packages are available for clients who want consistent, scheduled support. These are priced individually based on frequency and scope. Ask about them during your call." },
               { q: "Do you work with older adults?", a: "Yes. I work with people who want support maintaining their homes and their autonomy. The pace is set by the person, not me — and the goal is always to make the operational parts easier without getting in the way of how they already live." },
               { q: "What if the task takes less than 2 hours?", a: "The 2-hour minimum is the booking unit. If I finish early, I'll use the remaining time on whatever else would be useful — a quick tech check, a donation sort, whatever makes sense." },

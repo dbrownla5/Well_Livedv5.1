@@ -55,7 +55,7 @@ const pillars = [
     description: "A Reset surfaces what you're ready to part with. Legacy work turns up things with real value sitting in storage. A move closeout routes what doesn't make the truck. The resale piece is already built into the other work — pickup, evaluation, and listing without you having to become a part-time seller.",
     includes: ["Free pickup within service area", "Items matched to the platform where they actually sell", "Buyer communication handled for you", "Sales report and payout every 30 days from signing", "Donation rerouting for items that don't sell", "Clothing, accessories, designer, and estate pieces"],
     quickBook: { label: "Quick Resale Pickup", href: "/fast-bag-fill" },
-    pillarHref: "/curated-resale-consignment",
+    pillarHref: "/resale-consignment",
   },
 ];
 
@@ -96,7 +96,7 @@ export default function Services() {
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: "1px", backgroundColor: "var(--warm-gray-lt)" }}>
             {[
               { href: "/the-reset", num: "01", name: "Four-Hour Reset", price: "$495 flat rate", desc: "Four focused hours in the one space you keep meaning to fix. I show up and get it done." },
-              { href: "/house-calls", num: "02", name: "Two-Hour House Call", price: "$350 · 2 hours", desc: "Practical help for the things life accumulates faster than anyone has time to address. Technology, safety, organization, transitions." },
+              { href: "/house-calls", num: "02", name: "Two-Hour House Call", price: "$350 · 2 hours", desc: "Practical help for the things life accumulates faster than anyone has time to address. Technology, safety, organization, errands." },
               { href: "/fast-bag-fill", num: "03", name: "Quick Resale Pickup", price: "Complimentary pickup", desc: "Fill a bag with clothing and accessories you're ready to part with. Pickup is complimentary — I handle evaluation, routing, and resale." },
             ].map((qb, i) => (
               <FadeUp key={i} delay={i * 60}>

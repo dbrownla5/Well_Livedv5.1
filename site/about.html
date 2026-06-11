@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — The Well Lived Citizen</title>
+  <meta name="description" content="Practical operational support for modern life, run by one capable person in Los Angeles. Grounded competence over polished branding." />
+  <!-- Open Graph -->
+  <meta property="og:title" content="About — The Well Lived Citizen" />
+  <meta property="og:description" content="Practical operational support for modern life, run by one capable person in Los Angeles. Grounded competence over polished branding." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.thewelllivedcitizen.com/about" />
+  <meta property="og:site_name" content="The Well Lived Citizen" />
+  <link rel="canonical" href="https://www.thewelllivedcitizen.com/about" />
+  <!-- Paste your Google Search Console verification code below -->
+  <meta name="google-site-verification" content="REPLACE_WITH_VERIFICATION_CODE" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="wordmark" href="index.html">The Well Lived Citizen</a>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="primary-nav">Menu</button>
+      <nav class="nav" id="primary-nav" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="about.html" aria-current="page">About</a>
+        <a href="services.html">Services</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="resale.html">Sell With Me</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <p class="eyebrow">About</p>
+        <h1>Operational support for modern life.</h1>
+        <p class="lede">Most clients hire me because the operational side of life quietly became heavier than it used to be.</p>
+      </div>
+    </section>
+
+    <section class="section section--soft">
+      <div class="container split">
+        <div>
+          <h2>The work is rarely just about the object.</h2>
+          <p>Modern life quietly creates hundreds of small unfinished decisions. The lamp nobody knows what to do with. The unit no one wants to open. The setup that never got finished. Individually, none of them are a big deal. Together, they're the reason a weekend disappears and nothing feels handled.</p>
+          <p>I'm the person who handles them. One capable point of contact for the logistics, the follow-through, the vendor coordination, the resale decisions, the weird lamp, the storage unit. All of it.</p>
+        </div>
+        <div>
+          <p class="pull">Competence does not eliminate the need to be cared for.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <p class="eyebrow">How I think about it</p>
+        <h2 class="section-head">Grounded competence, not a sales pitch.</h2>
+        <div class="grid grid--3">
+          <div class="card">
+            <h3>Some clients are busy</h3>
+            <p>They don't want to spend the weekend assembling furniture, coordinating vendors, and managing resale platforms. Convenience is not a moral failure.</p>
+          </div>
+          <div class="card">
+            <h3>Some are in transition</h3>
+            <p>A move, a downsize, an inherited home, a changed household. Being capable doesn't mean someone should have to carry everything alone.</p>
+          </div>
+          <div class="card">
+            <h3>All of it is valid</h3>
+            <p>Support shouldn't require a crisis. People deserve a capable hand without being made to feel incapable.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--soft">
+      <div class="container split">
+        <div>
+          <p class="eyebrow">How I work</p>
+          <h2>Calm, practical, and almost invisible.</h2>
+          <p>A lot of this happens between visits — routing, coordination, scheduling, resale prep, vendor follow-up. The business is built around trust-based, asynchronous workflows: a key handoff, a route pickup, a solo reset while you're at work or out of town.</p>
+          <p class="muted">Based in Los Angeles. Local travel is generally folded into the work and routed for efficiency — you're paying for the work and the follow-through, not for someone standing in your kitchen.</p>
+        </div>
+        <div>
+          <p class="pull">The goal is not perfection. The goal is movement.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <p class="eyebrow">For clarity</p>
+        <h2 class="section-head">A few things this isn't.</h2>
+        <p class="note">This is practical operational support — not junk hauling, hoarding or biohazard remediation, a heavy-moving labor crew, legal estate administration, therapy, or family arbitration. Inherited-home and transition work covers the practical aftermath, not legal estate administration or deciding who gets what.</p>
+        <div class="btn-row">
+          <a class="btn" href="services.html">See the services</a>
+          <a class="btn btn--ghost" href="contact.html">Get in touch</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <a class="wordmark" href="index.html">The Well Lived Citizen</a>
+        <nav class="footer-nav" aria-label="Footer">
+          <a href="about.html">About</a>
+          <a href="services.html">Services</a>
+          <a href="pricing.html">Pricing</a>
+          <a href="resale.html">Sell With Me</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+      </div>
+      <p class="footer-meta">
+        Los Angeles · <a href="tel:+13234331350">(323) 433-1350</a> ·
+        <a href="mailto:dayna@thewelllivedcitizen.com">dayna@thewelllivedcitizen.com</a>
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var toggle = document.querySelector(".nav-toggle");
+      var nav = document.getElementById("primary-nav");
+      if (!toggle || !nav) return;
+      toggle.addEventListener("click", function () {
+        var open = nav.classList.toggle("open");
+        toggle.setAttribute("aria-expanded", open ? "true" : "false");
+      });
+    })();
+  </script>
+</body>
+</html>

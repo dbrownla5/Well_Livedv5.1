@@ -19,7 +19,7 @@ import FastBagFill from "@/pages/FastBagFill";
 import HomeReset from "@/pages/HomeReset";
 import LegacyPillar from "@/pages/LegacyPillar";
 import HouseCallsPillar from "@/pages/HouseCallsPillar";
-import CuratedResalePillar from "@/pages/CuratedResalePillar";
+import ResaleConsignmentPillar from "@/pages/ResaleConsignmentPillar";
 
 // Land every navigation at the TOP of the destination page — never partway down.
 function ScrollToTop() {
@@ -51,8 +51,10 @@ function Router() {
       <Route path="/legacy-planning" component={LegacyPillar} />
       <Route path="/legacy-inventory" component={LegacyPillar} />
       <Route path="/house-calls-pillar" component={HouseCallsPillar} />
-      <Route path="/curated-resale-consignment" component={CuratedResalePillar} />
-      <Route path="/curated-resale" component={CuratedResalePillar} />
+      <Route path="/resale-consignment" component={ResaleConsignmentPillar} />
+      {/* legacy aliases — not linked anywhere, kept only so any old URL still lands */}
+      <Route path="/curated-resale-consignment" component={ResaleConsignmentPillar} />
+      <Route path="/curated-resale" component={ResaleConsignmentPillar} />
 
       <Route component={NotFound} />
     </Switch>

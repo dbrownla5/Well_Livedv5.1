@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — The Well Lived Citizen</title>
+  <meta name="description" content="Tell me about the thing you keep circling around. Contact The Well Lived Citizen in Los Angeles by form, phone, or email." />
+  <!-- Open Graph -->
+  <meta property="og:title" content="Contact — The Well Lived Citizen" />
+  <meta property="og:description" content="Tell me about the thing you keep circling around. Contact The Well Lived Citizen in Los Angeles by form, phone, or email." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.thewelllivedcitizen.com/contact" />
+  <meta property="og:site_name" content="The Well Lived Citizen" />
+  <link rel="canonical" href="https://www.thewelllivedcitizen.com/contact" />
+  <!-- Paste your Google Search Console verification code below -->
+  <meta name="google-site-verification" content="REPLACE_WITH_VERIFICATION_CODE" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="wordmark" href="index.html">The Well Lived Citizen</a>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="primary-nav">Menu</button>
+      <nav class="nav" id="primary-nav" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="resale.html">Sell With Me</a>
+        <a href="contact.html" aria-current="page">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <p class="eyebrow">Contact</p>
+        <h1>Tell me about the thing that's been sitting in the hallway.</h1>
+        <p class="lede">A few details about what you need handled — the move, the unit, the resale pile, the setup — and I'll tell you how I'd approach it. No pressure, no membership.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container contact-grid">
+        <div>
+          <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+            <input type="hidden" name="form-name" value="contact" />
+            <p hidden>
+              <label>Don't fill this out: <input name="bot-field" /></label>
+            </p>
+
+            <div class="field">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" autocomplete="name" required />
+            </div>
+
+            <div class="field">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" autocomplete="email" required />
+            </div>
+
+            <div class="field">
+              <label for="phone">Phone</label>
+              <input type="tel" id="phone" name="phone" autocomplete="tel" />
+            </div>
+
+            <div class="field">
+              <label for="message">What do you need handled?</label>
+              <textarea id="message" name="message" required></textarea>
+            </div>
+
+            <button type="submit" class="btn">Send it over</button>
+          </form>
+        </div>
+
+        <aside>
+          <p class="eyebrow">Reach me directly</p>
+          <p class="contact-detail">
+            <strong>Phone</strong>
+            <a href="tel:+13234331350">(323) 433-1350</a>
+          </p>
+          <p class="contact-detail">
+            <strong>Email</strong>
+            <a href="mailto:dayna@thewelllivedcitizen.com">dayna@thewelllivedcitizen.com</a>
+          </p>
+          <p class="contact-detail">
+            <strong>Where</strong>
+            <span class="muted">Los Angeles</span>
+          </p>
+          <p class="note divider-note">The best support often feels calm, practical, and almost invisible. Send over whatever you've got — even if it's a half-finished thought and a photo of the closet nobody wants to open.</p>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <a class="wordmark" href="index.html">The Well Lived Citizen</a>
+        <nav class="footer-nav" aria-label="Footer">
+          <a href="about.html">About</a>
+          <a href="services.html">Services</a>
+          <a href="pricing.html">Pricing</a>
+          <a href="resale.html">Sell With Me</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+      </div>
+      <p class="footer-meta">
+        Los Angeles · <a href="tel:+13234331350">(323) 433-1350</a> ·
+        <a href="mailto:dayna@thewelllivedcitizen.com">dayna@thewelllivedcitizen.com</a>
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var toggle = document.querySelector(".nav-toggle");
+      var nav = document.getElementById("primary-nav");
+      if (!toggle || !nav) return;
+      toggle.addEventListener("click", function () {
+        var open = nav.classList.toggle("open");
+        toggle.setAttribute("aria-expanded", open ? "true" : "false");
+      });
+    })();
+  </script>
+</body>
+</html>

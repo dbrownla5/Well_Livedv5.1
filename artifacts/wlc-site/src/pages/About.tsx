@@ -146,16 +146,16 @@ export default function About() {
                 When it was my life in pieces.
               </h2>
               <p style={{ fontSize: "1.05rem", fontWeight: 300, color: "rgba(248,244,227,0.78)", lineHeight: 1.85, marginBottom: "1.75rem" }}>
-                After an unforeseen flood, I found myself moving through 13 temporary homes and Airbnbs, carrying only fragments of the life I thought I'd always recognize. Years of belongings, valuables, and deeply personal objects were damaged or lost — many of them irreplaceable.
+                A few years ago, an unforeseen flood ran me through 13 temporary homes and Airbnbs in a short stretch of time. A lot of what I owned was damaged or lost — including things that couldn't be replaced.
               </p>
               <p style={{ fontSize: "1.05rem", fontWeight: 300, color: "rgba(248,244,227,0.78)", lineHeight: 1.85, marginBottom: "1.75rem" }}>
-                What surprised me most was not only the grief of the loss, but the disorientation of living without the things that quietly reflect you back to yourself each day. The art you're used to seeing on your walls. The clothes that belong in your closet. The objects that make a place feel like the life you built. When those things are suddenly gone, the experience is profoundly destabilizing — even for someone as deeply self-sufficient as I have always been.
+                I'd spent my whole career being the capable one in the room. What that taught me is that being capable doesn't make you immune. Anyone can reach the point where there's no room left to think clearly about their own situation — not because they've lost the skill, but because they're carrying too much at once to use it.
               </p>
               <p style={{ fontSize: "1.05rem", fontWeight: 300, color: "rgba(248,244,227,0.78)", lineHeight: 1.85, marginBottom: "1.75rem" }}>
-                During that season, I was introduced to someone who, on paper, might have simply been called a home organizer.* But what she offered was something far deeper. She stepped into the moments I couldn't hold alone. The decisions I was too depleted to make. The logistics I normally would have solved in seconds. She was not organizing. She was relief. She became calm in the middle of disruption, clarity in the middle of grief, and movement in a moment when everything in my life had stopped.
+                During that stretch I worked with someone who, on paper, would be called a home organizer.* What she actually did was step into the parts I couldn't get to — the decisions I was too depleted to make, the logistics I'd normally have handled in my sleep — and start moving them. She wasn't organizing. She was the reason things started working again.
               </p>
               <p style={{ fontSize: "1.05rem", fontWeight: 300, color: "rgba(248,244,227,0.78)", lineHeight: 1.85, marginBottom: "3rem" }}>
-                That experience changed the way I understand this work. Because when it is your own life in pieces, even the most capable person can lose access to their usual clarity. What matters most in those moments is not simply having someone who knows where things go. It is having someone who can step into the weight of transition and quietly help carry it with you.
+                That's the standard I built this around. Knowing where things go is the easy part. Being the person who can walk into someone else's stuck situation, take in the whole picture, and quietly get it moving — that's the actual work.
               </p>
               <p style={{ fontSize: "0.72rem", fontWeight: 400, color: "rgba(248,244,227,0.38)", lineHeight: 1.7, letterSpacing: "0.04em" }}>
                 * Rachel Corwin · Spruce · Seattle, Washington

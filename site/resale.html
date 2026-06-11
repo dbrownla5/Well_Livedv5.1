@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sell With Me — The Well Lived Citizen</title>
+  <meta name="description" content="Resale and consignment intake in Los Angeles: free pickup, no fees up front, paid your commission share when items sell. Tell me what you're looking to sell." />
+  <!-- Open Graph -->
+  <meta property="og:title" content="Sell With Me — The Well Lived Citizen" />
+  <meta property="og:description" content="Resale and consignment intake in Los Angeles: free pickup, no fees up front, paid your commission share when items sell." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.thewelllivedcitizen.com/resale" />
+  <meta property="og:site_name" content="The Well Lived Citizen" />
+  <link rel="canonical" href="https://www.thewelllivedcitizen.com/resale" />
+  <!-- Paste your Google Search Console verification code below -->
+  <meta name="google-site-verification" content="REPLACE_WITH_VERIFICATION_CODE" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="wordmark" href="index.html">The Well Lived Citizen</a>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="primary-nav">Menu</button>
+      <nav class="nav" id="primary-nav" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="resale.html" aria-current="page">Sell With Me</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <p class="eyebrow">Sell With Me</p>
+        <h1>The resale pile, handled by one capable person.</h1>
+        <p class="lede">Pickup is free and there are no fees up front. I evaluate, photograph, list, and route each piece to the platform where it actually sells — and you're paid your commission share when it does.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <p class="eyebrow">How resale works</p>
+        <h2 class="section-head">No booking fee, no pickup fee, no work on your end.</h2>
+        <p class="lead">It starts with an intake request. From there the work is mine to carry.</p>
+        <div class="grid grid--3">
+          <div class="card">
+            <h3>Free pickup</h3>
+            <p>No booking fee and no pickup fee. Items come to me by route pickup, a drop-off, an approved shipping label, or an Uber courier — whatever keeps costs low before anything earns.</p>
+          </div>
+          <div class="card">
+            <h3>I do the work</h3>
+            <p>I evaluate each piece, prep it when prep meaningfully helps, photograph it, list it, and route it to the platform where it's most likely to sell.</p>
+          </div>
+          <div class="card">
+            <h3>Paid when it sells</h3>
+            <p>Resale is commission-based. You're paid your share of the net sale price once an item sells. The standard term is 180 days, with most strong inventory selling in roughly six to nine months.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--soft">
+      <div class="container">
+        <p class="eyebrow">Start an intake request</p>
+        <h2 class="section-head">Tell me what you're looking to sell.</h2>
+        <p class="lead">A few details to start. Nothing here is a commitment to a specific number of items — it just helps me plan the pickup.</p>
+
+        <form name="resale-intake" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+          <input type="hidden" name="form-name" value="resale-intake" />
+          <p hidden>
+            <label>Don't fill this out: <input name="bot-field" /></label>
+          </p>
+
+          <div class="field">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" autocomplete="name" required />
+          </div>
+
+          <div class="field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" autocomplete="email" required />
+          </div>
+
+          <div class="field">
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" name="phone" autocomplete="tel" />
+          </div>
+
+          <fieldset class="field fieldset">
+            <legend>What are you looking to sell?</legend>
+            <label class="choice"><input type="checkbox" name="selling[]" value="Clothing & accessories" /> Clothing &amp; accessories</label>
+            <label class="choice"><input type="checkbox" name="selling[]" value="Designer & luxury" /> Designer &amp; luxury</label>
+            <label class="choice"><input type="checkbox" name="selling[]" value="Home goods & furniture" /> Home goods &amp; furniture</label>
+            <label class="choice"><input type="checkbox" name="selling[]" value="Estate or inherited items" /> Estate or inherited items</label>
+            <label class="choice"><input type="checkbox" name="selling[]" value="Not sure yet" /> Not sure yet</label>
+          </fieldset>
+
+          <div class="field">
+            <label for="volume">Roughly how much?</label>
+            <select id="volume" name="volume">
+              <option value="A bag or two">A bag or two</option>
+              <option value="Several bags">Several bags</option>
+              <option value="A full closet">A full closet</option>
+              <option value="A room or more">A room or more</option>
+              <option value="A whole home">A whole home</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="pickup">Preferred pickup method</label>
+            <select id="pickup" name="pickup">
+              <option value="Route pickup">Route pickup</option>
+              <option value="Drop-off">Drop-off</option>
+              <option value="UPS label">UPS label</option>
+              <option value="Uber courier">Uber courier</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="notes">Anything else?</label>
+            <textarea id="notes" name="notes"></textarea>
+          </div>
+
+          <div class="field">
+            <label class="choice choice--terms">
+              <input type="checkbox" name="agreement" value="agreed" required />
+              <span>I understand resale is commission-based: pickup is free with no fees up front, and I'm paid my commission share of the net sale price when an item sells.</span>
+            </label>
+          </div>
+
+          <button type="submit" class="btn">Send my intake request</button>
+        </form>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <p class="eyebrow">Reach me directly</p>
+        <p class="contact-detail">
+          <strong>Phone</strong>
+          <a href="tel:+13234331350">(323) 433-1350</a>
+        </p>
+        <p class="contact-detail">
+          <strong>Email</strong>
+          <a href="mailto:dayna@thewelllivedcitizen.com">dayna@thewelllivedcitizen.com</a>
+        </p>
+        <p class="contact-detail">
+          <strong>Where</strong>
+          <span class="muted">Los Angeles</span>
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <a class="wordmark" href="index.html">The Well Lived Citizen</a>
+        <nav class="footer-nav" aria-label="Footer">
+          <a href="about.html">About</a>
+          <a href="services.html">Services</a>
+          <a href="pricing.html">Pricing</a>
+          <a href="resale.html">Sell With Me</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+      </div>
+      <p class="footer-meta">
+        Los Angeles · <a href="tel:+13234331350">(323) 433-1350</a> ·
+        <a href="mailto:dayna@thewelllivedcitizen.com">dayna@thewelllivedcitizen.com</a>
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var toggle = document.querySelector(".nav-toggle");
+      var nav = document.getElementById("primary-nav");
+      if (!toggle || !nav) return;
+      toggle.addEventListener("click", function () {
+        var open = nav.classList.toggle("open");
+        toggle.setAttribute("aria-expanded", open ? "true" : "false");
+      });
+    })();
+  </script>
+</body>
+</html>
