@@ -29,21 +29,10 @@ export default function Footer() {
         }}>
           <div>
             <img
-              src="/assets/wlc-hanger-logo-nobg.png"
-              alt="The Well Lived Citizen"
-              style={{ height: 56, width: "auto", display: "block", marginBottom: "0.75rem", filter: "invert(1) brightness(0.92)" }}
+              src="/assets/wlc-heritage-logo-parchment.png"
+              alt="Well Lived Citizen — A Well Dressed Citizen Company, Est. 2020"
+              style={{ width: 190, height: "auto", display: "block", marginBottom: "0.25rem" }}
             />
-            <div style={{
-              fontFamily: "'Plus Jakarta Sans', sans-serif",
-              fontSize: "0.9rem",
-              fontWeight: 800,
-              letterSpacing: "0.28em",
-              color: "var(--parchment)",
-              textTransform: "uppercase",
-              marginBottom: "0.5rem"
-            }}>
-              WELL LIVED<br />CITIZEN
-            </div>
             <p style={{ fontSize: "0.8rem", fontWeight: 300, color: "rgba(248,244,227,0.6)", lineHeight: 1.7, marginTop: "1rem", maxWidth: 220 }}>
               One capable person for the things that quietly pile up — handled, so life feels easier to manage again.
             </p>

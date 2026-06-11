@@ -136,6 +136,25 @@ export default function About() {
         </div>
       </section>
 
+      {/* ── THE MARK (heritage logo, shown at full detail) ── */}
+      <section style={{ backgroundColor: "var(--parchment-mid)", padding: "6rem 0" }}>
+        <div className="container">
+          <FadeUp>
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
+              <span className="eyebrow eyebrow-sage">The Mark · Est. 2020</span>
+              <img
+                src="/assets/wlc-heritage-logo-ink.png"
+                alt="Well Lived Citizen — the hanger mark. A Well Dressed Citizen Company, Est. 2020."
+                style={{ width: "min(440px, 86vw)", height: "auto", display: "block", margin: "1.5rem 0 2rem" }}
+              />
+              <p style={{ fontSize: "1rem", fontWeight: 300, color: "var(--ink-soft)", lineHeight: 1.8, maxWidth: 560 }}>
+                The hanger came first. <strong style={{ fontWeight: 600, color: "var(--ink)" }}>The Well Dressed Citizen</strong> — suiting, styling, resale — is where the eye was trained. The Well Lived Citizen is the same eye, pointed at the rest of life.
+              </p>
+            </div>
+          </FadeUp>
+        </div>
+      </section>
+
       {/* ── THE FLOOD ── */}
       <section style={{ backgroundColor: "var(--ink)", padding: "7rem 0" }}>
         <div className="container">
