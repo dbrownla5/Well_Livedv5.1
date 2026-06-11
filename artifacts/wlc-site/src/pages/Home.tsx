@@ -29,28 +29,28 @@ function offer(id: string) {
 // Quick Start cards — name/price/href from brand.ts entryOffers, descriptions are Dayna's verbatim copy.
 const QUICK_STARTS: { id: string; name: string; price: string; href: string; desc: string }[] = [
   {
+    id: "resale-pickup",
+    name: "Quick Resale Pickup",
+    price: "Free pickup · commission",
+    href: offer("resale-pickup").href,
+    desc:
+      "Fill a bag with what you're done with. I handle the rest — pickup, listing, buyers, payouts. The pile leaves, money starts showing up, and you never think about it again. You make one decision; I make the next fifty.",
+  },
+  {
     id: "reset",
-    name: "Four Hour Reset",
-    price: "$495",
+    name: "Four-Hour Reset",
+    price: "$495 flat",
     href: offer("reset").href,
     desc:
-      'The specific room, the singular task, the aftermath of a party, or the "my mother-in-law is coming" panic. That one looming project ruining your week. Let\'s just get it handled.',
+      "The project that's been hanging over you for months — handled in one focused afternoon. Decisions made, a plan in place, the thing finally moving. You stop carrying it around in your head.",
   },
   {
     id: "house-call",
-    name: "House Call",
+    name: "Two-Hour House Call",
     price: "$350",
     href: offer("house-call").href,
     desc:
-      "The things nobody really has a category for—tech setup, logistics, errands, and all those small details that a helpful neighbor used to handle for you.",
-  },
-  {
-    id: "resale-pickup",
-    name: "Quick Resale Pickup",
-    price: "Commission Based",
-    href: offer("resale-pickup").href,
-    desc:
-      "A hands-off way to clear the bags from your hallway, porch, or trunk — you know the ones, that have been following you around for two years. I sort, list, and sell; you get paid on what sells, nothing out of pocket.",
+      "The little list that never gets shorter — the returns, the install, the vendor to let in, the tech that won't behave — knocked out in one visit by someone who just figures it out.",
   },
   {
     id: "move-closeout",
@@ -58,7 +58,7 @@ const QUICK_STARTS: { id: string; name: string; price: string; href: string; des
     price: "$150/hr",
     href: offer("move-closeout").href,
     desc:
-      'The truck\'s gone but the move isn\'t done — the half-unpacked rooms, the boxes marked "misc," the stuff that never got a home. I close the loop so it actually feels moved-in.',
+      "You go ahead to the next place. I stay behind and finish the move — the boxes, the storage unit, the resale pile, the loose ends — so you're not managing the last 20% from another state.",
   },
 ];
 
