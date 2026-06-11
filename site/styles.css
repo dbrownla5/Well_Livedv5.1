@@ -431,7 +431,8 @@ th + th {
 }
 
 .field input,
-.field textarea {
+.field textarea,
+.field select {
   width: 100%;
   font: inherit;
   font-size: 1rem;
@@ -443,10 +444,52 @@ th + th {
 }
 
 .field input:focus,
-.field textarea:focus {
+.field textarea:focus,
+.field select:focus {
   outline: 2px solid var(--accent-dark);
   outline-offset: 1px;
   border-color: var(--accent-dark);
+}
+
+/* Checkbox / radio groups */
+.fieldset {
+  border: 1px solid var(--accent);
+  border-radius: 7px;
+  padding: 1rem 1.1rem;
+  background: #F4EFE4;
+}
+
+.fieldset legend {
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 0 0.4rem;
+  color: var(--text);
+}
+
+.choice {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  font-size: 1rem;
+  color: var(--text);
+  margin: 0.35rem 0;
+  cursor: pointer;
+}
+
+.choice input {
+  width: auto;
+  margin: 0.25rem 0 0;
+  accent-color: var(--accent-dark);
+  flex: none;
+}
+
+.choice--terms {
+  align-items: flex-start;
+  font-size: 0.95rem;
+  color: var(--text-soft);
+  line-height: 1.5;
 }
 
 .field textarea {
