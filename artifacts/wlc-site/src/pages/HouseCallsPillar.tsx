@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { Link } from "wouter";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
@@ -20,25 +20,46 @@ function FadeUp({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
   return <div ref={ref} className="fade-up">{children}</div>;
 }
 
-function FAQItem({ q, a }: { q: string; a: string }) {
-  const [open, setOpen] = useState(false);
-  return (
-    <div className="faq-item">
-      <button className="faq-trigger" onClick={() => setOpen(!open)}>
-        <span>{q}</span>
-        <span style={{ fontSize: "1.2rem", fontWeight: 300, flexShrink: 0, color: "var(--sage)" }}>{open ? "−" : "+"}</span>
-      </button>
-      <div className="faq-content" style={{ maxHeight: open ? 500 : 0 }}>
-        <div className="faq-body">{a}</div>
-      </div>
-    </div>
-  );
-}
+/** Content restored verbatim from Dayna's prior build. One seam (the list of
+ *  "missing person" roles) spanned a screenshot crop; reconstructed from her
+ *  own existing copy, not invented. */
+const FOR_LIST = [
+  "Newly divorced",
+  "Recently widowed",
+  "First time living alone",
+  "Partner travels constantly",
+  "Adult children supporting from another city",
+  "Practical aftermath no one stays to help with",
+  "Moments where the original plan stopped working and you still need the day to happen",
+];
+
+const WAYS = [
+  "One-time practical resets",
+  "Remote family check-ins",
+  "Post-project upkeep",
+  "Vendor days",
+  "Donation and return routing",
+  "Home re-entry after travel",
+  "Guest and event resets",
+];
+
+const OVERSIGHT = [
+  "Movers, haulers, cleaners, installers, contractors",
+  "Storage teams and donation pickups",
+  "Resale buyer coordination",
+  "Building and concierge protocol, service appointment access",
+];
+
+const PRICING = [
+  { label: "Hourly (beyond the House Call)", value: "$175/hr · 2 hr minimum" },
+  { label: "4-Hour Practical Reset", value: "Available" },
+  { label: "Continuity Retainer", value: "$500/mo" },
+];
 
 export default function HouseCallsPillar() {
   usePageMeta({
-    title: "House Calls — Practical Help for the Generational Gap | The Well Lived Citizen",
-    description: "When a parent in LA needs the modern layer of the home navigated and the adult child is in another city. House Calls fills the missing person role. $175/hr, 2-hour minimum.",
+    title: "House Calls — Two-Hour House Call, $350 | The Well Lived Citizen",
+    description: "The person you used to be able to call. Tech setup, vendor days, donation routing, and the practical loose ends of running a household. Fixed-price two-hour House Call, $350. Los Angeles.",
     path: "/house-calls-pillar",
   });
   return (
@@ -46,55 +67,91 @@ export default function HouseCallsPillar() {
       <Nav />
 
       {/* ── HERO ── */}
-      <section style={{ backgroundColor: "var(--ink)", paddingTop: "10rem", paddingBottom: "7rem" }}>
+      <section style={{ backgroundColor: "var(--ink)", paddingTop: "10rem", paddingBottom: "6rem" }}>
         <div className="container">
           <div style={{ maxWidth: 760 }}>
-            <span className="eyebrow eyebrow-light">House Calls · Los Angeles</span>
-            <h1 className="display-lg" style={{ color: "var(--parchment)", marginBottom: "1.75rem" }}>The person you used to be able to call.</h1>
-            <p style={{ fontSize: "1.15rem", fontWeight: 300, color: "rgba(248,244,227,0.78)", lineHeight: 1.8, marginBottom: "1rem" }}>
-              Remember when there was someone? Not a company, not a help line — a person who could just figure it out, and would catch the problem before it became a bigger one. House Calls is that, back.
+            <span className="eyebrow eyebrow-light">03 · House Calls</span>
+            <h1 className="display-lg" style={{ color: "var(--parchment)", marginBottom: "1.25rem" }}>
+              Two-Hour House Call — $350. Book this week.
+            </h1>
+            <p style={{ fontSize: "1.1rem", fontWeight: 300, color: "rgba(248,244,227,0.75)", lineHeight: 1.8, marginBottom: "2.25rem" }}>
+              Fixed price. No quote, no estimate call. The fastest way to get me on your calendar this week.
             </p>
-            <p style={{ fontSize: "1rem", fontWeight: 300, color: "rgba(248,244,227,0.6)", lineHeight: 1.8, marginBottom: "2.5rem" }}>
-              The Wi-Fi that dropped. The smoke detector chirping at 2am. The install you don't want to be home alone for. The parent two states away who "says they're fine." Handled — by someone who treats your home, or theirs, like it matters.
-            </p>
-            <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
-              <Link href="/contact" className="btn btn-sage">Book a House Call</Link>
-              <Link href="/pricing" className="btn btn-outline-light">View Pricing</Link>
+            <div style={{ display: "flex", gap: "1.5rem", alignItems: "center", flexWrap: "wrap" }}>
+              <a href="tel:3234331350" className="btn btn-sage">Call or text (323) 433-1350</a>
+              <span style={{ fontSize: "0.9rem", fontWeight: 300, color: "rgba(248,244,227,0.6)" }}>
+                Tell me what you'd like handled and I'll confirm the slot.
+              </span>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── THE FRICTION ── */}
-      <section style={{ backgroundColor: "var(--parchment)", padding: "6rem 0" }}>
+      {/* ── SOFT-LAUNCH OFFER ── */}
+      <section style={{ backgroundColor: "var(--parchment)", padding: "4rem 0" }}>
         <div className="container">
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "5rem", alignItems: "start" }}>
-            <FadeUp>
-              <span className="eyebrow eyebrow-sage">The Friction</span>
-              <h2 className="display-md" style={{ color: "var(--ink)", marginBottom: "2rem" }}>The world changed. The process got heavier.</h2>
-              <p className="body-lg" style={{ marginBottom: "1.5rem" }}>
-                No one can be expected to keep up with every new layer alone. House Calls fills the missing person role in real life: the partner who handled it, the nearby parent, the neighbor, the adult child in another city, the friend who always knew how to make the day still work.
+          <FadeUp>
+            <div style={{ border: "1.5px solid var(--warm-gray-lt)", borderLeft: "3px solid var(--sage)", padding: "2rem 2.25rem", maxWidth: 760 }}>
+              <p style={{ fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--sage-dark)", marginBottom: "0.75rem" }}>Soft-Launch Offer</p>
+              <p style={{ fontSize: "1.05rem", fontWeight: 400, color: "var(--ink)", lineHeight: 1.7, marginBottom: "0.75rem" }}>
+                <strong style={{ fontWeight: 700 }}>Two-Hour House Call — $350.</strong> One flat price. Book this week.
+              </p>
+              <p style={{ fontSize: "0.95rem", fontWeight: 300, color: "var(--ink-soft)", lineHeight: 1.7 }}>
+                Tech setup, donation drop-offs, vendor day, the practical loose ends that have been catching all week — whatever you'd hand to the friend you don't have anymore. Text a few sentences about what's on your plate and we'll lock the slot.
+              </p>
+            </div>
+          </FadeUp>
+        </div>
+      </section>
+
+      {/* ── THE SPIRIT ── */}
+      <section style={{ backgroundColor: "var(--parchment-mid)", padding: "6rem 0" }}>
+        <div className="container">
+          <FadeUp>
+            <div style={{ maxWidth: 740 }}>
+              <h2 className="display-md" style={{ color: "var(--ink)", marginBottom: "0.75rem" }}>For the things life leaves unfinished.</h2>
+              <p style={{ fontSize: "1.1rem", fontWeight: 300, color: "var(--ink-soft)", lineHeight: 1.8, marginBottom: "2rem" }}>
+                For when the issue isn't the room — it's the person you used to have to call.
+              </p>
+              <p style={{ fontSize: "1.05rem", fontWeight: 500, fontStyle: "italic", color: "var(--ink)", lineHeight: 1.7, marginBottom: "2rem" }}>
+                Possibly my favorite service, and the spirit of this company.
+              </p>
+              <p className="body-lg" style={{ marginBottom: "1.75rem" }}>
+                The world changed, the process got heavier, and no one can be expected to keep up with every new layer alone. House Calls fills the missing person role in real life: the partner who handled it, the nearby parent, the neighbor, the adult child in another city, the friend who always knew how to make the day work — the kind of help I wish I could give everyone, eventually. But right now, the need is there for each person I can reach.
               </p>
               <p className="body-lg">
-                It is for the people who suddenly find themselves handling the parts of home life someone else used to quietly carry. The bill that used to auto-resolve. The appliance install that feels different when you're home alone. The digital login that became intimidating overnight. The package, pickup, repair, donation, or appointment that shouldn't be a big deal but suddenly feels heavier than it should.
+                Once I know how your home works, it becomes easy for me to help keep it working — home check-ins, tech setup, hands-on home improvements, donation drop-offs, and the practical loose ends that make everyday life easier when someone trusted is paying attention.
+              </p>
+            </div>
+          </FadeUp>
+        </div>
+      </section>
+
+      {/* ── WHO IT'S FOR ── */}
+      <section style={{ backgroundColor: "var(--parchment)", padding: "6rem 0" }}>
+        <div className="container">
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "4.5rem", alignItems: "start" }}>
+            <FadeUp>
+              <h2 className="display-md" style={{ color: "var(--ink)", marginBottom: "1.75rem" }}>Who House Calls is for</h2>
+              <p className="body-lg" style={{ marginBottom: "1.5rem" }}>
+                For the people who suddenly find themselves handling the parts of home life someone else used to quietly carry.
+              </p>
+              <p className="body-lg" style={{ marginBottom: "1.5rem" }}>
+                The bill that used to auto-resolve because your partner handled it. The appliance install that feels different when you're home alone. The digital login that somehow became intimidating overnight. The package, pickup, repair, donation, or appointment that shouldn't be a big deal but suddenly feels heavier than it should.
+              </p>
+              <p className="body-lg" style={{ fontWeight: 600, color: "var(--ink)", marginBottom: "1.5rem" }}>
+                House Calls exists for the private, practical things people don't always want to say out loud.
+              </p>
+              <p className="body-lg">
+                The goal is not to make life look perfect. The goal is to make everyday life feel safe, manageable, and less isolating when the normal support system changed.
               </p>
             </FadeUp>
-
             <FadeUp delay={80}>
-              <div style={{ backgroundColor: "var(--parchment-mid)", padding: "2.5rem", boxShadow: "6px 6px 0px var(--sage)" }}>
-                <p style={{ fontSize: "0.65rem", fontWeight: 600, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--sage-dark)", marginBottom: "1.5rem" }}>Ways to Use House Calls</p>
-                {[
-                  "Tech and device setup (phones, Wi-Fi, smart home troubleshooting)",
-                  "Home check-ins and remote family updates",
-                  "Hands-on home improvements (changing high bulbs, swapping smoke detectors)",
-                  "Donation and return routing",
-                  "Vendor oversight and access days",
-                  "Home re-entry resets after travel",
-                  "Event prep, logistical setup, and post-event breakdown",
-                ].map((item, i) => (
-                  <div key={i} style={{ display: "flex", gap: "0.75rem", alignItems: "flex-start", padding: "0.7rem 0", borderBottom: "1px solid var(--warm-gray-lt)" }}>
-                    <span style={{ width: 5, height: 5, backgroundColor: "var(--sage)", flexShrink: 0, marginTop: "0.45rem" }} />
-                    <span style={{ fontSize: "0.9rem", fontWeight: 300, color: "var(--ink-soft)", lineHeight: 1.6 }}>{item}</span>
+              <div>
+                {FOR_LIST.map((item, i) => (
+                  <div key={i} style={{ padding: "0.9rem 0", borderBottom: "1px solid var(--warm-gray-lt)", display: "flex", gap: "0.75rem", alignItems: "flex-start" }}>
+                    <span style={{ color: "var(--sage)", flexShrink: 0, marginTop: "0.1rem" }}>—</span>
+                    <span style={{ fontSize: "0.95rem", fontWeight: 300, color: "var(--ink-soft)", lineHeight: 1.6 }}>{item}</span>
                   </div>
                 ))}
               </div>
@@ -103,41 +160,47 @@ export default function HouseCallsPillar() {
         </div>
       </section>
 
-      {/* ── THE GENERATIONAL GAP ── */}
-      <section style={{ backgroundColor: "var(--parchment-mid)", padding: "6rem 0" }}>
+      {/* ── WAYS + EXAMPLE ── */}
+      <section style={{ backgroundColor: "var(--ink)", padding: "6rem 0" }}>
         <div className="container">
           <FadeUp>
-            <div style={{ maxWidth: 720 }}>
-              <span className="eyebrow eyebrow-sage">The Generational Gap</span>
-              <h2 className="display-md" style={{ color: "var(--ink)", marginBottom: "2rem" }}>It's not about capability. It's about bandwidth.</h2>
-              <p className="body-lg" style={{ marginBottom: "1.5rem" }}>
-                Consider the fiercely independent parent who still cooks every meal, walks every day, and manages their own life perfectly — but whose adult children live in another city. The challenge isn't their capability. It's the modern layer of the home nobody was taught to navigate.
+            <span className="eyebrow eyebrow-light">Ways to use House Calls</span>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "0.5rem 3rem", maxWidth: 820, marginBottom: "3.5rem" }}>
+              {WAYS.map((item, i) => (
+                <div key={i} style={{ padding: "0.85rem 0", borderBottom: "1px solid rgba(248,244,227,0.12)", fontSize: "0.95rem", fontWeight: 300, color: "rgba(248,244,227,0.78)" }}>
+                  {item}
+                </div>
+              ))}
+            </div>
+            <div style={{ backgroundColor: "rgba(248,244,227,0.06)", border: "1px solid rgba(248,244,227,0.12)", padding: "2.25rem", maxWidth: 760 }}>
+              <p style={{ fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--sage)", marginBottom: "1rem" }}>Real-life example</p>
+              <p style={{ fontSize: "1.05rem", fontWeight: 300, color: "rgba(248,244,227,0.82)", lineHeight: 1.8, marginBottom: "1rem" }}>
+                The 8-month pregnant woman with a beautiful baby shower, hundreds of gifts, duplicate baby gear, no time, and no energy to turn a mountain of love into something functional.
               </p>
-              <p className="body-lg" style={{ marginBottom: "1.5rem" }}>
-                When the Wi-Fi repeater drops. When the telecom company quietly changes an emergency landline to Wi-Fi and suddenly charges $300 for extra channels. The issue isn't intelligence — it's a generational gap in technology and systems. And supportive adult children cannot always get in the weeds with a tech rep on a Tuesday afternoon.
-              </p>
-              <p className="body-lg" style={{ fontWeight: 500, color: "var(--ink)" }}>
-                That is exactly where House Calls steps in.
+              <p style={{ fontSize: "1.05rem", fontWeight: 400, color: "var(--parchment)", lineHeight: 1.7 }}>
+                The point is simple: everyone helps celebrate the moment — I help make it livable afterward. That's House Calls.
               </p>
             </div>
           </FadeUp>
         </div>
       </section>
 
-      {/* ── THE PRACTICAL RESOLUTION ── */}
-      <section style={{ backgroundColor: "var(--sage)", padding: "5rem 0" }}>
+      {/* ── VENDOR OVERSIGHT + SERVICE AREA ── */}
+      <section style={{ backgroundColor: "var(--parchment-mid)", padding: "6rem 0" }}>
         <div className="container">
           <FadeUp>
-            <div style={{ maxWidth: 680 }}>
-              <span className="eyebrow" style={{ color: "var(--sage-dark)" }}>The Practical Resolution</span>
-              <h2 className="display-md" style={{ color: "var(--ink)", marginBottom: "2rem" }}>I become the person who handles it.</h2>
-              <p style={{ fontSize: "1.05rem", fontWeight: 300, color: "var(--ink)", lineHeight: 1.8, marginBottom: "1.5rem", opacity: 0.85 }}>
-                I become the companion, the password organizer, the tech support, the vendor proxy, and the hands-on help. I get in the weeds to fight the battles that shouldn't have to be carried alone.
+            <div style={{ maxWidth: 760 }}>
+              <h2 className="display-md" style={{ color: "var(--ink)", marginBottom: "1.25rem" }}>Vendor &amp; project oversight</h2>
+              <p style={{ fontSize: "0.95rem", fontWeight: 300, color: "var(--ink-soft)", marginBottom: "1.5rem" }}>When needed, House Calls also covers:</p>
+              {OVERSIGHT.map((item, i) => (
+                <div key={i} style={{ padding: "0.85rem 0", borderBottom: "1px solid var(--warm-gray-lt)", fontSize: "0.95rem", fontWeight: 300, color: "var(--ink-soft)" }}>
+                  {item}
+                </div>
+              ))}
+              <h3 style={{ fontSize: "1.1rem", fontWeight: 700, color: "var(--ink)", margin: "2.5rem 0 0.75rem" }}>Service area</h3>
+              <p className="body-lg">
+                Los Angeles and surrounding areas. Quick asks can often be absorbed into an existing route. Urgent and time-sensitive requests are prioritized whenever possible.
               </p>
-              <p style={{ fontSize: "1.1rem", fontWeight: 500, color: "var(--ink)", lineHeight: 1.75, fontStyle: "italic" }}>
-                "Once I know how your home works, it becomes easy for me to help keep it working."
-              </p>
-              <p style={{ fontSize: "0.72rem", fontWeight: 600, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--ink)", opacity: 0.55, marginTop: "0.75rem" }}>— Dayna Brown, Founder</p>
             </div>
           </FadeUp>
         </div>
@@ -147,74 +210,25 @@ export default function HouseCallsPillar() {
       <section style={{ backgroundColor: "var(--parchment)", padding: "5rem 0" }}>
         <div className="container">
           <FadeUp>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "4rem", alignItems: "start" }}>
-              <div>
-                <span className="eyebrow eyebrow-sage">Pricing</span>
-                <h2 className="display-md" style={{ color: "var(--ink)", marginBottom: "1rem" }}>$175/hr.<br />2-hour minimum.</h2>
-                <p style={{ fontSize: "0.95rem", fontWeight: 300, color: "var(--ink-soft)", lineHeight: 1.75, marginBottom: "1.25rem" }}>
-                  Ongoing support available for repeat clients.
-                </p>
-                <p style={{ fontSize: "0.85rem", fontWeight: 300, color: "var(--ink-soft)", lineHeight: 1.75, marginBottom: "2rem", fontStyle: "italic" }}>
-                  No membership. No subscription. Ease comes from relationship, not a forced plan.
-                </p>
-                <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
-                  <Link href="/contact" className="btn btn-ink">Book Practical Help</Link>
-                  <Link href="/pricing" className="btn btn-outline-ink">Full Pricing Guide</Link>
-                </div>
-              </div>
-              <div>
-                {[
-                  { label: "Hourly rate", value: "$175/hr" },
-                  { label: "Minimum", value: "2 hours" },
-                  { label: "Ongoing support", value: "Retainer available" },
-                  { label: "Membership required", value: "No" },
-                  { label: "Service area", value: "Los Angeles + surrounding" },
-                  { label: "Quick Entry", value: "Two-Hour House Call" },
-                ].map((row, i) => (
-                  <div key={i} style={{ display: "flex", justifyContent: "space-between", padding: "0.85rem 0", borderBottom: "1px solid var(--warm-gray-lt)", fontSize: "0.9rem" }}>
-                    <span style={{ fontWeight: 300, color: "var(--sage-dark)" }}>{row.label}</span>
-                    <span style={{ fontWeight: 600, color: "var(--ink)" }}>{row.value}</span>
+            <div style={{ maxWidth: 760 }}>
+              <span className="eyebrow eyebrow-sage">Pricing</span>
+              <div style={{ marginTop: "0.5rem", marginBottom: "1.75rem" }}>
+                {PRICING.map((row, i) => (
+                  <div key={i} style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", gap: "1.5rem", padding: "1.25rem 0", borderBottom: "1px solid var(--warm-gray-lt)" }}>
+                    <span style={{ fontSize: "1.05rem", fontWeight: 400, color: "var(--ink)" }}>{row.label}</span>
+                    <span style={{ fontSize: "1.05rem", fontWeight: 700, color: "var(--ink)", whiteSpace: "nowrap" }}>{row.value}</span>
                   </div>
                 ))}
               </div>
-            </div>
-          </FadeUp>
-        </div>
-      </section>
-
-      {/* ── FAQ ── */}
-      <section style={{ backgroundColor: "var(--parchment-mid)", padding: "5rem 0" }}>
-        <div className="container">
-          <FadeUp>
-            <span className="eyebrow eyebrow-sage">Common Questions</span>
-            <h2 className="display-sm" style={{ color: "var(--ink)", marginBottom: "2.5rem" }}>Before you book</h2>
-          </FadeUp>
-          <div style={{ maxWidth: 720 }}>
-            {[
-              { q: "Is this designed for a specific type of client?", a: "Not at all. House Calls is for anyone who needs trusted, practical help at home — a professional who travels constantly, someone managing a parent's home from another city, or anyone who just needs an extra set of capable hands." },
-              { q: "Can I book this for a family member?", a: "Yes. Many clients book House Calls on behalf of a parent or relative. I handle the coordination and make sure the session is tailored to what that person actually needs." },
-              { q: "What if the task takes less than 2 hours?", a: "The 2-hour minimum is the booking unit. If I finish early, I'll use the remaining time on whatever else would be useful — a quick tech check, a donation sort, whatever makes sense." },
-              { q: "Can I set up ongoing support?", a: "Yes. A retainer is available for clients who want regular, scheduled support. No membership, no subscription — just a consistent relationship built around how your home actually works." },
-              { q: "What kinds of tech issues can you handle?", a: "Phone setup and transfers, Wi-Fi troubleshooting, smart home devices, TV and streaming setup, password organization, and navigating telecom billing issues. If it's a home tech problem, I can usually get in the weeds and resolve it." },
-            ].map((item, i) => (
-              <FAQItem key={i} q={item.q} a={item.a} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── CTA ── */}
-      <section style={{ backgroundColor: "var(--ink)", padding: "6rem 0" }}>
-        <div className="container">
-          <FadeUp>
-            <div style={{ maxWidth: 600 }}>
-              <h2 className="display-md" style={{ color: "var(--parchment)", marginBottom: "1.5rem" }}>Ready to get some things handled?</h2>
-              <p style={{ fontSize: "1rem", fontWeight: 300, color: "rgba(248,244,227,0.7)", lineHeight: 1.8, marginBottom: "2.5rem" }}>
-                Book a House Call and tell me what's been sitting on the list. I'll take it from there.
+              <p style={{ fontSize: "0.95rem", fontWeight: 300, color: "var(--ink-soft)", lineHeight: 1.75, marginBottom: "2rem" }}>
+                No membership. No subscription. Ease comes from relationship, not a forced plan.
+              </p>
+              <p style={{ fontSize: "1.1rem", fontWeight: 400, fontStyle: "italic", color: "var(--ink)", lineHeight: 1.7, marginBottom: "2.5rem", maxWidth: 640 }}>
+                Sometimes there isn't a perfect way around the problem. There's just the person who knows how to make the day work anyway. That's where House Calls is most useful.
               </p>
               <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
-                <Link href="/contact" className="btn btn-sage">Book Practical Help</Link>
-                <Link href="/pricing" className="btn btn-outline-light">See Pricing</Link>
+                <Link href="/contact" className="btn btn-ink">Book a House Call</Link>
+                <Link href="/services" className="btn btn-outline-ink">← All Services</Link>
               </div>
             </div>
           </FadeUp>
