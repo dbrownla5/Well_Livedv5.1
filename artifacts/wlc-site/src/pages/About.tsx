@@ -36,10 +36,10 @@ export default function About() {
           <div style={{ maxWidth: 720 }}>
             <span className="eyebrow eyebrow-light">Meet Dayna</span>
             <h1 className="display-lg" style={{ color: "var(--parchment)", marginBottom: "2rem" }}>
-              I have always been drawn to the life that lives inside people's most treasured possessions.
+              Some people hire four people. I just never had the luxury of not learning how to be all four.
             </h1>
             <p style={{ fontSize: "1.1rem", fontWeight: 300, color: "rgba(248,244,227,0.72)", lineHeight: 1.85 }}>
-              The objects around which identity is formed — whether subtly or boldly. A jacket is never just clothing when it carries the memory of the woman who wore it. A record is never just vinyl when it still holds the rebellion and the moment that brought it into the world. A closed closet door is never simply storage when it still tells the story of a marriage, a career, a season of confidence.
+              I'm Dayna. I handle the operational side of life — the moves, the resale, the storage units, the household tech, the piles that quietly became a project. Most of the time, people don't need another service. They need one capable person who can see the whole picture and start untangling it.
             </p>
           </div>
         </div>
@@ -55,23 +55,23 @@ export default function About() {
                 <span className="eyebrow eyebrow-sage">Dayna Brown · Founder</span>
 
                 <p className="body-lg" style={{ marginBottom: "2rem" }}>
-                  My background wasn't in "home organization." It was in learning how entire systems function — from warehouse operations and product development to executive support, client services, logistics, and real-world problem solving.
+                  My background was never "home organization." Before this, there was <strong>The Well Dressed Citizen</strong> — my styling company — and before that, men's suiting and fashion, starting young, at Nordstrom. Fashion, resale, and selling, built into years of executive operations: running warehouses, supporting leadership, and spotting the risk before it became the problem.
                 </p>
 
                 <p className="body-lg" style={{ marginBottom: "2rem" }}>
-                  Over time, I realized the same skill kept showing up across every role: seeing where friction exists before it becomes a bigger problem, and figuring out how to make things work more smoothly in practical, grounded ways.
+                  The same instinct ran through all of it — seeing where things were about to break, and quietly handling them before they did. I was always the one building teams that actually cared how the customer was treated, the way Nordstrom used to.
                 </p>
 
                 <p className="body-lg" style={{ marginBottom: "2rem" }}>
-                  The Well Lived Citizen grew out of that instinct. I help people navigate the operational side of life — the moves, belongings, resale decisions, storage units, unfinished projects, technology issues, vendor coordination, household resets, and all the small logistical realities that quietly shape how a home functions day to day.
+                  The Well Lived Citizen is the grown-up version of that same eye, pointed at people's homes and lives instead of companies — the moves, the belongings, the resale decisions, the storage units, the unfinished projects, the technology, the vendor coordination, and the small logistical realities that quietly decide how a home runs.
                 </p>
 
                 <p className="body-lg" style={{ marginBottom: "2rem" }}>
-                  Sometimes that means organizing a room. Sometimes it means coordinating a move. Sometimes it means evaluating what's worth reselling. Sometimes it means helping an adult child manage things for a parent from another state.
+                  Sometimes that means organizing a room. Sometimes it means deciding what's actually worth reselling. Sometimes it means helping an adult child handle things for a parent three states away.
                 </p>
 
                 <p className="body-lg" style={{ marginBottom: "2rem" }}>
-                  The common thread is simple: helping people get things handled with competence, follow-through, and good judgment. Because often, what people actually need isn't a fancy service or a generic organizer.
+                  The thread is always the same: getting it handled, with follow-through and good judgment. Because most of the time, what people need isn't a fancy service or a generic organizer.
                 </p>
 
                 <p style={{ fontSize: "1.15rem", fontWeight: 700, color: "var(--ink)", borderLeft: "3px solid var(--sage)", paddingLeft: "1.25rem", lineHeight: 1.5, marginTop: "2.5rem", marginBottom: "0.5rem" }}>
@@ -103,12 +103,12 @@ export default function About() {
                 </p>
                 <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
                   {[
-                    "15+ years in retail operations and logistics",
-                    "Resale active on 10+ platforms — Poshmark Ambassador, eBay, Vestiaire, Chairish, Grailed, and more",
-                    "Apartment set up for intake, staging, photography, and fulfillment",
+                    "Operations background — retail, warehousing, executive support",
+                    "Active resale across Poshmark (Ambassador), eBay, Vestiaire, Chairish, Grailed, and more",
+                    "Studio set up for intake, staging, photography, and fulfillment",
                     "Home organization, move support, vendor coordination",
                     "Based in Los Angeles · Serving greater LA",
-                    "Est. 2020 · By appointment only",
+                    "By appointment only",
                   ].map((item, i) => (
                     <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: "0.75rem", paddingBottom: "0.75rem", borderBottom: i < 5 ? "1px solid var(--warm-gray-lt)" : "none" }}>
                       <span style={{ color: "var(--sage)", flexShrink: 0, marginTop: "0.2rem", fontSize: "0.7rem" }}>—</span>
@@ -141,21 +141,15 @@ export default function About() {
         <div className="container">
           <FadeUp>
             <div style={{ maxWidth: 740 }}>
-              <span className="eyebrow eyebrow-light">How This Work Changed</span>
+              <span className="eyebrow eyebrow-light">What changed how I work</span>
               <h2 className="display-md" style={{ color: "var(--parchment)", marginBottom: "2.5rem" }}>
-                When it was my life in pieces.
+                Then it was my house in pieces.
               </h2>
               <p style={{ fontSize: "1.05rem", fontWeight: 300, color: "rgba(248,244,227,0.78)", lineHeight: 1.85, marginBottom: "1.75rem" }}>
-                After an unforeseen flood, I found myself moving through 13 temporary homes and Airbnbs, carrying only fragments of the life I thought I'd always recognize. Years of belongings, valuables, and deeply personal objects were damaged or lost — many of them irreplaceable.
-              </p>
-              <p style={{ fontSize: "1.05rem", fontWeight: 300, color: "rgba(248,244,227,0.78)", lineHeight: 1.85, marginBottom: "1.75rem" }}>
-                What surprised me most was not only the grief of the loss, but the disorientation of living without the things that quietly reflect you back to yourself each day. The art you're used to seeing on your walls. The clothes that belong in your closet. The objects that make a place feel like the life you built. When those things are suddenly gone, the experience is profoundly destabilizing — even for someone as deeply self-sufficient as I have always been.
-              </p>
-              <p style={{ fontSize: "1.05rem", fontWeight: 300, color: "rgba(248,244,227,0.78)", lineHeight: 1.85, marginBottom: "1.75rem" }}>
-                During that season, I was introduced to someone who, on paper, might have simply been called a home organizer.* But what she offered was something far deeper. She stepped into the moments I couldn't hold alone. The decisions I was too depleted to make. The logistics I normally would have solved in seconds. She was not organizing. She was relief. She became calm in the middle of disruption, clarity in the middle of grief, and movement in a moment when everything in my life had stopped.
+                A few years ago, a flood took most of mine. Months moving through thirteen temporary places, sorting what survived from what didn't — a lot of it irreplaceable. I'm about as self-sufficient as people come, and even I couldn't hold all of it at once.
               </p>
               <p style={{ fontSize: "1.05rem", fontWeight: 300, color: "rgba(248,244,227,0.78)", lineHeight: 1.85, marginBottom: "3rem" }}>
-                That experience changed the way I understand this work. Because when it is your own life in pieces, even the most capable person can lose access to their usual clarity. What matters most in those moments is not simply having someone who knows where things go. It is having someone who can step into the weight of transition and quietly help carry it with you.
+                Someone stepped in. On paper, a home organizer.* What she actually did was make the decisions I was too depleted to make and handle logistics I'd normally solve in my sleep. Not therapy. Not hand-holding. A capable person taking real weight off the pile. That's the day I understood what this work is — and it's the bar I hold myself to now.
               </p>
               <p style={{ fontSize: "0.72rem", fontWeight: 400, color: "rgba(248,244,227,0.38)", lineHeight: 1.7, letterSpacing: "0.04em" }}>
                 * Rachel Corwin · Spruce · Seattle, Washington
@@ -251,10 +245,10 @@ export default function About() {
           <FadeUp>
             <div style={{ maxWidth: 680 }}>
               <p style={{ fontSize: "clamp(1.3rem, 3vw, 2rem)", fontWeight: 700, color: "var(--ink)", lineHeight: 1.35, marginBottom: "2rem" }}>
-                "Someone is finally paying attention to the things that quietly matter."
+                "Competence doesn't cancel out the need to be cared for."
               </p>
               <p style={{ fontSize: "0.95rem", fontWeight: 300, color: "var(--ink)", opacity: 0.75, lineHeight: 1.8, marginBottom: "2.5rem" }}>
-                The work is never really about the object. It is about protecting the life it represents.
+                Most of my clients are capable people. The operational side of life just got heavier than the time they had for it — and someone competent stepping in is the whole relief.
               </p>
               <Link href="/contact" className="btn btn-ink">Schedule a Call</Link>
             </div>
