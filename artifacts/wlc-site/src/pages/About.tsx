@@ -36,10 +36,10 @@ export default function About() {
           <div style={{ maxWidth: 720 }}>
             <span className="eyebrow eyebrow-light">Meet Dayna</span>
             <h1 className="display-lg" style={{ color: "var(--parchment)", marginBottom: "2rem" }}>
-              Some people hire four people. I just never had the luxury of not learning how to be all four.
+              Most people don't need another service. They need another capable person.
             </h1>
             <p style={{ fontSize: "1.1rem", fontWeight: 300, color: "rgba(248,244,227,0.72)", lineHeight: 1.85 }}>
-              I'm Dayna. I handle the operational side of life — the moves, the resale, the storage units, the household tech, the piles that quietly became a project. Most of the time, people don't need another service. They need one capable person who can see the whole picture and start untangling it.
+              I'm Dayna. I handle the operational side of life — the moves, the resale, the storage units, the household tech, the piles that quietly became a project. My job is to see the whole picture and start untangling what's actually stuck.
             </p>
           </div>
         </div>
@@ -143,9 +143,9 @@ export default function About() {
             <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
               <span className="eyebrow eyebrow-sage">The Mark · Est. 2020</span>
               <img
-                src="/assets/wlc-heritage-logo-ink.png"
+                src="/assets/wlc-hanger-logo-nobg.png"
                 alt="Well Lived Citizen — the hanger mark. A Well Dressed Citizen Company, Est. 2020."
-                style={{ width: "min(440px, 86vw)", height: "auto", display: "block", margin: "1.5rem 0 2rem" }}
+                style={{ width: "min(420px, 86vw)", height: "auto", display: "block", margin: "1.5rem 0 2rem" }}
               />
               <p style={{ fontSize: "1rem", fontWeight: 300, color: "var(--ink-soft)", lineHeight: 1.8, maxWidth: 560 }}>
                 The hanger came first. <strong style={{ fontWeight: 600, color: "var(--ink)" }}>The Well Dressed Citizen</strong> — suiting, styling, resale — is where the eye was trained. The Well Lived Citizen is the same eye, pointed at the rest of life.

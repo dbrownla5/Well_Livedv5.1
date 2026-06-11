@@ -30,6 +30,10 @@ A huge generational shift is coming with inheritance and the wealth/vintage tran
 - **The business is fluid and tiered:** quick bag pickup → house call → downsizing → legacy catalog. Each tier flows into the next.
 - **Do NOT shrink the homepage** to "moves, resale, transitions." That scales down the work, the voice, and the person. The public face holds the whole fluid business. The two-engine point is about *income and schedule*, not the public site.
 
+## NIXED AS COPY (owner directive, 2026-06-11)
+- **"Some people hire four people. I never had the luxury of not learning how to be all four."** — Owner: that was a voice dump / venting, NEVER copy. Verdict: "pretentious." Do not use on the site or in marketing. Context-only.
+- **The logo is untouchable.** Never recolor, re-key, or produce derivative versions of Dayna's logo files. Use her files as delivered, resized only — or wait for her to provide what's needed.
+
 ## Voice reaffirmations (from the live session)
 - **Story over condition** (resale).
 - **Credibility by scope, not stats** — the caliber of companies and the scale she ran, not "15+ years." Numbers shrink her; the rooms she ran don't.
