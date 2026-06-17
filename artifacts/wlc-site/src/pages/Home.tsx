@@ -3,7 +3,7 @@ import { Link } from "wouter";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import { usePageMeta } from "@/lib/usePageMeta";
-import { hero, entryOffers } from "@/content/brand";
+import { hero, entryOffers, pricing } from "@/content/brand";
 
 function FadeUp({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -39,7 +39,7 @@ const QUICK_STARTS: { id: string; name: string; price: string; href: string; des
   {
     id: "reset",
     name: "Four-Hour Reset",
-    price: "$495 flat",
+    price: `${pricing.reset4hr.split(" · ")[0]} flat`,
     href: offer("reset").href,
     desc:
       "The project that's been hanging over you for months — handled in one focused afternoon. Decisions made, a plan in place, the thing finally moving. You stop carrying it around in your head.",
@@ -47,7 +47,7 @@ const QUICK_STARTS: { id: string; name: string; price: string; href: string; des
   {
     id: "house-call",
     name: "Two-Hour House Call",
-    price: "$350",
+    price: pricing.houseCall2hr,
     href: offer("house-call").href,
     desc:
       "The little list that never gets shorter — the returns, the install, the vendor to let in, the tech that won't behave — knocked out in one visit by someone who just figures it out.",
@@ -55,7 +55,7 @@ const QUICK_STARTS: { id: string; name: string; price: string; href: string; des
   {
     id: "move-closeout",
     name: "Move Wrap-Up",
-    price: "$150/hr",
+    price: pricing.homeCloseoutsHourly.split(" (+")[0],
     href: offer("move-closeout").href,
     desc:
       "You go ahead to the next place. I stay behind and finish the move — the boxes, the storage unit, the resale pile, the loose ends — so you're not managing the last 20% from another state.",

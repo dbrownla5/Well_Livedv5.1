@@ -130,8 +130,8 @@ export const voiceProfile = {
     canonicalConceptExamples: [
       {
         source: "Dayna voice — emotional entry point to all four services",
-        concept: "Most people aren't lazy. They're overloaded. The lamp that never got replaced after someone passed away. The closet full of things worth reselling that's been sitting untouched for three years. The storage unit everyone avoids opening. The move that technically happened six months ago, except half the house still feels temporary. What helps isn't another app, system, or productivity method. It's another capable person who can walk in, see the whole picture clearly, and start untangling what's actually stuck.",
-        use: "Homepage or About page opening. Sets up the permission structure: you are not lazy, you are overloaded, and there is a specific kind of help for this. The four images map to Legacy (lamp), Resale (closet), The Reset (storage unit), and Home Reset/Move (six months ago). This is not a new pillar — it is the emotional case for why all four pillars exist.",
+        concept: "Most people aren't lazy. They're overloaded. The lightbulb that never got replaced after someone passed away. The closet full of things worth reselling that's been sitting untouched for three years. The storage unit everyone avoids opening. The move that technically happened six months ago, except half the house still feels temporary. What helps isn't another app, system, or productivity method. It's another capable person who can walk in, see the whole picture clearly, and start untangling what's actually stuck.",
+        use: "Homepage or About page opening. Sets up the permission structure: you are not lazy, you are overloaded, and there is a specific kind of help for this. The four images map to Legacy (lightbulb), Resale (closet), The Reset (storage unit), and Home Reset/Move (six months ago). This is not a new pillar — it is the emotional case for why all four pillars exist.",
       },
     ],
   },

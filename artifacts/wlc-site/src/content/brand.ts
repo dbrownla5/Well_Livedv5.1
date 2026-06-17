@@ -40,7 +40,7 @@ export const positioningLines = [
   "Operational support for modern life.",
   "The stuff that falls between categories — and still has to get handled.",
   "For the things that become six phone calls, three vendors, and a month of avoidance.",
-  "The logistics, the follow-through, the vendor coordination, the resale decisions, the weird lamp, the storage unit. All of it.",
+  "The logistics, the follow-through, the vendor coordination, the resale decisions, the weird lightbulb, the storage unit. All of it.",
   "Support for people with too many tabs open.",
   "Someone competent helping life move again.",
 ] as const;
@@ -121,26 +121,28 @@ export const pillars = [
 export const pricing = {
   reset4hr: "$495 · one 4-hour block",
   houseCall2hr: "$350",
-  homeOrgHourly: "$150/hr",
-  flexBlock10hr: "$1,250 prepaid",
-  flexBlock25hr: "$3,150 prepaid",
+  homeOrgHourly: "$150/hr · 3-hour minimum",
+  homeOrgFlex10h: "$1,250 ($125/hr)",
+  homeOrgFlex25h: "$3,150",
+  flexBlocks: "Reserved in 2, 4, or 6-hour blocks at standard rates",
   moveInDay: "$1,200 flat",
   houseCallsHourly: "$175/hr · 2-hour minimum",
   homeCloseoutsHourly: "$150/hr (+ resale commission on items sold)",
   legacyHourly: "$175/hr · 2-hour minimum",
-  legacyFlex10hr: "$1,500 prepaid",
-  legacyFlex25hr: "$3,650 prepaid",
+  legacyFlex10h: "$1,500 ($150/hr)",
+  legacyFlex25h: "$3,650",
   legacyWholeHome: "Scoped after walkthrough",
   itemResearch: "~$25 (single item, one stop, one question)",
-  retainerFrom: "Starting at $500/month",
+  retainerFrom: "Custom quoted",
 } as const;
 
 /** Resale commission — % to client / % to TWLC, on net sale price. */
 export const commission = [
-  { category: "Clothing & Accessories", client: "45%", twlc: "55%" },
-  { category: "Designer & Luxury", client: "50%", twlc: "50%" },
-  { category: "Furniture & Significant Home", client: "50%", twlc: "50%" },
-  { category: "Full Closet Liquidation", client: "45%", twlc: "55%" },
+  { category: "Clothing & Accessories", client: "45%", twlc: "55%", note: "Standard items, shoes, bags, jewelry" },
+  { category: "Designer & Luxury", client: "50%", twlc: "50%", note: "Designer handbags, luxury clothing, fine jewelry" },
+  { category: "Furniture & Significant Home Pieces", client: "50%", twlc: "50%", note: "Furniture, art, significant home pieces" },
+  { category: "Full Closet Liquidation", client: "45%", twlc: "55%", note: "Whole-closet edits, multi-piece engagements" },
+  { category: "Low-Value Volume", client: "35%", twlc: "65%", note: "For items where resale potential is minimal due to market factors · reviewed at intake, never applied retroactively" },
 ] as const;
 
 /** Supply add-on bundles — SUPPLIES ONLY, never labor. */

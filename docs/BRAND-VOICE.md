@@ -46,7 +46,7 @@ Never frame the business *exclusively* around grief, hardship, or emotional cris
 - "Helping people move through the operational realities of modern life."
 - "Practical support for complicated seasons, busy lives, and all the things nobody really has a category for."
 - "The things people keep circling around for months."
-- "The logistics, the follow-through, the vendor coordination, the resale decisions, the weird lamp, the storage unit. All of it."
+- "The logistics, the follow-through, the vendor coordination, the resale decisions, the weird lightbulb, the storage unit. All of it."
 - "Support for people with too many tabs open."
 - "Someone competent helping life move again."
 
@@ -55,7 +55,7 @@ Never frame the business *exclusively* around grief, hardship, or emotional cris
 **Should NEVER sound:** preachy · spiritually branded · overly polished · emotionally theatrical · aggressively luxurious · self-important · startup-motivational · therapy-coded · "healing journey" adjacent · poetic for its own sake.
 
 ## The primary differentiator: OBSERVATIONAL SPECIFICITY (not elevated language)
-**Strong:** the storage unit everyone avoids opening · the move that technically happened six months ago · the dead smoke detector · the unreachable shelf · the resale pile untouched for years · the phone that never got set up correctly · the "temporary" boxes still sitting in the hallway.
+**Strong:** the storage unit everyone avoids opening · the move that technically happened six months ago · the lightbulb that never got replaced · the unreachable shelf · the resale pile untouched for years · the phone that never got set up correctly · the "temporary" boxes still sitting in the hallway.
 **Weak:** emotional continuity · care-driven experiences · stewardship ecosystems · meaningful transformation · preserving identity through belongings.
 
 ## Emotional intelligence rule
@@ -63,8 +63,13 @@ Recognize emotional weight, understand attachment, notice overwhelm, and remove 
 - BAD: "Objects carry emotional continuity."
 - GOOD: "The closet everyone closes quickly because nobody knows what to do with it yet."
 
-## The "Brand Monster" word list (not banned — but trigger scrutiny)
-stewardship · ecosystem · elevated · holistic · intentional · transformative · curated · care-driven · seamless · aligned · luxury experience · white-glove · meaningful belongings · holding space · optimize · supportive container · lifestyle transformation. *They replace observation with abstraction. Sound human first, not conceptually branded.*
+## Brand Wording Rules
+* **Banned Words (AI-drift, completely banned as not Dayna's voice)**:
+  * care-driven · transformative · holistic · bespoke · luxury · white-glove · optimize · scrutinize
+* **Caution & Context-Dependent Words (Must come from Dayna, not AI-generated; require specific context and must be used wisely)**:
+  * stewardship (The brand is **not** a stewardship-forward brand; this word is banned from public copy and restricted to a maximum of 2 uses on the About page only)
+  * continuity · ecosystem · curated · elevated · intentional living · seamless · concierge · holding space · meaningful belongings · luxury experience
+
 
 ## The ideal emotional effect
 Audience should feel: understood · relieved · less ashamed · calmer · more capable · less alone · less overwhelmed.

@@ -3,6 +3,7 @@ import { Link } from "wouter";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import { usePageMeta } from "@/lib/usePageMeta";
+import { pricing } from "@/content/brand";
 
 function FadeUp({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -51,11 +52,11 @@ const OUTPUTS = [
 ];
 
 const PRICING = [
-  { label: "10-Hour Flex Block", value: "$1,500" },
-  { label: "25-Hour Flex Block", value: "$3,650" },
+  { label: "10-Hour Flex Block", value: pricing.legacyFlex10h },
+  { label: "25-Hour Flex Block", value: pricing.legacyFlex25h },
   { label: "Legacy Project", value: "From $3,500 / 20–30 hrs" },
-  { label: "Whole home", value: "Quoted after walkthrough" },
-  { label: "Ongoing Continuity", value: "$500/mo" },
+  { label: "Whole home", value: pricing.legacyWholeHome },
+  { label: "Ongoing Continuity", value: pricing.retainerFrom },
 ];
 
 export default function LegacyPillar() {

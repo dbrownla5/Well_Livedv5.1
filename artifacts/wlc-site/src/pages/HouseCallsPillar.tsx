@@ -3,6 +3,7 @@ import { Link } from "wouter";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import { usePageMeta } from "@/lib/usePageMeta";
+import { pricing } from "@/content/brand";
 
 function FadeUp({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -51,9 +52,9 @@ const OVERSIGHT = [
 ];
 
 const PRICING = [
-  { label: "Hourly (beyond the House Call)", value: "$175/hr · 2 hr minimum" },
+  { label: "Hourly (beyond the House Call)", value: pricing.houseCallsHourly },
   { label: "4-Hour Practical Reset", value: "Available" },
-  { label: "Continuity Retainer", value: "$500/mo" },
+  { label: "Continuity Retainer", value: pricing.retainerFrom },
 ];
 
 export default function HouseCallsPillar() {

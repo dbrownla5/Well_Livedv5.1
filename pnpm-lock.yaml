@@ -499,6 +499,15 @@ importers:
       '@types/node':
         specifier: 'catalog:'
         version: 25.6.2
+      '@workspace/db':
+        specifier: workspace:*
+        version: link:../lib/db
+      drizzle-orm:
+        specifier: 'catalog:'
+        version: 0.45.2(@types/pg@8.20.0)(pg@8.20.0)
+      openai:
+        specifier: ^6.27.0
+        version: 6.39.0(zod@3.25.76)
       tsx:
         specifier: 'catalog:'
         version: 4.21.0

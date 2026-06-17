@@ -3,6 +3,7 @@ import { Link } from "wouter";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import { usePageMeta } from "@/lib/usePageMeta";
+import { entryOffers, pricing } from "@/content/brand";
 
 function FadeUp({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -95,9 +96,27 @@ export default function Services() {
           </FadeUp>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: "1px", backgroundColor: "var(--warm-gray-lt)" }}>
             {[
-              { href: "/the-reset", num: "01", name: "Four-Hour Reset", price: "$495 flat rate", desc: "Four focused hours in the one space you keep meaning to fix. I show up and get it done." },
-              { href: "/house-calls", num: "02", name: "Two-Hour House Call", price: "$350 · 2 hours", desc: "Practical help for the things life accumulates faster than anyone has time to address. Technology, safety, organization, the everyday stuff." },
-              { href: "/fast-bag-fill", num: "03", name: "Quick Resale Pickup", price: "Complimentary pickup", desc: "Fill a bag with clothing and accessories you're ready to part with. Pickup is complimentary — I handle evaluation, routing, and resale." },
+              {
+                href: entryOffers.find(o => o.id === "reset")!.href,
+                num: "01",
+                name: entryOffers.find(o => o.id === "reset")!.name,
+                price: pricing.reset4hr,
+                desc: entryOffers.find(o => o.id === "reset")!.blurb
+              },
+              {
+                href: entryOffers.find(o => o.id === "house-call")!.href,
+                num: "02",
+                name: entryOffers.find(o => o.id === "house-call")!.name,
+                price: `${pricing.houseCallsHourly.split(" · ")[0]} · ${pricing.houseCallsHourly.split(" · ")[1]}`,
+                desc: entryOffers.find(o => o.id === "house-call")!.blurb
+              },
+              {
+                href: entryOffers.find(o => o.id === "resale-pickup")!.href,
+                num: "03",
+                name: entryOffers.find(o => o.id === "resale-pickup")!.name,
+                price: entryOffers.find(o => o.id === "resale-pickup")!.price,
+                desc: entryOffers.find(o => o.id === "resale-pickup")!.blurb
+              },
             ].map((qb, i) => (
               <FadeUp key={i} delay={i * 60}>
                 <Link href={qb.href}>

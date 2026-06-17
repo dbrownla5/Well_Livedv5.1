@@ -4,6 +4,7 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import { usePageMeta } from "@/lib/usePageMeta";
 import FAQItem from "@/components/FAQItem";
+import { commission } from "@/content/brand";
 
 function FadeUp({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -200,9 +201,9 @@ export default function FastBagFill() {
               </div>
               <div>
                 {[
-                  { label: "Clothing & Accessories", value: "45% to you / 55% WLC", note: "Standard resale items" },
-                  { label: "Designer & Luxury", value: "50% to you / 50% WLC", note: "Designer handbags, luxury clothing" },
-                  { label: "Low-Value Volume", value: "35% to you / 65% WLC", note: "Primarily $5–$10 resale range · reviewed at intake, never applied retroactively" },
+                  { label: commission[0].category, value: `${commission[0].client} to you / ${commission[0].twlc} WLC`, note: commission[0].note },
+                  { label: commission[1].category, value: `${commission[1].client} to you / ${commission[1].twlc} WLC`, note: commission[1].note },
+                  { label: commission[4].category, value: `${commission[4].client} to you / ${commission[4].twlc} WLC`, note: commission[4].note },
                   { label: "Pickup fee", value: "Free", note: "Within LA service area" },
                   { label: "Booking fee", value: "None", note: "No upfront cost" },
                   { label: "Monthly report", value: "Every 30 days", note: "Cycle starts at your consent" },

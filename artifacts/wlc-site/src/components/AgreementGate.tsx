@@ -1,19 +1,15 @@
 import { useState, useRef } from "react";
+import { commission } from "@/content/brand";
 
-/**
- * AgreementGate — the signed intake that OPENS a handshake record.
- *
- * The client reads the resale agreement, must scroll to the end, types their
- * legal name as a signature, fills pickup details, and submits. On submit we
- * stamp an ISO-8601 `agreementTimestamp` and POST to /api/handshake/intake.
- * The server gate refuses to open a record without signature + timestamp, so
- * this component is what makes a pickup legally real — no signature, no pickup.
- */
+const clothingSplit = commission.find((c) => c.category.includes("Clothing"))?.client ?? "45%";
+const designerSplit = commission.find((c) => c.category.includes("Designer"))?.client ?? "50%";
+const furnitureSplit = commission.find((c) => c.category.includes("Furniture"))?.client ?? "50%";
+const liquidationSplit = commission.find((c) => c.category.includes("Closet"))?.client ?? "45%";
 
 const AGREEMENT_SECTIONS: { h: string; b: string }[] = [
   { h: "1. Possession & Custody", b: "Items handed to WLC at pickup transfer into WLC's custody for the purpose of evaluation, listing, and resale. Custody is logged at the moment of handoff." },
   { h: "2. Evaluation Window", b: "WLC will evaluate items within 7–10 business days of pickup and provide an itemized inventory report with estimated resale values." },
-  { h: "3. Commission Split", b: "Commission is calculated on net sale price (sale price minus platform fees, shipping, and approved transaction costs). Client share by category: Clothing & Accessories 45%, Designer & Luxury 50%, Furniture & Significant Home 50%, Full Closet Liquidation 45%. Bags primarily of lower-value items may use an adjusted structure, reviewed and communicated before listing." },
+  { h: "3. Commission Split", b: `Commission is calculated on net sale price (sale price minus platform fees, shipping, and approved transaction costs). Client share by category: Clothing & Accessories ${clothingSplit}, Designer & Luxury ${designerSplit}, Furniture & Significant Home ${furnitureSplit}, Full Closet Liquidation ${liquidationSplit}. Bags primarily of lower-value items may use an adjusted structure, reviewed and communicated before listing.` },
   { h: "4. Client Review & Consent", b: "After the inventory report, the Client has a 24-hour window to pull any item from resale. Pulled items are returned at the next scheduled visit." },
   { h: "5. Payout", b: "Commission payouts are issued monthly for items that have sold." },
   { h: "6. Items Not Sold", b: "Most strong inventory sells within approximately 6–9 months. At about 180 days, remaining unsold items may be continued in the resale workflow, rerouted, returned, or donated, per Client preference and operational judgment — with reasonable attempts to contact the Client first." },

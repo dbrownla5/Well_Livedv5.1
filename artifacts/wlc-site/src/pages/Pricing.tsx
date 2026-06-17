@@ -4,6 +4,7 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import { usePageMeta } from "@/lib/usePageMeta";
 import FAQItem from "@/components/FAQItem";
+import { pricing, commission } from "@/content/brand";
 
 function FadeUp({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -24,7 +25,7 @@ function FadeUp({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
 export default function Pricing() {
   usePageMeta({
     title: "Pricing — The Well Lived Citizen",
-    description: "$495 flat Four-Hour Reset, $175/hr House Calls (2-hr minimum), Legacy quoted after walkthrough, Resale & Consignment commission-based with free pickup. No hidden fees.",
+    description: "Transparent pricing for every path to clarity: from focused 4-hour Resets to custom Legacy plans and commission-based Resale. No hidden fees – just straightforward support to uncover what's next for your home.",
     path: "/pricing",
   });
   return (
@@ -55,7 +56,7 @@ export default function Pricing() {
                 num: "01",
                 service: "Four-Hour Reset",
                 href: "/the-reset",
-                price: "$495",
+                price: pricing.reset4hr.split(" · ")[0],
                 unit: "flat rate",
                 description: "A focused 4-hour working session. One space. Real results. No hourly creep.",
                 details: [
@@ -64,7 +65,7 @@ export default function Pricing() {
                   "Sorting, editing, and placement",
                   "Donation and resale routing",
                   "Post-session written summary",
-                  "Additional hours at $150/hr",
+                  `Additional hours at ${pricing.homeOrgHourly.split(" · ")[0]}`,
                 ],
                 cta: "Book a Reset",
                 featured: true,
@@ -73,7 +74,7 @@ export default function Pricing() {
                 num: "02",
                 service: "Legacy Inventory & Cataloging",
                 href: "/legacy-planning",
-                price: "$175",
+                price: pricing.legacyHourly.split("/hr")[0],
                 unit: "per hour · scoped after walkthrough",
                 description: "Hourly, with project scope set after a walkthrough. Retainer available for ongoing work. No fixed packages — you only pay for the work the home needs.",
                 details: [
@@ -91,7 +92,7 @@ export default function Pricing() {
                 num: "03",
                 service: "House Calls",
                 href: "/house-calls",
-                price: "$175",
+                price: pricing.houseCallsHourly.split("/hr")[0],
                 unit: "per hour",
                 description: "Flexible hourly help with the everyday running of a household. 2-hour minimum.",
                 details: [
@@ -118,7 +119,7 @@ export default function Pricing() {
                   "You agree to terms at intake, approve listings after evaluation",
                   "Custody transfers at pickup (in-person, UPS, or courier)",
                   "Commission split varies by category",
-                  "Low-value volume ($5–$10 range): 35% to you · reviewed at intake",
+                  "For items where resale potential is minimal due to market factors: 35% to you · reviewed at intake",
                   "Report and payout every 30 days from your consent",
                 ],
                 cta: "See Resale Details",
@@ -195,17 +196,13 @@ export default function Pricing() {
                 </div>
               </div>
               <div>
-                {[
-                  { category: "Clothing & Accessories", split: "45% to you / 55% WLC", note: "Standard items, shoes, bags, jewelry" },
-                  { category: "Designer & Luxury", split: "50% to you / 50% WLC", note: "Designer handbags, luxury clothing, fine jewelry" },
-                  { category: "Furniture & Significant Home Pieces", split: "50% to you / 50% WLC", note: "Furniture, art, significant home pieces" },
-                  { category: "Full Closet Liquidation", split: "45% to you / 55% WLC", note: "Whole-closet edits, multi-piece engagements" },
-                  { category: "Low-Value Volume", split: "35% to you / 65% WLC", note: "Primarily $5–$10 resale range · reviewed at intake, never applied retroactively" },
-                ].map((row, i) => (
+                {commission.map((row, i) => (
                   <div key={i} style={{ padding: "1.25rem 0", borderBottom: "1px solid rgba(56,48,46,0.15)" }}>
                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: "1rem", marginBottom: "0.35rem" }}>
                       <span style={{ fontSize: "0.9rem", fontWeight: 700, color: "var(--ink)" }}>{row.category}</span>
-                      <span style={{ fontSize: "0.85rem", fontWeight: 700, color: "var(--sage-dark)", whiteSpace: "nowrap" }}>{row.split}</span>
+                      <span style={{ fontSize: "0.85rem", fontWeight: 700, color: "var(--sage-dark)", whiteSpace: "nowrap" }}>
+                        {row.client} to you / {row.twlc} WLC
+                      </span>
                     </div>
                     <p style={{ fontSize: "0.75rem", fontWeight: 300, color: "var(--ink)", opacity: 0.65 }}>{row.note}</p>
                   </div>
@@ -257,7 +254,7 @@ export default function Pricing() {
           </div>
           <FadeUp delay={200}>
             <p style={{ fontSize: "0.85rem", fontWeight: 300, color: "var(--sage-dark)", marginTop: "2rem", lineHeight: 1.7 }}>
-              All three options are $495 flat for 4 hours. Additional time at $150/hr, always disclosed before I run over.
+              All three options are {pricing.reset4hr.split(" · ")[0]} flat for 4 hours. Additional time at {pricing.homeOrgHourly.split(" · ")[0]}, always disclosed before I run over.
             </p>
           </FadeUp>
         </div>
@@ -332,89 +329,67 @@ export default function Pricing() {
           <FadeUp>
             <span className="eyebrow" style={{ color: "rgba(248,244,227,0.45)" }}>Flex Blocks</span>
             <h2 className="display-md" style={{ color: "var(--parchment)", marginBottom: "0.75rem", maxWidth: 520 }}>
-              Pre-purchase hours. Use them when you need them.
+              Flex Blocks &amp; Hourly Rates
             </h2>
             <p style={{ fontSize: "0.95rem", fontWeight: 300, color: "rgba(248,244,227,0.65)", lineHeight: 1.8, marginBottom: "3rem", maxWidth: 560 }}>
-              Flex Blocks are reserved hours you can use for The Reset, House Calls, ongoing support, or the things that come up between bigger projects. Your hours never expire. The point is simple: your time is already there when life needs it.
+              Flex Blocks are reserved work blocks you can book for Home Organization, House Calls, and Legacy Inventory. Book by the session, or pre-buy a discounted 10 or 25-hour block to use as you need them. Flex-block hours never expire.
             </p>
           </FadeUp>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "1.5rem" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: "1.5rem" }}>
 
-            {/* Reset + House Calls */}
+            {/* Session Booking */}
             <FadeUp>
-              <div style={{ backgroundColor: "rgba(248,244,227,0.05)", border: "1px solid rgba(248,244,227,0.12)", padding: "2.5rem" }}>
+              <div style={{ backgroundColor: "rgba(248,244,227,0.05)", border: "1px solid rgba(248,244,227,0.12)", padding: "2.5rem", height: "100%" }}>
                 <p style={{ fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--sage)", marginBottom: "0.75rem" }}>
-                  The Reset · House Calls
+                  Session Booking
                 </p>
                 <p style={{ fontSize: "0.88rem", fontWeight: 300, color: "rgba(248,244,227,0.65)", lineHeight: 1.7, marginBottom: "2rem" }}>
-                  Pre-purchased hours for resets, practical home support, and the here-and-there asks that build up between sessions.
+                  Reserved in standard session blocks based on your project size. You only pay for the time you need.
                 </p>
                 <div style={{ display: "flex", flexDirection: "column", gap: 0 }}>
                   {[
-                    { label: "10-Hour Block", price: "$1,250", note: "Effective $125/hr · Save vs. $150/hr base" },
-                    { label: "25-Hour Block", price: "$3,150", note: "Effective $126/hr · Save vs. $150/hr base" },
+                    { label: "Home Organization & Move Support", rate: pricing.homeOrgHourly, note: "Reserved in 4 or 6-hour blocks" },
+                    { label: "House Calls", rate: pricing.houseCallsHourly, note: "Reserved in 2, 4, or 6-hour blocks" },
+                    { label: "Legacy Inventory & Cataloging", rate: pricing.legacyHourly, note: "Reserved in 2, 4, or 6-hour blocks" },
                   ].map((row, i) => (
                     <div key={i} style={{
-                      display: "flex", justifyContent: "space-between", alignItems: "center",
                       padding: "1rem 0", borderBottom: "1px solid rgba(248,244,227,0.1)",
                     }}>
-                      <div>
-                        <p style={{ fontSize: "0.9rem", fontWeight: 600, color: "var(--parchment)", marginBottom: "0.2rem" }}>{row.label}</p>
-                        <p style={{ fontSize: "0.72rem", fontWeight: 300, color: "rgba(248,244,227,0.4)" }}>{row.note}</p>
+                      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: "0.2rem" }}>
+                        <p style={{ fontSize: "0.9rem", fontWeight: 600, color: "var(--parchment)" }}>{row.label}</p>
+                        <p style={{ fontSize: "1.05rem", fontWeight: 700, color: "var(--sage)" }}>{row.rate.split(" · ")[0]}</p>
                       </div>
-                      <p style={{ fontSize: "1.1rem", fontWeight: 700, color: "var(--sage)" }}>{row.price}</p>
+                      <p style={{ fontSize: "0.72rem", fontWeight: 300, color: "rgba(248,244,227,0.4)" }}>{row.note} · {row.rate.includes(" · ") ? row.rate.split(" · ")[1] : ""}</p>
                     </div>
                   ))}
                 </div>
               </div>
             </FadeUp>
 
-            {/* Legacy Inventory flex blocks */}
-            <FadeUp delay={80}>
-              <div style={{ backgroundColor: "rgba(248,244,227,0.05)", border: "1px solid rgba(248,244,227,0.12)", padding: "2.5rem" }}>
+            {/* Prepaid Discounted Packages */}
+            <FadeUp delay={100}>
+              <div style={{ backgroundColor: "rgba(248,244,227,0.05)", border: "1px solid rgba(248,244,227,0.12)", padding: "2.5rem", height: "100%" }}>
                 <p style={{ fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--sage)", marginBottom: "0.75rem" }}>
-                  Legacy Inventory &amp; Cataloging
+                  Pre-Buy Flex Packages
                 </p>
                 <p style={{ fontSize: "0.88rem", fontWeight: 300, color: "rgba(248,244,227,0.65)", lineHeight: 1.7, marginBottom: "2rem" }}>
-                  Pre-purchased hours for inventory, cataloging, and downsizing work — applied across focused visits. Whole-home projects are scoped after a walkthrough.
+                  Pre-buy hours for general use (e.g., 2 hours at storage, 4 hours in the closet, etc.) and save on standard hourly rates.
                 </p>
                 <div style={{ display: "flex", flexDirection: "column", gap: 0 }}>
                   {[
-                    { label: "10-Hour Block", price: "$1,500", note: "Effective $150/hr · Save vs. $175/hr base" },
-                    { label: "25-Hour Block", price: "$3,650", note: "Effective $146/hr · Save vs. $175/hr base" },
+                    { label: "Home Organization (10-Hour Block)", rate: pricing.homeOrgFlex10h, note: "Saves $25/hr over standard rate" },
+                    { label: "Home Organization (25-Hour Block)", rate: pricing.homeOrgFlex25h, note: "Our best value for large organization projects" },
+                    { label: "Legacy & House Calls (10-Hour Block)", rate: pricing.legacyFlex10h, note: "Saves $25/hr over standard rate" },
+                    { label: "Legacy & House Calls (25-Hour Block)", rate: pricing.legacyFlex25h, note: "Ideal for ongoing legacy inventory work" },
                   ].map((row, i) => (
                     <div key={i} style={{
-                      display: "flex", justifyContent: "space-between", alignItems: "center",
                       padding: "1rem 0", borderBottom: "1px solid rgba(248,244,227,0.1)",
                     }}>
-                      <div>
-                        <p style={{ fontSize: "0.9rem", fontWeight: 600, color: "var(--parchment)", marginBottom: "0.2rem" }}>{row.label}</p>
-                        <p style={{ fontSize: "0.72rem", fontWeight: 300, color: "rgba(248,244,227,0.4)" }}>{row.note}</p>
+                      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: "0.2rem" }}>
+                        <p style={{ fontSize: "0.9rem", fontWeight: 600, color: "var(--parchment)" }}>{row.label}</p>
+                        <p style={{ fontSize: "1.05rem", fontWeight: 700, color: "var(--sage)" }}>{row.rate}</p>
                       </div>
-                      <p style={{ fontSize: "1.1rem", fontWeight: 700, color: "var(--sage)" }}>{row.price}</p>
-                    </div>
-                  ))}
-                </div>
-                <Link href="/legacy-planning" className="btn btn-outline-light" style={{ fontSize: "0.65rem", padding: "0.7rem 1.4rem", marginTop: "1.5rem" }}>Legacy Details</Link>
-              </div>
-            </FadeUp>
-
-            {/* How blocks work */}
-            <FadeUp delay={160}>
-              <div style={{ backgroundColor: "var(--sage)", padding: "2.5rem" }}>
-                <p style={{ fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--sage-dark)", marginBottom: "0.75rem" }}>
-                  How it works
-                </p>
-                <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-                  {[
-                    "Hours never expire — use them on your schedule.",
-                    "Apply across sessions in 2, 4, or 6-hour blocks.",
-                    "Works for any mix of Reset, House Calls, and ongoing support.",
-                    "Same rate applies whether you use them fast or over six months.",
-                    "Not applicable to project-scoped Legacy inventory or move work.",
-                  ].map((line, i) => (
-                    <div key={i} style={{ display: "flex", gap: "0.75rem", fontSize: "0.85rem", fontWeight: 300, color: "var(--ink)", lineHeight: 1.65 }}>
-                      <span style={{ color: "var(--ink)", opacity: 0.45, flexShrink: 0 }}>—</span>{line}
+                      <p style={{ fontSize: "0.72rem", fontWeight: 300, color: "rgba(248,244,227,0.4)" }}>{row.note}</p>
                     </div>
                   ))}
                 </div>
@@ -445,7 +420,7 @@ export default function Pricing() {
               </div>
               <div style={{ display: "flex", flexDirection: "column", gap: "0" }}>
                 {[
-                  { label: "Starting retainer", value: "$500/mo · customizable" },
+                  { label: "Pricing", value: "Custom quoted" },
                   { label: "Frequency", value: "Weekly, bi-weekly, or monthly" },
                   { label: "Scope", value: "Tailored to your home" },
                   { label: "Services included", value: "Any combination of services" },

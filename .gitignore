@@ -47,3 +47,12 @@ Thumbs.db
 # Replit
 .cache/
 .local/
+
+# Local Netlify folder
+.netlify
+
+# Environment files
+.env
+.env.local
+.env.production
+.env.development

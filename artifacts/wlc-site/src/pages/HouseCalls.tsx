@@ -4,6 +4,7 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import { usePageMeta } from "@/lib/usePageMeta";
 import FAQItem from "@/components/FAQItem";
+import { pricing } from "@/content/brand";
 
 function FadeUp({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -23,8 +24,8 @@ function FadeUp({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
 
 export default function HouseCalls() {
   usePageMeta({
-    title: "Two-Hour House Call — $175/hr | The Well Lived Citizen",
-    description: "Practical hourly help with the everyday running of a household. Technology, safety, organization, the everyday stuff. 2-hour minimum. Los Angeles.",
+    title: `Two-Hour House Call — ${pricing.houseCallsHourly.split(" · ")[0]} | The Well Lived Citizen`,
+    description: `Practical hourly help with the everyday running of a household. Technology, safety, organization, the everyday stuff. ${pricing.houseCallsHourly.split(" · ")[1]}. Los Angeles.`,
     path: "/house-calls",
   });
   return (
@@ -48,7 +49,7 @@ export default function HouseCalls() {
             </p>
             <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap", alignItems: "center" }}>
               <Link href="/contact" className="btn btn-sage">Schedule a House Call</Link>
-              <span style={{ fontSize: "0.8rem", fontWeight: 300, color: "rgba(248,244,227,0.45)" }}>$175/hr · 2-hour minimum</span>
+              <span style={{ fontSize: "0.8rem", fontWeight: 300, color: "rgba(248,244,227,0.45)" }}>{pricing.houseCallsHourly}</span>
             </div>
           </div>
         </div>
@@ -134,7 +135,7 @@ export default function HouseCalls() {
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "4rem", alignItems: "start" }}>
               <div>
                 <span className="eyebrow eyebrow-sage">Pricing</span>
-                <h2 className="display-md" style={{ color: "var(--ink)", marginBottom: "1rem" }}>$175/hr.<br />2-hour minimum.</h2>
+                <h2 className="display-md" style={{ color: "var(--ink)", marginBottom: "1rem" }}>{pricing.houseCallsHourly.split(" · ")[0]}.<br />{pricing.houseCallsHourly.split(" · ")[1]}.</h2>
                 <p style={{ fontSize: "0.95rem", fontWeight: 300, color: "var(--ink-soft)", lineHeight: 1.75, marginBottom: "2rem" }}>
                   Monthly retainer packages available for clients who want consistent, scheduled support.
                 </p>
@@ -145,8 +146,8 @@ export default function HouseCalls() {
               </div>
               <div>
                 {[
-                  { label: "Hourly rate", value: "$175/hr" },
-                  { label: "Minimum", value: "2 hours ($350)" },
+                  { label: "Hourly rate", value: pricing.houseCallsHourly.split(" · ")[0] },
+                  { label: "Minimum", value: pricing.houseCallsHourly.split(" · ")[1] },
                   { label: "Cancellation", value: "24-hour notice" },
                   { label: "Retainer", value: "Available — ask on call" },
                   { label: "Travel", value: "Included within LA" },

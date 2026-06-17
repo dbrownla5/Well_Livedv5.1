@@ -3,6 +3,7 @@ import { Link } from "wouter";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import { usePageMeta } from "@/lib/usePageMeta";
+import { pricing } from "@/content/brand";
 import FAQItem from "@/components/FAQItem";
 
 function FadeUp({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
@@ -23,7 +24,7 @@ function FadeUp({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
 
 export default function TheReset() {
   usePageMeta({
-    title: "Four-Hour Reset — $495 Flat | The Well Lived Citizen",
+    title: `Four-Hour Reset — ${pricing.reset4hr.split(" · ")[0]} Flat | The Well Lived Citizen`,
     description: "Four focused hours in the one space you keep meaning to fix. One flat rate. No hourly creep. Sorting, editing, placement, and routing — done in a single working session.",
     path: "/the-reset",
   });
@@ -133,8 +134,8 @@ export default function TheReset() {
                 <span className="eyebrow eyebrow-sage">Pricing</span>
                 <div style={{ marginTop: "1rem" }}>
                   {[
-                    { label: "Session rate", value: "$495 flat" },
-                    { label: "Additional time", value: "$150/hr" },
+                    { label: "Session rate", value: `${pricing.reset4hr.split(" · ")[0]} flat` },
+                    { label: "Additional time", value: pricing.homeOrgHourly.split(" · ")[0] },
                     { label: "Session length", value: "4 hours" },
                     { label: "Travel", value: "Included within LA" },
                     { label: "Supplies and tools", value: "Included" },
