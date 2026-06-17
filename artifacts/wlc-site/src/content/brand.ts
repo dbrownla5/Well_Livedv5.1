@@ -30,8 +30,8 @@ export const company = {
 /** LOCKED HERO — see docs/BRAND-VOICE.md. Landed 2026-06 (Dayna verbatim). */
 export const hero = {
   headline: "Chaos Wrangler. Professional Problem Solver.",
-  subhead:
-    "Usually what you need falls somewhere between categories.",
+  subhead1: "For reasons I can't fully explain, people keep handing me the complicated stuff.",
+  subhead2: "Twenty years of figuring out what's actually going on.",
 } as const;
 
 export const positioningLines = [

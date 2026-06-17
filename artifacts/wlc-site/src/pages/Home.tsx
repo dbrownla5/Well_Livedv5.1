@@ -27,38 +27,43 @@ function offer(id: string) {
 }
 
 // Quick Start cards — name/price/href from brand.ts entryOffers, descriptions are Dayna's verbatim copy.
-const QUICK_STARTS: { id: string; name: string; price: string; href: string; desc: string }[] = [
+// Quick Start cards — name/price/href/desc.
+const QUICK_STARTS: { id: string; name: string; subtitle: string; price: string; href: string; desc: string }[] = [
   {
     id: "resale-pickup",
     name: "Quick Resale Pickup",
+    subtitle: "Turn the pile into action.",
     price: "Free pickup · commission",
-    href: offer("resale-pickup").href,
+    href: "/fast-bag-fill",
     desc:
       "Fill a bag with what you're done with. I handle the rest — pickup, listing, buyers, payouts. The pile leaves, money starts showing up, and you never think about it again. You make one decision; I make the next fifty.",
   },
   {
     id: "reset",
     name: "Four-Hour Reset",
-    price: `${pricing.reset4hr.split(" · ")[0]} flat`,
-    href: offer("reset").href,
+    subtitle: "Get the project moving.",
+    price: "$495 flat",
+    href: "/the-reset",
     desc:
       "The project that's been hanging over you for months — handled in one focused afternoon. Decisions made, a plan in place, the thing finally moving. You stop carrying it around in your head.",
   },
   {
     id: "house-call",
     name: "Two-Hour House Call",
-    price: pricing.houseCall2hr,
-    href: offer("house-call").href,
+    subtitle: "Help for the things that don't fit neatly into a category.",
+    price: "$350",
+    href: "/house-calls",
     desc:
       "The little list that never gets shorter — the returns, the install, the vendor to let in, the tech that won't behave — knocked out in one visit by someone who just figures it out.",
   },
   {
-    id: "move-closeout",
-    name: "Move Wrap-Up",
-    price: pricing.homeCloseoutsHourly.split(" (+")[0],
-    href: offer("move-closeout").href,
+    id: "legacy-inventory",
+    name: "Legacy Inventory & Cataloging",
+    subtitle: "Understand what's there before decisions become urgent.",
+    price: "$175/hr · 2-hour minimum",
+    href: "/legacy-planning",
     desc:
-      "You go ahead to the next place. I stay behind and finish the move — the boxes, the storage unit, the resale pile, the loose ends — so you're not managing the last 20% from another state.",
+      "Document and value what is in a home, building a digital inventory and photo catalog. Getting ahead of the physical volume while you have the energy to decide what stays, what moves on, and what gets remembered.",
   },
 ];
 
@@ -92,33 +97,29 @@ export default function Home() {
                 {phraseOne}
               </h1>
               <p style={{ color: "rgba(248,244,227,0.74)", margin: "0.85rem 0 0", fontFamily: "var(--font-serif)", fontStyle: "italic", fontSize: "clamp(1.02rem, 1.7vw, 1.22rem)", lineHeight: 1.5, maxWidth: 600 }}>
-                A capable person for the moves, the resale, the messy piles, and the generational tech gap nobody planned for.
+                {hero.subhead1}
               </p>
               <h2 style={{ color: "var(--parchment)", margin: "2.25rem 0 0", fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: "clamp(1.9rem, 4vw, 3rem)", lineHeight: 1.05, letterSpacing: "-0.02em" }}>
                 {phraseTwo}
               </h2>
               <p style={{ color: "rgba(248,244,227,0.74)", margin: "0.85rem 0 0", fontFamily: "var(--font-serif)", fontStyle: "italic", fontSize: "clamp(1.02rem, 1.7vw, 1.22rem)", lineHeight: 1.5, maxWidth: 600 }}>
-                The business built for the things there isn't quite a service for.
+                {hero.subhead2}
               </p>
             </div>
           </FadeUp>
         </div>
       </section>
 
-      {/* ── WHO / WHAT ── */}
-      <section style={{ backgroundColor: "var(--parchment)", padding: "6.5rem 0" }}>
+      {/* ── COLORED RECOGNITION BOX ── */}
+      <section style={{ backgroundColor: "var(--parchment-mid)", padding: "6.5rem 0" }}>
         <div className="container">
           <FadeUp>
-            <div style={{ maxWidth: 760 }}>
-              <span className="eyebrow eyebrow-sage">Who's behind it</span>
-              <p style={{ fontSize: "clamp(1.3rem, 2.4vw, 1.7rem)", fontWeight: 700, color: "var(--ink)", lineHeight: 1.35, margin: "0.5rem 0 1.5rem" }}>
-                Practical operational support for modern life.
-              </p>
-              <p style={{ fontSize: "1.1rem", fontWeight: 300, color: "var(--ink-soft)", lineHeight: 1.8, margin: "0 0 2.75rem" }}>
-                My background is operations — warehouses, executive teams, fashion and resale — running the kind of complexity most people find overwhelming. The Well Lived Citizen is built for the things that fall between categories: the stuff nobody quite knows who to call about.
-              </p>
+            <div style={{ maxWidth: 760, backgroundColor: "var(--parchment)", padding: "3rem", borderRadius: "8px", border: "1px solid var(--warm-gray-lt)" }}>
+              <h2 style={{ fontSize: "clamp(1.3rem, 2.4vw, 1.7rem)", fontWeight: 700, color: "var(--ink)", lineHeight: 1.35, margin: "0 0 1.5rem" }}>
+                You probably ended up here because Google wasn't particularly helpful.
+              </h2>
               <p style={{ fontSize: "1.15rem", fontWeight: 700, color: "var(--ink)", lineHeight: 1.5, marginBottom: "1.25rem" }}>
-                You probably found me after typing "Is there a person who…"
+                Maybe you've been searching for:
               </p>
               <ul style={{ listStyle: "none", padding: 0, margin: "0 0 2rem", display: "flex", flexDirection: "column", gap: "0.85rem" }}>
                 {[
@@ -134,57 +135,21 @@ export default function Home() {
                   </li>
                 ))}
               </ul>
-              <p style={{ fontSize: "1.1rem", fontWeight: 400, color: "var(--ink)", lineHeight: 1.8, margin: 0 }}>
-                Usually what you need falls somewhere between categories. That's the whole job.<br />
-                <strong>— Dayna</strong>
+              <p style={{ fontSize: "1.1rem", fontWeight: 500, color: "var(--ink)", lineHeight: 1.8, margin: 0 }}>
+                A lot of the work I do lives between categories.
               </p>
             </div>
           </FadeUp>
         </div>
       </section>
 
-      {/* ── RECOGNITION ── */}
-      <section style={{ backgroundColor: "var(--ink)", padding: "6.5rem 0" }}>
+      {/* ── FAST STARTS ── */}
+      <section style={{ backgroundColor: "var(--parchment)", padding: "6rem 0" }}>
         <div className="container">
           <FadeUp>
-            <div style={{ maxWidth: 820 }}>
-              {[
-                "The things nobody really has a category for.",
-                "The lightbulb that's been out for months because it needs a ladder.",
-                "The closet full of things worth reselling that's been sitting untouched for three years.",
-                "The room everyone keeps avoiding, because sorting through it means conversations no one wants to have.",
-                "The resale pile that's less about money and more about wanting things to go somewhere thoughtfully.",
-                "The \"useful someday\" boxes that look irrational to outsiders and make perfect sense once someone understands the house.",
-                "The move is one problem. The fifteen invisible problems attached to it are usually the real issue.",
-                "The things that turn into six phone calls, three vendors, and a month of avoidance.",
-                "All the operational nonsense nobody tells you comes with adulthood.",
-                "Someone to deal with the things that become weekend projects for two consecutive years.",
-              ].map((line, i) => (
-                <p
-                  key={i}
-                  style={{
-                    fontSize: "clamp(1.15rem, 2.2vw, 1.5rem)",
-                    fontWeight: 300,
-                    color: i === 0 ? "var(--parchment)" : "rgba(248,244,227,0.72)",
-                    lineHeight: 1.5,
-                    marginBottom: "1rem",
-                  }}
-                >
-                  {line}
-                </p>
-              ))}
-            </div>
-          </FadeUp>
-        </div>
-      </section>
-
-      {/* ── QUICK STARTS ── */}
-      <section style={{ backgroundColor: "var(--parchment-mid)", padding: "6rem 0" }}>
-        <div className="container">
-          <FadeUp>
-            <span className="eyebrow eyebrow-sage">Start here</span>
+            <span className="eyebrow eyebrow-sage">Not sure where to begin?</span>
             <h2 className="display-md" style={{ color: "var(--ink)", marginBottom: "3.5rem", marginTop: "0.5rem" }}>
-              Easy ways most people start:
+              Most people start with one of these:
             </h2>
           </FadeUp>
 
@@ -195,8 +160,9 @@ export default function Home() {
             {QUICK_STARTS.map((card, i) => (
               <FadeUp key={card.id} delay={i * 60}>
                 <div style={{ backgroundColor: "var(--parchment)", padding: "2.5rem", height: "100%", display: "flex", flexDirection: "column" }}>
-                  <h3 className="display-sm" style={{ color: "var(--ink)", marginBottom: "0.4rem" }}>{card.name}</h3>
-                  <p style={{ fontSize: "0.85rem", fontWeight: 600, color: "var(--sage-dark)", letterSpacing: "0.04em", marginBottom: "1.25rem" }}>{card.price}</p>
+                  <h3 className="display-sm" style={{ color: "var(--ink)", marginBottom: "0.2rem" }}>{card.name}</h3>
+                  <p style={{ fontSize: "0.95rem", fontWeight: 600, fontStyle: "italic", color: "var(--sage-dark)", marginBottom: "0.5rem" }}>{card.subtitle}</p>
+                  <p style={{ fontSize: "0.85rem", fontWeight: 500, color: "var(--ink-soft)", letterSpacing: "0.04em", marginBottom: "1.25rem" }}>{card.price}</p>
                   <p style={{ fontSize: "0.95rem", fontWeight: 300, lineHeight: 1.8, color: "var(--ink-soft)", marginBottom: "2rem", flexGrow: 1 }}>
                     {card.desc}
                   </p>
@@ -210,13 +176,13 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── CORE SERVICES ── */}
-      <section style={{ backgroundColor: "var(--parchment)", padding: "6rem 0" }}>
+      {/* ── CORE PILLARS ── */}
+      <section style={{ backgroundColor: "var(--parchment-mid)", padding: "6rem 0" }}>
         <div className="container">
           <FadeUp>
-            <span className="eyebrow eyebrow-sage">Core Services</span>
+            <span className="eyebrow eyebrow-sage">Something a little more complicated?</span>
             <h2 className="display-md" style={{ color: "var(--ink)", marginBottom: "2.5rem", marginTop: "0.5rem" }}>
-              Or if it's bigger than that:
+              That's usually where the interesting work starts.
             </h2>
           </FadeUp>
           <div style={{ display: "grid", gap: "1px", backgroundColor: "var(--warm-gray-lt)" }}>
@@ -242,34 +208,44 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── BRIDGE (closer) ── */}
+      {/* ── ABOUT / WHY DAYNA ── */}
       <section style={{ backgroundColor: "var(--sage)", padding: "7rem 0" }}>
         <div className="container">
           <FadeUp>
             <div style={{ maxWidth: 760 }}>
+              <span className="eyebrow eyebrow-ink" style={{ marginBottom: "1.5rem", display: "inline-block" }}>Why Dayna</span>
+              <h2 className="display-md" style={{ color: "var(--ink)", marginBottom: "2.5rem" }}>
+                Practical operational support for modern life.
+              </h2>
+              
+              <p style={{ fontSize: "1.15rem", fontWeight: 300, color: "var(--ink)", lineHeight: 1.8, marginBottom: "2rem" }}>
+                My background is operations — warehouses, executive teams, fashion and resale — running the kind of complexity most people find overwhelming. The Well Lived Citizen is built for the things that fall between categories: the stuff nobody quite knows who to call about.
+              </p>
+
               {[
-                "Life creates a lot to manage.",
-                "Moves. Closets. Collections. Storage units. New babies. Family homes. The project that's been sitting in the corner for six months. The thing you'd handle yourself if you had the time, energy, or desire to become a part-time project manager.",
-                "I help with the practical realities of living—home organization, move support, inventory cataloging, resale, house calls, and the dozens of details that somehow don't fit neatly into one service.",
-                "One person instead of four strangers - one person who gets to know you, your home, how it all works.",
                 "Most people address the clutter. I address the friction underneath it.",
-                "Giving you clarity, ease and more time for living well.",
-                "That's the work.",
+                "I help with the practical realities of living — home organization, move support, inventory cataloging, resale, house calls, and the dozens of details that somehow don't fit neatly into one service.",
+                "One person instead of four strangers — one person who gets to know you, your home, how it all works, easing the big things and the little things into a flow that works for you.",
+                "Usually what you need falls somewhere between categories. That's the whole job.",
               ].map((para, i) => (
                 <p
                   key={i}
                   style={{
-                    fontSize: i === 0 ? "clamp(1.4rem, 3vw, 2rem)" : "1.1rem",
-                    fontWeight: i === 0 ? 700 : 300,
+                    fontSize: "1.1rem",
+                    fontWeight: 300,
                     color: "var(--ink)",
-                    lineHeight: i === 0 ? 1.25 : 1.85,
-                    marginBottom: i === 0 ? "2rem" : "1.5rem",
-                    opacity: i === 0 ? 1 : 0.9,
+                    lineHeight: 1.85,
+                    marginBottom: "1.5rem",
+                    opacity: 0.9,
                   }}
                 >
                   {para}
                 </p>
               ))}
+
+              <p style={{ fontSize: "1.1rem", fontWeight: 600, color: "var(--ink)", marginTop: "2rem" }}>
+                — Dayna
+              </p>
             </div>
           </FadeUp>
         </div>
