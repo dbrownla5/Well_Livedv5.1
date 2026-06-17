@@ -72,7 +72,7 @@ const CORE_SERVICES: { name: string; href: string }[] = [
 export default function Home() {
   usePageMeta({
     title: "The Well Lived Citizen — Chaos Wrangler. Professional Problem Solver. · Los Angeles",
-    description: "One person for the move, the resale, the storage unit, and the other thing currently ruining your week. Home organization, house calls, legacy inventory, and resale in greater Los Angeles.",
+    description: "Practical operational support for the things that quietly pile up at home and in life. Home organization, house calls, legacy inventory, and resale in greater Los Angeles.",
     path: "/",
   });
 
@@ -86,19 +86,19 @@ export default function Home() {
       <section style={{ backgroundColor: "var(--ink)", padding: "7.5rem 0 5rem" }}>
         <div className="container" style={{ width: "100%" }}>
           <FadeUp>
-            <span className="eyebrow eyebrow-light" style={{ fontSize: "1.05rem", letterSpacing: "0.16em", marginBottom: "2rem" }}>The Well Lived Citizen · Los Angeles</span>
+            <span className="eyebrow eyebrow-light" style={{ fontSize: "1.05rem", letterSpacing: "0.16em", marginBottom: "2rem", display: "inline-block" }}>The Well Lived Citizen · Los&nbsp;Angeles</span>
             <div style={{ maxWidth: 860 }}>
               <h1 style={{ color: "var(--parchment)", margin: 0, fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: "clamp(1.9rem, 4vw, 3rem)", lineHeight: 1.05, letterSpacing: "-0.02em" }}>
                 {phraseOne}
               </h1>
               <p style={{ color: "rgba(248,244,227,0.74)", margin: "0.85rem 0 0", fontFamily: "var(--font-serif)", fontStyle: "italic", fontSize: "clamp(1.02rem, 1.7vw, 1.22rem)", lineHeight: 1.5, maxWidth: 600 }}>
-                A lifeline for the moves, the resale, the messy piles, and the generational tech gap nobody planned for.
+                A lifeline for the things nobody really has a category for.
               </p>
               <h2 style={{ color: "var(--parchment)", margin: "2.25rem 0 0", fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: "clamp(1.9rem, 4vw, 3rem)", lineHeight: 1.05, letterSpacing: "-0.02em" }}>
                 {phraseTwo}
               </h2>
               <p style={{ color: "rgba(248,244,227,0.74)", margin: "0.85rem 0 0", fontFamily: "var(--font-serif)", fontStyle: "italic", fontSize: "clamp(1.02rem, 1.7vw, 1.22rem)", lineHeight: 1.5, maxWidth: 600 }}>
-                The business built for the things nobody quite knows who to call about.
+                The business built for the things you would handle yourself if you had the time, energy, or desire to become a part-time project manager.
               </p>
             </div>
           </FadeUp>
@@ -112,7 +112,7 @@ export default function Home() {
             <div style={{ maxWidth: 760 }}>
               <span className="eyebrow eyebrow-sage">Who's behind it</span>
               <p style={{ fontSize: "clamp(1.3rem, 2.4vw, 1.7rem)", fontWeight: 700, color: "var(--ink)", lineHeight: 1.35, margin: "0.5rem 0 1.5rem" }}>
-                I'm Dayna. I handle the operational side of life — so you get your time, and your home, back.
+                Practical operational support for modern life.
               </p>
               <p style={{ fontSize: "1.1rem", fontWeight: 300, color: "var(--ink-soft)", lineHeight: 1.8, margin: "0 0 2.75rem" }}>
                 My background is operations — warehouses, executive teams, fashion and resale — running the kind of complexity most people find overwhelming. The Well Lived Citizen is built for the things that fall between categories: the stuff nobody quite knows who to call about.
@@ -122,7 +122,7 @@ export default function Home() {
               </p>
               <ul style={{ listStyle: "none", padding: 0, margin: "0 0 2rem", display: "flex", flexDirection: "column", gap: "0.85rem" }}>
                 {[
-                  "...can help me figure out what to do with all this baby stuff?",
+                  "...can help me figure out what to do with the nursery after the baby shower? (The 8-month pregnant woman with hundreds of gifts, duplicate baby gear, no time, and no energy to turn a mountain of love into something functional)",
                   "...can help me finish unpacking after a move that technically happened six months ago?",
                   "...can help me deal with the storage unit that was supposed to be temporary?",
                   "...can help me figure out what to keep, sell, donate, or stop paying to store?",
@@ -135,7 +135,8 @@ export default function Home() {
                 ))}
               </ul>
               <p style={{ fontSize: "1.1rem", fontWeight: 400, color: "var(--ink)", lineHeight: 1.8, margin: 0 }}>
-                Usually what you need falls somewhere between categories. That's the whole job.
+                Usually what you need falls somewhere between categories. That's the whole job.<br />
+                <strong>— Dayna</strong>
               </p>
             </div>
           </FadeUp>

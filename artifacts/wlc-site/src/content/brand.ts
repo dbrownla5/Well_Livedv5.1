@@ -34,9 +34,7 @@ export const hero = {
     "Usually what you need falls somewhere between categories.",
 } as const;
 
-/** Approved positioning lines — use across the site / page breaks (not the hero). */
 export const positioningLines = [
-  "One person for the move, the resale, the storage unit, and the other thing currently ruining your week.",
   "Operational support for modern life.",
   "The stuff that falls between categories — and still has to get handled.",
   "For the things that become six phone calls, three vendors, and a month of avoidance.",
