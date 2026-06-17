@@ -92,13 +92,13 @@ export default function Home() {
                 {phraseOne}
               </h1>
               <p style={{ color: "rgba(248,244,227,0.74)", margin: "0.85rem 0 0", fontFamily: "var(--font-serif)", fontStyle: "italic", fontSize: "clamp(1.02rem, 1.7vw, 1.22rem)", lineHeight: 1.5, maxWidth: 600 }}>
-                A lifeline for the things nobody really has a category for.
+                A capable person to handle the things in life that fall between.
               </p>
               <h2 style={{ color: "var(--parchment)", margin: "2.25rem 0 0", fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: "clamp(1.9rem, 4vw, 3rem)", lineHeight: 1.05, letterSpacing: "-0.02em" }}>
                 {phraseTwo}
               </h2>
               <p style={{ color: "rgba(248,244,227,0.74)", margin: "0.85rem 0 0", fontFamily: "var(--font-serif)", fontStyle: "italic", fontSize: "clamp(1.02rem, 1.7vw, 1.22rem)", lineHeight: 1.5, maxWidth: 600 }}>
-                The business built for the things you would handle yourself if you had the time, energy, or desire to become a part-time project manager.
+                The business built for the things there isn't quite a service for.
               </p>
             </div>
           </FadeUp>
